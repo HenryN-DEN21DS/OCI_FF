@@ -1,0 +1,43 @@
+
+(DESCRIPTION=(CONNECT_TIMEOUT=5)(TRANSPORT_CONNECT_TIMEOUT=3)(RETRY_COUNT=3)(ADDRESS_LIST=(LOAD_BALANCE=on)
+(ADDRESS=(PROTOCOL=TCP)(HOST=10.0.0.103)(PORT=1521)))
+(CONNECT_DATA=(SERVICE_NAME=PDB1.sub01200825360.ddsoasvcn.oraclevcn.com)))
+
+Change_On_Install123
+
+-- Create the user 
+create user VWASAS
+  default tablespace MI_DATA
+  temporary tablespace TEMP
+  profile NO_EXPIRE
+  quota unlimited on mi_data;
+-- Grant/Revoke role privileges 
+grant resource to VWASAS;
+-- Grant/Revoke system privileges 
+grant create any index to VWASAS;
+grant create database link to VWASAS;
+grant create materialized view to VWASAS;
+grant create procedure to VWASAS;
+grant create session to VWASAS;
+grant create synonym to VWASAS;
+grant create table to VWASAS;
+grant create view to VWASAS;
+grant unlimited tablespace to VWASAS;
+
+VWASAS
+
++DATA/DDSOASDB_FRA12R/F2AFDCBE724B1CF8E0536700000AA7CD/DATAFILE/
+
+
+CREATE BIGFILE TABLESPACE MI_DATA 
+    DATAFILE 
+        '+DATA/DDSOASDB_FRA12R/F2AFDCBE724B1CF8E0536700000AA7CD/DATAFILE/MI_DATA' SIZE 262144000 
+    NOLOGGING 
+    DEFAULT NOCOMPRESS 
+    ONLINE 
+    SEGMENT SPACE MANAGEMENT AUTO 
+    EXTENT MANAGEMENT DICTIONARY;
+	
+	
+	git config --global user.email "h.niessen@dictu.nl"
+	git config --global user.name "NiessenHe"
