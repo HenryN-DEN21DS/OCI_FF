@@ -1,0 +1,10 @@
+[gui]
+	recentrepo = C:/CDCI_OAS/MUD/NiessenHe/NVWA_DKVI/Infra_as_a_code
+[user]
+	email = h.niessen@dictu.nl
+	name = NiessenHe
+[difftool "sourcetree"]
+	cmd = "'' "
+[mergetool "sourcetree"]
+	cmd = "'' "
+	trustExitCode = true
