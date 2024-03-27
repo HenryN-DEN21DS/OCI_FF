@@ -1,0 +1,622 @@
+<html lang="en"><head><title>ASH Report - From 29-Jan-24 13:49:39 To 29-Jan-24 14:49:39</title>
+<style type="text/css">
+body.awr {font:bold 10pt Arial,Helvetica,Geneva,sans-serif;color:black; background:White;}
+pre.awr  {font:8pt Courier;color:black; background:White;}
+pre_sqltext.awr  {white-space: pre-wrap;}
+h1.awr   {font:bold 20pt Arial,Helvetica,Geneva,sans-serif;color:#336699;background-color:White;border-bottom:1px solid #cccc99;margin-top:0pt; margin-bottom:0pt;padding:0px 0px 0px 0px;}
+h2.awr   {font:bold 18pt Arial,Helvetica,Geneva,sans-serif;color:#336699;background-color:White;margin-top:4pt; margin-bottom:0pt;}
+h3.awr {font:bold 16pt Arial,Helvetica,Geneva,sans-serif;color:#336699;background-color:White;margin-top:4pt; margin-bottom:0pt;}
+li.awr {font: 8pt Arial,Helvetica,Geneva,sans-serif; color:black; background:White;}
+th.awrnobg {font:bold 8pt Arial,Helvetica,Geneva,sans-serif; color:black; background:White;padding-left:4px; padding-right:4px;padding-bottom:2px}
+th.awrbg {font:bold 8pt Arial,Helvetica,Geneva,sans-serif; color:White; background:#0066CC;padding-left:4px; padding-right:4px;padding-bottom:2px}
+td.awrnc {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;}
+td.awrc    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;}
+td.awrnclb {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-left: thin solid black;}
+td.awrncbb {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-left: thin solid black;border-right: thin solid black;}
+td.awrncrb {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-right: thin solid black;}
+td.awrcrb    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-right: thin solid black;}
+td.awrclb    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-left: thin solid black;}
+td.awrcbb    {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-left: thin solid black;border-right: thin solid black;}
+a.awr {font:bold 8pt Arial,Helvetica,sans-serif;color:#663300; vertical-align:top;margin-top:0pt; margin-bottom:0pt;}
+td.awrnct {font:8pt Arial,Helvetica,Geneva,sans-serif;border-top: thin solid black;color:black;background:White;vertical-align:top;}
+td.awrct   {font:8pt Arial,Helvetica,Geneva,sans-serif;border-top: thin solid black;color:black;background:#FFFFCC; vertical-align:top;}
+td.awrnclbt  {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-top: thin solid black;border-left: thin solid black;}
+td.awrncbbt  {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-left: thin solid black;border-right: thin solid black;border-top: thin solid black;}
+td.awrncrbt {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:White;vertical-align:top;border-top: thin solid black;border-right: thin solid black;}
+td.awrcrbt     {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-top: thin solid black;border-right: thin solid black;}
+td.awrclbt     {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-top: thin solid black;border-left: thin solid black;}
+td.awrcbbt   {font:8pt Arial,Helvetica,Geneva,sans-serif;color:black;background:#FFFFCC; vertical-align:top;border-top: thin solid black;border-left: thin solid black;border-right: thin solid black;}
+table.tdiff {  border_collapse: collapse; }
+table.tscl {width: 600;}
+table.tscl tbody, table.tscl thead { display: block; }
+table.tscl thead tr th {height: 12px;line-height: 12px;}
+table.tscl tbody { height: 100px;overflow-y: auto; overflow-x: hidden;}
+table.tscl tbody td, thead th {width: 200;}
+.hidden   {position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+.pad   {margin-left:17px;}
+.doublepad {margin-left:34px;}
+</style></head><body class="awr">
+<h1 class="awr">
+ASH Report For PDIM/pdim
+
+</h1>
+<p />
+<table border="1" width="500" summary="This table displays information about the DB/Instance  for which the ASH report is generated.">
+<tr><th class="awrbg" scope="col">DB Name</th><th class="awrbg" scope="col">DB Id</th><th class="awrbg" scope="col">Instance</th><th class="awrbg" scope="col">Inst num</th><th class="awrbg" scope="col">Release</th><th class="awrbg" scope="col">RAC</th><th class="awrbg" scope="col">Host</th></tr>
+<tr><td class='awrnc'>PDIM</td><td align="right" class='awrnc'>1459796375</td><td class='awrnc'>pdim</td><td align="right" class='awrnc'>1</td><td class='awrnc'>19.0.0.0.0</td><td class='awrnc'>NO</td><td class='awrnc'>uwvm2vapora0012.p-dc.ba.uwv.nl</td></tr>
+</table>
+<p />
+<p />
+<table border="1" width="500" summary="This table displays the CPU and memory configuration of the DB/Instance">
+<tr><th class="awrbg" scope="col">CPUs</th><th class="awrbg" scope="col">SGA Size</th><th class="awrbg" scope="col">Buffer Cache</th><th class="awrbg" scope="col">Shared Pool</th><th class="awrbg" scope="col">ASH Buffer Size</th><th class="awrbg" scope="col">In-memory Area Size</th></tr>
+<tr><td align="right" class='awrnc'>64</td><td align="right" class='awrnc'>40,960M (100%)</td><td align="right" class='awrnc'>29,440M (71.9%)</td><td align="right" class='awrnc'>11,776M (28.8%)</td><td align="right" class='awrnc'>128.0M (0.3%)</td><td align="right" class='awrnc'>0.0M (0.0%)</td></tr>
+</table>
+<p />
+<p />
+<table border="1" width="500" summary="This table displays information about the ASH report  such as begin and end time, sample count">
+<tr><th class="awrnobg" scope="col"></th><th class="awrbg" scope="col">Sample Time</th><th class="awrbg" scope="col">Data Source</th></tr>
+<tr><td class='awrc'>Analysis Begin Time:</td><td align="right" class='awrc'>29-Jan-24 13:49:39</td><td align="center" class='awrc'>V$ACTIVE_SESSION_HISTORY</td></tr>
+<tr><td class='awrnc'>Analysis End Time:</td><td align="right" class='awrnc'>29-Jan-24 14:49:39</td><td align="center" class='awrnc'>V$ACTIVE_SESSION_HISTORY</td></tr>
+<tr><td class='awrc'>Elapsed Time:</td><td align="right" class='awrc'>      60.0 (mins) </td><td align="center" class='awrc'>&#160;</td></tr>
+<tr><td class='awrnc'>Sample Count:</td><td align="right" class='awrnc'>      4,798</td><td class='awrnc'>&#160;</td></tr>
+<tr><td class='awrc'>Average Active Sessions:</td><td align="right" class='awrc'>       1.33</td><td class='awrc'>&#160;</td></tr>
+<tr><td class='awrnc'>Avg. Active Session per CPU:</td><td align="right" class='awrnc'>       0.02</td><td class='awrnc'>&#160;</td></tr>
+<tr><td class='awrnc'>Report Target:</td><td align="right" class='awrnc'>None specified</td><td align="center" class='awrnc'>&#160;</td></tr>
+</table>
+<p />
+<a class="awr" name="top"></a>
+<h2 class="awr">
+ASH Report
+</h2>
+<ul>
+<li class="awr"><a class="awr" href="#101">Top Events</a></li>
+<li class="awr"><a class="awr" href="#102">Load Profile</a></li>
+<li class="awr"><a class="awr" href="#104">Top SQL</a></li>
+<li class="awr"><a class="awr" href="#10380">Top PL/SQL</a></li>
+<li class="awr"><a class="awr" href="#10390">Top Java</a></li>
+<li class="awr"><a class="awr" href="#10391">Top Call Types</a></li>
+<li class="awr"><a class="awr" href="#105">Top Sessions</a></li>
+<li class="awr"><a class="awr" href="#106">Top Objects/Files/Latches</a></li>
+<li class="awr"><a class="awr" href="#10200">Activity Over Time</a></li>
+</ul>
+<br /><a class="awr" href="#top">Back to Top</a><hr /><p />
+<a class="awr" name="101"></a>
+<h2 class="awr">
+Top Events
+</h2>
+<ul>
+<li class="awr"><a class="awr" href="#10010">Top User Events</a></li>
+<li class="awr"><a class="awr" href="#10020">Top Background Events</a></li>
+<li class="awr"><a class="awr" href="#10030">Top Event P1/P2/P3 Values</a></li>
+</ul>
+<a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10010"></a>
+<h3 class="awr">Top User Events</h3>
+<ul>
+</ul>
+<table border="1" summary="This table displays the top user events "><tr><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">Event Class</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">Avg Active Sessions</th></tr>
+<tr><td scope="row" class='awrc'>CPU + Wait for CPU</td><td class='awrc'>CPU</td><td align="right" class='awrc'>49.50</td><td align="right" class='awrc'>0.66</td></tr>
+<tr><td scope="row" class='awrnc'>direct path read</td><td class='awrnc'>User I/O</td><td align="right" class='awrnc'>5.92</td><td align="right" class='awrnc'>0.08</td></tr>
+<tr><td scope="row" class='awrc'>direct path read temp</td><td class='awrc'>User I/O</td><td align="right" class='awrc'>1.35</td><td align="right" class='awrc'>0.02</td></tr>
+</table><p />
+<a class="awr" href="#101">Back to Top Events</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10020"></a>
+<h3 class="awr">Top Background Events</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Background Events"><tr><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">Event Class</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Avg Active Sessions</th></tr>
+<tr><td scope="row" class='awrc'>Backup: MML create a backup piece</td><td class='awrc'>Administrative</td><td align="right" class='awrc'>23.63</td><td align="right" class='awrc'>0.32</td></tr>
+<tr><td scope="row" class='awrnc'>Backup: MML write backup piece</td><td class='awrnc'>Administrative</td><td align="right" class='awrnc'>5.63</td><td align="right" class='awrnc'>0.08</td></tr>
+<tr><td scope="row" class='awrc'>db file parallel write</td><td class='awrc'>System I/O</td><td align="right" class='awrc'>3.06</td><td align="right" class='awrc'>0.04</td></tr>
+<tr><td scope="row" class='awrnc'>CPU + Wait for CPU</td><td class='awrnc'>CPU</td><td align="right" class='awrnc'>2.19</td><td align="right" class='awrnc'>0.03</td></tr>
+</table><p />
+<a class="awr" href="#101">Back to Top Events</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10030"></a>
+<h3 class="awr">Top Event P1/P2/P3 Values</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Event P1/P2/P3 Values"><tr><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">P1 Value, P2 Value, P3 Value</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Parameter 1</th><th class="awrbg" scope="col">Parameter 2</th><th class="awrbg" scope="col">Parameter 3</th></tr>
+<tr><td scope="row" class='awrc'>direct path read</td><td align="right" class='awrc'>5.92</td><td align="right" class='awrc'>&quot;24&quot;,&quot;55312516&quot;,&quot;124&quot;</td><td align="right" class='awrc'>0.08</td>
+<td class='awrc'>file number</td><td class='awrc'>first dba</td><td class='awrc'>block cnt</td></tr>
+<tr><td scope="row" class='awrnc'>db file parallel write</td><td align="right" class='awrnc'>3.06</td><td align="right" class='awrnc'>&quot;1&quot;,&quot;0&quot;,&quot;2147483647&quot;</td><td align="right" class='awrnc'>3.06</td>
+<td class='awrnc'>requests</td><td class='awrnc'>interrupt</td><td class='awrnc'>timeout</td></tr>
+<tr><td scope="row" class='awrc'>direct path read temp</td><td align="right" class='awrc'>1.35</td><td align="right" class='awrc'>&quot;201&quot;,&quot;49787582&quot;,&quot;31&quot;</td><td align="right" class='awrc'>0.02</td>
+<td class='awrc'>file number</td><td class='awrc'>first dba</td><td class='awrc'>block cnt</td></tr>
+</table><p />
+<a class="awr" href="#101">Back to Top Events</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="102"></a>
+<h2 class="awr">
+Load Profile
+</h2>
+<ul>
+<li class="awr"><a class="awr" href="#10392">Top Containers</a></li>
+<li class="awr"><a class="awr" href="#10100">Top Service/Module</a></li>
+<li class="awr"><a class="awr" href="#10110">Top Client IDs</a></li>
+<li class="awr"><a class="awr" href="#10120">Top SQL Command Types</a></li>
+<li class="awr"><a class="awr" href="#10130">Top Phases of Execution</a></li>
+</ul>
+<a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10392"></a>
+<h3 class="awr">Top Containers</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Containers"><tr><th class="awrbg" scope="col">Container Name</th><th class="awrbg" scope="col">Count</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Avg Active Sessions</th></tr>
+<tr><td scope="row" class='awrc'>pdim</td><td align="right" class='awrc'>4,798</td><td align="right" class='awrc'>100.00</td><td align="right" class='awrc'>1.33</td></tr>
+</table><p />
+<a class="awr" href="#102">Back to Load Profile</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10100"></a>
+<h3 class="awr">Top Service/Module</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Service/Module"><tr><th class="awrbg" scope="col">Service</th><th class="awrbg" scope="col">Module</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Action</th><th class="awrbg" scope="col">% Action</th></tr>
+<tr><td class='awrc'>SYS$USERS</td><td class='awrc'>osh@uwvm2vlpapp0021.p-dc.ba.uwv.nl (TNS V1-V3)</td><td align="right" class='awrc'>59.27</td><td class='awrc'>UNNAMED</td><td align="right" class='awrc'>59.27</td></tr>
+<tr><td class='awrnc'>pdim</td><td class='awrnc'>backup archivelog</td><td align="right" class='awrnc'>20.74</td><td class='awrnc'>0000021 STARTED16</td><td align="right" class='awrnc'>10.84</td></tr>
+<tr><td class='awrc'><div class="hidden">pdim</div></td><td class='awrc'><div class="hidden">backup archivelog</div></td><td align="right" class='awrc'><div class="hidden">20.73780741975823259691538140892038349312</div></td><td class='awrc'>0000028 STARTED111</td><td align="right" class='awrc'>4.92</td></tr>
+<tr><td class='awrnc'><div class="hidden">pdim</div></td><td class='awrnc'><div class="hidden">backup archivelog</div></td><td align="right" class='awrnc'><div class="hidden">20.73780741975823259691538140892038349312</div></td><td class='awrnc'>0000019 STARTED16</td><td align="right" class='awrnc'>4.88</td></tr>
+<tr><td class='awrc'><div class="hidden">pdim</div></td><td class='awrc'>backup full datafile</td><td align="right" class='awrc'>10.07</td><td class='awrc'>0000052 STARTED16</td><td align="right" class='awrc'>5.02</td></tr>
+<tr><td class='awrnc'><div class="hidden">pdim</div></td><td class='awrnc'><div class="hidden">backup full datafile</div></td><td align="right" class='awrnc'><div class="hidden">10.0666944560233430596081700708628595248</div></td><td class='awrnc'>0000058 STARTED111</td><td align="right" class='awrnc'>4.94</td></tr>
+<tr><td class='awrc'>SYS$BACKGROUND</td><td class='awrc'>UNNAMED</td><td align="right" class='awrc'>6.07</td><td class='awrc'>UNNAMED</td><td align="right" class='awrc'>6.07</td></tr>
+<tr><td class='awrnc'>pdim</td><td class='awrnc'>rman@uwvm2vapora0012.p-dc.ba.uwv.nl (TNS V1-V3)</td><td align="right" class='awrnc'>1.27</td><td class='awrnc'>0000001 FINISHED70</td><td align="right" class='awrnc'>0.88</td></tr>
+</table><p />
+<a class="awr" href="#102">Back to Load Profile</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10110"></a>
+<h3 class="awr">Top Client IDs</h3>
+
+<p />
+No data exists for this section of the report.
+<p />
+<a class="awr" href="#102">Back to Load Profile</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10120"></a>
+<h3 class="awr">Top SQL Command Types</h3>
+<ul>
+<li class="awr"> 'Distinct SQLIDs' is the count of the distinct number of SQLIDs       with the given SQL Command Type found over all the ASH samples       in the analysis period</li>
+</ul>
+<table border="1" summary="Top SQL Command Types. . 'Distinct SQLIDs' is the count of the distinct number of SQLIDs with the given SQL Command Type found over all the ASH samples in the analysis period"><tr><th class="awrbg" scope="col">SQL Command Type</th><th class="awrbg" scope="col">Distinct SQLIDs</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Avg Active Sessions</th></tr>
+<tr><td scope="row" class='awrc'>INSERT</td><td align="right" class='awrc'>30</td><td align="right" class='awrc'>40.10</td><td align="right" class='awrc'>0.53</td></tr>
+<tr><td scope="row" class='awrnc'>SELECT</td><td align="right" class='awrnc'>176</td><td align="right" class='awrnc'>18.55</td><td align="right" class='awrnc'>0.25</td></tr>
+<tr><td scope="row" class='awrc'>DELETE</td><td align="right" class='awrc'>3</td><td align="right" class='awrc'>1.98</td><td align="right" class='awrc'>0.03</td></tr>
+</table><p />
+<a class="awr" href="#102">Back to Load Profile</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10130"></a>
+<h3 class="awr">Top Phases of Execution</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Phases of Execution"><tr><th class="awrbg" scope="col">Phase of Execution</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Avg Active Sessions</th></tr>
+<tr><td scope="row" class='awrc'>SQL Execution</td><td align="right" class='awrc'>58.77</td><td align="right" class='awrc'>0.78</td></tr>
+<tr><td scope="row" class='awrnc'>Parse</td><td align="right" class='awrnc'>1.52</td><td align="right" class='awrnc'>0.02</td></tr>
+</table><p />
+<a class="awr" href="#102">Back to Load Profile</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="104"></a>
+<h2 class="awr">
+Top SQL
+</h2>
+<ul>
+<li class="awr"><a class="awr" href="#10300">Top SQL with Top Events</a></li>
+<li class="awr"><a class="awr" href="#10305">Top SQL with Top Row Sources</a></li>
+<li class="awr"><a class="awr" href="#10370">Top SQL using literals</a></li>
+<li class="awr"><a class="awr" href="#10375">Top Parsing Module/Action</a></li>
+<li class="awr"><a class="awr" href="#99997">Complete List of SQL Text</a></li>
+</ul>
+<a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10300"></a>
+<h3 class="awr">Top SQL with Top Events</h3>
+<ul>
+</ul>
+<table border="1" summary="Top SQL with Top Events"><tr><th class="awrbg" scope="col">SQL ID</th><th class="awrbg" scope="col">FullPlanhash</th><th class="awrbg" scope="col">Planhash</th><th class="awrbg" scope="col">Sampled # of Executions</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">Top Row Source</th><th class="awrbg" scope="col">% RwSrc</th><th class="awrbg" scope="col">SQL Text</th><th class="awrbg" scope="col">Container Name</th></tr>
+<tr><td align="right" class='awrc'><a class="awr" href="#3zcgw67pyjmxu">3zcgw67pyjmxu</a></td><td align="right" class='awrc'>2384323019</td><td align="right" class='awrc'>2146368977</td>
+<td align="right" class='awrc'>2</td><td align="right" class='awrc'>19.53</td><td class='awrc'>CPU + Wait for CPU</td>
+<td align="right" class='awrc'>18.09</td><td class='awrc'>INDEX - FULL SCAN</td><td align="right" class='awrc'>12.15</td>
+<td class='awrc'>/* MV_REFRESH (INS) */INSERT /...</td><td align="right" class='awrc'>pdim</td></tr>
+<tr><td align="right" class='awrnc'><a class="awr" href="#bv8k10h0bsqxw">bv8k10h0bsqxw</a></td><td align="right" class='awrnc'>586821999</td><td align="right" class='awrnc'>3348165199</td>
+<td align="right" class='awrnc'>1</td><td align="right" class='awrnc'>5.36</td><td class='awrnc'>CPU + Wait for CPU</td>
+<td align="right" class='awrnc'>5.34</td><td class='awrnc'>INDEX - FAST FULL SCAN</td><td align="right" class='awrnc'>1.92</td>
+<td class='awrnc'>insert /*+ append parallel(8) ...</td><td align="right" class='awrnc'>pdim</td></tr>
+<tr><td align="right" class='awrc'><a class="awr" href="#9xjnnup3n9244">9xjnnup3n9244</a></td><td align="right" class='awrc'>586821999</td><td align="right" class='awrc'>3348165199</td>
+<td align="right" class='awrc'>1</td><td align="right" class='awrc'>5.21</td><td class='awrc'>CPU + Wait for CPU</td>
+<td align="right" class='awrc'>5.19</td><td class='awrc'>INDEX - FAST FULL SCAN</td><td align="right" class='awrc'>1.96</td>
+<td class='awrc'>insert /*+ append parallel(8) ...</td><td align="right" class='awrc'>pdim</td></tr>
+<tr><td align="right" class='awrnc'><a class="awr" href="#br0aj8gyzqt52">br0aj8gyzqt52</a></td><td align="right" class='awrnc'>1050358846</td><td align="right" class='awrnc'>446181820</td>
+<td align="right" class='awrnc'>1</td><td align="right" class='awrnc'>4.90</td><td class='awrnc'>CPU + Wait for CPU</td>
+<td align="right" class='awrnc'>3.92</td><td class='awrnc'>HASH JOIN</td><td align="right" class='awrnc'>1.50</td>
+<td class='awrnc'>/* MV_REFRESH (INS) */INSERT /...</td><td align="right" class='awrnc'>pdim</td></tr>
+<tr><td align="right" class='awrc'><a class="awr" href="#3w2j3sw8fh6mv">3w2j3sw8fh6mv</a></td><td align="right" class='awrc'>3818777193</td><td align="right" class='awrc'>3818777193</td>
+<td align="right" class='awrc'>1</td><td align="right" class='awrc'>1.06</td><td class='awrc'>CPU + Wait for CPU</td>
+<td align="right" class='awrc'>0.73</td><td class='awrc'>DELETE</td><td align="right" class='awrc'>0.56</td>
+<td class='awrc'>/* MV_REFRESH (DEL) */ delete ...</td><td align="right" class='awrc'>pdim</td></tr>
+</table><p />
+<a class="awr" href="#104">Back to Top SQL</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10305"></a>
+<h3 class="awr">Top SQL with Top Row Sources</h3>
+<ul>
+</ul>
+<table border="1" summary="Top SQL with Top Row Sources"><tr><th class="awrbg" scope="col">SQL ID</th><th class="awrbg" scope="col">FullPlanHash</th><th class="awrbg" scope="col">PlanHash</th><th class="awrbg" scope="col">Sampled # of Executions</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Row Source</th><th class="awrbg" scope="col">% RwSrc</th><th class="awrbg" scope="col">Top Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">SQL Text</th><th class="awrbg" scope="col">Container Name</th></tr>
+<tr><td align="right" class='awrc'><a class="awr" href="#3zcgw67pyjmxu">3zcgw67pyjmxu</a></td><td align="right" class='awrc'>2384323019</td><td align="right" class='awrc'>2146368977</td>
+<td align="right" class='awrc'>2</td><td align="right" class='awrc'>19.53</td>
+<td class='awrc'>INDEX - FULL SCAN</td><td align="right" class='awrc'>12.15</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>12.15</td>
+<td class='awrc'>/* MV_REFRESH (INS) */INSERT /...</td><td align="right" class='awrc'>pdim</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">3zcgw67pyjmxu</div></td><td align="right" class='awrnc'><div class="hidden">2384323019</div></td><td align="right" class='awrnc'><div class="hidden">2146368977</div></td>
+<td align="right" class='awrnc'><div class="hidden">2</div></td><td align="right" class='awrnc'><div class="hidden">19.52897040433513964151729887453105460609</div></td>
+<td class='awrnc'>HASH JOIN</td><td align="right" class='awrnc'>2.88</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>1.90</td>
+<td class='awrnc'></td><td align="right" class='awrnc'><div class="hidden">pdim</div></td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">3zcgw67pyjmxu</div></td><td align="right" class='awrc'><div class="hidden">2384323019</div></td><td align="right" class='awrc'><div class="hidden">2146368977</div></td>
+<td align="right" class='awrc'><div class="hidden">2</div></td><td align="right" class='awrc'><div class="hidden">19.52897040433513964151729887453105460609</div></td>
+<td class='awrc'>LOAD TABLE CONVENTIONAL</td><td align="right" class='awrc'>1.75</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>1.75</td>
+<td class='awrc'></td><td align="right" class='awrc'><div class="hidden">pdim</div></td></tr>
+<tr><td align="right" class='awrnc'><a class="awr" href="#bv8k10h0bsqxw">bv8k10h0bsqxw</a></td><td align="right" class='awrnc'>586821999</td><td align="right" class='awrnc'>3348165199</td>
+<td align="right" class='awrnc'>1</td><td align="right" class='awrnc'>5.36</td>
+<td class='awrnc'>INDEX - FAST FULL SCAN</td><td align="right" class='awrnc'>1.92</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>1.92</td>
+<td class='awrnc'>insert /*+ append parallel(8) ...</td><td align="right" class='awrnc'>pdim</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">bv8k10h0bsqxw</div></td><td align="right" class='awrc'><div class="hidden">586821999</div></td><td align="right" class='awrc'><div class="hidden">3348165199</div></td>
+<td align="right" class='awrc'><div class="hidden">1</div></td><td align="right" class='awrc'><div class="hidden">5.35639849937473947478115881617340558566</div></td>
+<td class='awrc'>INDEX - FAST FULL SCAN</td><td align="right" class='awrc'>1.90</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>1.90</td>
+<td class='awrc'></td><td align="right" class='awrc'><div class="hidden">pdim</div></td></tr>
+<tr><td align="right" class='awrnc'><a class="awr" href="#9xjnnup3n9244">9xjnnup3n9244</a></td><td align="right" class='awrnc'>586821999</td><td align="right" class='awrnc'>3348165199</td>
+<td align="right" class='awrnc'>1</td><td align="right" class='awrnc'>5.21</td>
+<td class='awrnc'>INDEX - FAST FULL SCAN</td><td align="right" class='awrnc'>1.96</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>1.96</td>
+<td class='awrnc'>insert /*+ append parallel(8) ...</td><td align="right" class='awrnc'>pdim</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">9xjnnup3n9244</div></td><td align="right" class='awrc'><div class="hidden">586821999</div></td><td align="right" class='awrc'><div class="hidden">3348165199</div></td>
+<td align="right" class='awrc'><div class="hidden">1</div></td><td align="right" class='awrc'><div class="hidden">5.21050437682367653188828678616090037516</div></td>
+<td class='awrc'>INDEX - FAST FULL SCAN</td><td align="right" class='awrc'>1.90</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>1.88</td>
+<td class='awrc'></td><td align="right" class='awrc'><div class="hidden">pdim</div></td></tr>
+<tr><td align="right" class='awrnc'><a class="awr" href="#br0aj8gyzqt52">br0aj8gyzqt52</a></td><td align="right" class='awrnc'>1050358846</td><td align="right" class='awrnc'>446181820</td>
+<td align="right" class='awrnc'>1</td><td align="right" class='awrnc'>4.90</td>
+<td class='awrnc'>HASH JOIN</td><td align="right" class='awrnc'>2.02</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>1.50</td>
+<td class='awrnc'>/* MV_REFRESH (INS) */INSERT /...</td><td align="right" class='awrnc'>pdim</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">br0aj8gyzqt52</div></td><td align="right" class='awrc'><div class="hidden">1050358846</div></td><td align="right" class='awrc'><div class="hidden">446181820</div></td>
+<td align="right" class='awrc'><div class="hidden">1</div></td><td align="right" class='awrc'><div class="hidden">4.89787411421425593997498957899124635265</div></td>
+<td class='awrc'>HASH JOIN</td><td align="right" class='awrc'>1.42</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>1.17</td>
+<td class='awrc'></td><td align="right" class='awrc'><div class="hidden">pdim</div></td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">br0aj8gyzqt52</div></td><td align="right" class='awrnc'><div class="hidden">1050358846</div></td><td align="right" class='awrnc'><div class="hidden">446181820</div></td>
+<td align="right" class='awrnc'><div class="hidden">1</div></td><td align="right" class='awrnc'><div class="hidden">4.89787411421425593997498957899124635265</div></td>
+<td class='awrnc'>LOAD TABLE CONVENTIONAL</td><td align="right" class='awrnc'>1.04</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>1.04</td>
+<td class='awrnc'></td><td align="right" class='awrnc'><div class="hidden">pdim</div></td></tr>
+<tr><td align="right" class='awrc'><a class="awr" href="#3w2j3sw8fh6mv">3w2j3sw8fh6mv</a></td><td align="right" class='awrc'>3818777193</td><td align="right" class='awrc'>3818777193</td>
+<td align="right" class='awrc'>1</td><td align="right" class='awrc'>1.06</td>
+<td class='awrc'>DELETE</td><td align="right" class='awrc'>0.58</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>0.56</td>
+<td class='awrc'>/* MV_REFRESH (DEL) */ delete ...</td><td align="right" class='awrc'>pdim</td></tr>
+</table><p />
+<a class="awr" href="#104">Back to Top SQL</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10370"></a>
+<h3 class="awr">Top SQL using literals</h3>
+<ul>
+<li class="awr"> FORCE_MATCHING_SIGNATURE is used to identify SQL statements that are        identical except for their use of literals. </li>
+<li class="awr"> Please refer to the Oracle Database Reference to understand how        the FORCE_MATCHING_SIGNATURE is derived.</li>
+</ul>
+<table border="1" summary="Top SQL using literals. . FORCE_MATCHING_SIGNATURE is used to identify SQL statements that are identical except for their use of literals.. Please refer to the Oracle Database Reference to understand how the FORCE_MATCHING_SIGNATURE is derived."><tr><th class="awrbg" scope="col">FORCE_MATCHING_SIGNATURE</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col"># of Sampled SQL Versions</th><th class="awrbg" scope="col">Example SQL 1</th><th class="awrbg" scope="col">Example SQL TEXT 1</th><th class="awrbg" scope="col">Example SQL 2</th><th class="awrbg" scope="col">Example SQL TEXT 2</th></tr>
+<tr><td align="right" scope="row" class='awrc'>13833674198290771665</td><td align="right" class='awrc'>1.29</td><td align="right" class='awrc'>6</td>
+<td class='awrc'>&#160;</td>
+<td class='awrc'>&#160;</td>
+<td class='awrc'>&#160;</td>
+<td class='awrc'>&#160;</td></tr>
+<tr><td align="right" scope="row" class='awrnc'>11338097563876552758</td><td align="right" class='awrnc'>1.15</td><td align="right" class='awrnc'>6</td>
+<td class='awrnc'>&#160;</td>
+<td class='awrnc'>&#160;</td>
+<td class='awrnc'>&#160;</td>
+<td class='awrnc'>&#160;</td></tr>
+</table><p />
+<a class="awr" href="#104">Back to Top SQL</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10375"></a>
+<h3 class="awr">Top Parsing Module/Action</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Parsing Module/Action"><tr><th class="awrbg" scope="col">Module</th><th class="awrbg" scope="col">Action</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th></tr>
+<tr><td class='awrc'>osh@uwvm2vlpapp0021.p-dc.ba.uwv.nl (TNS V1-V3)</td><td class='awrc'>&#160;</td><td align="right" class='awrc'>1.33</td>
+<td class='awrc'>cursor: pin S wait on X</td><td align="right" class='awrc'>0.75</td></tr>
+</table><p />
+<a class="awr" href="#104">Back to Top SQL</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="99997"></a>
+<p />
+<h3 class="awr">Complete List of SQL Text</h3><p />
+<table border="1" summary="This table displays the text of the SQL statements which have been
+      referred to in the report">
+<tr><th class="awrbg" scope="col">SQL Id</th><th class="awrbg" scope="col">SQL Text</th></tr>
+<tr><td scope="row" class='awrc'><a class="awr" name="3w2j3sw8fh6mv"></a>3w2j3sw8fh6mv</td><td class='awrc'><pre_sqltext class="awr">/* MV_REFRESH (DEL) */ delete from &quot;BDR_RESAFASA_PO&quot;.&quot;ACTIE_HM&quot;</pre_sqltext></td></tr>
+<tr><td scope="row" class='awrnc'><a class="awr" name="3zcgw67pyjmxu"></a>3zcgw67pyjmxu</td><td class='awrnc'><pre_sqltext class="awr">/* MV_REFRESH (INS) */INSERT /*+ BYPASS_RECURSIVE_CHECK */ INTO &quot;BDR_RESAFASA_PO&quot;.&quot;BRV_UKGEVACT_ACTIES_HM&quot; select
+        act.volgnummer_geval              as volgnummer_geval, 
+        act.datum_afhandeling             as datum_afhandeling, 
+        act.startdatum_actie              as startdatum_actie, 
+        act.afg_bsn                       as bsn, 
+        act.geplande_datum_rappeldatum    as geplande_datum_rappeldatum, 
+        act.datum_volgende_rappel         as datum_volgende_rappel, 
+        act.datum_ew                      as datum_eindewachttijd, 
+        act.code_afhandeling              as code_afhandeling, 
+        act.code_actie                    as code_actie, 
+        act.nummer_hoofdgroep             as nummer_hoofdgroep, 
+        act.nummer_dk                     as dk_nummer, 
+        act.afg_registratienumme
+r         as registratienummer, 
+        act.uitvoerende_functionaris      as uitvoerende_functionaris, 
+        act.verantw_funct_personeelsnr    as verantw_funct_personeelsnr, 
+        act.naam_verantw_functionaris     as naam_verantw_functionaris, 
+        act.verantw_funct_nr_rf_kantoor   as verantw_funct_nr_rf_kantoor, 
+        act.nummer_dk_team                as nummer_dk_team, 
+        act.datum_creatie                 as datum_creatie, 
+        act.volgnummer_dim                as volgnummer_dim, 
+        act.dim_start_datum               as dim_start_datum, 
+        act.dim_eind_datum                as dim_eind_datum, 
+        case
+            when to_char(dim_eind_datum,  'yyyymmdd') = '99991231' then
+                'J'
+            else
+                'N'
+        end as dim_recent_ind
+    from
+        okv_resafasa_po.okv_actie_hv act
+    where
+        act.nummer_dk not in (
+            46, 
+            8, 
+            20, 
+            43
+        )
+        and act.afg_bsn n
+ot in (
+            select
+                afg_bsn
+            from
+                dim_beveiliging.bev_vip_po_mv
+            where
+                to_char(dim_eind_datum,  'dd-mm-yyyy') = '31-12-9999'
+        )</pre_sqltext></td></tr>
+<tr><td scope="row" class='awrc'><a class="awr" name="9xjnnup3n9244"></a>9xjnnup3n9244</td><td class='awrc'><pre_sqltext class="awr">insert /*+ append parallel(8) */ into stg_resafasa.STG_actie_SIM_TB (dim_hub_key,  dim_start_datum,  registratienummer,  afg_registratienummer,  bsn,  afg_bsn,  volgnummer_geval,  naam_verzekerde,  verantw_funct_personeelsnr,  naam_verantw_functionaris) select standard_hash( to_char(volgnummer_geval) ||'|'|| to_char(code_actie) ||'|'|| to_char(datum_creatie,  'yyyy-mm-dd hh24:mi:ss') ||'|'|| to_char(volgnummer_dim) ||'|'|| to_char(startdatum_actie,  'yyyy-mm-dd hh24:mi:ss') ||'|'|| (select salt_waarde from dim_bronzone.brz_salt_tb where salt_type = 'HUB_KEY'),  'SHA256') AS dim_hub_key,  timestamp '2024-01-27 00:00:00' AS dim_start_datum,  null,  aliasafg_registratienummer.GEMASKEERD,  null,  aliasafg_bsn.GEMASKEERD,  aliasvolgnummer_geval.GEMASKEERD,  null,  aliasverantw_funct_personeelsnr.GEMASKEERD,  null from stg_resafasa.stg_actie_SN LEFT JOIN DIM_MA
+SKERING.dl_bsn_maskering_tb aliasafg_bsn on lpad( ltrim(regexp_replace( to_char(bsn),  '[^0-9]',  ''), '0'),   9,  '0') = aliasafg_bsn.ONGEMASKEERD  LEFT JOIN DIM_MASKERING.dl_registratie_maskering_tb aliasafg_registratienummer on lpad( ltrim(regexp_replace( to_char(registratienummer),  '[^0-9]',  ''), '0'),  10,  '0') = aliasafg_registratienummer.ONGEMASKEERD  LEFT JOIN DIM_MASKERING.dl_integers_maskering_tb aliasvolgnummer_geval on volgnummer_geval = aliasvolgnummer_geval.ONGEMASKEERD  LEFT JOIN DIM_MASKERING.dl_integers_maskering_tb aliasverantw_funct_personeelsnr on verantw_funct_personeelsnr = aliasverantw_funct_personeelsnr.ONGEMASKEERD  
+</pre_sqltext></td></tr>
+<tr><td scope="row" class='awrnc'><a class="awr" name="br0aj8gyzqt52"></a>br0aj8gyzqt52</td><td class='awrnc'><pre_sqltext class="awr">/* MV_REFRESH (INS) */INSERT /*+ BYPASS_RECURSIVE_CHECK */ INTO &quot;BDR_RESAFASA_PO&quot;.&quot;ACTIE_HM&quot; select
+        bsn, 
+        volgnummer_geval, 
+        datum_beeindiging, 
+        nummer_hoofdgroep, 
+        verantw_funct_nr_rf_kantoor, 
+        code_geslacht_verantw_funct, 
+        code_actie, 
+        startdatum_actie, 
+        datum_afhandeling, 
+        geplande_datum_rappeldatum, 
+        aantal_rappels, 
+        uitvoerende_functionaris, 
+        datum_creatie, 
+        nummer_dk, 
+        afg_registratienummer, 
+        afg_bsn, 
+        datum_ew, 
+        naam_verzekerde, 
+        nummer_dk_team, 
+        verantw_funct_personeelsnr, 
+        naam_verantw_functionaris, 
+        omschrijving_actie, 
+        code_afhandeling, 
+        code_opmerking, 
+        datum_volgende_rappel, 
+        uitvoerend_dk, 
+        datum_mutatie,
+volgnummer_dim, 
+        dim_start_datum, 
+        dim_eind_datum, 
+        dim_recent_ind, 
+        dim_status, 
+        dim_bron, 
+        dim_archiefvernietiging_status, 
+        dim_datum_aanmaak, 
+        dim_user_aanmaak, 
+        dim_datum_gewijzigd, 
+        dim_user_gewijzigd, 
+        registratienummer
+    from
+        okv_resafasa_po.okv_actie_hv</pre_sqltext></td></tr>
+<tr><td scope="row" class='awrc'><a class="awr" name="bv8k10h0bsqxw"></a>bv8k10h0bsqxw</td><td class='awrc'><pre_sqltext class="awr">insert /*+ append parallel(8) */ into stg_resafasa.STG_actie_SIM_TB (dim_hub_key,  dim_start_datum,  registratienummer,  afg_registratienummer,  bsn,  afg_bsn,  volgnummer_geval,  naam_verzekerde,  verantw_funct_personeelsnr,  naam_verantw_functionaris) select standard_hash( to_char(volgnummer_geval) ||'|'|| to_char(code_actie) ||'|'|| to_char(datum_creatie,  'yyyy-mm-dd hh24:mi:ss') ||'|'|| to_char(volgnummer_dim) ||'|'|| to_char(startdatum_actie,  'yyyy-mm-dd hh24:mi:ss') ||'|'|| (select salt_waarde from dim_bronzone.brz_salt_tb where salt_type = 'HUB_KEY'),  'SHA256') AS dim_hub_key,  timestamp '2024-01-26 00:00:00' AS dim_start_datum,  null,  aliasafg_registratienummer.GEMASKEERD,  null,  aliasafg_bsn.GEMASKEERD,  aliasvolgnummer_geval.GEMASKEERD,  null,  aliasverantw_funct_personeelsnr.GEMASKEERD,  null from stg_resafasa.stg_actie_SN LEFT JOIN DIM_MA
+SKERING.dl_bsn_maskering_tb aliasafg_bsn on lpad( ltrim(regexp_replace( to_char(bsn),  '[^0-9]',  ''), '0'),   9,  '0') = aliasafg_bsn.ONGEMASKEERD  LEFT JOIN DIM_MASKERING.dl_registratie_maskering_tb aliasafg_registratienummer on lpad( ltrim(regexp_replace( to_char(registratienummer),  '[^0-9]',  ''), '0'),  10,  '0') = aliasafg_registratienummer.ONGEMASKEERD  LEFT JOIN DIM_MASKERING.dl_integers_maskering_tb aliasvolgnummer_geval on volgnummer_geval = aliasvolgnummer_geval.ONGEMASKEERD  LEFT JOIN DIM_MASKERING.dl_integers_maskering_tb aliasverantw_funct_personeelsnr on verantw_funct_personeelsnr = aliasverantw_funct_personeelsnr.ONGEMASKEERD  
+</pre_sqltext></td></tr>
+</table>
+<p />
+<a class="awr" href="#104">Back to Top SQL</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="10380"></a>
+<h3 class="awr">Top PL/SQL Procedures</h3>
+<ul>
+<li class="awr"> 'PL/SQL entry subprogram' represents the application's top-level        entry-point(procedure, function, trigger, package initialization       or RPC call) into PL/SQL. </li>
+<li class="awr"> 'PL/SQL current subprogram' is the pl/sql subprogram being executed        at the point of sampling . If the value is 'SQL', it represents        the percentage of time spent executing SQL for the particular        plsql entry subprogram</li>
+</ul>
+<table border="1" summary="Top PL/SQL Procedures. . 'PL/SQL entry subprogram' represents the application's top-level entry-point(procedure, function, trigger, package initialization or RPC call) into PL/SQL.. 'PL/SQL current subprogram' is the pl/sql subprogram being executed at the point of sampling . If the value is 'SQL', it represents the percentage of time spent executing SQL for the particular plsql entry subprogram"><tr><th class="awrbg" scope="col">PLSQL Entry Subprogram</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">PLSQL Current Subprogram</th><th class="awrbg" scope="col">% Current</th><th class="awrbg" scope="col">Container Name</th></tr>
+<tr><td scope="row" class='awrc'>SYS.DBMS_SNAPSHOT.REFRESH#1</td><td align="right" class='awrc'>27.24</td>
+<td class='awrc'>SQL</td><td align="right" class='awrc'>27.24</td>
+<td align="right" class='awrc'>pdim</td></tr>
+<tr><td scope="row" class='awrnc'>SYS.DBMS_BACKUP_RESTORE.BACKUPPIECECREATE#13</td><td align="right" class='awrnc'>20.74</td>
+<td class='awrnc'>SQL</td><td align="right" class='awrnc'>20.74</td>
+<td align="right" class='awrnc'>pdim</td></tr>
+<tr><td scope="row" class='awrc'>SYS.DBMS_BACKUP_RESTORE.DOAUTOBACKUP#2</td><td align="right" class='awrc'>9.86</td>
+<td class='awrc'>SQL</td><td align="right" class='awrc'>9.86</td>
+<td align="right" class='awrc'>pdim</td></tr>
+</table><p />
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="10390"></a>
+<h3 class="awr">Top Java Workload</h3>
+
+<p />
+No data exists for this section of the report.
+<p />
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="10391"></a>
+<h3 class="awr">Top Call Types</h3>
+<ul>
+</ul>
+<table border="1" summary="Top Call Types"><tr><th class="awrbg" scope="col">Call Type</th><th class="awrbg" scope="col">Count</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Avg Active Sessions</th></tr>
+<tr><td scope="row" class='awrc'>PL/SQL RPC</td><td align="right" class='awrc'>1,493</td><td align="right" class='awrc'>31.12</td><td align="right" class='awrc'>0.41</td></tr>
+<tr><td scope="row" class='awrnc'>LOGOFF</td><td align="right" class='awrnc'>1,119</td><td align="right" class='awrnc'>23.32</td><td align="right" class='awrnc'>0.31</td></tr>
+<tr><td scope="row" class='awrc'>V8 Bundled Exec</td><td align="right" class='awrc'>301</td><td align="right" class='awrc'>6.27</td><td align="right" class='awrc'>0.08</td></tr>
+<tr><td scope="row" class='awrnc'>LOB/FILE operations</td><td align="right" class='awrnc'>71</td><td align="right" class='awrnc'>1.48</td><td align="right" class='awrnc'>0.02</td></tr>
+</table><p />
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="105"></a>
+<h2 class="awr">
+Top Sessions
+</h2>
+<ul>
+<li class="awr"><a class="awr" href="#10310">Top Sessions</a></li>
+<li class="awr"><a class="awr" href="#10320">Top Blocking Sessions</a></li>
+<li class="awr"><a class="awr" href="#10330">Top Sessions running PQs</a></li>
+</ul>
+<a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10310"></a>
+<h3 class="awr">Top Sessions</h3>
+<ul>
+<li class="awr"> '# Samples Active' shows the number of ASH samples in which the session        was found waiting for that particular event. The percentage shown       in this column is calculated with respect to wall clock time       and not total database activity. </li>
+<li class="awr"> 'XIDs' shows the number of distinct transaction IDs sampled in ASH        when the session was waiting for that particular event </li>
+<li class="awr"> For sessions running Parallel Queries, this section will NOT aggregate        the PQ slave activity into the session issuing the PQ. Refer to        the 'Top Sessions running PQs' section for such statistics.</li>
+</ul>
+<table border="1" summary="Top Sessions. . '# Samples Active' shows the number of ASH samples in which the session was found waiting for that particular event. The percentage shown in this column is calculated with respect to wall clock time and not total database activity.. 'XIDs' shows the number of distinct transaction IDs sampled in ASH when the session was waiting for that particular event. For sessions running Parallel Queries, this section will NOT aggregate the PQ slave activity into the session issuing the PQ. Refer to the 'Top Sessions running PQs' section for such statistics."><tr><th class="awrbg" scope="col">Sid, Serial#</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">User</th><th class="awrbg" scope="col">Program</th><th class="awrbg" scope="col"># Samples Active</th><th class="awrbg" scope="col">XIDs</th></tr>
+<tr><td align="right" scope="row" class='awrc'>1753,31369</td><td align="right" class='awrc'>14.74</td><td class='awrc'>Backup: MML create a backup piece</td><td align="right" class='awrc'>9.44</td>
+<td class='awrc'>SYS</td><td class='awrc'>rman@uwvm2vapo...l (TNS V1-V3)</td><td align="right" class='awrc'>453/3,600 [ 13%]</td><td align="right" class='awrc'>0</td></tr>
+<tr><td align="right" scope="row" class='awrnc'><div class="hidden">1753,31369</div></td><td align="right" class='awrnc'><div class="hidden">14.73530637765735723218007503126302626094</div></td><td class='awrnc'>Backup: MML write backup piece</td><td align="right" class='awrnc'>4.52</td>
+<td class='awrnc'><div class="hidden">SYS</div></td><td class='awrnc'><div class="hidden">rman@uwvm2vapo...l (TNS V1-V3)</div></td><td align="right" class='awrnc'>217/3,600 [  6%]</td><td align="right" class='awrnc'>0</td></tr>
+<tr><td align="right" scope="row" class='awrc'>1676,12705</td><td align="right" class='awrc'>11.19</td><td class='awrc'>Backup: MML create a backup piece</td><td align="right" class='awrc'>9.46</td>
+<td class='awrc'>SYS</td><td class='awrc'>rman@uwvm2vapo...l (TNS V1-V3)</td><td align="right" class='awrc'>454/3,600 [ 13%]</td><td align="right" class='awrc'>0</td></tr>
+<tr><td align="right" scope="row" class='awrnc'><div class="hidden">1676,12705</div></td><td align="right" class='awrnc'><div class="hidden">11.19216340141725719049604001667361400584</div></td><td class='awrnc'>Backup: MML write backup piece</td><td align="right" class='awrnc'>1.08</td>
+<td class='awrnc'><div class="hidden">SYS</div></td><td class='awrnc'><div class="hidden">rman@uwvm2vapo...l (TNS V1-V3)</div></td><td align="right" class='awrnc'>52/3,600 [  1%]</td><td align="right" class='awrnc'>0</td></tr>
+<tr><td align="right" scope="row" class='awrc'>1902,12676</td><td align="right" class='awrc'>10.48</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>9.50</td>
+<td class='awrc'>DIM_BEDRIJFSZONE</td><td class='awrc'>osh@uwvm2vlpap...l (TNS V1-V3)</td><td align="right" class='awrc'>456/3,600 [ 13%]</td><td align="right" class='awrc'>1</td></tr>
+<tr><td align="right" scope="row" class='awrnc'>308,14240</td><td align="right" class='awrnc'>9.88</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>9.42</td>
+<td class='awrnc'>DIM_BEDRIJFSZONE</td><td class='awrnc'>osh@uwvm2vlpap...l (TNS V1-V3)</td><td align="right" class='awrnc'>452/3,600 [ 13%]</td><td align="right" class='awrnc'>1</td></tr>
+<tr><td align="right" scope="row" class='awrc'>1902,49357</td><td align="right" class='awrc'>5.96</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>4.65</td>
+<td class='awrc'>DIM_BEDRIJFSZONE</td><td class='awrc'>osh@uwvm2vlpap...l (TNS V1-V3)</td><td align="right" class='awrc'>223/3,600 [  6%]</td><td align="right" class='awrc'>1</td></tr>
+</table><p />
+<a class="awr" href="#105">Back to Top Sessions</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10320"></a>
+<h3 class="awr">Top Blocking Sessions</h3>
+
+<p />
+No data exists for this section of the report.
+<p />
+<a class="awr" href="#105">Back to Top Sessions</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10330"></a>
+<h3 class="awr">Top Sessions running PQs</h3>
+<ul>
+<li class="awr"> This section aggregates all the work done by the PQ slaves into        the session issuing the parallel query.</li>
+</ul>
+<table border="1" summary="Top Sessions running PQs. . This section aggregates all the work done by the PQ slaves into the session issuing the parallel query."><tr><th class="awrbg" scope="col">Sid,Srl# (Inst)</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">SQL ID</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">User</th><th class="awrbg" scope="col">Program</th><th class="awrbg" scope="col">SQL Text</th></tr>
+<tr><td align="right" scope="row" class='awrc'>2663,33023(1)</td><td align="right" class='awrc'>5.36</td><td class='awrc'><a class="awr" href="#bv8k10h0bsqxw">bv8k10h0bsqxw</a></td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>5.34</td>
+<td class='awrc'>DIM_STAGING</td><td class='awrc'>osh@uwvm2vlpap...l (TNS V1-V3)</td>
+<td class='awrc'>insert /*+ append parallel(8) ...</td></tr>
+<tr><td align="right" scope="row" class='awrnc'>308,15882(1)</td><td align="right" class='awrnc'>5.21</td><td class='awrnc'><a class="awr" href="#9xjnnup3n9244">9xjnnup3n9244</a></td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>5.19</td>
+<td class='awrnc'>DIM_STAGING</td><td class='awrnc'>osh@uwvm2vlpap...l (TNS V1-V3)</td>
+<td class='awrnc'>insert /*+ append parallel(8) ...</td></tr>
+</table><p />
+<a class="awr" href="#105">Back to Top Sessions</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="106"></a>
+<h2 class="awr">
+Top Objects/Files/Latches
+</h2>
+<ul>
+<li class="awr"><a class="awr" href="#10340">Top DB Objects</a></li>
+<li class="awr"><a class="awr" href="#10350">Top DB Files</a></li>
+<li class="awr"><a class="awr" href="#10360">Top Latches</a></li>
+</ul>
+<a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10340"></a>
+<h3 class="awr">Top DB Objects</h3>
+<ul>
+<li class="awr"> With respect to Application, Cluster, User I/O, buffer busy waits and     In-Memory DB events only. </li>
+<li class="awr"> Tablespace name is not available for reports generated from the root PDB     of a consolidated database. </li>
+<li class="awr"> When ** MISSING ** occurs, some of the object attributes may not be available.</li>
+</ul>
+<table border="1" summary="Top DB Objects. . With respect to Application, Cluster, User I/O, buffer busy waits and In-Memory DB events only.. Tablespace name is not available for reports generated from the root PDB of a consolidated database.. When ** MISSING ** occurs, some of the object attributes may not be available."><tr><th class="awrbg" scope="col">Object ID</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">Object Name (Type)</th><th class="awrbg" scope="col">Tablespace</th><th class="awrbg" scope="col">Container Name</th></tr>
+<tr><td align="right" scope="row" class='awrc'>111792</td><td align="right" class='awrc'>2.92</td><td class='awrc'>direct path read</td><td align="right" class='awrc'>2.92</td>
+<td class='awrc'>INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT (TABLE PARTITION)</td><td class='awrc'>DIM_INTEGRATIEZONE</td>
+<td align="right" class='awrc'>pdim</td></tr>
+<tr><td align="right" scope="row" class='awrnc'>111791</td><td align="right" class='awrnc'>1.13</td><td class='awrnc'>direct path read</td><td align="right" class='awrnc'>1.13</td>
+<td class='awrnc'>INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT (TABLE PARTITION)</td><td class='awrnc'>DIM_INTEGRATIEZONE</td>
+<td align="right" class='awrnc'>pdim</td></tr>
+</table><p />
+<a class="awr" href="#106">Back to Top Objects/Files/Latches</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10350"></a>
+<h3 class="awr">Top DB Files</h3>
+<ul>
+<li class="awr"> With respect to Cluster and User I/O events only.</li>
+</ul>
+<table border="1" summary="Top DB Files. . With respect to Cluster and User I/O events only."><tr><th class="awrbg" scope="col">File ID</th><th class="awrbg" scope="col">% Activity</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">% Event</th><th class="awrbg" scope="col">File Name</th><th class="awrbg" scope="col">Tablespace</th></tr>
+<tr><td align="right" scope="row" class='awrc'>24</td><td align="right" class='awrc'>6.00</td><td class='awrc'>direct path read</td><td align="right" class='awrc'>5.90</td>
+<td class='awrc'>+DATA/PDIM/DATAFILE/dim_integratiezone.305.1128959695</td><td class='awrc'>DIM_INTEGRATIEZONE</td></tr>
+<tr><td align="right" scope="row" class='awrnc'>23</td><td align="right" class='awrnc'>2.31</td><td class='awrnc'>direct path read temp</td><td align="right" class='awrnc'>1.04</td>
+<td class='awrnc'>+DATA/PDIM/DATAFILE/dim_bronzone.304.1128957979</td><td class='awrnc'>DIM_BRONZONE</td></tr>
+</table><p />
+<a class="awr" href="#106">Back to Top Objects/Files/Latches</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<a class="awr" name="10360"></a>
+<h3 class="awr">Top Latches</h3>
+
+<p />
+No data exists for this section of the report.
+<p />
+<a class="awr" href="#106">Back to Top Objects/Files/Latches</a>
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+<a class="awr" name="10200"></a>
+<h3 class="awr">Activity Over Time</h3>
+<ul>
+<li class="awr"> Analysis period is divided into smaller time slots </li>
+<li class="awr"> Top 3 events are reported in each of those slots </li>
+<li class="awr"> 'Slot Count' shows the number of ASH samples in that slot </li>
+<li class="awr"> 'Event Count' shows the number of ASH samples waiting for    that event in that slot </li>
+<li class="awr"> '% Event' is 'Event Count' over all ASH samples in the analysis period</li>
+</ul>
+<table border="1" summary="Activity Over Time. . Analysis period is divided into smaller time slots. Top 3 events are reported in each of those slots. 'Slot Count' shows the number of ASH samples in that slot. 'Event Count' shows the number of ASH samples waiting for that event in that slot. '% Event' is 'Event Count' over all ASH samples in the analysis period"><tr><th class="awrbg" scope="col">Slot Time (Duration)</th><th class="awrbg" scope="col">Slot Count</th><th class="awrbg" scope="col">Event</th><th class="awrbg" scope="col">Event Count</th><th class="awrbg" scope="col">% Event</th></tr>
+<tr><td align="right" class='awrc'>13:49:39   (4.4 min)</td><td align="right" class='awrc'>112</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>58</td><td align="right" class='awrc'>1.21</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">13:49:39   (4.4 min)</div></td><td align="right" class='awrnc'><div class="hidden">112</div></td><td class='awrnc'>direct path read</td><td align="right" class='awrnc'>39</td><td align="right" class='awrnc'>0.81</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">13:49:39   (4.4 min)</div></td><td align="right" class='awrc'><div class="hidden">112</div></td><td class='awrc'>External Procedure call</td><td align="right" class='awrc'>2</td><td align="right" class='awrc'>0.04</td></tr>
+<tr><td align="right" class='awrnc'>13:54:00   (6.0 min)</td><td align="right" class='awrnc'>1,155</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>797</td><td align="right" class='awrnc'>16.61</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">13:54:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">1155</div></td><td class='awrc'>direct path read</td><td align="right" class='awrc'>244</td><td align="right" class='awrc'>5.09</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">13:54:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">1155</div></td><td class='awrnc'>cursor: pin S wait on X</td><td align="right" class='awrnc'>36</td><td align="right" class='awrnc'>0.75</td></tr>
+<tr><td align="right" class='awrc'>14:00:00   (6.0 min)</td><td align="right" class='awrc'>797</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>356</td><td align="right" class='awrc'>7.42</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:00:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">797</div></td><td class='awrnc'>Backup: MML create a backup piece</td><td align="right" class='awrnc'>290</td><td align="right" class='awrnc'>6.04</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:00:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">797</div></td><td class='awrc'>Backup: MML write backup piece</td><td align="right" class='awrc'>52</td><td align="right" class='awrc'>1.08</td></tr>
+<tr><td align="right" class='awrnc'>14:06:00   (6.0 min)</td><td align="right" class='awrnc'>679</td><td class='awrnc'>Backup: MML create a backup piece</td><td align="right" class='awrnc'>279</td><td align="right" class='awrnc'>5.81</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:06:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">679</div></td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>243</td><td align="right" class='awrc'>5.06</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:06:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">679</div></td><td class='awrnc'>db file parallel write</td><td align="right" class='awrnc'>45</td><td align="right" class='awrnc'>0.94</td></tr>
+<tr><td align="right" class='awrc'>14:12:00   (6.0 min)</td><td align="right" class='awrc'>256</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>204</td><td align="right" class='awrc'>4.25</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:12:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">256</div></td><td class='awrnc'>db file parallel write</td><td align="right" class='awrnc'>30</td><td align="right" class='awrnc'>0.63</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:12:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">256</div></td><td class='awrc'>External Procedure call</td><td align="right" class='awrc'>4</td><td align="right" class='awrc'>0.08</td></tr>
+<tr><td align="right" class='awrnc'>14:18:00   (6.0 min)</td><td align="right" class='awrnc'>462</td><td class='awrnc'>CPU + Wait for CPU</td><td align="right" class='awrnc'>416</td><td align="right" class='awrnc'>8.67</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:18:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">462</div></td><td class='awrc'>direct path read temp</td><td align="right" class='awrc'>9</td><td align="right" class='awrc'>0.19</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:18:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">462</div></td><td class='awrnc'>direct path write temp</td><td align="right" class='awrnc'>6</td><td align="right" class='awrnc'>0.13</td></tr>
+<tr><td align="right" class='awrc'>14:24:00   (6.0 min)</td><td align="right" class='awrc'>289</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>249</td><td align="right" class='awrc'>5.19</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:24:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">289</div></td><td class='awrnc'>db file parallel write</td><td align="right" class='awrnc'>22</td><td align="right" class='awrnc'>0.46</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:24:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">289</div></td><td class='awrc'>direct path read temp</td><td align="right" class='awrc'>6</td><td align="right" class='awrc'>0.13</td></tr>
+<tr><td align="right" class='awrnc'>14:30:00   (6.0 min)</td><td align="right" class='awrnc'>403</td><td class='awrnc'>Backup: MML create a backup piece</td><td align="right" class='awrnc'>225</td><td align="right" class='awrnc'>4.69</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:30:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">403</div></td><td class='awrc'>Backup: MML write backup piece</td><td align="right" class='awrc'>91</td><td align="right" class='awrc'>1.90</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:30:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">403</div></td><td class='awrnc'>enq: WL - contention</td><td align="right" class='awrnc'>30</td><td align="right" class='awrnc'>0.63</td></tr>
+<tr><td align="right" class='awrc'>14:36:00   (6.0 min)</td><td align="right" class='awrc'>351</td><td class='awrc'>Backup: MML create a backup piece</td><td align="right" class='awrc'>193</td><td align="right" class='awrc'>4.02</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:36:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">351</div></td><td class='awrnc'>Backup: MML write backup piece</td><td align="right" class='awrnc'>124</td><td align="right" class='awrnc'>2.58</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:36:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">351</div></td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>15</td><td align="right" class='awrc'>0.31</td></tr>
+<tr><td align="right" class='awrnc'>14:42:00   (6.0 min)</td><td align="right" class='awrnc'>222</td><td class='awrnc'>Backup: MML create a backup piece</td><td align="right" class='awrnc'>147</td><td align="right" class='awrnc'>3.06</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:42:00   (6.0 min)</div></td><td align="right" class='awrc'><div class="hidden">222</div></td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>50</td><td align="right" class='awrc'>1.04</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:42:00   (6.0 min)</div></td><td align="right" class='awrnc'><div class="hidden">222</div></td><td class='awrnc'>Backup: MML commit backup piece</td><td align="right" class='awrnc'>9</td><td align="right" class='awrnc'>0.19</td></tr>
+<tr><td align="right" class='awrc'>14:48:00   (1.7 min)</td><td align="right" class='awrc'>72</td><td class='awrc'>CPU + Wait for CPU</td><td align="right" class='awrc'>66</td><td align="right" class='awrc'>1.38</td></tr>
+<tr><td align="right" class='awrnc'><div class="hidden">14:48:00   (1.7 min)</div></td><td align="right" class='awrnc'><div class="hidden">72</div></td><td class='awrnc'>Disk file operations I/O</td><td align="right" class='awrnc'>1</td><td align="right" class='awrnc'>0.02</td></tr>
+<tr><td align="right" class='awrc'><div class="hidden">14:48:00   (1.7 min)</div></td><td align="right" class='awrc'><div class="hidden">72</div></td><td class='awrc'>External Procedure call</td><td align="right" class='awrc'>1</td><td align="right" class='awrc'>0.02</td></tr>
+</table><p />
+<br /><a class="awr" href="#top">Back to Top</a><p />
+<p />
+End of Report
+</body></html>

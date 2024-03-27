@@ -1,0 +1,2153 @@
+ADDM Task ADDM:1459796375_1_8322
+ADDM Report for Task 'ADDM:1459796375_1_8322'
+---------------------------------------------
+
+Analysis Period
+---------------
+AWR snapshot range from 8321 to 8322.
+Time period starts at 30-01-24 10.00.50 PM
+Time period ends at 30-01-24 11.00.54 PM
+
+Analysis Target
+---------------
+Database 'PDIM' with DB ID 1459796375.
+Database version 19.0.0.0.0.
+ADDM performed an analysis of instance pdim, numbered 1 and hosted at
+uwvm2vapora0012.p-dc.ba.uwv.nl.
+
+Activity During the Analysis Period
+-----------------------------------
+Total database time was 23737 seconds.
+The average number of active sessions was 6.59.
+
+Summary of Findings
+-------------------
+Description                               Active Sessions      Recommendations
+Percent of Activity
+----------------------------------------  -------------------  ---------------
+1  Top SQL Statements                        2.4 | 36.5           5
+2  Top Segments by "User I/O" and "Cluster"  1.76 | 26.73         5
+3  Undersized PGA                            .67 | 10.16          0
+4  CPU Usage                                 .66 | 10             2
+5  Hard Parse Due to Parse Errors            .39 | 5.9            1
+6  Undersized SGA                            .2 | 3.01            1
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Findings and Recommendations
+----------------------------
+
+Finding 1: Top SQL Statements
+Impact is 2.4 active sessions, 36.5% of total activity.
+-------------------------------------------------------
+SQL statements consuming significant database time were found. These
+statements offer a good opportunity for performance improvement.
+
+Recommendation 1: SQL Tuning
+Estimated benefit is 1.41 active sessions, 21.39% of total activity.
+--------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"auf79w4gd8uam".
+Related Object
+SQL statement with SQL_ID auf79w4gd8uam.
+/* MV_REFRESH (INS) */INSERT /*+ BYPASS_RECURSIVE_CHECK APPEND  */
+INTO "BDR_SMZ_SV_PM"."BDR_SMZ_SV_WIA_1ECLAIM_AM" select
+dim_snapshot_id
+, dim_organisatie_id_actief
+, dim_uitslag_claim_id
+, dim_uitslag_riv_id
+, dim_procesfase_id
+, dim_procesdata_id
+, dim_product_id
+, dim_klantcategorie_id
+, dim_land_id
+, dim_organisatie_id_regie
+, dim_organisatie_id_smo
+, dim_aob_id
+, dim_datum_id_geldende_ewt
+, dim_diagnose_id_1
+, dim_diagnose_id_2
+, dim_diagnose_id_3
+, dim_leeftijd_id_afg_datum_afgesloten
+, dim_leeftijd_id_ewt
+, dim_leeftijd_id_start_proces
+, dim_geslacht_id
+, ouderdom_voorraad
+, afg_regie_en_smo_gelijk
+, nvl (afg_indicatie_va, 0)                       afg_indicatie_va
+, nvl( afg_indicatie_ad, 0)                       afg_indicatie_ad
+, sum (aantal_dagen_uitstel_totaal)
+aantal_dagen_uitstel_totaal
+, sum (d013_voorraad_wia_1e_claim)
+d013_voorraad_wia_1e_claim
+, sum (d014_wia_acht_voorraad_1eclaim)
+d014_wia_acht_voorraad_1eclaim
+, sum (d015_beslissing_1e_claim_wia)
+d015_beslissing_1e_claim_wia
+, sum (d015_beslissing_1e_claim_wia_tijdig)
+d015_beslissing_1e_claim_wia_tijdig
+, sum (d017_aantal_input_wia_1e_claim)
+d017_aantal_input_wia_1e_claim
+, sum (d103_aantal_1e_claim_beschikkingen)
+d103_aantal_1e_claim_beschikkingen
+, sum (d133_wia_aantal_riv_werkgever)
+d133_wia_aantal_riv_werkgever
+, sum (d133_wia_tijdige_riv_werkgever)
+d133_wia_tijdige_riv_werkgever
+, sum (d229_wia_aantal_riv_werkgever)
+d229_wia_aantal_riv_werkgever
+, sum (d229_wia_riv_niet_akkoord_wgv)
+d229_wia_riv_niet_akkoord_wgv
+, sum (d230_wia_aantal_beschikkingen)
+d230_wia_aantal_beschikkingen
+, sum (d230_wia_aantal_toekenningen)
+d230_wia_aantal_toekenningen
+, sum (d231_wia_aantal_toekenningen)
+d231_wia_aantal_toekenningen
+, sum (d231_wia_aantal_iva_toekenning)
+d231_wia_aantal_iva_toekenning
+, sum (d247_wia_overdracht_werkplan)
+d247_wia_overdracht_werkplan
+, sum (d247_wia_tijdig_overdr_werkpl)
+d247_wia_tijdig_overdr_werkpl
+, sum (d248_wia_overdracht_werkplan)
+d248_wia_overdracht_werkplan
+, sum (d248_wia_juist_overdr_werkpl)
+d248_wia_juist_overdr_werkpl
+, sum (d613_wia_beslis)                           d613_wia_beslis
+, sum (d613_wia_beslis_ezwb)
+d613_wia_beslis_ezwb
+, sum (d614_wia_beslis_ezwb)
+d614_wia_beslis_ezwb
+, sum (d614_wia_beslis_ezwb_tijdig)
+d614_wia_beslis_ezwb_tijdig
+, sum (d1026_wia_beslis_ezwb)
+d1026_wia_beslis_ezwb
+, sum (d1026_wia_beslis_ezwb_afw)
+d1026_wia_beslis_ezwb_afw
+, sum (d1031_wia_riv_nok_wg)
+d1031_wia_riv_nok_wg
+, sum (d1031_wia_riv_nok_loonsanctie)
+d1031_wia_riv_nok_loonsanctie
+, sum (d1049_wia_beslis)                          d1049_wia_beslis
+, sum (d1049_wia_beslis_tijdig)
+d1049_wia_beslis_tijdig
+, sum (d1430_wia_voorraad_regie)
+d1430_wia_voorraad_regie
+, sum (d1430_wia_voorraad_achterstand)
+d1430_wia_voorraad_achterstand
+, sum (d1510_output_met_vangnet)
+d1510_output_met_vangnet
+, sum (d1510_output_met_vangnet_afw)
+d1510_output_met_vangnet_afw
+, sum (s573_wia_early_warning_voorsch)
+s573_wia_early_warning_voorsch
+, sum (s574_wia_early_warning_voorsch)
+s574_wia_early_warning_voorsch
+, sum (s574_wia_early_warn_vrsch_tdg)
+s574_wia_early_warn_vrsch_tdg
+, sum (s580_wia_voorraad_regie)
+s580_wia_voorraad_regie
+, sum (s580_wia_voorraad_regie_tijdig)
+s580_wia_voorraad_regie_tijdig
+, sum (s581_wia_voorraad_intake_regie)
+s581_wia_voorraad_intake_regie
+, sum (s582_wia_voorraad_smo)
+s582_wia_voorraad_smo
+, sum (s583_wia_voorraad_smo)
+s583_wia_voorraad_smo
+, sum (s583_wia_voorraad_smo_tijdig)
+s583_wia_voorraad_smo_tijdig
+, sum (s584_wia_herleefde_aanvraag)
+s584_wia_herleefde_aanvraag
+, sum (s585_wia_sanctie_riv)
+s585_wia_sanctie_riv
+, sum (s586_wia_openriv_nietvangnet)
+s586_wia_openriv_nietvangnet
+, sum (s587_wia_openriv_nietvangnet)
+s587_wia_openriv_nietvangnet
+, sum (s587_wia_openriv_nietvangn_tdg)
+s587_wia_openriv_nietvangn_tdg
+, sum (s588_wia_opsch_en_verl)
+s588_wia_opsch_en_verl
+, sum (s589_wia_voorraad_vld)
+s589_wia_voorraad_vld
+, sum (s590_wia_voorraad_bkv)
+s590_wia_voorraad_bkv
+, sum (s591_wia_bkv)                              s591_wia_bkv
+, sum (s592_wia_vld)                              s592_wia_vld
+, sum (s730_wia_beslis)                           s730_wia_beslis
+, sum (s730_wia_beslis_uitstel)
+s730_wia_beslis_uitstel
+, sum (s731_wia_beslis_uitstel)
+s731_wia_beslis_uitstel
+, sum (s731_wia_beslis_x_uitstel)
+s731_wia_beslis_x_uitstel
+, sum (s765_wia_uitval)                           s765_wia_uitval
+, sum (s766_wia_beslis)                           s766_wia_beslis
+, sum (s766_wia_beslis_x_dgn)
+s766_wia_beslis_x_dgn
+, sum (s817_wia_beslis)                           s817_wia_beslis
+, sum (s817_wia_beslis_inkoop_smo_tdg)
+s817_wia_beslis_inkoop_smo_tdg
+, sum (s1591_wia_output_bkv)
+s1591_wia_output_bkv
+, sum (s1592_wia_output_vld)
+s1592_wia_output_vld
+, sum (s1593_wia_adhoc_bkv)                       s1593_wia_adhoc_bkv
+, sum (s1594_wia_adhoc_vld)                       s1594_wia_adhoc_vld
+, sum (doorlooptijd_ad_beoordeling)
+doorlooptijd_ad_beoordeling
+, sum (doorlooptijd_intake)                       doorlooptijd_intake
+, sum (doorlooptijd_intake_regie)
+doorlooptijd_intake_regie
+, sum (doorlooptijd_med_beoordeling)
+doorlooptijd_med_beoordeling
+, sum (doorlooptijd_oend)                         doorlooptijd_oend
+, sum (doorlooptijd_rdh)                          doorlooptijd_rdh
+, sum (doorlooptijd_riv)                          doorlooptijd_riv
+, sum (nvl2 (doorlooptijd_ad_beoordeling, 1, 0))
+aantal_ad_beoordeling
+, sum (nvl2 (doorlooptijd_intake, 1, 0))          aantal_intake
+, sum (nvl2 (doorlooptijd_intake_regie, 1, 0))    aantal_intake_regie
+, sum (nvl2 (doorlooptijd_med_beoordeling, 1, 0))
+aantal_med_beoordeling
+, sum (nvl2 (doorlooptijd_oend, 1, 0))            aantal_oend
+, sum (nvl2 (doorlooptijd_rdh, 1, 0))             aantal_rdh
+, sum (nvl2 (doorlooptijd_riv, 1, 0))             aantal_riv
+, sum (info_uitstel_med_exp_aantal)
+info_uitstel_med_exp_aantal
+, sum (info_uitstel_med_exp_duur)
+info_uitstel_med_exp_duur
+, sum (info_uitstel_med_info_aantal)
+info_uitstel_med_info_aantal
+, sum (info_uitstel_med_info_duur)
+info_uitstel_med_info_duur
+, sum ( case
+when info_uitstel_med_exp_aantal +
+info_uitstel_med_info_aantal > 0
+then 1
+else 0
+end )                                     ind_info_uitstel_med
+, sum (input)                                     input
+, sum (output)                                    output
+, sum (output_tijdig)                             output_tijdig
+, sum (voorraad)                                  voorraad
+, sum (voorraad_incl_regie)                       voorraad_incl_regie
+, sum (voorraad_tijdig)                           voorraad_tijdig
+, sum (ad_hoc_afsluiting)                         ad_hoc_afsluiting
+from
+bdr_smz_sv_wia_1eclaim_ft f
+where not exists
+(select 1
+from bdr_smz_sv_beoordeling_soft_delete_mv sd
+where sd.pcs_id = f.pcs_id)
+group by dim_snapshot_id
+, dim_organisatie_id_actief
+, dim_uitslag_claim_id
+, dim_uitslag_riv_id
+, dim_procesfase_id
+, dim_procesdata_id
+, dim_product_id
+, dim_klantcategorie_id
+, dim_land_id
+, dim_organisatie_id_regie
+, dim_organisatie_id_smo
+, dim_aob_id
+, dim_datum_id_geldende_ewt
+, dim_diagnose_id_1
+, dim_diagnose_id_2
+, dim_diagnose_id_3
+, dim_leeftijd_id_afg_datum_afgesloten
+, dim_leeftijd_id_ewt
+, dim_leeftijd_id_start_proces
+, dim_geslacht_id
+, ouderdom_voorraad
+, afg_regie_en_smo_gelijk
+, nvl (afg_indicatie_va, 0)
+, nvl( afg_indicatie_ad, 0)
+Rationale
+The SQL spent 98% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "auf79w4gd8uam" was executed 1 times and had
+an average elapsed time of 967 seconds.
+Rationale
+At least one execution of the statement ran in parallel.
+
+Recommendation 2: SQL Tuning
+Estimated benefit is .31 active sessions, 4.74% of total activity.
+------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the SELECT statement with SQL_ID
+"8xzx7nmza6v13".
+Related Object
+SQL statement with SQL_ID 8xzx7nmza6v13.
+/* SQL Analyze(2511,1) */ SELECT COUNT(1) FROM (
+select * from (
+select row_number() over ( partition by dim_start_datum,
+datum_overdracht, begindatum_spec, volgnummer_geval order by
+dim_start_datum) num_rows,
+x.*
+from okv_resafasa_po.okv_specificatie_wia_hv x
+)
+where num_rows > 1
+) sub1
+Rationale
+The SQL spent 100% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "8xzx7nmza6v13" was executed 11 times and had
+an average elapsed time of 99 seconds.
+Rationale
+At least 2 distinct execution plans were utilized for this SQL statement
+during the analysis period.
+Rationale
+I/O and Cluster wait for TABLE
+"BRZ_RESAFASA.BRZ_SPECIFICATIE_WIA_HUB_HT" with object ID 660282
+consumed 86% of the database time spent on this SQL statement.
+Rationale
+Top level calls to execute the PL/SQL statement with SQL_ID
+"4xm1ruvkx3awx" are responsible for 100% of the database time spent on
+the SELECT statement with SQL_ID "8xzx7nmza6v13".
+Related Object
+SQL statement with SQL_ID 4xm1ruvkx3awx.
+DECLARE job BINARY_INTEGER := :job;  next_date TIMESTAMP WITH TIME
+ZONE := :mydate;  broken BOOLEAN := FALSE;  job_name VARCHAR2(128) :=
+:job_name;  job_subname VARCHAR2(128) := :job_subname;  job_owner
+VARCHAR2(128) := :job_owner;  job_start TIMESTAMP WITH TIME ZONE :=
+:job_start;  job_scheduled_start TIMESTAMP WITH TIME ZONE :=
+:job_scheduled_start;  window_start TIMESTAMP WITH TIME ZONE :=
+:window_start;  window_end TIMESTAMP WITH TIME ZONE := :window_end;
+chain_id VARCHAR2(14) :=  :chainid;  credential_owner VARCHAR2(128)
+:= :credown;  credential_name  VARCHAR2(128) := :crednam;
+destination_owner VARCHAR2(128) := :destown;  destination_name
+VARCHAR2(128) := :destnam;  job_dest_id varchar2(14) := :jdestid;
+log_id number := :log_id;  BEGIN  DECLARE
+ename             VARCHAR2(30);
+exec_task         BOOLEAN;
+BEGIN
+-- check if tuning pack is enabled
+exec_task := prvt_advisor.is_pack_enabled(
+dbms_management_packs.TUNING_PACK);
+-- check if we are in a pdb,
+-- since auto sqltune is not run in a pdb
+IF (exec_task AND -- tuning pack enabled
+sys_context('userenv', 'con_id') <> 0 AND -- not in non-cdb
+sys_context('userenv', 'con_id') <> 1  ) THEN -- not in root
+exec_task := FALSE;
+END IF;
+-- execute auto sql tuning task
+IF (exec_task) THEN
+ename := dbms_sqltune.execute_tuning_task(
+'SYS_AUTO_SQL_TUNING_TASK');
+END IF;
+-- check whether we are in non-CDB or a PDB
+-- auto SPM evolve only runs in a non-CDB or a PDB, not the root.
+IF (sys_context('userenv', 'con_id') = 0 OR
+sys_context('userenv', 'con_id') > 2) THEN
+exec_task := TRUE;
+ELSE
+exec_task := FALSE;
+END IF;
+-- execute auto SPM evolve task
+IF (exec_task) THEN
+ename := dbms_spm.execute_evolve_task('SYS_AUTO_SPM_EVOLVE_TASK');
+END IF;
+END;  :mydate := next_date; IF broken THEN :b := 1; ELSE :b := 0; END
+IF; END;
+
+Recommendation 3: SQL Tuning
+Estimated benefit is .3 active sessions, 4.52% of total activity.
+-----------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the SELECT statement with SQL_ID
+"drz9dwgaxpmft".
+Related Object
+SQL statement with SQL_ID drz9dwgaxpmft.
+/* SQL Analyze(2511,1) */ select * from (
+select row_number() over ( partition by dim_start_datum,
+datum_overdracht, begindatum_spec, volgnummer_geval order by
+dim_start_datum) num_rows,
+x.*
+from okv_resafasa_po.okv_specificatie_wia_hv x
+)
+where num_rows < 19
+Rationale
+The SQL spent 99% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "drz9dwgaxpmft" was executed 11 times and had
+an average elapsed time of 96 seconds.
+Rationale
+At least 2 distinct execution plans were utilized for this SQL statement
+during the analysis period.
+Rationale
+I/O and Cluster wait for TABLE
+"BRZ_RESAFASA.BRZ_SPECIFICATIE_WIA_HUB_HT" with object ID 660282
+consumed 91% of the database time spent on this SQL statement.
+Rationale
+Top level calls to execute the PL/SQL statement with SQL_ID
+"4xm1ruvkx3awx" are responsible for 100% of the database time spent on
+the SELECT statement with SQL_ID "drz9dwgaxpmft".
+Related Object
+SQL statement with SQL_ID 4xm1ruvkx3awx.
+DECLARE job BINARY_INTEGER := :job;  next_date TIMESTAMP WITH TIME
+ZONE := :mydate;  broken BOOLEAN := FALSE;  job_name VARCHAR2(128) :=
+:job_name;  job_subname VARCHAR2(128) := :job_subname;  job_owner
+VARCHAR2(128) := :job_owner;  job_start TIMESTAMP WITH TIME ZONE :=
+:job_start;  job_scheduled_start TIMESTAMP WITH TIME ZONE :=
+:job_scheduled_start;  window_start TIMESTAMP WITH TIME ZONE :=
+:window_start;  window_end TIMESTAMP WITH TIME ZONE := :window_end;
+chain_id VARCHAR2(14) :=  :chainid;  credential_owner VARCHAR2(128)
+:= :credown;  credential_name  VARCHAR2(128) := :crednam;
+destination_owner VARCHAR2(128) := :destown;  destination_name
+VARCHAR2(128) := :destnam;  job_dest_id varchar2(14) := :jdestid;
+log_id number := :log_id;  BEGIN  DECLARE
+ename             VARCHAR2(30);
+exec_task         BOOLEAN;
+BEGIN
+-- check if tuning pack is enabled
+exec_task := prvt_advisor.is_pack_enabled(
+dbms_management_packs.TUNING_PACK);
+-- check if we are in a pdb,
+-- since auto sqltune is not run in a pdb
+IF (exec_task AND -- tuning pack enabled
+sys_context('userenv', 'con_id') <> 0 AND -- not in non-cdb
+sys_context('userenv', 'con_id') <> 1  ) THEN -- not in root
+exec_task := FALSE;
+END IF;
+-- execute auto sql tuning task
+IF (exec_task) THEN
+ename := dbms_sqltune.execute_tuning_task(
+'SYS_AUTO_SQL_TUNING_TASK');
+END IF;
+-- check whether we are in non-CDB or a PDB
+-- auto SPM evolve only runs in a non-CDB or a PDB, not the root.
+IF (sys_context('userenv', 'con_id') = 0 OR
+sys_context('userenv', 'con_id') > 2) THEN
+exec_task := TRUE;
+ELSE
+exec_task := FALSE;
+END IF;
+-- execute auto SPM evolve task
+IF (exec_task) THEN
+ename := dbms_spm.execute_evolve_task('SYS_AUTO_SPM_EVOLVE_TASK');
+END IF;
+END;  :mydate := next_date; IF broken THEN :b := 1; ELSE :b := 0; END
+IF; END;
+
+Recommendation 4: SQL Tuning
+Estimated benefit is .18 active sessions, 2.76% of total activity.
+------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the SELECT statement with SQL_ID
+"gqvvu38hrvc1m".
+Related Object
+SQL statement with SQL_ID gqvvu38hrvc1m.
+/* SQL Analyze(1) */ select /*+  full(t)    parallel(t,64)
+parallel_index(t,64) dbms_stats cursor_sharing_exact
+use_weak_name_resl dynamic_sampling(0) no_monitoring
+xmlindex_sel_idx_tbl opt_param('optimizer_inmemory_aware' 'false')
+no_substrb_pad  */to_char(count("DIM_HUB_KEY")),substrb(dump(min("DIM
+_HUB_KEY"),16,0,64),1,240),substrb(dump(max("DIM_HUB_KEY"),16,0,64),1
+,240),to_char(count("DIM_MD5")),substrb(dump(min("DIM_MD5"),16,0,64),
+1,240),substrb(dump(max("DIM_MD5"),16,0,64),1,240),to_char(count("DIM
+_START_DATUM")),substrb(dump(min("DIM_START_DATUM"),16,0,64),1,240),s
+ubstrb(dump(max("DIM_START_DATUM"),16,0,64),1,240),to_char(count("PCS
+_ID")),substrb(dump(min("PCS_ID"),16,0,64),1,240),substrb(dump(max("P
+CS_ID"),16,0,64),1,240),to_char(count("STATUS_RAPPORT")),substrb(dump
+(min("STATUS_RAPPORT"),16,0,64),1,240),substrb(dump(max("STATUS_RAPPO
+RT"),16,0,64),1,240),to_char(count("REGISTRATIEDATUM")),substrb(dump(
+min("REGISTRATIEDATUM"),16,0,64),1,240),substrb(dump(max("REGISTRATIE
+DATUM"),16,0,64),1,240),to_char(count("REGISTRATIE_EINDDATUM")),subst
+rb(dump(min("REGISTRATIE_EINDDATUM"),16,0,64),1,240),substrb(dump(max
+("REGISTRATIE_EINDDATUM"),16,0,64),1,240),to_char(count("HUIDIG")),su
+bstrb(dump(min("HUIDIG"),16,0,64),1,240),substrb(dump(max("HUIDIG"),1
+6,0,64),1,240),to_char(count("ID")),substrb(dump(min("ID"),16,0,64),1
+,240),substrb(dump(max("ID"),16,0,64),1,240),to_char(count("STATUS"))
+,substrb(dump(min("STATUS"),16,0,64),1,240),substrb(dump(max("STATUS"
+),16,0,64),1,240),to_char(count("STREEFDATUM")),substrb(dump(min("STR
+EEFDATUM"),16,0,64),1,240),substrb(dump(max("STREEFDATUM"),16,0,64),1
+,240),to_char(count("STREEFDATUM_REGISTRATIE")),substrb(dump(min("STR
+EEFDATUM_REGISTRATIE"),16,0,64),1,240),substrb(dump(max("STREEFDATUM_
+REGISTRATIE"),16,0,64),1,240),to_char(count("INLOGNAAM")),substrb(dum
+p(min("INLOGNAAM"),16,0,64),1,240),substrb(dump(max("INLOGNAAM"),16,0
+,64),1,240),count(rowidtochar(rowid)) from
+"STG_SMF"."STG_MIS_GEDRAGSBLOKKEN_SRC_TB" t  /*
+TOPN,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,
+NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,N
+IL,NIL,NDV,NIL,NIL,RWID,U254,U254,U254,U254,U254,U254,U254,U254,U254,
+U254,U254,U254,U254U*/
+Rationale
+The SQL spent 100% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "gqvvu38hrvc1m" was executed 1 times and had
+an average elapsed time of 148 seconds.
+Rationale
+At least one execution of the statement ran in parallel.
+
+Recommendation 5: SQL Tuning
+Estimated benefit is .18 active sessions, 2.71% of total activity.
+------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the SELECT statement with SQL_ID
+"b221nfn9t1wdd".
+Related Object
+SQL statement with SQL_ID b221nfn9t1wdd.
+/* SQL Analyze(1) */ select /*+  full(t)    parallel(t,64)
+parallel_index(t,64) dbms_stats cursor_sharing_exact
+use_weak_name_resl dynamic_sampling(0) no_monitoring
+xmlindex_sel_idx_tbl opt_param('optimizer_inmemory_aware' 'false')
+no_substrb_pad  */to_char(count("DATUM_EERSTE_AO_DAG_VA")),substrb(du
+mp(min("DATUM_EERSTE_AO_DAG_VA"),16,0,64),1,240),substrb(dump(max("DA
+TUM_EERSTE_AO_DAG_VA"),16,0,64),1,240),to_char(count("DATUM_GEWENSTE_
+AFHANDELING")),substrb(dump(min("DATUM_GEWENSTE_AFHANDELING"),16,0,64
+),1,240),substrb(dump(max("DATUM_GEWENSTE_AFHANDELING"),16,0,64),1,24
+0),to_char(count("IND_VANGNET")),substrb(dump(min("IND_VANGNET"),16,0
+,64),1,240),substrb(dump(max("IND_VANGNET"),16,0,64),1,240),to_char(c
+ount("SOORT_TEKORTKOMING")),substrb(dump(min("SOORT_TEKORTKOMING"),16
+,0,64),1,240),substrb(dump(max("SOORT_TEKORTKOMING"),16,0,64),1,240),
+to_char(count("IND_GERINGE_KANS_HERSTEL")),substrb(dump(min("IND_GERI
+NGE_KANS_HERSTEL"),16,0,64),1,240),substrb(dump(max("IND_GERINGE_KANS
+_HERSTEL"),16,0,64),1,240),to_char(count("IND_AO_AANVANG_VERZEKERING"
+)),substrb(dump(min("IND_AO_AANVANG_VERZEKERING"),16,0,64),1,240),sub
+strb(dump(max("IND_AO_AANVANG_VERZEKERING"),16,0,64),1,240),to_char(c
+ount("IND_HULPBEHOEVENDHEID")),substrb(dump(min("IND_HULPBEHOEVENDHEI
+D"),16,0,64),1,240),substrb(dump(max("IND_HULPBEHOEVENDHEID"),16,0,64
+),1,240),to_char(count("IND_WW_GEWENST")),substrb(dump(min("IND_WW_GE
+WENST"),16,0,64),1,240),substrb(dump(max("IND_WW_GEWENST"),16,0,64),1
+,240),to_char(count("IND_HERSTEL_BINNEN_EEN_JAAR")),substrb(dump(min(
+"IND_HERSTEL_BINNEN_EEN_JAAR"),16,0,64),1,240),substrb(dump(max("IND_
+HERSTEL_BINNEN_EEN_JAAR"),16,0,64),1,240),to_char(count("IND_RVC_MEER
+_DAN_75P_MMI")),substrb(dump(min("IND_RVC_MEER_DAN_75P_MMI"),16,0,64)
+,1,240),substrb(dump(max("IND_RVC_MEER_DAN_75P_MMI"),16,0,64),1,240),
+to_char(count("PRODUCTCODE_OUD")),substrb(dump(min("PRODUCTCODE_OUD")
+,16,0,64),1,240),substrb(dump(max("PRODUCTCODE_OUD"),16,0,64),1,240),
+to_char(count("CODE_SOORT_RECHT")),substrb(dump(min("CODE_SOORT_RECHT
+"),16,0,64),1,240),substrb(dump(max("CODE_SOORT_RECHT"),16,0,64),1,24
+0),to_char(count("GEREALISEERDE_EINDDATUM_RIV_AD")),substrb(dump(min(
+"GEREALISEERDE_EINDDATUM_RIV_AD"),16,0,64),1,240),substrb(dump(max("G
+EREALISEERDE_EINDDATUM_RIV_AD"),16,0,64),1,240),to_char(count("REDEN_
+RESULTAAT_RIV")),substrb(dump(min("REDEN_RESULTAAT_RIV"),16,0,64),1,2
+40),substrb(dump(max("REDEN_RESULTAAT_RIV"),16,0,64),1,240),to_char(c
+ount("IND_AFWIJKEN_OVERDRACHT")),substrb(dump(min("IND_AFWIJKEN_OVERD
+RACHT"),16,0,64),1,240),substrb(dump(max("IND_AFWIJKEN_OVERDRACHT"),1
+6,0,64),1,240),to_char(count("DATUM_INGANG_RECHT")),substrb(dump(min(
+"DATUM_INGANG_RECHT"),16,0,64),1,240),substrb(dump(max("DATUM_INGANG_
+RECHT"),16,0,64),1,240),to_char(count("DATUM_EINDE_LOONSANCTIE")),sub
+strb(dump(min("DATUM_EINDE_LOONSANCTIE"),16,0,64),1,240),substrb(dump
+(max("DATUM_EINDE_LOONSANCTIE"),16,0,64),1,240),to_char(count("IND_VO
+ORSCHOT_GEWENST")),substrb(dump(min("IND_VOORSCHOT_GEWENST"),16,0,64)
+,1,240),substrb(dump(max("IND_VOORSCHOT_GEWENST"),16,0,64),1,240),to_
+char(count("IND_CS_VOORLEGGEN_GVA")),substrb(dump(min("IND_CS_VOORLEG
+GEN_GVA"),16,0,64),1,240),substrb(dump(max("IND_CS_VOORLEGGEN_GVA"),1
+6,0,64),1,240),to_char(count("CS_NAAM_GVA")),substrb(dump(min("CS_NAA
+M_GVA"),16,0,64),1,240),substrb(dump(max("CS_NAAM_GVA"),16,0,64),1,24
+0),to_char(count("CONTRACTNUMMER")),substrb(dump(min("CONTRACTNUMMER"
+),16,0,64),1,240),substrb(dump(max("CONTRACTNUMMER"),16,0,64),1,240),
+to_char(count("DTM_EINDE_TOEK_VERL_NORISK")),substrb(dump(min("DTM_EI
+NDE_TOEK_VERL_NORISK"),16,0,64),1,240),substrb(dump(max("DTM_EINDE_TO
+EK_VERL_NORISK"),16,0,64),1,240),to_char(count("CODE_GEMEENTE")),subs
+trb(dump(min("CODE_GEMEENTE"),16,0,64),1,240),substrb(dump(max("CODE_
+GEMEENTE"),16,0,64),1,240),to_char(count("KENMERK_GEMEENTE")),substrb
+(dump(min("KENMERK_GEMEENTE"),16,0,64),1,240),substrb(dump(max("KENME
+RK_GEMEENTE"),16,0,64),1,240),to_char(count("AANVRAAG_VOLLEDIG")),sub
+strb(dump(min("AANVRAAG_VOLLEDIG"),16,0,64),1,240),substrb(dump(max("
+AANVRAAG_VOLLEDIG"),16,0,64),1,240),to_char(count("IND_HERBEOORDELING
+_NAV_IAW")),substrb(dump(min("IND_HERBEOORDELING_NAV_IAW"),16,0,64),1
+,240),substrb(dump(max("IND_HERBEOORDELING_NAV_IAW"),16,0,64),1,240),
+to_char(count("CODE_KOLOM_SUWI")),substrb(dump(min("CODE_KOLOM_SUWI")
+,16,0,64),1,240),substrb(dump(max("CODE_KOLOM_SUWI"),16,0,64),1,240),
+to_char(count("NAAM_PARTIJ_SUWI")),substrb(dump(min("NAAM_PARTIJ_SUWI
+"),16,0,64),1,240),substrb(dump(max("NAAM_PARTIJ_SUWI"),16,0,64),1,24
+0),to_char(count("GELEVERDE_DIENST")),substrb(dump(min("GELEVERDE_DIE
+NST"),16,0,64),1,240),substrb(dump(max("GELEVERDE_DIENST"),16,0,64),1
+,240),to_char(count("LDR_EXPORT")),substrb(dump(min("LDR_EXPORT"),16,
+0,64),1,240),substrb(dump(max("LDR_EXPORT"),16,0,64),1,240),to_char(c
+ount("CODE_TYPE_AANVRAAG")),substrb(dump(min("CODE_TYPE_AANVRAAG"),16
+,0,64),1,240),substrb(dump(max("CODE_TYPE_AANVRAAG"),16,0,64),1,240),
+to_char(count("CODE_CONCLUSIE_MDI")),substrb(dump(min("CODE_CONCLUSIE
+_MDI"),16,0,64),1,240),substrb(dump(max("CODE_CONCLUSIE_MDI"),16,0,64
+),1,240),to_char(count("CODE_KOSTELOOS")),substrb(dump(min("CODE_KOST
+ELOOS"),16,0,64),1,240),substrb(dump(max("CODE_KOSTELOOS"),16,0,64),1
+,240),to_char(count("CODE_VANGNET")),substrb(dump(min("CODE_VANGNET")
+,16,0,64),1,240),substrb(dump(max("CODE_VANGNET"),16,0,64),1,240),to_
+char(count("IND_CASUS_BZ_INTERNATIONAAL")),substrb(dump(min("IND_CASU
+S_BZ_INTERNATIONAAL"),16,0,64),1,240),substrb(dump(max("IND_CASUS_BZ_
+INTERNATIONAAL"),16,0,64),1,240),to_char(count("IND_AOW_HERBO")),subs
+trb(dump(min("IND_AOW_HERBO"),16,0,64),1,240),substrb(dump(max("IND_A
+OW_HERBO"),16,0,64),1,240),to_char(count("IND_MEDISCH_80_100_SCO")),s
+ubstrb(dump(min("IND_MEDISCH_80_100_SCO"),16,0,64),1,240),substrb(dum
+p(max("IND_MEDISCH_80_100_SCO"),16,0,64),1,240),to_char(count("REA_CO
+LLEGE")),substrb(dump(min("REA_COLLEGE"),16,0,64),1,240),substrb(dump
+(max("REA_COLLEGE"),16,0,64),1,240),to_char(count("SMV_MS")),substrb(
+dump(min("SMV_MS"),16,0,64),1,240),substrb(dump(max("SMV_MS"),16,0,64
+),1,240),to_char(count("DIM_HUB_KEY")),substrb(dump(min("DIM_HUB_KEY"
+),16,0,64),1,240),substrb(dump(max("DIM_HUB_KEY"),16,0,64),1,240),to_
+char(count("DIM_MD5")),substrb(dump(min("DIM_MD5"),16,0,64),1,240),su
+bstrb(dump(max("DIM_MD5"),16,0,64),1,240),to_char(count("DIM_START_DA
+TUM")),substrb(dump(min("DIM_START_DATUM"),16,0,64),1,240),substrb(du
+mp(max("DIM_START_DATUM"),16,0,64),1,240),to_char(count("ID")),substr
+b(dump(min("ID"),16,0,64),1,240),substrb(dump(max("ID"),16,0,64),1,24
+0),to_char(count("OBJECT_ID")),substrb(dump(min("OBJECT_ID"),16,0,64)
+,1,240),substrb(dump(max("OBJECT_ID"),16,0,64),1,240),to_char(count("
+SOORT_PROCES")),substrb(dump(min("SOORT_PROCES"),16,0,64),1,240),subs
+trb(dump(max("SOORT_PROCES"),16,0,64),1,240),to_char(count("AFG_REGIS
+TRATIENUMMER")),substrb(dump(min("AFG_REGISTRATIENUMMER"),16,0,64),1,
+240),substrb(dump(max("AFG_REGISTRATIENUMMER"),16,0,64),1,240),to_cha
+r(count("AFG_SOFINUMMER")),substrb(dump(min("AFG_SOFINUMMER"),16,0,64
+),1,240),substrb(dump(max("AFG_SOFINUMMER"),16,0,64),1,240),to_char(c
+ount("AWB_STARTDATUM")),substrb(dump(min("AWB_STARTDATUM"),16,0,64),1
+,240),substrb(dump(max("AWB_STARTDATUM"),16,0,64),1,240),to_char(coun
+t("NORM_AWB")),substrb(dump(min("NORM_AWB"),16,0,64),1,240),substrb(d
+ump(max("NORM_AWB"),16,0,64),1,240),to_char(count("REDEN_TUSSENTIJDS"
+)),substrb(dump(min("REDEN_TUSSENTIJDS"),16,0,64),1,240),substrb(dump
+(max("REDEN_TUSSENTIJDS"),16,0,64),1,240),to_char(count("DATUM_AFGESL
+OTEN")),substrb(dump(min("DATUM_AFGESLOTEN"),16,0,64),1,240),substrb(
+dump(max("DATUM_AFGESLOTEN"),16,0,64),1,240),to_char(count("DATUM_VER
+ZEND_ME")),substrb(dump(min("DATUM_VERZEND_ME"),16,0,64),1,240),subst
+rb(dump(max("DATUM_VERZEND_ME"),16,0,64),1,240),to_char(count("PROCES
+NAAM_RAPPORT")),substrb(dump(min("PROCESNAAM_RAPPORT"),16,0,64),1,240
+),substrb(dump(max("PROCESNAAM_RAPPORT"),16,0,64),1,240),to_char(coun
+t("GELDENDE_DATUM_EWT")),substrb(dump(min("GELDENDE_DATUM_EWT"),16,0,
+64),1,240),substrb(dump(max("GELDENDE_DATUM_EWT"),16,0,64),1,240),to_
+char(count("SANCTIEPERIODE")),substrb(dump(min("SANCTIEPERIODE"),16,0
+,64),1,240),substrb(dump(max("SANCTIEPERIODE"),16,0,64),1,240),to_cha
+r(count("VERZENDDATUM_SANCTIE")),substrb(dump(min("VERZENDDATUM_SANCT
+IE"),16,0,64),1,240),substrb(dump(max("VERZENDDATUM_SANCTIE"),16,0,64
+),1,240),to_char(count("TYPE_HERBEOORDELING")),substrb(dump(min("TYPE
+_HERBEOORDELING"),16,0,64),1,240),substrb(dump(max("TYPE_HERBEOORDELI
+NG"),16,0,64),1,240),to_char(count("GEREALISEERDE_EINDDATUM_AD")),sub
+strb(dump(min("GEREALISEERDE_EINDDATUM_AD"),16,0,64),1,240),substrb(d
+ump(max("GEREALISEERDE_EINDDATUM_AD"),16,0,64),1,240),to_char(count("
+RESULTAAT_RIV")),substrb(dump(min("RESULTAAT_RIV"),16,0,64),1,240),su
+bstrb(dump(max("RESULTAAT_RIV"),16,0,64),1,240),to_char(count("GESLAC
+HT")),substrb(dump(min("GESLACHT"),16,0,64),1,240),substrb(dump(max("
+GESLACHT"),16,0,64),1,240),to_char(count("POSTCODE")),substrb(dump(mi
+n("POSTCODE"),16,0,64),1,240),substrb(dump(max("POSTCODE"),16,0,64),1
+,240),to_char(count("AFG_POSTCODEGEBIED")),substrb(dump(min("AFG_POST
+CODEGEBIED"),16,0,64),1,240),substrb(dump(max("AFG_POSTCODEGEBIED"),1
+6,0,64),1,240),to_char(count("VA_RIV")),substrb(dump(min("VA_RIV"),16
+,0,64),1,240),substrb(dump(max("VA_RIV"),16,0,64),1,240),to_char(coun
+t("PB_RIV")),substrb(dump(min("PB_RIV"),16,0,64),1,240),substrb(dump(
+max("PB_RIV"),16,0,64),1,240),to_char(count("AD")),substrb(dump(min("
+AD"),16,0,64),1,240),substrb(dump(max("AD"),16,0,64),1,240),to_char(c
+ount("VA_2")),substrb(dump(min("VA_2"),16,0,64),1,240),substrb(dump(m
+ax("VA_2"),16,0,64),1,240),to_char(count("WERKGEVER_OK")),substrb(dum
+p(min("WERKGEVER_OK"),16,0,64),1,240),substrb(dump(max("WERKGEVER_OK"
+),16,0,64),1,240),to_char(count("MATERIE_MR_OK")),substrb(dump(min("M
+ATERIE_MR_OK"),16,0,64),1,240),substrb(dump(max("MATERIE_MR_OK"),16,0
+,64),1,240),to_char(count("DATUM_ONTVANGSTAANVRAAG")),substrb(dump(mi
+n("DATUM_ONTVANGSTAANVRAAG"),16,0,64),1,240),substrb(dump(max("DATUM_
+ONTVANGSTAANVRAAG"),16,0,64),1,240),to_char(count("DATUM_OVERDRACHT_W
+W")),substrb(dump(min("DATUM_OVERDRACHT_WW"),16,0,64),1,240),substrb(
+dump(max("DATUM_OVERDRACHT_WW"),16,0,64),1,240),to_char(count("DATUM_
+UITERSTE_AFHANDELING2")),substrb(dump(min("DATUM_UITERSTE_AFHANDELING
+2"),16,0,64),1,240),substrb(dump(max("DATUM_UITERSTE_AFHANDELING2"),1
+6,0,64),1,240),to_char(count("DATUM_ONTVANGST_ME")),substrb(dump(min(
+"DATUM_ONTVANGST_ME"),16,0,64),1,240),substrb(dump(max("DATUM_ONTVANG
+ST_ME"),16,0,64),1,240),to_char(count("NOTITIES")),substrb(dump(min("
+NOTITIES"),16,0,64),1,240),substrb(dump(max("NOTITIES"),16,0,64),1,24
+0),to_char(count("IND_REGRES")),substrb(dump(min("IND_REGRES"),16,0,6
+4),1,240),substrb(dump(max("IND_REGRES"),16,0,64),1,240),to_char(coun
+t("IND_HERLEVING")),substrb(dump(min("IND_HERLEVING"),16,0,64),1,240)
+,substrb(dump(max("IND_HERLEVING"),16,0,64),1,240),to_char(count("MED
+ISCH_OORDEEL_AO")),substrb(dump(min("MEDISCH_OORDEEL_AO"),16,0,64),1,
+240),substrb(dump(max("MEDISCH_OORDEEL_AO"),16,0,64),1,240),to_char(c
+ount("IND_ZELFDE_ZIEKTEOORZAAK")),substrb(dump(min("IND_ZELFDE_ZIEKTE
+OORZAAK"),16,0,64),1,240),substrb(dump(max("IND_ZELFDE_ZIEKTEOORZAAK"
+),16,0,64),1,240),to_char(count("IND_NAWERKING_BEROEPSZIEKTE")),subst
+rb(dump(min("IND_NAWERKING_BEROEPSZIEKTE"),16,0,64),1,240),substrb(du
+mp(max("IND_NAWERKING_BEROEPSZIEKTE"),16,0,64),1,240),to_char(count("
+IND_VWT_AKKOORD")),substrb(dump(min("IND_VWT_AKKOORD"),16,0,64),1,240
+),substrb(dump(max("IND_VWT_AKKOORD"),16,0,64),1,240),to_char(count("
+REDEN_TEKORTKOMING_RIVZW")),substrb(dump(min("REDEN_TEKORTKOMING_RIVZ
+W"),16,0,64),1,240),substrb(dump(max("REDEN_TEKORTKOMING_RIVZW"),16,0
+,64),1,240),to_char(count("IND_AKKOORD_VOLL_DUURZAAM_AO")),substrb(du
+mp(min("IND_AKKOORD_VOLL_DUURZAAM_AO"),16,0,64),1,240),substrb(dump(m
+ax("IND_AKKOORD_VOLL_DUURZAAM_AO"),16,0,64),1,240),to_char(count("IND
+_PARTICIPATIE_MOGELIJKHEDEN")),substrb(dump(min("IND_PARTICIPATIE_MOG
+ELIJKHEDEN"),16,0,64),1,240),substrb(dump(max("IND_PARTICIPATIE_MOGEL
+IJKHEDEN"),16,0,64),1,240),to_char(count("DATUM_IN_BEHANDELNAME")),su
+bstrb(dump(min("DATUM_IN_BEHANDELNAME"),16,0,64),1,240),substrb(dump(
+max("DATUM_IN_BEHANDELNAME"),16,0,64),1,240),to_char(count("GEREALISE
+ERDE_EINDDATUM_RIV_VA")),substrb(dump(min("GEREALISEERDE_EINDDATUM_RI
+V_VA"),16,0,64),1,240),substrb(dump(max("GEREALISEERDE_EINDDATUM_RIV_
+VA"),16,0,64),1,240),to_char(count("DATUM_STREEF_SMO")),substrb(dump(
+min("DATUM_STREEF_SMO"),16,0,64),1,240),substrb(dump(max("DATUM_STREE
+F_SMO"),16,0,64),1,240),to_char(count("SMF_CASUS_ID")),substrb(dump(m
+in("SMF_CASUS_ID"),16,0,64),1,240),substrb(dump(max("SMF_CASUS_ID"),1
+6,0,64),1,240),to_char(count("REDEN_AFWIJKEN_OVERDRACHT")),substrb(du
+mp(min("REDEN_AFWIJKEN_OVERDRACHT"),16,0,64),1,240),substrb(dump(max(
+"REDEN_AFWIJKEN_OVERDRACHT"),16,0,64),1,240),to_char(count("DATUM_OOR
+SPRONKELIJKE_EWT")),substrb(dump(min("DATUM_OORSPRONKELIJKE_EWT"),16,
+0,64),1,240),substrb(dump(max("DATUM_OORSPRONKELIJKE_EWT"),16,0,64),1
+,240),to_char(count("CODE_EIGEN_RISICO_DRAGER")),substrb(dump(min("CO
+DE_EIGEN_RISICO_DRAGER"),16,0,64),1,240),substrb(dump(max("CODE_EIGEN
+_RISICO_DRAGER"),16,0,64),1,240),to_char(count("DATUM_REG_VOORSCHOT_G
+EWENST")),substrb(dump(min("DATUM_REG_VOORSCHOT_GEWENST"),16,0,64),1,
+240),substrb(dump(max("DATUM_REG_VOORSCHOT_GEWENST"),16,0,64),1,240),
+to_char(count("DATUM_TIJD_CS_VOORLEGGEN_GVA")),substrb(dump(min("DATU
+M_TIJD_CS_VOORLEGGEN_GVA"),16,0,64),1,240),substrb(dump(max("DATUM_TI
+JD_CS_VOORLEGGEN_GVA"),16,0,64),1,240),to_char(count("DATUM_TIJD_CS_G
+ECONTRASIGNEERD")),substrb(dump(min("DATUM_TIJD_CS_GECONTRASIGNEERD")
+,16,0,64),1,240),substrb(dump(max("DATUM_TIJD_CS_GECONTRASIGNEERD"),1
+6,0,64),1,240),to_char(count("DTM_BEGIN_TOEK_VERL_NORISK")),substrb(d
+ump(min("DTM_BEGIN_TOEK_VERL_NORISK"),16,0,64),1,240),substrb(dump(ma
+x("DTM_BEGIN_TOEK_VERL_NORISK"),16,0,64),1,240),to_char(count("RESULT
+AAT_ARBEIDSVERMOGEN")),substrb(dump(min("RESULTAAT_ARBEIDSVERMOGEN"),
+16,0,64),1,240),substrb(dump(max("RESULTAAT_ARBEIDSVERMOGEN"),16,0,64
+),1,240),to_char(count("NAAM_GEMEENTE")),substrb(dump(min("NAAM_GEMEE
+NTE"),16,0,64),1,240),substrb(dump(max("NAAM_GEMEENTE"),16,0,64),1,24
+0),to_char(count("CODE_TYPE_DIENST")),substrb(dump(min("CODE_TYPE_DIE
+NST"),16,0,64),1,240),substrb(dump(max("CODE_TYPE_DIENST"),16,0,64),1
+,240),to_char(count("AANVRAAG_BINNEN_6_MAANDEN")),substrb(dump(min("A
+ANVRAAG_BINNEN_6_MAANDEN"),16,0,64),1,240),substrb(dump(max("AANVRAAG
+_BINNEN_6_MAANDEN"),16,0,64),1,240),to_char(count("IND_MACHTIGING_AAN
+WEZIG")),substrb(dump(min("IND_MACHTIGING_AANWEZIG"),16,0,64),1,240),
+substrb(dump(max("IND_MACHTIGING_AANWEZIG"),16,0,64),1,240),to_char(c
+ount("CODE_PARTIJ_SUWI")),substrb(dump(min("CODE_PARTIJ_SUWI"),16,0,6
+4),1,240),substrb(dump(max("CODE_PARTIJ_SUWI"),16,0,64),1,240),to_cha
+r(count("LOCATIE_DIENSTVERLENING")),substrb(dump(min("LOCATIE_DIENSTV
+ERLENING"),16,0,64),1,240),substrb(dump(max("LOCATIE_DIENSTVERLENING"
+),16,0,64),1,240),to_char(count("OVERDRACHT_DIENSTVERLENING")),substr
+b(dump(min("OVERDRACHT_DIENSTVERLENING"),16,0,64),1,240),substrb(dump
+(max("OVERDRACHT_DIENSTVERLENING"),16,0,64),1,240),to_char(count("COD
+E_INSCHAT_ARBVERM_KLANT")),substrb(dump(min("CODE_INSCHAT_ARBVERM_KLA
+NT"),16,0,64),1,240),substrb(dump(max("CODE_INSCHAT_ARBVERM_KLANT"),1
+6,0,64),1,240),to_char(count("CODE_SCHOOL")),substrb(dump(min("CODE_S
+CHOOL"),16,0,64),1,240),substrb(dump(max("CODE_SCHOOL"),16,0,64),1,24
+0),to_char(count("CODE_HERKOMST_AANVRAAG")),substrb(dump(min("CODE_HE
+RKOMST_AANVRAAG"),16,0,64),1,240),substrb(dump(max("CODE_HERKOMST_AAN
+VRAAG"),16,0,64),1,240),to_char(count("CODE_BESCHIKKING_VOORZ_DOOR"))
+,substrb(dump(min("CODE_BESCHIKKING_VOORZ_DOOR"),16,0,64),1,240),subs
+trb(dump(max("CODE_BESCHIKKING_VOORZ_DOOR"),16,0,64),1,240),to_char(c
+ount("CODE_KLANTTYPE")),substrb(dump(min("CODE_KLANTTYPE"),16,0,64),1
+,240),substrb(dump(max("CODE_KLANTTYPE"),16,0,64),1,240),to_char(coun
+t("AANTAL_DAGEN_UITSTEL_TOTAAL")),substrb(dump(min("AANTAL_DAGEN_UITS
+TEL_TOTAAL"),16,0,64),1,240),substrb(dump(max("AANTAL_DAGEN_UITSTEL_T
+OTAAL"),16,0,64),1,240),to_char(count("REINTEGRATIE_SPOOR_1_SCO")),su
+bstrb(dump(min("REINTEGRATIE_SPOOR_1_SCO"),16,0,64),1,240),substrb(du
+mp(max("REINTEGRATIE_SPOOR_1_SCO"),16,0,64),1,240),to_char(count("COD
+E_AANVRAGER_ESB")),substrb(dump(min("CODE_AANVRAGER_ESB"),16,0,64),1,
+240),substrb(dump(max("CODE_AANVRAGER_ESB"),16,0,64),1,240),to_char(c
+ount("CODE_SOORT_AANVRAGER")),substrb(dump(min("CODE_SOORT_AANVRAGER"
+),16,0,64),1,240),substrb(dump(max("CODE_SOORT_AANVRAGER"),16,0,64),1
+,240),to_char(count("DATUM_ONTVANGST_IGS")),substrb(dump(min("DATUM_O
+NTVANGST_IGS"),16,0,64),1,240),substrb(dump(max("DATUM_ONTVANGST_IGS"
+),16,0,64),1,240),to_char(count("CLASS_ID")),substrb(dump(min("CLASS_
+ID"),16,0,64),1,240),substrb(dump(max("CLASS_ID"),16,0,64),1,240),to_
+char(count("PRODUCTCODE")),substrb(dump(min("PRODUCTCODE"),16,0,64),1
+,240),substrb(dump(max("PRODUCTCODE"),16,0,64),1,240),to_char(count("
+REGISTRATIENUMMER")),substrb(dump(min("REGISTRATIENUMMER"),16,0,64),1
+,240),substrb(dump(max("REGISTRATIENUMMER"),16,0,64),1,240),to_char(c
+ount("SOFINUMMER")),substrb(dump(min("SOFINUMMER"),16,0,64),1,240),su
+bstrb(dump(max("SOFINUMMER"),16,0,64),1,240),to_char(count("PROCES_ST
+ARTDATUM")),substrb(dump(min("PROCES_STARTDATUM"),16,0,64),1,240),sub
+strb(dump(max("PROCES_STARTDATUM"),16,0,64),1,240),to_char(count("AWB
+_EINDDATUM")),substrb(dump(min("AWB_EINDDATUM"),16,0,64),1,240),subst
+rb(dump(max("AWB_EINDDATUM"),16,0,64),1,240),to_char(count("RESULTAAT
+")),substrb(dump(min("RESULTAAT"),16,0,64),1,240),substrb(dump(max("R
+ESULTAAT"),16,0,64),1,240),to_char(count("REDEN_AFSLUITEN")),substrb(
+dump(min("REDEN_AFSLUITEN"),16,0,64),1,240),substrb(dump(max("REDEN_A
+FSLUITEN"),16,0,64),1,240),to_char(count("PROCES")),substrb(dump(min(
+"PROCES"),16,0,64),1,240),substrb(dump(max("PROCES"),16,0,64),1,240),
+to_char(count("DATUM_EERSTE_AO_DAG")),substrb(dump(min("DATUM_EERSTE_
+AO_DAG"),16,0,64),1,240),substrb(dump(max("DATUM_EERSTE_AO_DAG"),16,0
+,64),1,240),to_char(count("NIEUWE_DATUM_EWT")),substrb(dump(min("NIEU
+WE_DATUM_EWT"),16,0,64),1,240),substrb(dump(max("NIEUWE_DATUM_EWT"),1
+6,0,64),1,240),to_char(count("OORDEEL_LLC")),substrb(dump(min("OORDEE
+L_LLC"),16,0,64),1,240),substrb(dump(max("OORDEEL_LLC"),16,0,64),1,24
+0),to_char(count("SOORT_BEOORDELING")),substrb(dump(min("SOORT_BEOORD
+ELING"),16,0,64),1,240),substrb(dump(max("SOORT_BEOORDELING"),16,0,64
+),1,240),to_char(count("GEREALISEERDE_EINDDATUM_VA")),substrb(dump(mi
+n("GEREALISEERDE_EINDDATUM_VA"),16,0,64),1,240),substrb(dump(max("GER
+EALISEERDE_EINDDATUM_VA"),16,0,64),1,240),to_char(count("GEREALISEERD
+E_EINDDATUM_RIV")),substrb(dump(min("GEREALISEERDE_EINDDATUM_RIV"),16
+,0,64),1,240),substrb(dump(max("GEREALISEERDE_EINDDATUM_RIV"),16,0,64
+),1,240),to_char(count("AANVRAGER_DO")),substrb(dump(min("AANVRAGER_D
+O"),16,0,64),1,240),substrb(dump(max("AANVRAGER_DO"),16,0,64),1,240),
+to_char(count("GEBOORTEDATUM")),substrb(dump(min("GEBOORTEDATUM"),16,
+0,64),1,240),substrb(dump(max("GEBOORTEDATUM"),16,0,64),1,240),to_cha
+r(count("AFG_POSTCODE")),substrb(dump(min("AFG_POSTCODE"),16,0,64),1,
+240),substrb(dump(max("AFG_POSTCODE"),16,0,64),1,240),to_char(count("
+SAMENGESTELDE_NAAM")),substrb(dump(min("SAMENGESTELDE_NAAM"),16,0,64)
+,1,240),substrb(dump(max("SAMENGESTELDE_NAAM"),16,0,64),1,240),to_cha
+r(count("AD_RIV")),substrb(dump(min("AD_RIV"),16,0,64),1,240),substrb
+(dump(max("AD_RIV"),16,0,64),1,240),to_char(count("VA")),substrb(dump
+(min("VA"),16,0,64),1,240),substrb(dump(max("VA"),16,0,64),1,240),to_
+char(count("PB")),substrb(dump(min("PB"),16,0,64),1,240),substrb(dump
+(max("PB"),16,0,64),1,240),to_char(count("AD_2")),substrb(dump(min("A
+D_2"),16,0,64),1,240),substrb(dump(max("AD_2"),16,0,64),1,240),to_cha
+r(count("MATERIE_AD_OK")),substrb(dump(min("MATERIE_AD_OK"),16,0,64),
+1,240),substrb(dump(max("MATERIE_AD_OK"),16,0,64),1,240),to_char(coun
+t("MATERIE_CLIENT_OK")),substrb(dump(min("MATERIE_CLIENT_OK"),16,0,64
+),1,240),substrb(dump(max("MATERIE_CLIENT_OK"),16,0,64),1,240),to_cha
+r(count("DATUM_VERZOEKCOMPLETEREN")),substrb(dump(min("DATUM_VERZOEKC
+OMPLETEREN"),16,0,64),1,240),substrb(dump(max("DATUM_VERZOEKCOMPLETER
+EN"),16,0,64),1,240),to_char(count("DATUM_UITERSTE_AFHANDELING")),sub
+strb(dump(min("DATUM_UITERSTE_AFHANDELING"),16,0,64),1,240),substrb(d
+ump(max("DATUM_UITERSTE_AFHANDELING"),16,0,64),1,240),count(rowidtoch
+ar(rowid)) from "STG_SMF"."STG_MIS_PROCESSEN_SRC_TB" t  /*
+NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,N
+IL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NI
+L,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV
+,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,
+NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,N
+IL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NI
+L,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,TOPN,NIL,NIL,ND
+V,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL
+,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,
+NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,N
+IL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,ND
+V,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL
+,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,
+NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,N
+IL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,ND
+V,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL
+,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,
+NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,N
+IL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,ND
+V,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL
+,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,
+NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,N
+IL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,ND
+V,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL,NDV,NIL,NIL
+,RWID,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U25
+4,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U2
+54,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U
+254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,
+U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254
+,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U25
+4,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U2
+54,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U
+254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,
+U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254,U254
+,U254U*/
+Rationale
+The SQL spent 100% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "b221nfn9t1wdd" was executed 1 times and had
+an average elapsed time of 236 seconds.
+Rationale
+At least one execution of the statement ran in parallel.
+
+
+Finding 2: Top Segments by "User I/O" and "Cluster"
+Impact is 1.76 active sessions, 26.73% of total activity.
+---------------------------------------------------------
+Individual database segments responsible for significant "User I/O" and
+"Cluster" waits were found.
+
+Recommendation 1: Segment Tuning
+Estimated benefit is .47 active sessions, 7.16% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT" with object ID
+111792.
+Related Object
+Database object with ID 111792.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT" with object ID
+111792.
+Related Object
+Database object with ID 111792.
+Rationale
+The I/O usage statistics for the object are: 4773 full object scans,
+22328562 physical reads, 0 physical writes and 22312930 direct reads.
+
+Recommendation 2: Segment Tuning
+Estimated benefit is .37 active sessions, 5.62% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_DEFAULT" with object ID
+208893.
+Related Object
+Database object with ID 208893.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_DEFAULT" with object ID
+208893.
+Related Object
+Database object with ID 208893.
+Rationale
+The I/O usage statistics for the object are: 4109 full object scans,
+16443434 physical reads, 0 physical writes and 16441206 direct reads.
+
+Recommendation 3: Segment Tuning
+Estimated benefit is .32 active sessions, 4.85% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT" with object ID
+111791.
+Related Object
+Database object with ID 111791.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT" with object ID
+111791.
+Related Object
+Database object with ID 111791.
+Rationale
+The I/O usage statistics for the object are: 3845 full object scans,
+15769933 physical reads, 0 physical writes and 15758926 direct reads.
+
+Recommendation 4: Segment Tuning
+Estimated benefit is .32 active sessions, 4.85% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_RECENT" with object ID
+208892.
+Related Object
+Database object with ID 208892.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_RECENT" with object ID
+208892.
+Related Object
+Database object with ID 208892.
+Rationale
+The I/O usage statistics for the object are: 3699 full object scans,
+17050811 physical reads, 0 physical writes and 17047828 direct reads.
+
+Recommendation 5: Segment Tuning
+Estimated benefit is .28 active sessions, 4.25% of total activity.
+------------------------------------------------------------------
+Action
+Investigate application logic involving I/O on TABLE
+"BRZ_RESAFASA.BRZ_SPECIFICATIE_WIA_HUB_HT" with object ID 660282.
+Related Object
+Database object with ID 660282.
+Action
+Look at the "Top SQL Statements" finding for SQL statements consuming
+significant I/O on this segment. For example, the SELECT statement with
+SQL_ID "drz9dwgaxpmft" is responsible for 98% of "User I/O" and
+"Cluster" waits for this segment.
+Rationale
+The I/O usage statistics for the object are: 10 full object scans,
+2982915 physical reads, 0 physical writes and 2756016 direct reads.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is 2.94 active sessions, 44.58% of total activity.
+
+
+Finding 3: Undersized PGA
+Impact is .67 active sessions, 10.16% of total activity.
+--------------------------------------------------------
+The PGA was inadequately sized, causing additional I/O to temporary
+tablespaces to consume significant database time.
+The value of parameter "pga_aggregate_target" was "25600 M" during the
+analysis period.
+
+No recommendations are available.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is 2.94 active sessions, 44.58% of total activity.
+
+
+Finding 4: CPU Usage
+Impact is .66 active sessions, 10% of total activity.
+-----------------------------------------------------
+Time spent on the CPU by the instance was responsible for a substantial part
+of database time.
+
+Recommendation 1: Application Analysis
+Estimated benefit is 3.55 active sessions, 53.94% of total activity.
+--------------------------------------------------------------------
+Action
+Look at the "Top SQL Statements" finding for SQL statements consuming
+significant time on CPU. For example, the INSERT statement with SQL_ID
+"auf79w4gd8uam" is responsible for 26% of CPU usage during the analysis
+period.
+
+Recommendation 2: Application Analysis
+Estimated benefit is .66 active sessions, 10% of total activity.
+----------------------------------------------------------------
+Action
+Parsing SQL statements were consuming significant CPU. Please refer to
+other findings in this task about parsing for further details.
+
+
+Finding 5: Hard Parse Due to Parse Errors
+Impact is .39 active sessions, 5.9% of total activity.
+------------------------------------------------------
+Hard parsing SQL statements that encountered parse errors was consuming
+significant database time.
+
+Recommendation 1: Application Analysis
+Estimated benefit is .39 active sessions, 5.9% of total activity.
+-----------------------------------------------------------------
+Action
+Investigate application logic to eliminate parse errors.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Hard parsing of SQL statements was consuming significant database time.
+Impact is .39 active sessions, 5.98% of total activity.
+
+
+Finding 6: Undersized SGA
+Impact is .2 active sessions, 3.01% of total activity.
+------------------------------------------------------
+The SGA was inadequately sized, causing additional I/O or hard parses.
+The value of parameter "sga_target" was "40960 M" during the analysis period.
+
+Recommendation 1: Database Configuration
+Estimated benefit is .2 active sessions, 2.99% of total activity.
+-----------------------------------------------------------------
+Action
+Increase the size of the SGA by setting the parameter "sga_target" to
+46080 M.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is 2.94 active sessions, 44.58% of total activity.
+Hard parsing of SQL statements was consuming significant database time.
+Impact is .39 active sessions, 5.98% of total activity.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Additional Information
+----------------------
+
+Miscellaneous Information
+-------------------------
+Wait class "Application" was not consuming significant database time.
+Wait class "Commit" was not consuming significant database time.
+Wait class "Concurrency" was not consuming significant database time.
+Wait class "Configuration" was not consuming significant database time.
+Wait class "Network" was not consuming significant database time.
+Session connect and disconnect calls were not consuming significant database
+time.
+
+The database's maintenance windows were active during 99% of the analysis
+period.
+
+ADDM Task ADDM:1459796375_1_8312
+ADDM Report for Task 'ADDM:1459796375_1_8312'
+---------------------------------------------
+
+Analysis Period
+---------------
+AWR snapshot range from 8311 to 8312.
+Time period starts at 30-01-24 12.00.16 PM
+Time period ends at 30-01-24 01.00.19 PM
+
+Analysis Target
+---------------
+Database 'PDIM' with DB ID 1459796375.
+Database version 19.0.0.0.0.
+ADDM performed an analysis of instance pdim, numbered 1 and hosted at
+uwvm2vapora0012.p-dc.ba.uwv.nl.
+
+Activity During the Analysis Period
+-----------------------------------
+Total database time was 7846 seconds.
+The average number of active sessions was 2.18.
+
+Summary of Findings
+-------------------
+Description                               Active Sessions      Recommendations
+Percent of Activity
+----------------------------------------  -------------------  ---------------
+1  Top SQL Statements                        1.1 | 50.43          3
+2  Top Segments by "User I/O" and "Cluster"  .4 | 18.17           4
+3  Buffer Busy - Hot Objects                 .17 | 7.7            1
+4  Undersized PGA                            .04 | 2.01           0
+5  Undersized SGA                            .04 | 1.86           1
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Findings and Recommendations
+----------------------------
+
+Finding 1: Top SQL Statements
+Impact is 1.1 active sessions, 50.43% of total activity.
+--------------------------------------------------------
+SQL statements consuming significant database time were found. These
+statements offer a good opportunity for performance improvement.
+
+Recommendation 1: SQL Tuning
+Estimated benefit is .69 active sessions, 31.78% of total activity.
+-------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"2frqwujjy5r4v".
+Related Object
+SQL statement with SQL_ID 2frqwujjy5r4v.
+/* MV_REFRESH (INS) */INSERT /*+ BYPASS_RECURSIVE_CHECK APPEND  */
+INTO "BDR_SMZ_SV_PM"."BDR_SMZ_SV_HERBO_AM" select
+dim_snapshot_id
+, dim_beoordelingseffect_id
+, dim_uitslag_claim_id
+, dim_leeftijd_id
+, dim_leeftijd_id_datum_afgesloten
+, dim_procesfase_id
+, dim_procesdata_id
+, dim_product_id
+, dim_klantcategorie_id
+, dim_land_id
+, dim_organisatie_id_regie
+, dim_organisatie_id_smo
+, dim_organisatie_id_actief
+, dim_soort_aanvrager_id
+, dim_geslacht_id
+, ouderdom_voorraad
+, voorportaal_streefmaand
+, afg_regie_en_smo_gelijk
+, nvl (afg_indicatie_va, 0)             afg_indicatie_va
+, nvl (afg_indicatie_ad, 0)             afg_indicatie_ad
+, sum (d035_vrrd_vraag_all)             d035_vrrd_vraag_all
+, sum (d039_vrrd_vraag_waj)             d039_vrrd_vraag_waj
+, sum (d040_beslis_vraag_all)           d040_beslis_vraag_all
+, sum (d040_beslis_vraag_all_tdg)       d040_beslis_vraag_all_tdg
+, sum (d105_vrrd_prof_all)              d105_vrrd_prof_all
+, sum (d113_beslis_vraag_all)           d113_beslis_vraag_all
+, sum (d115_beslis_vraag_nwaj)          d115_beslis_vraag_nwaj
+, sum (d116_beslis_vraag_owaj)          d116_beslis_vraag_owaj
+, sum (d119_beslis_prof_all)            d119_beslis_prof_all
+, sum (d120_vrrd_tot_all)               d120_vrrd_tot_all
+, sum (d120_vrrd_tot_all_tdg)           d120_vrrd_tot_all_tdg
+, sum (d121_beslis_tot_all)             d121_beslis_tot_all
+, sum (d121_beslis_tot_all_tdg)         d121_beslis_tot_all_tdg
+, sum (d232_beslis_prof_wia)            d232_beslis_prof_wia
+, sum (d232_beslis_prof_wia_gewijz)     d232_beslis_prof_wia_gewijz
+, sum (d359_beslis_tot_all)             d359_beslis_tot_all
+, sum (d360_instroom_tot_all)           d360_instroom_tot_all
+, sum (d361_adhoc_tot_all)              d361_adhoc_tot_all
+, sum (d362_vrrd_tot_all)               d362_vrrd_tot_all
+, sum (d363_instroom_vraag_all)         d363_instroom_vraag_all
+, sum (d364_adhoc_vraag_all)            d364_adhoc_vraag_all
+, sum (d366_vrrd_vraag_all)             d366_vrrd_vraag_all
+, sum (d366_vrrd_vraag_all_tdg)         d366_vrrd_vraag_all_tdg
+, sum (d367_instroom_prof_all)          d367_instroom_prof_all
+, sum (d368_adhoc_prof_all)             d368_adhoc_prof_all
+, sum (d479_beslis_wia_overdr)          d479_beslis_wia_overdr
+, sum (d479_beslis_wia_overdr_terecht)
+d479_beslis_wia_overdr_terecht
+, sum (d618_instroom_tot_all_netto)     d618_instroom_tot_all_netto
+, sum (d619_vrrd_vrprtl)                d619_vrrd_vrprtl
+, sum (d620_vrrd_vrprtl_tdg)            d620_vrrd_vrprtl_tdg
+, sum (d1030_perc_herbo_wia_eff_n)      d1030_perc_herbo_wia_eff_n
+, sum (d1030_perc_herbo_wia_eff_t)      d1030_perc_herbo_wia_eff_t
+, sum (d1032_perc_herbo_wia_eff_vrg_n)
+d1032_perc_herbo_wia_eff_vrg_n
+, sum (d1032_perc_herbo_wia_eff_vrg_t)
+d1032_perc_herbo_wia_eff_vrg_t
+, sum (d1033_beslis_vraag_wia)          d1033_beslis_vraag_wia
+, sum (d1033_beslis_vraag_wia_tk_iva)   d1033_beslis_vraag_wia_tk_iva
+, sum (d1034_beslis_prof_wia)           d1034_beslis_prof_wia
+, sum (d1034_beslis_prof_wia_tk_iva)    d1034_beslis_prof_wia_tk_iva
+, sum (d1105_instroom_prof_all_netto)   d1105_instroom_prof_all_netto
+, sum (d1107_instroom_vrg_all_netto)    d1107_instroom_vrg_all_netto
+, sum (d1119_perc_herbo_wao_eff_n)      d1119_perc_herbo_wao_eff_n
+, sum (d1119_perc_herbo_wao_eff_t)      d1119_perc_herbo_wao_eff_t
+, sum (d1120_perc_herbo_wjng_eff_n)     d1120_perc_herbo_wjng_eff_n
+, sum (d1120_perc_herbo_wjng_eff_t)     d1120_perc_herbo_wjng_eff_t
+, sum (d1357_vrrd_vrprtl_achterstand)   d1357_vrrd_vrprtl_achterstand
+, sum (d1359_vrrd_wia_incl_vrprtl)      d1359_vrrd_wia_incl_vrprtl
+, sum (d1360_vrrd_wajong_incl_vrprtl)   d1360_vrrd_wajong_incl_vrprtl
+, sum (i_0001_per_wia_wijz_med_nmed_n)
+i_0001_per_wia_wijz_med_nmed_n
+, sum (i_0001_per_wia_wijz_med_nmed_t)
+i_0001_per_wia_wijz_med_nmed_t
+, sum (s732_beslis_tot_all)             s732_beslis_tot_all
+, sum (s732_beslis_tot_all_met_ov)      s732_beslis_tot_all_met_ov
+, sum (s733_beslis_tot_all_met_ov)      s733_beslis_tot_all_met_ov
+, sum (s733_beslis_tot_all_xov)         s733_beslis_tot_all_xov
+, sum (s734_beslis_tot_all_xov)         s734_beslis_tot_all_xov
+, sum (s803_beslis_wajong)              s803_beslis_wajong
+, sum (s803_beslis_wajong_arbvrmgn)     s803_beslis_wajong_arbvrmgn
+, sum (s1010_vrrd_herbo_inc_intake)     s1010_vrrd_herbo_inc_intake
+, sum (s1011_vrrd_vrprtl_geen_plndt)    s1011_vrrd_vrprtl_geen_plndt
+, sum (s1012_vrrd_vrprtl_met_plndt)     s1012_vrrd_vrprtl_met_plndt
+, sum (s1013_vrrd_verkoop_smo)          s1013_vrrd_verkoop_smo
+, sum (s1014_vrrd_verkoop_smo)          s1014_vrrd_verkoop_smo
+, sum (s1014_vrrd_verkoop_smo_tdg)      s1014_vrrd_verkoop_smo_tdg
+, sum (s1015_beslis_prof_all)           s1015_beslis_prof_all
+, sum (s1015_beslis_prof_all_tdg)       s1015_beslis_prof_all_tdg
+, sum (s1016_vrrd_vrprtl_toekomst)      s1016_vrrd_vrprtl_toekomst
+, sum (s1027_beslis_wia_80_100)         s1027_beslis_wia_80_100
+, sum (s1027_beslis_wia_gn_vrprtl)      s1027_beslis_wia_gn_vrprtl
+, sum (s1043_beslis_tot_all)            s1043_beslis_tot_all
+, sum (s1043_beslis_tot_all_drlptd)     s1043_beslis_tot_all_drlptd
+, sum (s1600_netto_input_mon)           s1600_netto_input_mon
+, sum (s1601_output_mon)                s1601_output_mon
+, sum (s1602_vrrd_mon)                  s1602_vrrd_mon
+, sum (s1603_achterst_vrprtl_mon)       s1603_achterst_vrprtl_mon
+, sum (s1604_herbo_outcome_mon)         s1604_herbo_outcome_mon
+, sum (s1604_tot_outcome_mon)           s1604_tot_outcome_mon
+, sum (s1605_tot_vrrd_prof_herbo)       s1605_tot_vrrd_prof_herbo
+, sum (s1606_incl_achterst_vrprtl_mon)
+s1606_incl_achterst_vrprtl_mon
+, sum (s1607_geen_achterst_vrprtl_mon)
+s1607_geen_achterst_vrprtl_mon
+, sum (s1610_adhoc_afsluit_mon)         s1610_adhoc_afsluit_mon
+, sum (s1612_output_mon_12_mnd)         s1612_output_mon_12_mnd
+, sum (s1613_actuele_caseload_mon)      s1613_actuele_caseload_mon
+, sum(input)                            input
+, sum(voorraad)                         voorraad
+, sum(voorraad_tijdig)                  voorraad_tijdig
+, sum(voorraad_incl_regie)              voorraad_incl_regie
+, sum(output)                           output
+, sum(output_tijdig)                    output_tijdig
+, sum(ad_hoc_afsluiting)                ad_hoc_afsluiting
+, sum(doorlooptijd_oend)                doorlooptijd_oend
+, sum(doorlooptijd_intake_regie)        doorlooptijd_intake_regie
+, sum(doorlooptijd_intake)              doorlooptijd_intake
+, sum(doorlooptijd_med_beoordeling)     doorlooptijd_med_beoordeling
+, sum(doorlooptijd_ad_beoordeling)      doorlooptijd_ad_beoordeling
+, sum(doorlooptijd_rdh)                 doorlooptijd_rdh
+, sum(info_uitstel_med_info_aantal)     info_uitstel_med_info_aantal
+, sum(info_uitstel_med_info_duur)       info_uitstel_med_info_duur
+, sum(info_uitstel_med_exp_aantal)      info_uitstel_med_exp_aantal
+, sum(info_uitstel_med_exp_duur)        info_uitstel_med_exp_duur
+from
+bdr_smz_sv_herbo_ft f
+where
+not exists (
+select
+1
+from
+bdr_smz_sv_beoordeling_soft_delete_mv sd
+where
+sd.pcs_id = f.pcs_id
+)
+group by
+dim_snapshot_id
+, dim_beoordelingseffect_id
+, dim_uitslag_claim_id
+, dim_leeftijd_id
+, dim_leeftijd_id_datum_afgesloten
+, dim_procesfase_id
+, dim_procesdata_id
+, dim_product_id
+, dim_klantcategorie_id
+, dim_land_id
+, dim_organisatie_id_regie
+, dim_organisatie_id_smo
+, dim_organisatie_id_actief
+, dim_soort_aanvrager_id
+, dim_geslacht_id
+, ouderdom_voorraad
+, voorportaal_streefmaand
+, afg_regie_en_smo_gelijk
+, nvl (afg_indicatie_va, 0)
+, nvl( afg_indicatie_ad, 0)
+Rationale
+The SQL spent 97% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "2frqwujjy5r4v" was executed 1 times and had
+an average elapsed time of 732 seconds.
+Rationale
+At least one execution of the statement ran in parallel.
+
+Recommendation 2: SQL Tuning
+Estimated benefit is .34 active sessions, 15.58% of total activity.
+-------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"cuhb1t38xjvf0". Additionally, investigate this statement for possible
+performance improvements. You can supplement the information given here
+with an ASH report for this SQL_ID.
+Related Object
+SQL statement with SQL_ID cuhb1t38xjvf0.
+INSERT INTO bdr_smz_sv_PM.bdr_smz_sv_herbo_ft(PCS_ID,DIM_DATUM_AANMAA
+K,DIM_USER_AANMAAK,AFG_REGIE_EN_SMO_GELIJK,AFG_INDICATIE_VA,AFG_INDIC
+ATIE_AD,DIM_SNAPSHOT_ID,DIM_ORGANISATIE_ID_ACTIEF,DIM_KLANT_ID,DIM_UI
+TSLAG_CLAIM_ID,DIM_LEEFTIJD_ID,DIM_LEEFTIJD_ID_DATUM_AFGESLOTEN,DIM_P
+ROCESFASE_ID,DIM_PROCESDATA_ID,DIM_PRODUCT_ID,DIM_KLANTCATEGORIE_ID,D
+IM_LAND_ID,DIM_ORGANISATIE_ID_REGIE,DIM_ORGANISATIE_ID_SMO,DIM_SOORT_
+AANVRAGER_ID,DIM_GESLACHT_ID,S1600_NETTO_INPUT_MON,S1601_OUTPUT_MON,S
+1602_VRRD_MON,S1603_ACHTERST_VRPRTL_MON,S1604_HERBO_OUTCOME_MON,S1604
+_TOT_OUTCOME_MON,S1605_TOT_VRRD_PROF_HERBO,S1606_INCL_ACHTERST_VRPRTL
+_MON,S1607_GEEN_ACHTERST_VRPRTL_MON,S1610_ADHOC_AFSLUIT_MON,S1612_OUT
+PUT_MON_12_MND,S1613_ACTUELE_CASELOAD_MON,S803_BESLIS_WAJONG,S803_BES
+LIS_WAJONG_ARBVRMGN,S1027_BESLIS_WIA_80_100,S1027_BESLIS_WIA_GN_VRPRT
+L,D105_VRRD_PROF_ALL,D119_BESLIS_PROF_ALL,D232_BESLIS_PROF_WIA,D232_B
+ESLIS_PROF_WIA_GEWIJZ,D367_INSTROOM_PROF_ALL,D368_ADHOC_PROF_ALL,D103
+4_BESLIS_PROF_WIA,D1034_BESLIS_PROF_WIA_TK_IVA,D1105_INSTROOM_PROF_AL
+L_NETTO,S1015_BESLIS_PROF_ALL,S1015_BESLIS_PROF_ALL_TDG,D120_VRRD_TOT
+_ALL,D120_VRRD_TOT_ALL_TDG,D360_INSTROOM_TOT_ALL,D361_ADHOC_TOT_ALL,D
+362_VRRD_TOT_ALL,D618_INSTROOM_TOT_ALL_NETTO,D619_VRRD_VRPRTL,D620_VR
+RD_VRPRTL_TDG,D1357_VRRD_VRPRTL_ACHTERSTAND,D1359_VRRD_WIA_INCL_VRPRT
+L,D1360_VRRD_WAJONG_INCL_VRPRTL,S1010_VRRD_HERBO_INC_INTAKE,S1011_VRR
+D_VRPRTL_GEEN_PLNDT,S1012_VRRD_VRPRTL_MET_PLNDT,S1013_VRRD_VERKOOP_SM
+O,S1014_VRRD_VERKOOP_SMO,S1014_VRRD_VERKOOP_SMO_TDG,S1016_VRRD_VRPRTL
+_TOEKOMST,D121_BESLIS_TOT_ALL,D121_BESLIS_TOT_ALL_TDG,D359_BESLIS_TOT
+_ALL,D479_BESLIS_WIA_OVERDR,D479_BESLIS_WIA_OVERDR_TERECHT,S732_BESLI
+S_TOT_ALL,S732_BESLIS_TOT_ALL_MET_OV,S733_BESLIS_TOT_ALL_MET_OV,S733_
+BESLIS_TOT_ALL_XOV,S734_BESLIS_TOT_ALL_XOV,S1043_BESLIS_TOT_ALL,S1043
+_BESLIS_TOT_ALL_DRLPTD,D035_VRRD_VRAAG_ALL,D039_VRRD_VRAAG_WAJ,D040_B
+ESLIS_VRAAG_ALL,D040_BESLIS_VRAAG_ALL_TDG,D113_BESLIS_VRAAG_ALL,D115_
+BESLIS_VRAAG_NWAJ,D116_BESLIS_VRAAG_OWAJ,D363_INSTROOM_VRAAG_ALL,D364
+_ADHOC_VRAAG_ALL,D366_VRRD_VRAAG_ALL,D366_VRRD_VRAAG_ALL_TDG,D1033_BE
+SLIS_VRAAG_WIA,D1033_BESLIS_VRAAG_WIA_TK_IVA,D1107_INSTROOM_VRG_ALL_N
+ETTO,D1119_PERC_HERBO_WAO_EFF_N,D1119_PERC_HERBO_WAO_EFF_T,D1120_PERC
+_HERBO_WJNG_EFF_N,D1120_PERC_HERBO_WJNG_EFF_T,D1030_PERC_HERBO_WIA_EF
+F_N,D1030_PERC_HERBO_WIA_EFF_T,D1032_PERC_HERBO_WIA_EFF_VRG_N,D1032_P
+ERC_HERBO_WIA_EFF_VRG_T,I_0001_PER_WIA_WIJZ_MED_NMED_N,I_0001_PER_WIA
+_WIJZ_MED_NMED_T,DIM_BEOORDELINGSEFFECT_ID,INPUT,VOORRAAD,VOORRAAD_TI
+JDIG,VOORRAAD_INCL_REGIE,OUTPUT,OUTPUT_TIJDIG,AD_HOC_AFSLUITING,DOORL
+OOPTIJD_OEND,DOORLOOPTIJD_INTAKE_REGIE,DOORLOOPTIJD_INTAKE,DOORLOOPTI
+JD_MED_BEOORDELING,DOORLOOPTIJD_AD_BEOORDELING,DOORLOOPTIJD_RDH,INFO_
+UITSTEL_MED_INFO_AANTAL,INFO_UITSTEL_MED_INFO_DUUR,INFO_UITSTEL_MED_E
+XP_AANTAL,INFO_UITSTEL_MED_EXP_DUUR,OUDERDOM_VOORRAAD,VOORPORTAAL_STR
+EEFMAAND) VALUES(:PCS_ID,:DIM_DATUM_AANMAAK,:DIM_USER_AANMAAK,:AFG_RE
+GIE_EN_SMO_GELIJK,:AFG_INDICATIE_VA,:AFG_INDICATIE_AD,:DIM_SNAPSHOT_I
+D,:DIM_ORGANISATIE_ID_ACTIEF,:DIM_KLANT_ID,:DIM_UITSLAG_CLAIM_ID,:DIM
+_LEEFTIJD_ID,:DIM_LEEFTIJD_ID_DATUM_AFGESLOTEN,:DIM_PROCESFASE_ID,:DI
+M_PROCESDATA_ID,:DIM_PRODUCT_ID,:DIM_KLANTCATEGORIE_ID,:DIM_LAND_ID,:
+DIM_ORGANISATIE_ID_REGIE,:DIM_ORGANISATIE_ID_SMO,:DIM_SOORT_AANVRAGER
+_ID,:DIM_GESLACHT_ID,:S1600_NETTO_INPUT_MON,:S1601_OUTPUT_MON,:S1602_
+VRRD_MON,:S1603_ACHTERST_VRPRTL_MON,:S1604_HERBO_OUTCOME_MON,:S1604_T
+OT_OUTCOME_MON,:S1605_TOT_VRRD_PROF_HERBO,:S1606_INCL_ACHTERST_VRPRTL
+_MON,:S1607_GEEN_ACHTERST_VRPRTL_MON,:S1610_ADHOC_AFSLUIT_MON,:S1612_
+OUTPUT_MON_12_MND,:S1613_ACTUELE_CASELOAD_MON,:S803_BESLIS_WAJONG,:S8
+03_BESLIS_WAJONG_ARBVRMGN,:S1027_BESLIS_WIA_80_100,:S1027_BESLIS_WIA_
+GN_VRPRTL,:D105_VRRD_PROF_ALL,:D119_BESLIS_PROF_ALL,:D232_BESLIS_PROF
+_WIA,:D232_BESLIS_PROF_WIA_GEWIJZ,:D367_INSTROOM_PROF_ALL,:D368_ADHOC
+_PROF_ALL,:D1034_BESLIS_PROF_WIA,:D1034_BESLIS_PROF_WIA_TK_IVA,:D1105
+_INSTROOM_PROF_ALL_NETTO,:S1015_BESLIS_PROF_ALL,:S1015_BESLIS_PROF_AL
+L_TDG,:D120_VRRD_TOT_ALL,:D120_VRRD_TOT_ALL_TDG,:D360_INSTROOM_TOT_AL
+L,:D361_ADHOC_TOT_ALL,:D362_VRRD_TOT_ALL,:D618_INSTROOM_TOT_ALL_NETTO
+,:D619_VRRD_VRPRTL,:D620_VRRD_VRPRTL_TDG,:D1357_VRRD_VRPRTL_ACHTERSTA
+ND,:D1359_VRRD_WIA_INCL_VRPRTL,:D1360_VRRD_WAJONG_INCL_VRPRTL,:S1010_
+VRRD_HERBO_INC_INTAKE,:S1011_VRRD_VRPRTL_GEEN_PLNDT,:S1012_VRRD_VRPRT
+L_MET_PLNDT,:S1013_VRRD_VERKOOP_SMO,:S1014_VRRD_VERKOOP_SMO,:S1014_VR
+RD_VERKOOP_SMO_TDG,:S1016_VRRD_VRPRTL_TOEKOMST,:D121_BESLIS_TOT_ALL,:
+D121_BESLIS_TOT_ALL_TDG,:D359_BESLIS_TOT_ALL,:D479_BESLIS_WIA_OVERDR,
+:D479_BESLIS_WIA_OVERDR_TERECHT,:S732_BESLIS_TOT_ALL,:S732_BESLIS_TOT
+_ALL_MET_OV,:S733_BESLIS_TOT_ALL_MET_OV,:S733_BESLIS_TOT_ALL_XOV,:S73
+4_BESLIS_TOT_ALL_XOV,:S1043_BESLIS_TOT_ALL,:S1043_BESLIS_TOT_ALL_DRLP
+TD,:D035_VRRD_VRAAG_ALL,:D039_VRRD_VRAAG_WAJ,:D040_BESLIS_VRAAG_ALL,:
+D040_BESLIS_VRAAG_ALL_TDG,:D113_BESLIS_VRAAG_ALL,:D115_BESLIS_VRAAG_N
+WAJ,:D116_BESLIS_VRAAG_OWAJ,:D363_INSTROOM_VRAAG_ALL,:D364_ADHOC_VRAA
+G_ALL,:D366_VRRD_VRAAG_ALL,:D366_VRRD_VRAAG_ALL_TDG,:D1033_BESLIS_VRA
+AG_WIA,:D1033_BESLIS_VRAAG_WIA_TK_IVA,:D1107_INSTROOM_VRG_ALL_NETTO,:
+D1119_PERC_HERBO_WAO_EFF_N,:D1119_PERC_HERBO_WAO_EFF_T,:D1120_PERC_HE
+RBO_WJNG_EFF_N,:D1120_PERC_HERBO_WJNG_EFF_T,:D1030_PERC_HERBO_WIA_EFF
+_N,:D1030_PERC_HERBO_WIA_EFF_T,:D1032_PERC_HERBO_WIA_EFF_VRG_N,:D1032
+_PERC_HERBO_WIA_EFF_VRG_T,:I_0001_PER_WIA_WIJZ_MED_NMED_N,:I_0001_PER
+_WIA_WIJZ_MED_NMED_T,:DIM_BEOORDELINGSEFFECT_ID,:INPUT,:VOORRAAD,:VOO
+RRAAD_TIJDIG,:VOORRAAD_INCL_REGIE,:OUTPUT,:OUTPUT_TIJDIG,:AD_HOC_AFSL
+UITING,:DOORLOOPTIJD_OEND,:DOORLOOPTIJD_INTAKE_REGIE,:DOORLOOPTIJD_IN
+TAKE,:DOORLOOPTIJD_MED_BEOORDELING,:DOORLOOPTIJD_AD_BEOORDELING,:DOOR
+LOOPTIJD_RDH,:INFO_UITSTEL_MED_INFO_AANTAL,:INFO_UITSTEL_MED_INFO_DUU
+R,:INFO_UITSTEL_MED_EXP_AANTAL,:INFO_UITSTEL_MED_EXP_DUUR,:OUDERDOM_V
+OORRAAD,:VOORPORTAAL_STREEFMAAND)
+Rationale
+The SQL spent 51% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Look at data given below and an ASH report for further performance
+improvements.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "cuhb1t38xjvf0" was executed 1999 times and
+had an average elapsed time of 0.65 seconds.
+Rationale
+Waiting for event "buffer busy waits" in wait class "Concurrency"
+accounted for 39% of the database time spent in processing the SQL
+statement with SQL_ID "cuhb1t38xjvf0".
+
+Recommendation 3: SQL Tuning
+Estimated benefit is .04 active sessions, 1.84% of total activity.
+------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"gpgp6ykhjgxtn".
+Related Object
+SQL statement with SQL_ID gpgp6ykhjgxtn.
+INSERT INTO BDR_SMZ_SV_PM.BDR_SMZ_SV_HERBO_FKS_TB(DIM_SNAPSHOT_ID,DIM
+_KLANT_ID,DIM_UITSLAG_CLAIM_ID,DIM_KLANTCATEGORIE_ID,DIM_SOORT_AANVRA
+GER_ID,DIM_LEEFTIJD_ID,DIM_LEEFTIJD_ID_DATUM_AFGESLOTEN,DIM_LAND_ID,D
+IM_ORGANISATIE_ID_ACTIEF,DIM_ORGANISATIE_ID_SMO,DIM_ORGANISATIE_ID_RE
+GIE,DIM_PRODUCT_ID,DIM_PROCESDATA_ID,DIM_PROCESFASE_ID,DIM_DATUM_ID_U
+ITERSTE_AFHANDELING,DIM_GESLACHT_ID,PCS_ID,AFG_REGIE_EN_SMO_GELIJK,AF
+G_INDICATIE_VA,AFG_INDICATIE_AD)
+VALUES(:DIM_SNAPSHOT_ID,:DIM_KLANT_ID,:DIM_UITSLAG_CLAIM_ID,:DIM_KLAN
+TCATEGORIE_ID,:DIM_SOORT_AANVRAGER_ID,:DIM_LEEFTIJD_ID,:DIM_LEEFTIJD_
+ID_DATUM_AFGESLOTEN,:DIM_LAND_ID,:DIM_ORGANISATIE_ID_ACTIEF,:DIM_ORGA
+NISATIE_ID_SMO,:DIM_ORGANISATIE_ID_REGIE,:DIM_PRODUCT_ID,:DIM_PROCESD
+ATA_ID,:DIM_PROCESFASE_ID,:DIM_DATUM_ID_UITERSTE_AFHANDELING,:DIM_GES
+LACHT_ID,:PCS_ID,:AFG_REGIE_EN_SMO_GELIJK,:AFG_INDICATIE_VA,:AFG_INDI
+CATIE_AD)
+Rationale
+The SQL spent 78% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "gpgp6ykhjgxtn" was executed 513 times and had
+an average elapsed time of 0.098 seconds.
+
+
+Finding 2: Top Segments by "User I/O" and "Cluster"
+Impact is .4 active sessions, 18.17% of total activity.
+-------------------------------------------------------
+Individual database segments responsible for significant "User I/O" and
+"Cluster" waits were found.
+
+Recommendation 1: Segment Tuning
+Estimated benefit is .15 active sessions, 6.72% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT" with object ID
+111792.
+Related Object
+Database object with ID 111792.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT" with object ID
+111792.
+Related Object
+Database object with ID 111792.
+Rationale
+The I/O usage statistics for the object are: 7426 full object scans,
+35079526 physical reads, 0 physical writes and 35075173 direct reads.
+
+Recommendation 2: Segment Tuning
+Estimated benefit is .14 active sessions, 6.34% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT" with object ID
+111791.
+Related Object
+Database object with ID 111791.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT" with object ID
+111791.
+Related Object
+Database object with ID 111791.
+Rationale
+The I/O usage statistics for the object are: 5984 full object scans,
+24773508 physical reads, 0 physical writes and 24775592 direct reads.
+
+Recommendation 3: Segment Tuning
+Estimated benefit is .06 active sessions, 2.65% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_RECENT" with object ID
+208892.
+Related Object
+Database object with ID 208892.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_RECENT" with object ID
+208892.
+Related Object
+Database object with ID 208892.
+Rationale
+The I/O usage statistics for the object are: 2394 full object scans,
+11030471 physical reads, 0 physical writes and 11030294 direct reads.
+
+Recommendation 4: Segment Tuning
+Estimated benefit is .05 active sessions, 2.46% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_DEFAULT" with object ID
+208893.
+Related Object
+Database object with ID 208893.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_DEFAULT" with object ID
+208893.
+Related Object
+Database object with ID 208893.
+Rationale
+The I/O usage statistics for the object are: 2656 full object scans,
+10637548 physical reads, 0 physical writes and 10636894 direct reads.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is .49 active sessions, 22.72% of total activity.
+
+
+Finding 3: Buffer Busy - Hot Objects
+Impact is .17 active sessions, 7.7% of total activity.
+------------------------------------------------------
+Read and write contention on database blocks was consuming significant
+database time.
+
+Recommendation 1: Schema Changes
+Estimated benefit is .16 active sessions, 7.13% of total activity.
+------------------------------------------------------------------
+Action
+Consider partitioning the INDEX "BDR_SMZ_SV_PM.BDR_SMZ_SV_HERBO_PK" with
+object ID 236408 in a manner that will evenly distribute concurrent DML
+across multiple partitions.
+Related Object
+Database object with ID 236408.
+Rationale
+The INSERT statement with SQL_ID "cuhb1t38xjvf0" was significantly
+affected by "buffer busy" waits.
+Related Object
+SQL statement with SQL_ID cuhb1t38xjvf0.
+INSERT INTO bdr_smz_sv_PM.bdr_smz_sv_herbo_ft(PCS_ID,DIM_DATUM_AANMAA
+K,DIM_USER_AANMAAK,AFG_REGIE_EN_SMO_GELIJK,AFG_INDICATIE_VA,AFG_INDIC
+ATIE_AD,DIM_SNAPSHOT_ID,DIM_ORGANISATIE_ID_ACTIEF,DIM_KLANT_ID,DIM_UI
+TSLAG_CLAIM_ID,DIM_LEEFTIJD_ID,DIM_LEEFTIJD_ID_DATUM_AFGESLOTEN,DIM_P
+ROCESFASE_ID,DIM_PROCESDATA_ID,DIM_PRODUCT_ID,DIM_KLANTCATEGORIE_ID,D
+IM_LAND_ID,DIM_ORGANISATIE_ID_REGIE,DIM_ORGANISATIE_ID_SMO,DIM_SOORT_
+AANVRAGER_ID,DIM_GESLACHT_ID,S1600_NETTO_INPUT_MON,S1601_OUTPUT_MON,S
+1602_VRRD_MON,S1603_ACHTERST_VRPRTL_MON,S1604_HERBO_OUTCOME_MON,S1604
+_TOT_OUTCOME_MON,S1605_TOT_VRRD_PROF_HERBO,S1606_INCL_ACHTERST_VRPRTL
+_MON,S1607_GEEN_ACHTERST_VRPRTL_MON,S1610_ADHOC_AFSLUIT_MON,S1612_OUT
+PUT_MON_12_MND,S1613_ACTUELE_CASELOAD_MON,S803_BESLIS_WAJONG,S803_BES
+LIS_WAJONG_ARBVRMGN,S1027_BESLIS_WIA_80_100,S1027_BESLIS_WIA_GN_VRPRT
+L,D105_VRRD_PROF_ALL,D119_BESLIS_PROF_ALL,D232_BESLIS_PROF_WIA,D232_B
+ESLIS_PROF_WIA_GEWIJZ,D367_INSTROOM_PROF_ALL,D368_ADHOC_PROF_ALL,D103
+4_BESLIS_PROF_WIA,D1034_BESLIS_PROF_WIA_TK_IVA,D1105_INSTROOM_PROF_AL
+L_NETTO,S1015_BESLIS_PROF_ALL,S1015_BESLIS_PROF_ALL_TDG,D120_VRRD_TOT
+_ALL,D120_VRRD_TOT_ALL_TDG,D360_INSTROOM_TOT_ALL,D361_ADHOC_TOT_ALL,D
+362_VRRD_TOT_ALL,D618_INSTROOM_TOT_ALL_NETTO,D619_VRRD_VRPRTL,D620_VR
+RD_VRPRTL_TDG,D1357_VRRD_VRPRTL_ACHTERSTAND,D1359_VRRD_WIA_INCL_VRPRT
+L,D1360_VRRD_WAJONG_INCL_VRPRTL,S1010_VRRD_HERBO_INC_INTAKE,S1011_VRR
+D_VRPRTL_GEEN_PLNDT,S1012_VRRD_VRPRTL_MET_PLNDT,S1013_VRRD_VERKOOP_SM
+O,S1014_VRRD_VERKOOP_SMO,S1014_VRRD_VERKOOP_SMO_TDG,S1016_VRRD_VRPRTL
+_TOEKOMST,D121_BESLIS_TOT_ALL,D121_BESLIS_TOT_ALL_TDG,D359_BESLIS_TOT
+_ALL,D479_BESLIS_WIA_OVERDR,D479_BESLIS_WIA_OVERDR_TERECHT,S732_BESLI
+S_TOT_ALL,S732_BESLIS_TOT_ALL_MET_OV,S733_BESLIS_TOT_ALL_MET_OV,S733_
+BESLIS_TOT_ALL_XOV,S734_BESLIS_TOT_ALL_XOV,S1043_BESLIS_TOT_ALL,S1043
+_BESLIS_TOT_ALL_DRLPTD,D035_VRRD_VRAAG_ALL,D039_VRRD_VRAAG_WAJ,D040_B
+ESLIS_VRAAG_ALL,D040_BESLIS_VRAAG_ALL_TDG,D113_BESLIS_VRAAG_ALL,D115_
+BESLIS_VRAAG_NWAJ,D116_BESLIS_VRAAG_OWAJ,D363_INSTROOM_VRAAG_ALL,D364
+_ADHOC_VRAAG_ALL,D366_VRRD_VRAAG_ALL,D366_VRRD_VRAAG_ALL_TDG,D1033_BE
+SLIS_VRAAG_WIA,D1033_BESLIS_VRAAG_WIA_TK_IVA,D1107_INSTROOM_VRG_ALL_N
+ETTO,D1119_PERC_HERBO_WAO_EFF_N,D1119_PERC_HERBO_WAO_EFF_T,D1120_PERC
+_HERBO_WJNG_EFF_N,D1120_PERC_HERBO_WJNG_EFF_T,D1030_PERC_HERBO_WIA_EF
+F_N,D1030_PERC_HERBO_WIA_EFF_T,D1032_PERC_HERBO_WIA_EFF_VRG_N,D1032_P
+ERC_HERBO_WIA_EFF_VRG_T,I_0001_PER_WIA_WIJZ_MED_NMED_N,I_0001_PER_WIA
+_WIJZ_MED_NMED_T,DIM_BEOORDELINGSEFFECT_ID,INPUT,VOORRAAD,VOORRAAD_TI
+JDIG,VOORRAAD_INCL_REGIE,OUTPUT,OUTPUT_TIJDIG,AD_HOC_AFSLUITING,DOORL
+OOPTIJD_OEND,DOORLOOPTIJD_INTAKE_REGIE,DOORLOOPTIJD_INTAKE,DOORLOOPTI
+JD_MED_BEOORDELING,DOORLOOPTIJD_AD_BEOORDELING,DOORLOOPTIJD_RDH,INFO_
+UITSTEL_MED_INFO_AANTAL,INFO_UITSTEL_MED_INFO_DUUR,INFO_UITSTEL_MED_E
+XP_AANTAL,INFO_UITSTEL_MED_EXP_DUUR,OUDERDOM_VOORRAAD,VOORPORTAAL_STR
+EEFMAAND) VALUES(:PCS_ID,:DIM_DATUM_AANMAAK,:DIM_USER_AANMAAK,:AFG_RE
+GIE_EN_SMO_GELIJK,:AFG_INDICATIE_VA,:AFG_INDICATIE_AD,:DIM_SNAPSHOT_I
+D,:DIM_ORGANISATIE_ID_ACTIEF,:DIM_KLANT_ID,:DIM_UITSLAG_CLAIM_ID,:DIM
+_LEEFTIJD_ID,:DIM_LEEFTIJD_ID_DATUM_AFGESLOTEN,:DIM_PROCESFASE_ID,:DI
+M_PROCESDATA_ID,:DIM_PRODUCT_ID,:DIM_KLANTCATEGORIE_ID,:DIM_LAND_ID,:
+DIM_ORGANISATIE_ID_REGIE,:DIM_ORGANISATIE_ID_SMO,:DIM_SOORT_AANVRAGER
+_ID,:DIM_GESLACHT_ID,:S1600_NETTO_INPUT_MON,:S1601_OUTPUT_MON,:S1602_
+VRRD_MON,:S1603_ACHTERST_VRPRTL_MON,:S1604_HERBO_OUTCOME_MON,:S1604_T
+OT_OUTCOME_MON,:S1605_TOT_VRRD_PROF_HERBO,:S1606_INCL_ACHTERST_VRPRTL
+_MON,:S1607_GEEN_ACHTERST_VRPRTL_MON,:S1610_ADHOC_AFSLUIT_MON,:S1612_
+OUTPUT_MON_12_MND,:S1613_ACTUELE_CASELOAD_MON,:S803_BESLIS_WAJONG,:S8
+03_BESLIS_WAJONG_ARBVRMGN,:S1027_BESLIS_WIA_80_100,:S1027_BESLIS_WIA_
+GN_VRPRTL,:D105_VRRD_PROF_ALL,:D119_BESLIS_PROF_ALL,:D232_BESLIS_PROF
+_WIA,:D232_BESLIS_PROF_WIA_GEWIJZ,:D367_INSTROOM_PROF_ALL,:D368_ADHOC
+_PROF_ALL,:D1034_BESLIS_PROF_WIA,:D1034_BESLIS_PROF_WIA_TK_IVA,:D1105
+_INSTROOM_PROF_ALL_NETTO,:S1015_BESLIS_PROF_ALL,:S1015_BESLIS_PROF_AL
+L_TDG,:D120_VRRD_TOT_ALL,:D120_VRRD_TOT_ALL_TDG,:D360_INSTROOM_TOT_AL
+L,:D361_ADHOC_TOT_ALL,:D362_VRRD_TOT_ALL,:D618_INSTROOM_TOT_ALL_NETTO
+,:D619_VRRD_VRPRTL,:D620_VRRD_VRPRTL_TDG,:D1357_VRRD_VRPRTL_ACHTERSTA
+ND,:D1359_VRRD_WIA_INCL_VRPRTL,:D1360_VRRD_WAJONG_INCL_VRPRTL,:S1010_
+VRRD_HERBO_INC_INTAKE,:S1011_VRRD_VRPRTL_GEEN_PLNDT,:S1012_VRRD_VRPRT
+L_MET_PLNDT,:S1013_VRRD_VERKOOP_SMO,:S1014_VRRD_VERKOOP_SMO,:S1014_VR
+RD_VERKOOP_SMO_TDG,:S1016_VRRD_VRPRTL_TOEKOMST,:D121_BESLIS_TOT_ALL,:
+D121_BESLIS_TOT_ALL_TDG,:D359_BESLIS_TOT_ALL,:D479_BESLIS_WIA_OVERDR,
+:D479_BESLIS_WIA_OVERDR_TERECHT,:S732_BESLIS_TOT_ALL,:S732_BESLIS_TOT
+_ALL_MET_OV,:S733_BESLIS_TOT_ALL_MET_OV,:S733_BESLIS_TOT_ALL_XOV,:S73
+4_BESLIS_TOT_ALL_XOV,:S1043_BESLIS_TOT_ALL,:S1043_BESLIS_TOT_ALL_DRLP
+TD,:D035_VRRD_VRAAG_ALL,:D039_VRRD_VRAAG_WAJ,:D040_BESLIS_VRAAG_ALL,:
+D040_BESLIS_VRAAG_ALL_TDG,:D113_BESLIS_VRAAG_ALL,:D115_BESLIS_VRAAG_N
+WAJ,:D116_BESLIS_VRAAG_OWAJ,:D363_INSTROOM_VRAAG_ALL,:D364_ADHOC_VRAA
+G_ALL,:D366_VRRD_VRAAG_ALL,:D366_VRRD_VRAAG_ALL_TDG,:D1033_BESLIS_VRA
+AG_WIA,:D1033_BESLIS_VRAAG_WIA_TK_IVA,:D1107_INSTROOM_VRG_ALL_NETTO,:
+D1119_PERC_HERBO_WAO_EFF_N,:D1119_PERC_HERBO_WAO_EFF_T,:D1120_PERC_HE
+RBO_WJNG_EFF_N,:D1120_PERC_HERBO_WJNG_EFF_T,:D1030_PERC_HERBO_WIA_EFF
+_N,:D1030_PERC_HERBO_WIA_EFF_T,:D1032_PERC_HERBO_WIA_EFF_VRG_N,:D1032
+_PERC_HERBO_WIA_EFF_VRG_T,:I_0001_PER_WIA_WIJZ_MED_NMED_N,:I_0001_PER
+_WIA_WIJZ_MED_NMED_T,:DIM_BEOORDELINGSEFFECT_ID,:INPUT,:VOORRAAD,:VOO
+RRAAD_TIJDIG,:VOORRAAD_INCL_REGIE,:OUTPUT,:OUTPUT_TIJDIG,:AD_HOC_AFSL
+UITING,:DOORLOOPTIJD_OEND,:DOORLOOPTIJD_INTAKE_REGIE,:DOORLOOPTIJD_IN
+TAKE,:DOORLOOPTIJD_MED_BEOORDELING,:DOORLOOPTIJD_AD_BEOORDELING,:DOOR
+LOOPTIJD_RDH,:INFO_UITSTEL_MED_INFO_AANTAL,:INFO_UITSTEL_MED_INFO_DUU
+R,:INFO_UITSTEL_MED_EXP_AANTAL,:INFO_UITSTEL_MED_EXP_DUUR,:OUDERDOM_V
+OORRAAD,:VOORPORTAAL_STREEFMAAND)
+
+Symptoms That Led to the Finding:
+---------------------------------
+Read and write contention on database blocks was consuming significant
+database time.
+Impact is .17 active sessions, 7.7% of total activity.
+Wait class "Concurrency" was consuming significant database time.
+Impact is .21 active sessions, 9.46% of total activity.
+
+
+Finding 4: Undersized PGA
+Impact is .04 active sessions, 2.01% of total activity.
+-------------------------------------------------------
+The PGA was inadequately sized, causing additional I/O to temporary
+tablespaces to consume significant database time.
+The value of parameter "pga_aggregate_target" was "25600 M" during the
+analysis period.
+
+No recommendations are available.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is .49 active sessions, 22.72% of total activity.
+
+
+Finding 5: Undersized SGA
+Impact is .04 active sessions, 1.86% of total activity.
+-------------------------------------------------------
+The SGA was inadequately sized, causing additional I/O or hard parses.
+The value of parameter "sga_target" was "40960 M" during the analysis period.
+
+Recommendation 1: Database Configuration
+Estimated benefit is .02 active sessions, 1.05% of total activity.
+------------------------------------------------------------------
+Action
+Increase the size of the SGA by setting the parameter "sga_target" to
+46080 M.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is .49 active sessions, 22.72% of total activity.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Additional Information
+----------------------
+
+Miscellaneous Information
+-------------------------
+Wait class "Application" was not consuming significant database time.
+Wait class "Commit" was not consuming significant database time.
+Wait class "Configuration" was not consuming significant database time.
+CPU was not a bottleneck for the instance.
+Wait class "Network" was not consuming significant database time.
+Session connect and disconnect calls were not consuming significant database
+time.
+Hard parsing of SQL statements was not consuming significant database time.
+
+ADDM Task ADDM:1459796375_1_8313
+ADDM Report for Task 'ADDM:1459796375_1_8313'
+---------------------------------------------
+
+Analysis Period
+---------------
+AWR snapshot range from 8312 to 8313.
+Time period starts at 30-01-24 01.00.19 PM
+Time period ends at 30-01-24 02.00.23 PM
+
+Analysis Target
+---------------
+Database 'PDIM' with DB ID 1459796375.
+Database version 19.0.0.0.0.
+ADDM performed an analysis of instance pdim, numbered 1 and hosted at
+uwvm2vapora0012.p-dc.ba.uwv.nl.
+
+Activity During the Analysis Period
+-----------------------------------
+Total database time was 7795 seconds.
+The average number of active sessions was 2.16.
+
+Summary of Findings
+-------------------
+Description                               Active Sessions      Recommendations
+Percent of Activity
+----------------------------------------  -------------------  ---------------
+1  Top SQL Statements                        1.18 | 54.52         3
+2  CPU Usage                                 .32 | 14.75          2
+3  Top Segments by "User I/O" and "Cluster"  .32 | 14.68          4
+4  Undersized PGA                            .07 | 3.02           0
+5  Undersized SGA                            .04 | 1.65           1
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Findings and Recommendations
+----------------------------
+
+Finding 1: Top SQL Statements
+Impact is 1.18 active sessions, 54.52% of total activity.
+---------------------------------------------------------
+SQL statements consuming significant database time were found. These
+statements offer a good opportunity for performance improvement.
+
+Recommendation 1: SQL Tuning
+Estimated benefit is 1.01 active sessions, 46.9% of total activity.
+-------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"2frqwujjy5r4v".
+Related Object
+SQL statement with SQL_ID 2frqwujjy5r4v.
+/* MV_REFRESH (INS) */INSERT /*+ BYPASS_RECURSIVE_CHECK APPEND  */
+INTO "BDR_SMZ_SV_PM"."BDR_SMZ_SV_HERBO_AM" select
+dim_snapshot_id
+, dim_beoordelingseffect_id
+, dim_uitslag_claim_id
+, dim_leeftijd_id
+, dim_leeftijd_id_datum_afgesloten
+, dim_procesfase_id
+, dim_procesdata_id
+, dim_product_id
+, dim_klantcategorie_id
+, dim_land_id
+, dim_organisatie_id_regie
+, dim_organisatie_id_smo
+, dim_organisatie_id_actief
+, dim_soort_aanvrager_id
+, dim_geslacht_id
+, ouderdom_voorraad
+, voorportaal_streefmaand
+, afg_regie_en_smo_gelijk
+, nvl (afg_indicatie_va, 0)             afg_indicatie_va
+, nvl (afg_indicatie_ad, 0)             afg_indicatie_ad
+, sum (d035_vrrd_vraag_all)             d035_vrrd_vraag_all
+, sum (d039_vrrd_vraag_waj)             d039_vrrd_vraag_waj
+, sum (d040_beslis_vraag_all)           d040_beslis_vraag_all
+, sum (d040_beslis_vraag_all_tdg)       d040_beslis_vraag_all_tdg
+, sum (d105_vrrd_prof_all)              d105_vrrd_prof_all
+, sum (d113_beslis_vraag_all)           d113_beslis_vraag_all
+, sum (d115_beslis_vraag_nwaj)          d115_beslis_vraag_nwaj
+, sum (d116_beslis_vraag_owaj)          d116_beslis_vraag_owaj
+, sum (d119_beslis_prof_all)            d119_beslis_prof_all
+, sum (d120_vrrd_tot_all)               d120_vrrd_tot_all
+, sum (d120_vrrd_tot_all_tdg)           d120_vrrd_tot_all_tdg
+, sum (d121_beslis_tot_all)             d121_beslis_tot_all
+, sum (d121_beslis_tot_all_tdg)         d121_beslis_tot_all_tdg
+, sum (d232_beslis_prof_wia)            d232_beslis_prof_wia
+, sum (d232_beslis_prof_wia_gewijz)     d232_beslis_prof_wia_gewijz
+, sum (d359_beslis_tot_all)             d359_beslis_tot_all
+, sum (d360_instroom_tot_all)           d360_instroom_tot_all
+, sum (d361_adhoc_tot_all)              d361_adhoc_tot_all
+, sum (d362_vrrd_tot_all)               d362_vrrd_tot_all
+, sum (d363_instroom_vraag_all)         d363_instroom_vraag_all
+, sum (d364_adhoc_vraag_all)            d364_adhoc_vraag_all
+, sum (d366_vrrd_vraag_all)             d366_vrrd_vraag_all
+, sum (d366_vrrd_vraag_all_tdg)         d366_vrrd_vraag_all_tdg
+, sum (d367_instroom_prof_all)          d367_instroom_prof_all
+, sum (d368_adhoc_prof_all)             d368_adhoc_prof_all
+, sum (d479_beslis_wia_overdr)          d479_beslis_wia_overdr
+, sum (d479_beslis_wia_overdr_terecht)
+d479_beslis_wia_overdr_terecht
+, sum (d618_instroom_tot_all_netto)     d618_instroom_tot_all_netto
+, sum (d619_vrrd_vrprtl)                d619_vrrd_vrprtl
+, sum (d620_vrrd_vrprtl_tdg)            d620_vrrd_vrprtl_tdg
+, sum (d1030_perc_herbo_wia_eff_n)      d1030_perc_herbo_wia_eff_n
+, sum (d1030_perc_herbo_wia_eff_t)      d1030_perc_herbo_wia_eff_t
+, sum (d1032_perc_herbo_wia_eff_vrg_n)
+d1032_perc_herbo_wia_eff_vrg_n
+, sum (d1032_perc_herbo_wia_eff_vrg_t)
+d1032_perc_herbo_wia_eff_vrg_t
+, sum (d1033_beslis_vraag_wia)          d1033_beslis_vraag_wia
+, sum (d1033_beslis_vraag_wia_tk_iva)   d1033_beslis_vraag_wia_tk_iva
+, sum (d1034_beslis_prof_wia)           d1034_beslis_prof_wia
+, sum (d1034_beslis_prof_wia_tk_iva)    d1034_beslis_prof_wia_tk_iva
+, sum (d1105_instroom_prof_all_netto)   d1105_instroom_prof_all_netto
+, sum (d1107_instroom_vrg_all_netto)    d1107_instroom_vrg_all_netto
+, sum (d1119_perc_herbo_wao_eff_n)      d1119_perc_herbo_wao_eff_n
+, sum (d1119_perc_herbo_wao_eff_t)      d1119_perc_herbo_wao_eff_t
+, sum (d1120_perc_herbo_wjng_eff_n)     d1120_perc_herbo_wjng_eff_n
+, sum (d1120_perc_herbo_wjng_eff_t)     d1120_perc_herbo_wjng_eff_t
+, sum (d1357_vrrd_vrprtl_achterstand)   d1357_vrrd_vrprtl_achterstand
+, sum (d1359_vrrd_wia_incl_vrprtl)      d1359_vrrd_wia_incl_vrprtl
+, sum (d1360_vrrd_wajong_incl_vrprtl)   d1360_vrrd_wajong_incl_vrprtl
+, sum (i_0001_per_wia_wijz_med_nmed_n)
+i_0001_per_wia_wijz_med_nmed_n
+, sum (i_0001_per_wia_wijz_med_nmed_t)
+i_0001_per_wia_wijz_med_nmed_t
+, sum (s732_beslis_tot_all)             s732_beslis_tot_all
+, sum (s732_beslis_tot_all_met_ov)      s732_beslis_tot_all_met_ov
+, sum (s733_beslis_tot_all_met_ov)      s733_beslis_tot_all_met_ov
+, sum (s733_beslis_tot_all_xov)         s733_beslis_tot_all_xov
+, sum (s734_beslis_tot_all_xov)         s734_beslis_tot_all_xov
+, sum (s803_beslis_wajong)              s803_beslis_wajong
+, sum (s803_beslis_wajong_arbvrmgn)     s803_beslis_wajong_arbvrmgn
+, sum (s1010_vrrd_herbo_inc_intake)     s1010_vrrd_herbo_inc_intake
+, sum (s1011_vrrd_vrprtl_geen_plndt)    s1011_vrrd_vrprtl_geen_plndt
+, sum (s1012_vrrd_vrprtl_met_plndt)     s1012_vrrd_vrprtl_met_plndt
+, sum (s1013_vrrd_verkoop_smo)          s1013_vrrd_verkoop_smo
+, sum (s1014_vrrd_verkoop_smo)          s1014_vrrd_verkoop_smo
+, sum (s1014_vrrd_verkoop_smo_tdg)      s1014_vrrd_verkoop_smo_tdg
+, sum (s1015_beslis_prof_all)           s1015_beslis_prof_all
+, sum (s1015_beslis_prof_all_tdg)       s1015_beslis_prof_all_tdg
+, sum (s1016_vrrd_vrprtl_toekomst)      s1016_vrrd_vrprtl_toekomst
+, sum (s1027_beslis_wia_80_100)         s1027_beslis_wia_80_100
+, sum (s1027_beslis_wia_gn_vrprtl)      s1027_beslis_wia_gn_vrprtl
+, sum (s1043_beslis_tot_all)            s1043_beslis_tot_all
+, sum (s1043_beslis_tot_all_drlptd)     s1043_beslis_tot_all_drlptd
+, sum (s1600_netto_input_mon)           s1600_netto_input_mon
+, sum (s1601_output_mon)                s1601_output_mon
+, sum (s1602_vrrd_mon)                  s1602_vrrd_mon
+, sum (s1603_achterst_vrprtl_mon)       s1603_achterst_vrprtl_mon
+, sum (s1604_herbo_outcome_mon)         s1604_herbo_outcome_mon
+, sum (s1604_tot_outcome_mon)           s1604_tot_outcome_mon
+, sum (s1605_tot_vrrd_prof_herbo)       s1605_tot_vrrd_prof_herbo
+, sum (s1606_incl_achterst_vrprtl_mon)
+s1606_incl_achterst_vrprtl_mon
+, sum (s1607_geen_achterst_vrprtl_mon)
+s1607_geen_achterst_vrprtl_mon
+, sum (s1610_adhoc_afsluit_mon)         s1610_adhoc_afsluit_mon
+, sum (s1612_output_mon_12_mnd)         s1612_output_mon_12_mnd
+, sum (s1613_actuele_caseload_mon)      s1613_actuele_caseload_mon
+, sum(input)                            input
+, sum(voorraad)                         voorraad
+, sum(voorraad_tijdig)                  voorraad_tijdig
+, sum(voorraad_incl_regie)              voorraad_incl_regie
+, sum(output)                           output
+, sum(output_tijdig)                    output_tijdig
+, sum(ad_hoc_afsluiting)                ad_hoc_afsluiting
+, sum(doorlooptijd_oend)                doorlooptijd_oend
+, sum(doorlooptijd_intake_regie)        doorlooptijd_intake_regie
+, sum(doorlooptijd_intake)              doorlooptijd_intake
+, sum(doorlooptijd_med_beoordeling)     doorlooptijd_med_beoordeling
+, sum(doorlooptijd_ad_beoordeling)      doorlooptijd_ad_beoordeling
+, sum(doorlooptijd_rdh)                 doorlooptijd_rdh
+, sum(info_uitstel_med_info_aantal)     info_uitstel_med_info_aantal
+, sum(info_uitstel_med_info_duur)       info_uitstel_med_info_duur
+, sum(info_uitstel_med_exp_aantal)      info_uitstel_med_exp_aantal
+, sum(info_uitstel_med_exp_duur)        info_uitstel_med_exp_duur
+from
+bdr_smz_sv_herbo_ft f
+where
+not exists (
+select
+1
+from
+bdr_smz_sv_beoordeling_soft_delete_mv sd
+where
+sd.pcs_id = f.pcs_id
+)
+group by
+dim_snapshot_id
+, dim_beoordelingseffect_id
+, dim_uitslag_claim_id
+, dim_leeftijd_id
+, dim_leeftijd_id_datum_afgesloten
+, dim_procesfase_id
+, dim_procesdata_id
+, dim_product_id
+, dim_klantcategorie_id
+, dim_land_id
+, dim_organisatie_id_regie
+, dim_organisatie_id_smo
+, dim_organisatie_id_actief
+, dim_soort_aanvrager_id
+, dim_geslacht_id
+, ouderdom_voorraad
+, voorportaal_streefmaand
+, afg_regie_en_smo_gelijk
+, nvl (afg_indicatie_va, 0)
+, nvl( afg_indicatie_ad, 0)
+Rationale
+The SQL spent 96% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "2frqwujjy5r4v" was executed 1 times and had
+an average elapsed time of 844 seconds.
+Rationale
+At least one execution of the statement ran in parallel.
+
+Recommendation 2: SQL Tuning
+Estimated benefit is .06 active sessions, 2.71% of total activity.
+------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"gpgp6ykhjgxtn".
+Related Object
+SQL statement with SQL_ID gpgp6ykhjgxtn.
+INSERT INTO BDR_SMZ_SV_PM.BDR_SMZ_SV_HERBO_FKS_TB(DIM_SNAPSHOT_ID,DIM
+_KLANT_ID,DIM_UITSLAG_CLAIM_ID,DIM_KLANTCATEGORIE_ID,DIM_SOORT_AANVRA
+GER_ID,DIM_LEEFTIJD_ID,DIM_LEEFTIJD_ID_DATUM_AFGESLOTEN,DIM_LAND_ID,D
+IM_ORGANISATIE_ID_ACTIEF,DIM_ORGANISATIE_ID_SMO,DIM_ORGANISATIE_ID_RE
+GIE,DIM_PRODUCT_ID,DIM_PROCESDATA_ID,DIM_PROCESFASE_ID,DIM_DATUM_ID_U
+ITERSTE_AFHANDELING,DIM_GESLACHT_ID,PCS_ID,AFG_REGIE_EN_SMO_GELIJK,AF
+G_INDICATIE_VA,AFG_INDICATIE_AD)
+VALUES(:DIM_SNAPSHOT_ID,:DIM_KLANT_ID,:DIM_UITSLAG_CLAIM_ID,:DIM_KLAN
+TCATEGORIE_ID,:DIM_SOORT_AANVRAGER_ID,:DIM_LEEFTIJD_ID,:DIM_LEEFTIJD_
+ID_DATUM_AFGESLOTEN,:DIM_LAND_ID,:DIM_ORGANISATIE_ID_ACTIEF,:DIM_ORGA
+NISATIE_ID_SMO,:DIM_ORGANISATIE_ID_REGIE,:DIM_PRODUCT_ID,:DIM_PROCESD
+ATA_ID,:DIM_PROCESFASE_ID,:DIM_DATUM_ID_UITERSTE_AFHANDELING,:DIM_GES
+LACHT_ID,:PCS_ID,:AFG_REGIE_EN_SMO_GELIJK,:AFG_INDICATIE_VA,:AFG_INDI
+CATIE_AD)
+Rationale
+The SQL spent 80% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "gpgp6ykhjgxtn" was executed 514 times and had
+an average elapsed time of 0.091 seconds.
+
+Recommendation 3: SQL Tuning
+Estimated benefit is .05 active sessions, 2.33% of total activity.
+------------------------------------------------------------------
+Action
+Run SQL Tuning Advisor on the INSERT statement with SQL_ID
+"af8nss095b6bj". Additionally, investigate this statement for possible
+performance improvements. You can supplement the information given here
+with an ASH report for this SQL_ID.
+Related Object
+SQL statement with SQL_ID af8nss095b6bj.
+INSERT INTO bdr_smz_sv_PM.bdr_smz_sv_herbo_mw_tb(PCS_ID,VOORRAAD_INCL
+_REGIE,OUTPUT,OUTPUT_TIJDIG,VOORRAAD,VOORRAAD_TIJDIG,DOORLOOPTIJD_OEN
+D,DOORLOOPTIJD_INTAKE,DOORLOOPTIJD_INTAKE_REGIE,DOORLOOPTIJD_RDH,DOOR
+LOOPTIJD_MED_BEOORDELING,DOORLOOPTIJD_AD_BEOORDELING,AD_HOC_AFSLUITIN
+G,INPUT,INFO_UITSTEL_MED_INFO_AANTAL,INFO_UITSTEL_MED_INFO_DUUR,INFO_
+UITSTEL_MED_EXP_AANTAL,INFO_UITSTEL_MED_EXP_DUUR,OUDERDOM_VOORRAAD,VO
+ORPORTAAL_STREEFMAAND)
+VALUES(:PCS_ID,:VOORRAAD_INCL_REGIE,:OUTPUT,:OUTPUT_TIJDIG,:VOORRAAD,
+:VOORRAAD_TIJDIG,:DOORLOOPTIJD_OEND,:DOORLOOPTIJD_INTAKE,:DOORLOOPTIJ
+D_INTAKE_REGIE,:DOORLOOPTIJD_RDH,:DOORLOOPTIJD_MED_BEOORDELING,:DOORL
+OOPTIJD_AD_BEOORDELING,:AD_HOC_AFSLUITING,:INPUT,:INFO_UITSTEL_MED_IN
+FO_AANTAL,:INFO_UITSTEL_MED_INFO_DUUR,:INFO_UITSTEL_MED_EXP_AANTAL,:I
+NFO_UITSTEL_MED_EXP_DUUR,:OUDERDOM_VOORRAAD,:VOORPORTAAL_STREEFMAAND)
+Rationale
+The SQL spent 44% of its database time on CPU, I/O and Cluster waits.
+This part of database time may be improved by the SQL Tuning Advisor.
+Look at data given below and an ASH report for further performance
+improvements.
+Rationale
+Database time for this SQL was divided as follows: 100% for SQL
+execution, 0% for parsing, 0% for PL/SQL execution and 0% for Java
+execution.
+Rationale
+SQL statement with SQL_ID "af8nss095b6bj" was executed 480 times and had
+an average elapsed time of 0.062 seconds.
+
+
+Finding 2: CPU Usage
+Impact is .32 active sessions, 14.75% of total activity.
+--------------------------------------------------------
+Time spent on the CPU by the instance was responsible for a substantial part
+of database time.
+
+Recommendation 1: Application Analysis
+Estimated benefit is 1.5 active sessions, 69.51% of total activity.
+-------------------------------------------------------------------
+Action
+Look at the "Top SQL Statements" finding for SQL statements consuming
+significant time on CPU. For example, the INSERT statement with SQL_ID
+"2frqwujjy5r4v" is responsible for 63% of CPU usage during the analysis
+period.
+
+Recommendation 2: Database Configuration
+Estimated benefit is .32 active sessions, 14.75% of total activity.
+-------------------------------------------------------------------
+Action
+Consider not using the compression option for RMAN jobs. Alternatively,
+consider slowing down RMAN activity, or scheduling RMAN jobs when user
+activity is lower.
+
+
+Finding 3: Top Segments by "User I/O" and "Cluster"
+Impact is .32 active sessions, 14.68% of total activity.
+--------------------------------------------------------
+Individual database segments responsible for significant "User I/O" and
+"Cluster" waits were found.
+
+Recommendation 1: Segment Tuning
+Estimated benefit is .11 active sessions, 5.11% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT" with object ID
+111792.
+Related Object
+Database object with ID 111792.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_DEFAULT" with object ID
+111792.
+Related Object
+Database object with ID 111792.
+Rationale
+The I/O usage statistics for the object are: 6002 full object scans,
+28327161 physical reads, 0 physical writes and 28322874 direct reads.
+
+Recommendation 2: Segment Tuning
+Estimated benefit is .08 active sessions, 3.7% of total activity.
+-----------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_DEFAULT" with object ID
+208893.
+Related Object
+Database object with ID 208893.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_DEFAULT" with object ID
+208893.
+Related Object
+Database object with ID 208893.
+Rationale
+The I/O usage statistics for the object are: 2234 full object scans,
+8945846 physical reads, 0 physical writes and 8945114 direct reads.
+
+Recommendation 3: Segment Tuning
+Estimated benefit is .07 active sessions, 3.04% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT" with object ID
+111791.
+Related Object
+Database object with ID 111791.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_BEOORDELING_HT.PRT_RECENT" with object ID
+111791.
+Related Object
+Database object with ID 111791.
+Rationale
+The I/O usage statistics for the object are: 4842 full object scans,
+20008408 physical reads, 0 physical writes and 20008958 direct reads.
+
+Recommendation 4: Segment Tuning
+Estimated benefit is .06 active sessions, 2.83% of total activity.
+------------------------------------------------------------------
+Action
+Run "Segment Advisor" on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_RECENT" with object ID
+208892.
+Related Object
+Database object with ID 208892.
+Action
+Investigate application logic involving I/O on TABLE PARTITION
+"INT_SMZ_SV_PM.INT_SMZ_SV_PROCESFASE_HT.PRT_RECENT" with object ID
+208892.
+Related Object
+Database object with ID 208892.
+Rationale
+The I/O usage statistics for the object are: 2011 full object scans,
+9275808 physical reads, 0 physical writes and 9275420 direct reads.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is .44 active sessions, 20.22% of total activity.
+
+
+Finding 4: Undersized PGA
+Impact is .07 active sessions, 3.02% of total activity.
+-------------------------------------------------------
+The PGA was inadequately sized, causing additional I/O to temporary
+tablespaces to consume significant database time.
+The value of parameter "pga_aggregate_target" was "25600 M" during the
+analysis period.
+
+No recommendations are available.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is .44 active sessions, 20.22% of total activity.
+
+
+Finding 5: Undersized SGA
+Impact is .04 active sessions, 1.65% of total activity.
+-------------------------------------------------------
+The SGA was inadequately sized, causing additional I/O or hard parses.
+The value of parameter "sga_target" was "40960 M" during the analysis period.
+
+Recommendation 1: Database Configuration
+Estimated benefit is .03 active sessions, 1.62% of total activity.
+------------------------------------------------------------------
+Action
+Increase the size of the SGA by setting the parameter "sga_target" to
+46080 M.
+
+Symptoms That Led to the Finding:
+---------------------------------
+Wait class "User I/O" was consuming significant database time.
+Impact is .44 active sessions, 20.22% of total activity.
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Additional Information
+----------------------
+
+Miscellaneous Information
+-------------------------
+Wait class "Application" was not consuming significant database time.
+Wait class "Commit" was not consuming significant database time.
+Wait class "Concurrency" was not consuming significant database time.
+Wait class "Configuration" was not consuming significant database time.
+Wait class "Network" was not consuming significant database time.
+Session connect and disconnect calls were not consuming significant database
+time.
+Hard parsing of SQL statements was not consuming significant database time.
