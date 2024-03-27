@@ -1,0 +1,354 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "BE03QAP454UWVRM.HRC.BA.UWV.NL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2021-01-22"
+   Time "12.22.57"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSSHAREDCONTAINER
+   Identifier "scnMaakErrorBestandControleMetadata"
+   DateModified "2020-12-21"
+   TimeModified "11.40.28"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CContainerDefn"
+      Readonly "0"
+      Name "scnMaakErrorBestandControleMetadata"
+      ContainerType "0"
+      View "V0"
+      Version "56.0.0"
+      Category "\\10 Staging\\50 Jobs\\DL_ControleMetadata"
+      NextID "1"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "pmCheckNaam"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      JobType "3"
+      RuntimeColumnPropagation "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Container"
+      NextID "2"
+      OutputPins "V0P1"
+      IsTopLevel "0"
+      StageList "V0S0|V0S3|V0"
+      StageXPos "360|576|168"
+      StageYPos "192|192|192"
+      StageTypes "CTransformerStage|CCustomStage|ID_PALETTEINPUT"
+      NextStageID "6"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|48|36"
+      StageYSize "48|48|48"
+      ContainerViewSizing "0052 0052 1037 0399 0000 0001 0000 0000"
+      StageNames "trf_Boodschap|sqf_ErrorBestand|ID_PALETTEINPUT"
+      StageTypeIDs "CTransformerStage|PxSequentialFile|ID_PALETTEINPUT"
+      LinkNames "Output| |Input"
+      LinkHasMetaDatas "True| |True"
+      LinkTypes "1| |1"
+      LinkNamePositionXs "487| |263"
+      LinkNamePositionYs "218| |220"
+      TargetStageIDs "V0S3| |V0S0"
+      SourceStageEffectiveExecutionModes "2| |0"
+      SourceStageRuntimeExecutionModes "2| |2"
+      TargetStageEffectiveExecutionModes "1| |2"
+      TargetStageRuntimeExecutionModes "1| |2"
+      LinkIsSingleOperatorLookup "False| |False"
+      LinkIsSortSequential "False| |False"
+      LinkSortMode "0| |0"
+      LinkPartColMode "1| |1"
+      LinkSourcePinIDs "V0S0P3| |V0P1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0P1"
+      OLEType "CStdOutput"
+      Readonly "0"
+      Name "Input"
+      Partner "V0S0|V0S0P2"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "boodschap"
+         SqlType "12"
+         Precision "9999"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      LeftTextPos "263"
+      TopTextPos "220"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0"
+      OLEType "CTransformerStage"
+      Readonly "0"
+      Name "trf_Boodschap"
+      NextID "4"
+      InputPins "V0S0P2"
+      OutputPins "V0S0P3"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TrxGenCode"
+         Value =+=+=+=
+//
+// Generated file to implement the V0S0_scnMaakErrorBestandControleMetadata_trf_Boodschap transform operator.
+//
+
+// define our input/output link names
+inputname 0 Input;
+outputname 0 Output;
+
+initialize {
+ // define our control variables
+ int8 RowRejected0;
+ int8 NullSetVar0;
+
+}
+
+mainloop {
+
+ // initialise the rejected row variable
+ RowRejected0 = 1;
+
+ // evaluate columns (no constraints) for link: Output
+ writerecord 0;
+ RowRejected0 = 0;
+}
+
+finish {
+}
+
+=+=+=+=
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TrxGenCache"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TrxClassName"
+         Value "V0S0_scnMaakErrorBestandControleMetadata_trf_Boodschap"
+      END DSSUBRECORD
+      ValidationStatus "0"
+      StageType "CTransformerStage"
+      BlockSize "0"
+      StageVarsMinimised "0"
+      LoopVarsMaximised "0"
+      MaxLoopIterations "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0P2"
+      OLEType "CTrxInput"
+      Readonly "0"
+      Name "Input"
+      Partner "V0|V0P1"
+      LinkType "1"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Schema"
+         Value =+=+=+=
+record
+(
+  boodschap:string[max=9999];
+)
+=+=+=+=
+      END DSSUBRECORD
+      MultiRow "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0P3"
+      OLEType "CTrxOutput"
+      Readonly "0"
+      Name "Output"
+      Partner "V0S3|V0S3P2"
+      Reject "0"
+      ErrorPin "0"
+      RowLimit "0"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "boodschap"
+         SqlType "12"
+         Precision "9999"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "Input.boodschap"
+         Group "0"
+         ParsedDerivation "Input.boodschap"
+         SourceColumn "Input.boodschap"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Schema"
+         Value =+=+=+=
+record
+(
+  boodschap:string[max=9999];
+)
+=+=+=+=
+      END DSSUBRECORD
+      LeftTextPos "487"
+      TopTextPos "218"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "sqf_ErrorBestand"
+      NextID "3"
+      InputPins "V0S3P2"
+      StageType "PxSequentialFile"
+      AllowColumnMapping "0"
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3P2"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "Output"
+      Partner "V0S0|V0S0P3"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "schema"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "file"
+         Value "\(2)\(2)0\(1)\(3)file\(2)/w001/shared_hot/data/errorlogs/ControleMetadata_Errors.txt\(2)0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "append\\overwrite"
+         Value "append"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "nocleanup"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "rejects"
+         Value "continue"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "firstLineColumnNames"
+         Value " "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "writemethod"
+         Value "\(2)\(2)0\(1)\(3)writemethod\(2) \(2)0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SchemaFormat"
+         Value "final_delim=end, delim=',', quote=double"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+END DSSHAREDCONTAINER
