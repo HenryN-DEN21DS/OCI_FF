@@ -1,0 +1,575 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "BE03QAP454UWVRM.HRC.BA.UWV.NL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2021-01-22"
+   Time "13.07.46"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "insert_job_DL_InsertBronzoneTabel"
+   DateModified "2020-12-21"
+   TimeModified "14.50.06"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "insert_job_DL_InsertBronzoneTabel"
+      Description =+=+=+=
+Generieke job voor het inserten van een bronzone tabel op basis van een dataset
+
+Datum      Naam   Omschrijving
+13-07-2020 mle134 Aangemaakt
+=+=+=+=
+      NextID "23"
+      Container "V0"
+      JobVersion "56.0.0"
+      ControlAfterSubr "0"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "$APT_CONFIG_FILE"
+         Prompt "Configuration file"
+         Default "/w001/app/ibm/as1/InformationServer/Server/Configurations/max.apt"
+         HelpTxt "The Parallel job configuration file."
+         ParamType "4"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDlId"
+         Prompt "pmDlId"
+         Default "4"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmBrzSchemaNaam"
+         Prompt "pmBrzSchemaNaam"
+         Default "BRZ_DUMMYBRON"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmBrzTabelNaam"
+         Prompt "pmBrzTabelNaam"
+         Default "BRZ_ML_TEST_HUB_HT"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Teksten"
+         Prompt "par_Teksten parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor Tekst waarden"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Prompt "par_DIM_Dbs parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor database connectie"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Linux_Paden"
+         Prompt "par_Linux_Paden parameters"
+         Default "(As pre-defined)"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceMode"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceSeq"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceRecords"
+         Value "100"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceSkip"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TracePeriod"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RecordJobPerformanceData"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "IdentList"
+         Value "orc_Brz_Tabel"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "ClientCodePage"
+         Value "1252"
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      IsTemplate "0"
+      NLSLocale ",,,,"
+      JobType "3"
+      Category "\\20 Bronzone\\50 Jobs\\5 LaadBronzone"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "1"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V13S2|V18A0|V22S0"
+      StageXPos "216|4|24"
+      StageYPos "144|9|144"
+      StageTypes "CCustomStage.CC_GUI|ID_PALETTEJOBANNOTATION|CCustomStage"
+      NextStageID "144"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|936|48"
+      StageYSize "49|83|48"
+      ContainerViewSizing "0007 0004 1180 0658 0000 0001 0000 0000"
+      StageNames "orc_Brz_Tabel| |dst_Tabel"
+      StageTypeIDs "OracleConnectorPX| |PxDataSet"
+      LinkNames " | |lnk_InsTabel"
+      LinkHasMetaDatas " | |False"
+      LinkTypes " | |1"
+      LinkNamePositionXs " | |115"
+      LinkNamePositionYs " | |150"
+      TargetStageIDs " | |V13S2"
+      SourceStageEffectiveExecutionModes " | |2"
+      SourceStageRuntimeExecutionModes " | |2"
+      TargetStageEffectiveExecutionModes " | |2"
+      TargetStageRuntimeExecutionModes " | |2"
+      LinkIsSingleOperatorLookup " | |False"
+      LinkIsSortSequential " | |False"
+      LinkSortMode " | |0"
+      LinkPartColMode " | |1"
+      LinkSourcePinIDs " | |V22S0P2"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V13S2"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "orc_Brz_Tabel"
+      NextID "12"
+      InputPins "V13S2P3"
+      StageType "OracleConnectorPX"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "RejectFromLink"
+         Value "-1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantVersion"
+         Value "1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantLibrary"
+         Value "ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectNumber"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariantsVersions"
+         Value "1.0,1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RACName"
+         Value "/Connection/RACName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Engine"
+         Value "EE"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantName"
+         Value "12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Username"
+         Value "/Connection/Username"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectUsesPercentage"
+         Value "false"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "xaoDbName"
+         Value "/Connection/xaoDbName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Orientation"
+         Value "link"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectorName"
+         Value "OracleConnector"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectionString"
+         Value "/Connection/Server"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "OSLevelAuthentication"
+         Value "/Connection/OSLevelAuthentication"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariants"
+         Value "V1;11:\"11g\":ccora11g;12:\"12c\":ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectThreshold"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariantsLibraries"
+         Value "ccora11g,ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Context"
+         Value "target"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Password"
+         Value "/Connection/Password"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "XMLProperties"
+         Value "<?xml version='1.0' encoding='UTF-16'?><Properties version='1.1'><Common><Context type='int'>2</Context><Variant type='string'>12c</Variant><DescriptorVersion type='string'>1.0</DescriptorVersion><PartitionType type='int'>-1</PartitionType><RCP type='int'>1</RCP></Common><Connection><Server modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Dbs_Naam#]]></Server><Username modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Bronzone_User#]]></Username><Password modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Bronzone_Password#]]></Password><OSLevelAuthentication type='bool'><![CDATA[0]]></OSLevelAuthentication><Version modified='1' type='string'><![CDATA[12c]]></Version></Connection><Usage><WriteMode modified='1' type='int'><![CDATA[0]]></WriteMode><GenerateSQL modified='1' type='bool'><![CDATA[1]]></GenerateSQL><TableName modified='1' type='string'><![CDATA[#pmBrzSchemaNaam#.#pmBrzTabelNaam#]]><TableScope type='int'><![CDATA[0]]></TableScope></TableName><EnableQuotedIDs type='bool'><![CDATA[0]]></EnableQuotedIDs><SQL collapsed='1'></SQL><TableAction collapsed='1' type='int'><![CDATA[0]]></TableAction><Transaction><IsolationLevel type='int'><![CDATA[0]]></IsolationLevel><RecordCount type='int'><![CDATA[2000]]></RecordCount></Transaction><Session><ArraySize type='int'><![CDATA[2000]]></ArraySize><DropUnmatchedFields type='bool'><![CDATA[0]]></DropUnmatchedFields><TreatWarningsAsErrors type='bool'><![CDATA[0]]></TreatWarningsAsErrors><PreserveTrailingBlanks type='bool'><![CDATA[1]]></PreserveTrailingBlanks><FailOnRowErrorPX type='bool'><![CDATA[1]]></FailOnRowErrorPX></Session><Logging><LogColumnValues collapsed='1' type='bool'><![CDATA[0]]></LogColumnValues></Logging><BeforeAfter collapsed='1' type='bool'><![CDATA[0]]></BeforeAfter><ApplicationFailoverControl collapsed='1' type='bool'><![CDATA[0]]></ApplicationFailoverControl><Reconnect collapsed='1' type='bool'><![CDATA[0]]></Reconnect><Disconnect collapsed='1' type='int'><![CDATA[0]]></Disconnect></Usage></Properties >"
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V13S2P3"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "lnk_InsTabel"
+      Partner "V22S0|V22S0P2"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "RejectFromLink"
+         Value "-1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantVersion"
+         Value "1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantLibrary"
+         Value "ccora11g"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectNumber"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantName"
+         Value "11"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectUsesPercentage"
+         Value "false"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectorName"
+         Value "OracleConnector"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectThreshold"
+         Value "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SchemaFormat"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V18A0"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "V18A0"
+      NextID "0"
+      AnnotationType "1"
+      TextFont "Courier\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "0"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "12713983"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V22S0"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "dst_Tabel"
+      NextID "3"
+      OutputPins "V22S0P2"
+      StageType "PxDataSet"
+      AllowColumnMapping "0"
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V22S0P2"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "lnk_InsTabel"
+      Partner "V13S2|V13S2P3"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "dataset"
+         Value "#par_Linux_Paden.$evPad_Bronzone#/#par_Linux_Paden.$evPad_Datasets#/#pmDlId#_#pmBrzTabelNaam#.dst"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "missingcolmode"
+         Value " "
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      LeftTextPos "115"
+      TopTextPos "150"
+      LinkMinimised "0"
+   END DSRECORD
+END DSJOB
+BEGIN DSEXECJOB
+   Identifier "insert_job_DL_InsertBronzoneTabel"
+   DateModified "1899-12-30"
+   TimeModified "00.00.01"
+   BEGIN DSRECORD
+      Identifier "insert_job_DL_InsertBronzoneTabel"
+      F1 "JOB"
+      F3 "11.7///60/C"
+      F5 "$APT_CONFIG_FILE\VpmDlId\VpmBrzSchemaNaam\VpmBrzTabelNaam\Vpar_Teksten\Vpar_Teksten.$evTekst_Code_Delete\Vpar_Teksten.$evTekst_Code_Insert\Vpar_Teksten.$evTekst_Code_Onbekend\Vpar_Teksten.$evTekst_Code_Update\Vpar_Teksten.$evTekst_Code_UndoHardDeleteInsert\Vpar_Teksten.$evTekst_Code_UndoHardDeleteNoAction\Vpar_Teksten.$evTekst_Code_UndoSoftDeleteInsert\Vpar_Teksten.$evTekst_Code_UndoSoftDeleteNoAction\Vpar_Teksten.$evTekst_Datum_Waarde_Hoog\Vpar_Teksten.$evTekst_Datum_Waarde_Laag\Vpar_Teksten.$evTekst_Status_Afgebroken\Vpar_Teksten.$evTekst_Status_Gereset\Vpar_Teksten.$evTekst_Status_Klaar\Vpar_Teksten.$evTekst_Status_Lopend\Vpar_Teksten.$evTekst_To_char_Date\Vpar_Teksten.$evTekst_To_char_DateTime\Vpar_Teksten.$evTekst_To_char_Timestamp\Vpar_Teksten.$evTekst_Waarde_Ja\Vpar_Teksten.$evTekst_Waarde_Nee\Vpar_DIM_Dbs\Vpar_DIM_Dbs.$evDIM_Dbs_Naam\Vpar_DIM_Dbs.$evDIM_Bedrijfszone_User\Vpar_DIM_Dbs.$evDIM_Bedrijfszone_Password\Vpar_DIM_Dbs.$evDIM_Bronzone_User\Vpar_DIM_Dbs.$evDIM_Bronzone_Password\Vpar_DIM_Dbs.$evDIM_Datastage_ConnectString\Vpar_DIM_Dbs.$evDIM_Datastage_User\Vpar_DIM_Dbs.$evDIM_Datastage_Password\Vpar_DIM_Dbs.$evDIM_Integratiezone_User\Vpar_DIM_Dbs.$evDIM_Integratiezone_Password\Vpar_DIM_Dbs.$evDIM_Logging_User\Vpar_DIM_Dbs.$evDIM_Logging_Password\Vpar_DIM_Dbs.$evDIM_Metadata_User\Vpar_DIM_Dbs.$evDIM_Metadata_Password\Vpar_DIM_Dbs.$evDIM_Staging_User\Vpar_DIM_Dbs.$evDIM_Staging_Password\Vpar_DIM_Dbs.$evDIM_Staging_ConnectString\Vpar_Linux_Paden\Vpar_Linux_Paden.$evPad_Root\Vpar_Linux_Paden.$evPad_Datalevering\Vpar_Linux_Paden.$evPad_Afgewezen\Vpar_Linux_Paden.$evPad_Archief\Vpar_Linux_Paden.$evPad_Inbox\Vpar_Linux_Paden.$evPad_Verwerking\Vpar_Linux_Paden.$evPad_Staging\Vpar_Linux_Paden.$evPad_Bronzone\Vpar_Linux_Paden.$evPad_Integratiezone\Vpar_Linux_Paden.$evPad_Bedrijfszone\Vpar_Linux_Paden.$evPad_Scripts\Vpar_Linux_Paden.$evPad_Paramfiles\Vpar_Linux_Paden.$evPad_Schemafiles\Vpar_Linux_Paden.$evPad_Datasets\Vpar_Linux_Paden.$evPad_Logs\Vpar_Linux_Paden.$evPad_Generiek"
+      F6 "Configuration file\VpmDlId\VpmBrzSchemaNaam\VpmBrzTabelNaam\Vpar_Teksten parameters\VevTekst_Code_Delete: Waarde voor 'Delete'.\VevTekst_Code_Insert: Waarde voor 'Insert'.\VevTekst_Code_Onbekend: Waarde voor 'Onbekend'.\VevTekst_Code_Update: Waarde voor 'Update'.\VevTekst_Code_UndoHardDeleteInsert: Waarde voor 'Undo hard delete, veranderde data, dus insert'\VevTekst_Code_UndoHardDeleteNoAction: Waarde voor 'Undo hard delete, geen wijziging in de data, dus geen verdere actie nodig'.\VevTekst_Code_UndoSoftDeleteInsert: Waarde voor 'Undo soft delete, veranderde data, dus insert'\VevTekst_Code_UndoSoftDeleteNoAction: Waarde voor 'Undo soft delete, geen wijziging in de data, dus geen verdere actie nodig'.\VevTekst_Datum_Waarde_Hoog: Max. datum\VevTekst_Datum_Waarde_Laag: Min. datum\VevTekst_Status_Afgebroken: Status tekst 'Afgebroken'\VevTekst_Status_Gereset: Status tekst 'Gereset'\VevTekst_Status_Klaar: Status tekst 'Klaar'\VevTekst_Status_Lopend: Status tekst 'Lopend'\VevTekst_To_char_Date: Conversie formaat voor Datum\VevTekst_To_char_DateTime: Conversie formaat voor Datum&Tijd\VevTekst_To_char_Timestamp: Conversie formaat voor Timestamp\VevTekst_Waarde_Ja: Waarde voor 'Ja'    in Ja/Nee-velden\VevTekst_Waarde_Nee: Waarde voor 'Nee' in Ja/Nee-velden\Vpar_DIM_Dbs parameters\VevDIM_Dbs_Naam: Naam van de DIM database\VevDIM_Businesszone_User:         Naam            van generieke user voor Business zone\VevDIM_Businesszone_Password: Wachtwoord van generieke user voor Business zone\VevDIM_Bronzone_User:         Naam            van generieke user voor Bron zone\VevDIM_Bronzone_Password: Wachtwoord van generieke user voor Bron zone\VevDIM_DataStage: Connectie van generieke user voor DataStage (voor shell scripts)\VevDIM_DataStage_User:         Naam            van generieke user voor DataStage\VevDIM_DataStage_Password: Wachtwoord van generieke user voor DataStage\VevDIM_Integratiezone_User:         Naam            van generieke user voor Integratie zonej\VevDIM_Integratiezone_Password: Wachtwoord van generieke user voor Integratie zone\VevDIM_Logging_User:         Naam            van generieke user voor Logging\VevDIM_Logging_Password: Wachtwoord van generieke user voor Logging\VevDIM_Metadata_User:         Naam            van generieke user voor Metadata\VevDIM_Metadata_Password: Wachtwoord van generieke user voor Metadata\VevDIM_Staging_User:         Naam            van generieke user voor Staging\VevDIM_Staging_Password: Wachtwoord van generieke user voor Staging\VevDIM_Staging: Connectie van generieke user voor Staging (voor shell scripts)\Vpar_Linux_Paden parameters\VevPad_Root: Root van de Linux boomstructuur voor DIM - en DataStage bestanden\VevPad_Datalevering: Map voor Data leveringen van alle bronnen\VevPad_Afgewezen: Submap per bron voor Afgewezen van data leveringen\VevPad_Archief:Submap per bron voor Archief van data leveringen\VevPad_Inbox: Submap per bron voor Inbox van data leveringen\VevPad_Verwerking: Submap per bron voor Verwerking van data leveringen\VevPad_Staging: Map voor Staging \VevPad_Bronzone: Map voor Bronzone\VevPad_Integratiezone:Map voor Integratiezone\VevPad_Bedrijfszone: Map voor Bedrijfszone\VevPad_Scripts: Submap voor Script bestanden\VevPad_Paramfiles: Submap voor Parameterfiles\VevPad_Schemafiles: Submap voor Schemafiles\VevPad_Datasets: Submap voor Dataset bestanden\VevPad_Logs: Submap voor Log bestanden\VevPad_Generiek: Map voor Generieke bestanden"
+      F7 "/w001/app/ibm/as1/InformationServer/Server/Configurations/max.apt\V4\VBRZ_DUMMYBRON\VBRZ_ML_TEST_HUB_HT\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF"
+      F8 "The Parallel job configuration file.\V\V\V\VParameterset voor Tekst waarden\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\VParameterset voor database connectie\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V"
+      F9 "4\V0\V0\V0\V13\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V13\V0\V0\V1\V0\V1\V0\V0\V1\V0\V1\V0\V1\V0\V1\V0\V1\V0\V13\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0"
+      F10 "V0"
+      F11 "Generieke job voor het inserten van een bronzone tabel op basis van een dataset\(D)\(A)\(D)\(A)Datum      Naam   Omschrijving\(D)\(A)13-07-2020 mle134 Aangemaakt"
+      F15 "OracleConnectorPX\VPxDataSet"
+      F18 "/w001/app/ibm/as1/InformationServer/Server/Configurations/max.apt\V4\VBRZ_DUMMYBRON\VBRZ_ML_TEST_HUB_HT\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF"
+      F21 "1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1"
+      F24 ",,,,"
+      F28 "\\20 Bronzone\\50 Jobs\\5 LaadBronzone"
+      F29 "0"
+      F30 "1"
+      F31 "2020-12-21 14:50:06"
+      F32 "3"
+      F34 "0\V1\VLINUX\V0\V\V#DSProjectARTOptions#\V1252\V\V\V\V\V\V0\V0"
+      F35 "orc_Brz_Tabel"
+      F36 "be03qap454uwvrm.hrc.ba.uwv.nl"
+      F37 "DIM_ontwikkel"
+      F38 "0"
+      F39 "insert_job_DL_InsertBronzoneTabel.orc_Brz_Tabel\Vinsert_job_DL_InsertBronzoneTabel.dst_Tabel"
+      F41 "0"
+      F43 ",,,,"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "insert_job_DL_InsertBronzoneTabel.dst_Tabel"
+      F1 "STAGE"
+      F2 "CUSTOM"
+      F3 "11.7///60/C"
+      F4 "insert_job_DL_InsertBronzoneTabel"
+      F10 "insert_job_DL_InsertBronzoneTabel.dst_Tabel.lnk_InsTabel"
+      F16 "PxDataSet"
+      F31 "insert_job_DL_InsertBronzoneTabel.dst_Tabel"
+      F32 "-1.-1"
+      F40 "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "insert_job_DL_InsertBronzoneTabel.dst_Tabel.lnk_InsTabel"
+      F1 "INPIN"
+      F3 "11.7///60/C"
+      F5 "0"
+      F16 "insert_job_DL_InsertBronzoneTabel.dst_Tabel\Vinsert_job_DL_InsertBronzoneTabel.orc_Brz_Tabel"
+      F39 "lnk_InsTabel"
+      F50 "\V"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "insert_job_DL_InsertBronzoneTabel.orc_Brz_Tabel"
+      F1 "STAGE"
+      F2 "CUSTOM"
+      F3 "11.7///60/C"
+      F4 "insert_job_DL_InsertBronzoneTabel"
+      F9 "insert_job_DL_InsertBronzoneTabel.dst_Tabel.lnk_InsTabel"
+      F13 "RejectFromLink\VVariantVersion\VVariantLibrary\VRejectNumber\VSupportedVariantsVersions\VRACName\VEngine\VVariantName\VUsername\VRejectUsesPercentage\VxaoDbName\VOrientation\VConnectorName\VConnectionString\VOSLevelAuthentication\VSupportedVariants\VRejectThreshold\VSupportedVariantsLibraries\VContext\VPassword\VXMLProperties"
+      F14 "-1\V1.0\Vccora12c\V0\V1.0,1.0\V/Connection/RACName\VEE\V12c\V/Connection/Username\Vfalse\V/Connection/xaoDbName\Vlink\VOracleConnector\V/Connection/Server\V/Connection/OSLevelAuthentication\VV1;11:\"11g\":ccora11g;12:\"12c\":ccora12c\V0\Vccora11g,ccora12c\Vtarget\V/Connection/Password\V<?xml version='1.0' encoding='UTF-16'?><Properties version='1.1'><Common><Context type='int'>2</Context><Variant type='string'>12c</Variant><DescriptorVersion type='string'>1.0</DescriptorVersion><PartitionType type='int'>-1</PartitionType><RCP type='int'>1</RCP></Common><Connection><Server modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Dbs_Naam#]]></Server><Username modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Bronzone_User#]]></Username><Password modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Bronzone_Password#]]></Password><OSLevelAuthentication type='bool'><![CDATA[0]]></OSLevelAuthentication><Version modified='1' type='string'><![CDATA[12c]]></Version></Connection><Usage><WriteMode modified='1' type='int'><![CDATA[0]]></WriteMode><GenerateSQL modified='1' type='bool'><![CDATA[1]]></GenerateSQL><TableName modified='1' type='string'><![CDATA[#pmBrzSchemaNaam#.#pmBrzTabelNaam#]]><TableScope type='int'><![CDATA[0]]></TableScope></TableName><EnableQuotedIDs type='bool'><![CDATA[0]]></EnableQuotedIDs><SQL collapsed='1'></SQL><TableAction collapsed='1' type='int'><![CDATA[0]]></TableAction><Transaction><IsolationLevel type='int'><![CDATA[0]]></IsolationLevel><RecordCount type='int'><![CDATA[2000]]></RecordCount></Transaction><Session><ArraySize type='int'><![CDATA[2000]]></ArraySize><DropUnmatchedFields type='bool'><![CDATA[0]]></DropUnmatchedFields><TreatWarningsAsErrors type='bool'><![CDATA[0]]></TreatWarningsAsErrors><PreserveTrailingBlanks type='bool'><![CDATA[1]]></PreserveTrailingBlanks><FailOnRowErrorPX type='bool'><![CDATA[1]]></FailOnRowErrorPX></Session><Logging><LogColumnValues collapsed='1' type='bool'><![CDATA[0]]></LogColumnValues></Logging><BeforeAfter collapsed='1' type='bool'><![CDATA[0]]></BeforeAfter><ApplicationFailoverControl collapsed='1' type='bool'><![CDATA[0]]></ApplicationFailoverControl><Reconnect collapsed='1' type='bool'><![CDATA[0]]></Reconnect><Disconnect collapsed='1' type='int'><![CDATA[0]]></Disconnect></Usage></Properties >"
+      F16 "OracleConnectorPX"
+      F23 "2\V0\V0\V2\V0\V0\V0\V0\V0\V11\V0\V0\V0\V0\V0\V0\V2\V0\V0\V1\V0"
+      F31 "insert_job_DL_InsertBronzoneTabel.orc_Brz_Tabel"
+      F32 "-1.-1"
+      F40 "1"
+   END DSRECORD
+   COMMENT No program sources in executable job
+   COMMENT No program binaries in executable job
+   BEGIN DSSCRIPT
+      Identifier "OshExecuter.sh"
+      TERMINATOR =+=+=+=
+#!/bin/sh
+# Shell script for Datastage to execute an osh script, generated at 2020-12-21 14:50:06
+# Compiler runtime stamp 11.7///60/C
+#
+# Parameters:
+# $1 - Run indicator: R=normal run, P=performance wrappered run
+# $2 - Environment variable file name - dummy
+# $3... - Osh / performance checker command line arguments
+RunIndicator=$1
+DummyEnv=$2
+shift
+shift
+if test ! -x "$APT_ORCHHOME/bin/osh"
+  then echo '##OSHRETVAL NOOSH'
+  exit 1
+fi
+# Test for resource estimation option.
+if test $RunIndicator = P
+  then $APT_ORCHHOME/bin/orchresest "$@" 2>&1 &
+  else $APT_ORCHHOME/bin/osh "$@" 2>&1 &
+fi
+oshpid=$!
+# Write the pid of the conductor process
+echo '##OSHPID' $oshpid
+wait $oshpid
+oshcode=$?
+oshdir=`dirname $0`
+# Write the terminating string
+echo '##OSHRETVAL' $oshcode > $oshdir/../RT_SCTEMP/$oshpid.retval
+echo '##OSHRETVAL' $oshcode
+# end of script
+=+=+=+=
+   END DSSCRIPT
+   BEGIN DSSCRIPT
+      Identifier "OshScript.osh"
+      TERMINATOR =+=+=+=
+# OSH / orchestrate script for Job insert_job_DL_InsertBronzoneTabel compiled at 14:50:06 21 Dec 2020
+#################################################################
+#### STAGE: orc_Brz_Tabel
+## Operator
+pxbridge
+## Operator options
+-Orientation link
+-XMLProperties '<?xml version=\\'1.0\\' encoding=\\'UTF-16\\'?><Properties version=\\'1.1\\'><Common><Context type=\\'int\\'>2</Context><Variant type=\\'string\\'>12c</Variant><DescriptorVersion type=\\'string\\'>1.0</DescriptorVersion><PartitionType type=\\'int\\'>-1</PartitionType><RCP type=\\'int\\'>1</RCP></Common><Connection><Server modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Dbs_Naam"]]]></Server><Username modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Bronzone_User"]]]></Username><Password modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Bronzone_Password"]]]></Password><OSLevelAuthentication type=\\'bool\\'><![CDATA[0]]></OSLevelAuthentication><Version modified=\\'1\\' type=\\'string\\'><![CDATA[12c]]></Version></Connection><Usage><WriteMode modified=\\'1\\' type=\\'int\\'><![CDATA[0]]></WriteMode><GenerateSQL modified=\\'1\\' type=\\'bool\\'><![CDATA[1]]></GenerateSQL><TableName modified=\\'1\\' type=\\'string\\'><![CDATA[[&"pmBrzSchemaNaam"].[&"pmBrzTabelNaam"]]]><TableScope type=\\'int\\'><![CDATA[0]]></TableScope></TableName><EnableQuotedIDs type=\\'bool\\'><![CDATA[0]]></EnableQuotedIDs><SQL collapsed=\\'1\\'></SQL><TableAction collapsed=\\'1\\' type=\\'int\\'><![CDATA[0]]></TableAction><Transaction><IsolationLevel type=\\'int\\'><![CDATA[0]]></IsolationLevel><RecordCount type=\\'int\\'><![CDATA[2000]]></RecordCount></Transaction><Session><ArraySize type=\\'int\\'><![CDATA[2000]]></ArraySize><DropUnmatchedFields type=\\'bool\\'><![CDATA[0]]></DropUnmatchedFields><TreatWarningsAsErrors type=\\'bool\\'><![CDATA[0]]></TreatWarningsAsErrors><PreserveTrailingBlanks type=\\'bool\\'><![CDATA[1]]></PreserveTrailingBlanks><FailOnRowErrorPX type=\\'bool\\'><![CDATA[1]]></FailOnRowErrorPX></Session><Logging><LogColumnValues collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></LogColumnValues></Logging><BeforeAfter collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></BeforeAfter><ApplicationFailoverControl collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></ApplicationFailoverControl><Reconnect collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></Reconnect><Disconnect collapsed=\\'1\\' type=\\'int\\'><![CDATA[0]]></Disconnect></Usage></Properties >'
+-connector '{
+   version=1.0, 
+   library=ccora12c, 
+   versionlist=\\'1.0,1.0\\', 
+   variant=\\'12c\\', 
+   name=OracleConnector, 
+   variantlist=\\'V1;11:"11g":ccora11g;12:"12c":ccora12c\\'
+}'
+-target 0 '{
+      DSSchema=\\'record
+           ()\\'
+}'
+   
+## General options
+[ident('orc_Brz_Tabel'); jobmon_ident('orc_Brz_Tabel')]
+## Inputs
+0< [] 'dst_Tabel:lnk_InsTabel.v'
+;
+#################################################################
+#### STAGE: dst_Tabel
+## Operator
+copy
+## General options
+[ident('dst_Tabel')]
+## Inputs
+0< [ds] '[&"par_Linux_Paden.$evPad_Bronzone"]/[&"par_Linux_Paden.$evPad_Datasets"]/[&"pmDlId"]_[&"pmBrzTabelNaam"].dst'
+## Outputs
+0> [] 'dst_Tabel:lnk_InsTabel.v'
+;
+# End of OSH code
+=+=+=+=
+   END DSSCRIPT
+END DSEXECJOB

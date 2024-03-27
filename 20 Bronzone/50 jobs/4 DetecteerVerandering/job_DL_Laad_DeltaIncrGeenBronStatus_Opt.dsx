@@ -1,0 +1,935 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "UWVM2VLOAPP0004.O-DC.BA.UWV.NL"
+   ToolInstanceID "DIM_harnas"
+   MDISVersion "1.0"
+   Date "2023-12-21"
+   Time "11.52.20"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "job_DL_Laad_DeltaIncrGeenBronStatus_Opt"
+   DateModified "2023-11-13"
+   TimeModified "11.11.20"
+   BEGIN DSRECORD
+      Identifier "GANDALF_V0A21"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "GANDALF_V0A21"
+      NextID "0"
+      AnnotationType "0"
+      AnnotationText =+=+=+=
+Optimization (Release Version 11.5.0.0B7.19-201411004) of job "job_DL_Laad_DeltaIncrGeenBronStatus" on 2023-11-13 11:10:27 
+with options: Generate OrderBy in SQL,Push to source,Push to target,Push all to target
+=+=+=+=
+      TextFont "MS Sans Serif\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "1"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "8454016"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "job_DL_Laad_DeltaIncrGeenBronStatus_Opt"
+      Description =+=+=+=
+Generieke job voor het vullen van een delta tabel voor een incrementele levering zonder bron status en voor een initiële levering. Bronzone Hub en Staging hub worden vergeleken met een left outer join. Aan de hand van DIM_KEY_BRZ, dim_md5 en dim_bron_status worden de acties bepaald. Deze worden in de delta tabel geladen.
+
+Datum      Naam   Omschrijving
+10-11-2023 isa030 Datatype RAW toegevoegd voor dim_hub- en md5- keys
+28-04-2023 epa037 rij_nr_reverse vervangen door een snellere rij_nr_totaal
+11-11-2022 epa037 RIJ_NR in joiner veranderd van integer naar bigint
+23-02-2021 mle134 Gebruik van DIM_RECENT_IND en DIM_RECENT_IND(performance wijziging)
+22-12-2020 mle134 Vervanging acties door hardcoded waardes ivm Balanced Optimization
+20-10-2020 hmi017 Vervangen DIM_KEY voor DIM_KEY_BRZ
+14-10-2020 jsc226 Vervangen datatype DATE met TIMESTAMP voor DIM_START_DATUM en DIM_EIND_DATUM, kolomnamen in hoofdletter
+11-09-2020 mle134 Wijziging datatype DIM_KEY naar BIGINT
+09-07-2020 jsc226 dim_start_datum_hub toegevoegd
+25-06-2020 jsc226 Mogelijkheid tot verwerken van meerdere rijen per functionele sleutel toegevoegd
+19-06-2020 jsc226 Aangemaakt
+=+=+=+=
+      NextID "5"
+      Container "V0"
+      JobVersion "56.0.0"
+      ControlAfterSubr "0"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "pmStagingSchemaNaam"
+         Prompt "pmStagingSchemaNaam"
+         Default "stg_dummybron"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmBrzSchemaNaam"
+         Prompt "pmBrzSchemaNaam"
+         Default "brz_dummybron"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmStagingHubTabelNaam"
+         Prompt "pmStagingHubTabelNaam"
+         Default "stg_test_d_ht_hub_tb"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmBrzHubTabelNaam"
+         Prompt "pmBrzHubTabelNaam"
+         Default "brz_test_d_ht_hub_ht"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDeltaTabelNaam"
+         Prompt "pmDeltaTabelNaam"
+         Default "stg_test_d_ht_d_tb"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Prompt "par_DIM_Dbs parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor database connectie"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Teksten"
+         Prompt "par_Teksten parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor Tekst waarden"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceMode"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceSeq"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceRecords"
+         Value "100"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceSkip"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TracePeriod"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RecordJobPerformanceData"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "IdentList"
+         Value "jnr_Left_BrzStgHub|orc_StagingHub|orc_BronzoneHub|trn_BepaalActie|orc_DeltaTabel"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "ClientCodePage"
+         Value "1252"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "GANDALF"
+         Name "Optimized"
+         Value "Jobname=\"job_DL_Laad_DeltaIncrGeenBronStatus_Optimized1\",Timestamp=\"2023-11-13 11:10:25\",Version=\"Release Version 11.5.0.0B7.19-201411004\",JobProps=\"isGenOrdBy,PushProcToSrcs,PushProcToTrgts,PushAllToDB\",StageProps=\"orc_DeltaTabel.StagingTableSpace=,orc_StagingHub.ArraySize=100,orc_BronzoneHub.ArraySize=100,orc_DeltaTabel.ArraySize=100,orc_DeltaTabel.StagingTableName=,jnr_Left_BrzStgHub.StageAffinity=none,trn_BepaalActie.StageAffinity=none\""
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      Dependencies "CJobDepend"
+      BEGIN DSSUBRECORD
+         Name "job_DL_Laad_DeltaIncrGeenBronStatus"
+         Type "6"
+         Location "2023-11-10 17:00:52"
+      END DSSUBRECORD
+      IsTemplate "0"
+      NLSLocale ",,,,"
+      JobType "3"
+      Category "\\20 Bronzone\\50 Jobs\\4 DetecteerVerandering"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      CodeGenLocation "<?xml version='1.0' encoding='UTF-16'?><jometadata><orgjobname>job_DL_Laad_DeltaIncrGeenBronStatus</orgjobname><internalbuildno>IBM InfoSphere DataStage Balanced Optimization</internalbuildno><jooptions><option propName='isGenOrdBy'>Yes</option><option propName='PushProcToSrcs'>Yes</option><option propName='PushProcToTrgts'>Yes</option><option propName='PushAllToDB'>Yes</option><option propName='BreakStage'></option><option propName='MaxJoinDepth'>no limit</option><option propName='ArraySize'>100</option><option propName='ArraySize'>100</option><option propName='ArraySize'>100</option><option propName='StagingTableName'></option><option propName='StageAffinity'>none</option><option propName='StageAffinity'>none</option></jooptions><StagingTableSpace><stage>orc_DeltaTabel</stage></StagingTableSpace></jometadata>"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "1"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V3S3|V0A17|V0S19|GANDALF_V0A21"
+      StageXPos "96|7|912|12"
+      StageYPos "288|6|240|172"
+      StageTypes "CCustomStage|ID_PALETTEJOBANNOTATION|CCustomStage.CC_GUI|ID_PALETTEANNOTATION"
+      NextStageID "22"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|900|48|984"
+      StageYSize "81|128|54|44"
+      ContainerViewSizing "0003 0006 1144 0443 0000 0001 0000 0000"
+      StageNames "Initiator_1| |orc_DeltaTabel| "
+      StageTypeIDs "PxRowGenerator| |OracleConnectorPX| "
+      LinkNames "lnk_LaadDelta| | | "
+      LinkHasMetaDatas "True| | | "
+      LinkTypes "1| | | "
+      LinkNamePositionXs "213| | | "
+      LinkNamePositionYs "311| | | "
+      TargetStageIDs "V0S19| | | "
+      SourceStageEffectiveExecutionModes "1| | | "
+      SourceStageRuntimeExecutionModes "1| | | "
+      TargetStageEffectiveExecutionModes "1| | | "
+      TargetStageRuntimeExecutionModes "1| | | "
+      LinkIsSingleOperatorLookup "False| | | "
+      LinkIsSortSequential "False| | | "
+      LinkSortMode "0| | | "
+      LinkPartColMode "1| | | "
+      LinkSourcePinIDs "V3S3P1| | | "
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0A17"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "V0A17"
+      NextID "0"
+      AnnotationType "1"
+      TextFont "Courier\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "0"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "12713983"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S19"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "orc_DeltaTabel"
+      NextID "2"
+      InputPins "V0S19P1"
+      StageType "OracleConnectorPX"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "RejectFromLink"
+         Value "-1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantVersion"
+         Value "1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantLibrary"
+         Value "ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectNumber"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariantsVersions"
+         Value "1.0,1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RACName"
+         Value "/Connection/RACName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Engine"
+         Value "EE"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantName"
+         Value "12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Username"
+         Value "/Connection/Username"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectUsesPercentage"
+         Value "false"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "xaoDbName"
+         Value "/Connection/xaoDbName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Orientation"
+         Value "link"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectorName"
+         Value "OracleConnector"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectionString"
+         Value "/Connection/Server"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "OSLevelAuthentication"
+         Value "/Connection/OSLevelAuthentication"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariants"
+         Value "V1;11:\"11g\":ccora11g;12:\"12c\":ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectThreshold"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariantsLibraries"
+         Value "ccora11g,ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Context"
+         Value "target"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Password"
+         Value "/Connection/Password"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "XMLProperties"
+         Value =+=+=+=
+<?xml version='1.0' encoding='UTF-16'?><Properties version='1.1'><Common><Context type='int'>2</Context><Variant type='string'>12c</Variant><DescriptorVersion type='string'>1.0</DescriptorVersion><PartitionType type='int'>-1</PartitionType><RCP type='int'>0</RCP></Common><Connection><Server modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Dbs_Naam#]]></Server><Username modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Staging_User#]]></Username><Password modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Staging_Password#]]></Password><OSLevelAuthentication type='bool'><![CDATA[0]]></OSLevelAuthentication><Version modified='1' type='string'><![CDATA[12c]]></Version></Connection><Usage><WriteMode type='int'><![CDATA[8]]></WriteMode><TableName type='string'><![CDATA[#pmStagingSchemaNaam#.#pmDeltaTabelNaam#]]><TableScope type='int'><![CDATA[0]]></TableScope></TableName><EnableQuotedIDs type='bool'><![CDATA[0]]></EnableQuotedIDs><TableAction collapsed='1' type='int'><![CDATA[0]]></TableAction><Session><ArraySize type='int'><![CDATA[100]]></ArraySize><DropUnmatchedFields type='bool'><![CDATA[1]]></DropUnmatchedFields><TreatWarningsAsErrors type='bool'><![CDATA[0]]></TreatWarningsAsErrors><PreserveTrailingBlanks type='bool'><![CDATA[1]]></PreserveTrailingBlanks><FailOnRowErrorPX type='bool'><![CDATA[1]]></FailOnRowErrorPX></Session><BeforeAfter type='bool'><![CDATA[1]]><BeforeSQL modified='1' type='string'><![CDATA[call truncate_table('#pmStagingSchemaNaam#', '#pmDeltaTabelNaam#');]]><ReadFromFileBeforeSQL type='bool'><![CDATA[0]]></ReadFromFileBeforeSQL><FailOnError type='bool'><![CDATA[1]]></FailOnError></BeforeSQL><AfterSQL type='string'><![CDATA[insert into #pmStagingSchemaNaam#.#pmDeltaTabelNaam# (DIM_HUB_KEY, DIM_MD5, DIM_START_DATUM, DIM_START_DATUM_HUB, DIM_EIND_DATUM, DIM_KEY_BRZ, DIM_STATUS, DIM_ACTIE, DIM_RECENT_IND)  
+select CAST(BALOP_5.DIM_HUB_KEY AS RAW(32)) as DIM_HUB_KEY, CAST(BALOP_5.DIM_MD5 AS RAW(16)) as DIM_MD5, CAST(BALOP_5.DIM_START_DATUM AS TIMESTAMP(6)) as DIM_START_DATUM, CAST(BALOP_5.DIM_START_DATUM_HUB AS TIMESTAMP(6)) as DIM_START_DATUM_HUB, CAST(BALOP_5.DIM_EIND_DATUM AS TIMESTAMP(6)) as DIM_EIND_DATUM, CAST(BALOP_5.DIM_KEY_BRZ AS NUMBER(19)) as DIM_KEY_BRZ, CAST(BALOP_5.DIM_STATUS AS VARCHAR2(9)) as DIM_STATUS, CAST(BALOP_5.DIM_ACTIE AS VARCHAR2(9)) as DIM_ACTIE, CAST(BALOP_5.DIM_RECENT_IND AS CHAR(1)) as DIM_RECENT_IND 
+from  
+(select STG_DIM_HUB_KEY as DIM_HUB_KEY, STG_DIM_MD5 as DIM_MD5, DIM_START_DATUM as DIM_START_DATUM, DIM_START_DATUM_HUB as DIM_START_DATUM_HUB, DIM_EIND_DATUM as DIM_EIND_DATUM, DIM_KEY_BRZ as DIM_KEY_BRZ, DIM_STATUS as DIM_STATUS,  CASE WHEN (DIM_KEY_BRZ is null ) THEN ('I') WHEN (RIJ_NR > 1) THEN ('I') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS is null )) THEN ('U') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USI') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHI') ELSE ('X') END as DIM_ACTIE,  CASE WHEN (RIJ_NR_TOTAAL = RIJ_NR) THEN ('J') ELSE ('N') END as DIM_RECENT_IND 
+from  
+(select BALOP_1.DIM_HUB_KEY as STG_DIM_HUB_KEY, BALOP_3.DIM_MD5 as BRZ_DIM_MD5, BALOP_1.STG_DIM_MD5 as STG_DIM_MD5, BALOP_1.DIM_START_DATUM as DIM_START_DATUM, BALOP_1.DIM_EIND_DATUM as DIM_EIND_DATUM, BALOP_3.DIM_KEY_BRZ as DIM_KEY_BRZ, BALOP_3.DIM_STATUS as DIM_STATUS, BALOP_1.RIJ_NR as RIJ_NR, BALOP_1.RIJ_NR_TOTAAL as RIJ_NR_TOTAAL, BALOP_3.DIM_START_DATUM_HUB as DIM_START_DATUM_HUB 
+from  
+(select  row_number() over (partition by DIM_HUB_KEY order by DIM_START_DATUM) as rij_nr,
+           dim_hub_key,
+           dim_md5 as stg_dim_md5,
+           dim_start_datum,
+           lead(#pmStagingHubTabelNaam#.dim_start_datum,1,date'9999-12-31') over 
+              (partition by #pmStagingHubTabelNaam#.dim_hub_key order by #pmStagingHubTabelNaam#.dim_start_datum asc)
+              as dim_eind_datum,
+           count(*) over (partition by DIM_HUB_KEY)  as RIJ_NR_TOTAAL
+from #pmStagingSchemaNaam#.#pmStagingHubTabelNaam#) BALOP_1 
+left outer join  
+(select DIM_HUB_KEY as DIM_HUB_KEY, DIM_MD5 as DIM_MD5, DIM_KEY_BRZ as DIM_KEY_BRZ, DIM_STATUS as DIM_STATUS, DIM_START_DATUM as DIM_START_DATUM_HUB 
+from #pmBrzSchemaNaam#.#pmBrzHubTabelNaam# #pmBrzHubTabelNaam# 
+where DIM_RECENT_IND = 'J') BALOP_3 
+on ((BALOP_1.DIM_HUB_KEY = BALOP_3.DIM_HUB_KEY) or ((BALOP_1.DIM_HUB_KEY is null ) and (BALOP_3.DIM_HUB_KEY is null ))) 
+order by BALOP_1.DIM_HUB_KEY asc nulls first ) BALOP_4 
+where  CASE WHEN (DIM_KEY_BRZ is null ) THEN ('I') WHEN (RIJ_NR > 1) THEN ('I') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS is null )) THEN ('U') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USI') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHI') ELSE ('X') END <> 'X') BALOP_5]]><ReadFromFileAfterSQL type='bool'><![CDATA[0]]></ReadFromFileAfterSQL><FailOnError type='bool'><![CDATA[1]]></FailOnError></AfterSQL><BeforeSQLNode type='string'><![CDATA[]]><ReadFromFileBeforeSQLNode type='bool'><![CDATA[0]]></ReadFromFileBeforeSQLNode><FailOnError type='bool'><![CDATA[1]]></FailOnError></BeforeSQLNode><AfterSQLNode type='string'><![CDATA[]]><ReadFromFileAfterSQLNode type='bool'><![CDATA[0]]></ReadFromFileAfterSQLNode><FailOnError type='bool'><![CDATA[1]]></FailOnError></AfterSQLNode></BeforeAfter><LoadControl><ManualMode collapsed='1' type='bool'><![CDATA[0]]></ManualMode><EnableParallelLoadSessions type='bool'><![CDATA[1]]></EnableParallelLoadSessions><Buffersizeinkilobytes type='int'><![CDATA[1024]]></Buffersizeinkilobytes><UseDateCache collapsed='1' type='bool'><![CDATA[0]]></UseDateCache><SkipIndexes type='int'><![CDATA[0]]></SkipIndexes><DisableRedoLog type='bool'><![CDATA[0]]></DisableRedoLog><BeforeLoad collapsed='1' type='bool'><![CDATA[0]]></BeforeLoad><AfterLoad collapsed='1' type='bool'><![CDATA[0]]></AfterLoad></LoadControl><ApplicationFailoverControl collapsed='1' type='bool'><![CDATA[0]]></ApplicationFailoverControl><Disconnect collapsed='1' type='int'><![CDATA[0]]></Disconnect><GenerateSQL type='bool'><![CDATA[0]]></GenerateSQL><SQL><PlSqlStatement type='string'><![CDATA[BEGIN RETURN; END;]]></PlSqlStatement></SQL><WriteStrategyTableName type='string'><![CDATA[#pmStagingSchemaNaam#.#pmDeltaTabelNaam#]]></WriteStrategyTableName><Transaction><RecordCount type='int'><![CDATA[100]]></RecordCount></Transaction></Usage></Properties>
+=+=+=+=
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "Execmode"
+         Value "seq"
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S19P1"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "lnk_LaadDelta"
+      Partner "V3S3|V3S3P1"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "RejectFromLink"
+         Value "-1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantVersion"
+         Value "1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantLibrary"
+         Value "ccora11g"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectNumber"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantName"
+         Value "11"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectUsesPercentage"
+         Value "false"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectorName"
+         Value "OracleConnector"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectThreshold"
+         Value "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SchemaFormat"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V3S3"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "Initiator_1"
+      NextID "2"
+      OutputPins "V3S3P1"
+      StageType "PxRowGenerator"
+      AllowColumnMapping "0"
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V3S3P1"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "lnk_LaadDelta"
+      Partner "V0S19|V0S19P1"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "schema"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "records"
+         Value "0"
+      END DSSUBRECORD
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "DIM_HUB_KEY"
+         SqlType "-3"
+         Precision "32"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_MD5"
+         SqlType "-3"
+         Precision "16"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_START_DATUM"
+         SqlType "11"
+         Precision "0"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "1"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_START_DATUM_HUB"
+         SqlType "11"
+         Precision "0"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "1"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_EIND_DATUM"
+         SqlType "11"
+         Precision "0"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "1"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_KEY_BRZ"
+         SqlType "-5"
+         Precision "0"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_STATUS"
+         SqlType "12"
+         Precision "9"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_ACTIE"
+         SqlType "12"
+         Precision "9"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "DIM_RECENT_IND"
+         SqlType "1"
+         Precision "1"
+         Scale "0"
+         Nullable "1"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      LeftTextPos "213"
+      TopTextPos "311"
+      LinkMinimised "0"
+   END DSRECORD
+END DSJOB
+BEGIN DSEXECJOB
+   Identifier "job_DL_Laad_DeltaIncrGeenBronStatus_Opt"
+   DateModified "1899-12-30"
+   TimeModified "00.00.01"
+   BEGIN DSRECORD
+      Identifier "job_DL_Laad_DeltaIncrGeenBronStatus_Opt"
+      F1 "JOB"
+      F3 "11.7///60/C"
+      F5 "pmStagingSchemaNaam\VpmBrzSchemaNaam\VpmStagingHubTabelNaam\VpmBrzHubTabelNaam\VpmDeltaTabelNaam\Vpar_DIM_Dbs\Vpar_DIM_Dbs.$evDIM_Dbs_Naam\Vpar_DIM_Dbs.$evDIM_Bedrijfszone_User\Vpar_DIM_Dbs.$evDIM_Bedrijfszone_Password\Vpar_DIM_Dbs.$evDIM_Bronzone_User\Vpar_DIM_Dbs.$evDIM_Bronzone_Password\Vpar_DIM_Dbs.$evDIM_Datastage_ConnectString\Vpar_DIM_Dbs.$evDIM_Datastage_User\Vpar_DIM_Dbs.$evDIM_Datastage_Password\Vpar_DIM_Dbs.$evDIM_Integratiezone_User\Vpar_DIM_Dbs.$evDIM_Integratiezone_Password\Vpar_DIM_Dbs.$evDIM_Logging_User\Vpar_DIM_Dbs.$evDIM_Logging_Password\Vpar_DIM_Dbs.$evDIM_Metadata_User\Vpar_DIM_Dbs.$evDIM_Metadata_Password\Vpar_DIM_Dbs.$evDIM_Staging_User\Vpar_DIM_Dbs.$evDIM_Staging_Password\Vpar_DIM_Dbs.$evDIM_Staging_ConnectString\Vpar_Teksten\Vpar_Teksten.$evTekst_Code_Delete\Vpar_Teksten.$evTekst_Code_Insert\Vpar_Teksten.$evTekst_Code_Onbekend\Vpar_Teksten.$evTekst_Code_Update\Vpar_Teksten.$evTekst_Code_UndoHardDeleteInsert\Vpar_Teksten.$evTekst_Code_UndoHardDeleteNoAction\Vpar_Teksten.$evTekst_Code_UndoSoftDeleteInsert\Vpar_Teksten.$evTekst_Code_UndoSoftDeleteNoAction\Vpar_Teksten.$evTekst_Datum_Waarde_Hoog\Vpar_Teksten.$evTekst_Datum_Waarde_Laag\Vpar_Teksten.$evTekst_Status_Afgebroken\Vpar_Teksten.$evTekst_Status_Gereset\Vpar_Teksten.$evTekst_Status_Klaar\Vpar_Teksten.$evTekst_Status_Lopend\Vpar_Teksten.$evTekst_To_char_Date\Vpar_Teksten.$evTekst_To_char_DateTime\Vpar_Teksten.$evTekst_To_char_Timestamp\Vpar_Teksten.$evTekst_Waarde_Ja\Vpar_Teksten.$evTekst_Waarde_Nee"
+      F6 "pmStagingSchemaNaam\VpmBrzSchemaNaam\VpmStagingHubTabelNaam\VpmBrzHubTabelNaam\VpmDeltaTabelNaam\Vpar_DIM_Dbs parameters\VevDIM_Dbs_Naam: Naam van de DIM database\VevDIM_Businesszone_User:         Naam            van generieke user voor Business zone\VevDIM_Businesszone_Password: Wachtwoord van generieke user voor Business zone\VevDIM_Bronzone_User:         Naam            van generieke user voor Bron zone\VevDIM_Bronzone_Password: Wachtwoord van generieke user voor Bron zone\VevDIM_DataStage: Connectie van generieke user voor DataStage (voor shell scripts)\VevDIM_DataStage_User:         Naam            van generieke user voor DataStage\VevDIM_DataStage_Password: Wachtwoord van generieke user voor DataStage\VevDIM_Integratiezone_User:         Naam            van generieke user voor Integratie zonej\VevDIM_Integratiezone_Password: Wachtwoord van generieke user voor Integratie zone\VevDIM_Logging_User:         Naam            van generieke user voor Logging\VevDIM_Logging_Password: Wachtwoord van generieke user voor Logging\VevDIM_Metadata_User:         Naam            van generieke user voor Metadata\VevDIM_Metadata_Password: Wachtwoord van generieke user voor Metadata\VevDIM_Staging_User:         Naam            van generieke user voor Staging\VevDIM_Staging_Password: Wachtwoord van generieke user voor Staging\VevDIM_Staging: Connectie van generieke user voor Staging (voor shell scripts)\Vpar_Teksten parameters\VevTekst_Code_Delete: Waarde voor 'Delete'.\VevTekst_Code_Insert: Waarde voor 'Insert'.\VevTekst_Code_Onbekend: Waarde voor 'Onbekend'.\VevTekst_Code_Update: Waarde voor 'Update'.\VevTekst_Code_UndoHardDeleteInsert: Waarde voor 'Undo hard delete, veranderde data, dus insert'\VevTekst_Code_UndoHardDeleteNoAction: Waarde voor 'Undo hard delete, geen wijziging in de data, dus geen verdere actie nodig'.\VevTekst_Code_UndoSoftDeleteInsert: Waarde voor 'Undo soft delete, veranderde data, dus insert'\VevTekst_Code_UndoSoftDeleteNoAction: Waarde voor 'Undo soft delete, geen wijziging in de data, dus geen verdere actie nodig'.\VevTekst_Datum_Waarde_Hoog: Max. datum\VevTekst_Datum_Waarde_Laag: Min. datum\VevTekst_Status_Afgebroken: Status tekst 'Afgebroken'\VevTekst_Status_Gereset: Status tekst 'Gereset'\VevTekst_Status_Klaar: Status tekst 'Klaar'\VevTekst_Status_Lopend: Status tekst 'Lopend'\VevTekst_To_char_Date: Conversie formaat voor Datum\VevTekst_To_char_DateTime: Conversie formaat voor Datum&Tijd\VevTekst_To_char_Timestamp: Conversie formaat voor Timestamp\VevTekst_Waarde_Ja: Waarde voor 'Ja'    in Ja/Nee-velden\VevTekst_Waarde_Nee: Waarde voor 'Nee' in Ja/Nee-velden"
+      F7 "stg_dummybron\Vbrz_dummybron\Vstg_test_d_ht_hub_tb\Vbrz_test_d_ht_hub_ht\Vstg_test_d_ht_d_tb\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF"
+      F8 "\V\V\V\V\VParameterset voor database connectie\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\VParameterset voor Tekst waarden\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V"
+      F9 "0\V0\V0\V0\V0\V13\V0\V0\V1\V0\V1\V0\V0\V1\V0\V1\V0\V1\V0\V1\V0\V1\V0\V13\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0"
+      F10 "V0"
+      F11 "Generieke job voor het vullen van een delta tabel voor een incrementele levering zonder bron status en voor een initiële levering. Bronzone Hub en Staging hub worden vergeleken met een left outer join. Aan de hand van DIM_KEY_BRZ, dim_md5 en dim_bron_status worden de acties bepaald. Deze worden in de delta tabel geladen.\(D)\(A)\(D)\(A)Datum      Naam   Omschrijving\(D)\(A)28-04-2023 epa037 rij_nr_reverse vervangen door een snellere rij_nr_totaal\(D)\(A)11-11-2022 epa037 RIJ_NR in joiner veranderd van integer naar bigint\(D)\(A)23-02-2021 mle134 Gebruik van DIM_RECENT_IND en DIM_RECENT_IND(performance wijziging)\(D)\(A)22-12-2020 mle134 Vervanging acties door hardcoded waardes ivm Balanced Optimization\(D)\(A)20-10-2020 hmi017 Vervangen DIM_KEY voor DIM_KEY_BRZ\(D)\(A)14-10-2020 jsc226 Vervangen datatype DATE met TIMESTAMP voor DIM_START_DATUM en DIM_EIND_DATUM, kolomnamen in hoofdletter\(D)\(A)11-09-2020 mle134 Wijziging datatype DIM_KEY naar BIGINT\(D)\(A)09-07-2020 jsc226 dim_start_datum_hub toegevoegd\(D)\(A)25-06-2020 jsc226 Mogelijkheid tot verwerken van meerdere rijen per functionele sleutel toegevoegd\(D)\(A)19-06-2020 jsc226 Aangemaakt"
+      F15 "OracleConnectorPX\VPxRowGenerator"
+      F18 "stg_dummybron\Vbrz_dummybron\Vstg_test_d_ht_hub_tb\Vbrz_test_d_ht_hub_ht\Vstg_test_d_ht_d_tb\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF"
+      F21 "1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1"
+      F24 ",,,,"
+      F25 "job_DL_Laad_DeltaIncrGeenBronStatus"
+      F26 "6"
+      F27 "2023-08-16 08:48:06"
+      F28 "\\20 Bronzone\\50 Jobs\\4 DetecteerVerandering"
+      F29 "0"
+      F30 "1"
+      F31 "2023-08-16 08:58:03"
+      F32 "3"
+      F34 "0\V1\VLINUX\V0\V\V#DSProjectARTOptions#\V1252\V\V\V\V\V\V0\V0"
+      F35 "Initiator_1\Vorc_DeltaTabel"
+      F36 "uwvm2vloapp0004.o-dc.ba.uwv.nl"
+      F37 "DIM_harnas"
+      F38 "0"
+      F39 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1\Vjob_DL_Laad_DeltaIncrGeenBronStatus_Opt.orc_DeltaTabel"
+      F41 "0"
+      F43 ",,,,"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1"
+      F1 "STAGE"
+      F2 "CUSTOM"
+      F3 "11.7///60/C"
+      F4 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt"
+      F10 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1.lnk_LaadDelta"
+      F16 "PxRowGenerator"
+      F31 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1"
+      F32 "-1.-1"
+      F40 "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1.lnk_LaadDelta"
+      F1 "OUTPIN"
+      F3 "11.7///60/C"
+      F5 "9"
+      F16 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1\Vjob_DL_Laad_DeltaIncrGeenBronStatus_Opt.orc_DeltaTabel"
+      F21 "DIM_HUB_KEY\VDIM_MD5\VDIM_START_DATUM\VDIM_START_DATUM_HUB\VDIM_EIND_DATUM\VDIM_KEY_BRZ\VDIM_STATUS\VDIM_ACTIE\VDIM_RECENT_IND"
+      F22 "0\V0\V0\V0\V0\V0\V0\V0\V0"
+      F25 "12\V12\V11\V11\V11\V-5\V12\V12\V1"
+      F26 "999\V99\V0\V0\V0\V0\V9\V9\V1"
+      F27 "0\V0\V0\V0\V0\V0\V0\V0\V0"
+      F28 "0\V0\V0\V0\V0\V0\V0\V0\V0"
+      F39 "lnk_LaadDelta"
+      F40 "1\V1\V1\V1\V1\V1\V1\V1\V1"
+      F50 "\V"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.orc_DeltaTabel"
+      F1 "STAGE"
+      F2 "CUSTOM"
+      F3 "11.7///60/C"
+      F4 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt"
+      F9 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.Initiator_1.lnk_LaadDelta"
+      F13 "RejectFromLink\VVariantVersion\VVariantLibrary\VRejectNumber\VSupportedVariantsVersions\VRACName\VEngine\VVariantName\VUsername\VRejectUsesPercentage\VxaoDbName\VOrientation\VConnectorName\VConnectionString\VOSLevelAuthentication\VSupportedVariants\VRejectThreshold\VSupportedVariantsLibraries\VContext\VPassword\VXMLProperties"
+      F14 "-1\V1.0\Vccora12c\V0\V1.0,1.0\V/Connection/RACName\VEE\V12c\V/Connection/Username\Vfalse\V/Connection/xaoDbName\Vlink\VOracleConnector\V/Connection/Server\V/Connection/OSLevelAuthentication\VV1;11:\"11g\":ccora11g;12:\"12c\":ccora12c\V0\Vccora11g,ccora12c\Vtarget\V/Connection/Password\V<?xml version='1.0' encoding='UTF-16'?><Properties version='1.1'><Common><Context type='int'>2</Context><Variant type='string'>12c</Variant><DescriptorVersion type='string'>1.0</DescriptorVersion><PartitionType type='int'>-1</PartitionType><RCP type='int'>0</RCP></Common><Connection><Server modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Dbs_Naam#]]></Server><Username modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Staging_User#]]></Username><Password modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Staging_Password#]]></Password><OSLevelAuthentication type='bool'><![CDATA[0]]></OSLevelAuthentication><Version modified='1' type='string'><![CDATA[12c]]></Version></Connection><Usage><WriteMode type='int'><![CDATA[8]]></WriteMode><TableName type='string'><![CDATA[#pmStagingSchemaNaam#.#pmDeltaTabelNaam#]]><TableScope type='int'><![CDATA[0]]></TableScope></TableName><EnableQuotedIDs type='bool'><![CDATA[0]]></EnableQuotedIDs><TableAction collapsed='1' type='int'><![CDATA[0]]></TableAction><Session><ArraySize type='int'><![CDATA[100]]></ArraySize><DropUnmatchedFields type='bool'><![CDATA[1]]></DropUnmatchedFields><TreatWarningsAsErrors type='bool'><![CDATA[0]]></TreatWarningsAsErrors><PreserveTrailingBlanks type='bool'><![CDATA[1]]></PreserveTrailingBlanks><FailOnRowErrorPX type='bool'><![CDATA[1]]></FailOnRowErrorPX></Session><BeforeAfter type='bool'><![CDATA[1]]><BeforeSQL modified='1' type='string'><![CDATA[call truncate_table('#pmStagingSchemaNaam#', '#pmDeltaTabelNaam#');]]><ReadFromFileBeforeSQL type='bool'><![CDATA[0]]></ReadFromFileBeforeSQL><FailOnError type='bool'><![CDATA[1]]></FailOnError></BeforeSQL><AfterSQL type='string'><![CDATA[insert into #pmStagingSchemaNaam#.#pmDeltaTabelNaam# (DIM_HUB_KEY, DIM_MD5, DIM_START_DATUM, DIM_START_DATUM_HUB, DIM_EIND_DATUM, DIM_KEY_BRZ, DIM_STATUS, DIM_ACTIE, DIM_RECENT_IND)  \(D)\(A)select CAST(BALOP_5.DIM_HUB_KEY AS VARCHAR2(999)) as DIM_HUB_KEY, CAST(BALOP_5.DIM_MD5 AS VARCHAR2(99)) as DIM_MD5, CAST(BALOP_5.DIM_START_DATUM AS TIMESTAMP(6)) as DIM_START_DATUM, CAST(BALOP_5.DIM_START_DATUM_HUB AS TIMESTAMP(6)) as DIM_START_DATUM_HUB, CAST(BALOP_5.DIM_EIND_DATUM AS TIMESTAMP(6)) as DIM_EIND_DATUM, CAST(BALOP_5.DIM_KEY_BRZ AS NUMBER(19)) as DIM_KEY_BRZ, CAST(BALOP_5.DIM_STATUS AS VARCHAR2(9)) as DIM_STATUS, CAST(BALOP_5.DIM_ACTIE AS VARCHAR2(9)) as DIM_ACTIE, CAST(BALOP_5.DIM_RECENT_IND AS CHAR(1)) as DIM_RECENT_IND \(D)\(A)from  \(D)\(A)(select STG_DIM_HUB_KEY as DIM_HUB_KEY, STG_DIM_MD5 as DIM_MD5, DIM_START_DATUM as DIM_START_DATUM, DIM_START_DATUM_HUB as DIM_START_DATUM_HUB, DIM_EIND_DATUM as DIM_EIND_DATUM, DIM_KEY_BRZ as DIM_KEY_BRZ, DIM_STATUS as DIM_STATUS,  CASE WHEN (DIM_KEY_BRZ is null ) THEN ('I') WHEN (RIJ_NR > 1) THEN ('I') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS is null )) THEN ('U') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USI') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHI') ELSE ('X') END as DIM_ACTIE,  CASE WHEN (RIJ_NR_TOTAAL = RIJ_NR) THEN ('J') ELSE ('N') END as DIM_RECENT_IND \(D)\(A)from  \(D)\(A)(select BALOP_1.DIM_HUB_KEY as STG_DIM_HUB_KEY, BALOP_3.DIM_MD5 as BRZ_DIM_MD5, BALOP_1.STG_DIM_MD5 as STG_DIM_MD5, BALOP_1.DIM_START_DATUM as DIM_START_DATUM, BALOP_1.DIM_EIND_DATUM as DIM_EIND_DATUM, BALOP_3.DIM_KEY_BRZ as DIM_KEY_BRZ, BALOP_3.DIM_STATUS as DIM_STATUS, BALOP_1.RIJ_NR as RIJ_NR, BALOP_1.RIJ_NR_TOTAAL as RIJ_NR_TOTAAL, BALOP_3.DIM_START_DATUM_HUB as DIM_START_DATUM_HUB \(D)\(A)from  \(D)\(A)(select  row_number() over (partition by DIM_HUB_KEY order by DIM_START_DATUM) as rij_nr,\(D)\(A)           dim_hub_key,\(D)\(A)           dim_md5 as stg_dim_md5,\(D)\(A)           dim_start_datum,\(D)\(A)           lead(#pmStagingHubTabelNaam#.dim_start_datum,1,date'9999-12-31') over \(D)\(A)              (partition by #pmStagingHubTabelNaam#.dim_hub_key order by #pmStagingHubTabelNaam#.dim_start_datum asc)\(D)\(A)              as dim_eind_datum,\(D)\(A)           count(*) over (partition by DIM_HUB_KEY)  as RIJ_NR_TOTAAL\(D)\(A)from #pmStagingSchemaNaam#.#pmStagingHubTabelNaam#) BALOP_1 \(D)\(A)left outer join  \(D)\(A)(select DIM_HUB_KEY as DIM_HUB_KEY, DIM_MD5 as DIM_MD5, DIM_KEY_BRZ as DIM_KEY_BRZ, DIM_STATUS as DIM_STATUS, DIM_START_DATUM as DIM_START_DATUM_HUB \(D)\(A)from #pmBrzSchemaNaam#.#pmBrzHubTabelNaam# #pmBrzHubTabelNaam# \(D)\(A)where DIM_RECENT_IND = 'J') BALOP_3 \(D)\(A)on ((BALOP_1.DIM_HUB_KEY = BALOP_3.DIM_HUB_KEY) or ((BALOP_1.DIM_HUB_KEY is null ) and (BALOP_3.DIM_HUB_KEY is null ))) \(D)\(A)order by BALOP_1.DIM_HUB_KEY asc nulls first ) BALOP_4 \(D)\(A)where  CASE WHEN (DIM_KEY_BRZ is null ) THEN ('I') WHEN (RIJ_NR > 1) THEN ('I') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS is null )) THEN ('U') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'S')) THEN ('USI') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHX') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = 'H')) THEN ('UHI') ELSE ('X') END <> 'X') BALOP_5]]><ReadFromFileAfterSQL type='bool'><![CDATA[0]]></ReadFromFileAfterSQL><FailOnError type='bool'><![CDATA[1]]></FailOnError></AfterSQL><BeforeSQLNode type='string'><![CDATA[]]><ReadFromFileBeforeSQLNode type='bool'><![CDATA[0]]></ReadFromFileBeforeSQLNode><FailOnError type='bool'><![CDATA[1]]></FailOnError></BeforeSQLNode><AfterSQLNode type='string'><![CDATA[]]><ReadFromFileAfterSQLNode type='bool'><![CDATA[0]]></ReadFromFileAfterSQLNode><FailOnError type='bool'><![CDATA[1]]></FailOnError></AfterSQLNode></BeforeAfter><LoadControl><ManualMode collapsed='1' type='bool'><![CDATA[0]]></ManualMode><EnableParallelLoadSessions type='bool'><![CDATA[1]]></EnableParallelLoadSessions><Buffersizeinkilobytes type='int'><![CDATA[1024]]></Buffersizeinkilobytes><UseDateCache collapsed='1' type='bool'><![CDATA[0]]></UseDateCache><SkipIndexes type='int'><![CDATA[0]]></SkipIndexes><DisableRedoLog type='bool'><![CDATA[0]]></DisableRedoLog><BeforeLoad collapsed='1' type='bool'><![CDATA[0]]></BeforeLoad><AfterLoad collapsed='1' type='bool'><![CDATA[0]]></AfterLoad></LoadControl><ApplicationFailoverControl collapsed='1' type='bool'><![CDATA[0]]></ApplicationFailoverControl><Disconnect collapsed='1' type='int'><![CDATA[0]]></Disconnect><GenerateSQL type='bool'><![CDATA[0]]></GenerateSQL><SQL><PlSqlStatement type='string'><![CDATA[BEGIN RETURN; END;]]></PlSqlStatement></SQL><WriteStrategyTableName type='string'><![CDATA[#pmStagingSchemaNaam#.#pmDeltaTabelNaam#]]></WriteStrategyTableName><Transaction><RecordCount type='int'><![CDATA[100]]></RecordCount></Transaction></Usage></Properties>"
+      F16 "OracleConnectorPX"
+      F23 "2\V0\V0\V2\V0\V0\V0\V0\V0\V11\V0\V0\V0\V0\V0\V0\V2\V0\V0\V1\V0"
+      F31 "job_DL_Laad_DeltaIncrGeenBronStatus_Opt.orc_DeltaTabel"
+      F32 "-1.-1"
+      F40 "1"
+   END DSRECORD
+   COMMENT No program sources in executable job
+   COMMENT No program binaries in executable job
+   BEGIN DSSCRIPT
+      Identifier "OshExecuter.sh"
+      TERMINATOR =+=+=+=
+#!/bin/sh
+# Shell script for Datastage to execute an osh script, generated at 2023-08-16 08:58:03
+# Compiler runtime stamp 11.7///60/C
+#
+# Parameters:
+# $1 - Run indicator: R=normal run, P=performance wrappered run
+# $2 - Environment variable file name - dummy
+# $3... - Osh / performance checker command line arguments
+RunIndicator=$1
+DummyEnv=$2
+shift
+shift
+if test ! -x "$APT_ORCHHOME/bin/osh"
+  then echo '##OSHRETVAL NOOSH'
+  exit 1
+fi
+# Test for resource estimation option.
+if test $RunIndicator = P
+  then $APT_ORCHHOME/bin/orchresest "$@" 2>&1 &
+  else $APT_ORCHHOME/bin/osh "$@" 2>&1 &
+fi
+oshpid=$!
+# Write the pid of the conductor process
+echo '##OSHPID' $oshpid
+wait $oshpid
+oshcode=$?
+oshdir=`dirname $0`
+# Write the terminating string
+echo '##OSHRETVAL' $oshcode > $oshdir/../RT_SCTEMP/$oshpid.retval
+echo '##OSHRETVAL' $oshcode
+# end of script
+=+=+=+=
+   END DSSCRIPT
+   BEGIN DSSCRIPT
+      Identifier "OshScript.osh"
+      TERMINATOR =+=+=+=
+# OSH / orchestrate script for Job job_DL_Laad_DeltaIncrGeenBronStatus_Opt compiled at 08:58:03 16 Aug 2023
+#################################################################
+#### STAGE: Initiator_1
+## Operator
+generator
+## Operator options
+-schema record
+(
+  DIM_HUB_KEY:nullable string[max=999];
+  DIM_MD5:nullable string[max=99];
+  DIM_START_DATUM:nullable timestamp[microseconds];
+  DIM_START_DATUM_HUB:nullable timestamp[microseconds];
+  DIM_EIND_DATUM:nullable timestamp[microseconds];
+  DIM_KEY_BRZ:nullable int64;
+  DIM_STATUS:nullable string[max=9];
+  DIM_ACTIE:nullable string[max=9];
+  DIM_RECENT_IND:nullable string[1];
+)
+-records 0
+## General options
+[ident('Initiator_1'); jobmon_ident('Initiator_1')]
+## Outputs
+0> [] 'Initiator_1:lnk_LaadDelta.v'
+;
+#################################################################
+#### STAGE: orc_DeltaTabel
+## Operator
+pxbridge
+## Operator options
+-Orientation link
+-XMLProperties '<?xml version=\\'1.0\\' encoding=\\'UTF-16\\'?><Properties version=\\'1.1\\'><Common><Context type=\\'int\\'>2</Context><Variant type=\\'string\\'>12c</Variant><DescriptorVersion type=\\'string\\'>1.0</DescriptorVersion><PartitionType type=\\'int\\'>-1</PartitionType><RCP type=\\'int\\'>0</RCP></Common><Connection><Server modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Dbs_Naam"]]]></Server><Username modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Staging_User"]]]></Username><Password modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Staging_Password"]]]></Password><OSLevelAuthentication type=\\'bool\\'><![CDATA[0]]></OSLevelAuthentication><Version modified=\\'1\\' type=\\'string\\'><![CDATA[12c]]></Version></Connection><Usage><WriteMode type=\\'int\\'><![CDATA[8]]></WriteMode><TableName type=\\'string\\'><![CDATA[[&"pmStagingSchemaNaam"].[&"pmDeltaTabelNaam"]]]><TableScope type=\\'int\\'><![CDATA[0]]></TableScope></TableName><EnableQuotedIDs type=\\'bool\\'><![CDATA[0]]></EnableQuotedIDs><TableAction collapsed=\\'1\\' type=\\'int\\'><![CDATA[0]]></TableAction><Session><ArraySize type=\\'int\\'><![CDATA[100]]></ArraySize><DropUnmatchedFields type=\\'bool\\'><![CDATA[1]]></DropUnmatchedFields><TreatWarningsAsErrors type=\\'bool\\'><![CDATA[0]]></TreatWarningsAsErrors><PreserveTrailingBlanks type=\\'bool\\'><![CDATA[1]]></PreserveTrailingBlanks><FailOnRowErrorPX type=\\'bool\\'><![CDATA[1]]></FailOnRowErrorPX></Session><BeforeAfter type=\\'bool\\'><![CDATA[1]]><BeforeSQL modified=\\'1\\' type=\\'string\\'><![CDATA[call truncate_table(\\'[&"pmStagingSchemaNaam"]\\', \\'[&"pmDeltaTabelNaam"]\\');]]><ReadFromFileBeforeSQL type=\\'bool\\'><![CDATA[0]]></ReadFromFileBeforeSQL><FailOnError type=\\'bool\\'><![CDATA[1]]></FailOnError></BeforeSQL><AfterSQL type=\\'string\\'><![CDATA[insert into [&"pmStagingSchemaNaam"].[&"pmDeltaTabelNaam"] (DIM_HUB_KEY, DIM_MD5, DIM_START_DATUM, DIM_START_DATUM_HUB, DIM_EIND_DATUM, DIM_KEY_BRZ, DIM_STATUS, DIM_ACTIE, DIM_RECENT_IND)  
+select CAST(BALOP_5.DIM_HUB_KEY AS VARCHAR2(999)) as DIM_HUB_KEY, CAST(BALOP_5.DIM_MD5 AS VARCHAR2(99)) as DIM_MD5, CAST(BALOP_5.DIM_START_DATUM AS TIMESTAMP(6)) as DIM_START_DATUM, CAST(BALOP_5.DIM_START_DATUM_HUB AS TIMESTAMP(6)) as DIM_START_DATUM_HUB, CAST(BALOP_5.DIM_EIND_DATUM AS TIMESTAMP(6)) as DIM_EIND_DATUM, CAST(BALOP_5.DIM_KEY_BRZ AS NUMBER(19)) as DIM_KEY_BRZ, CAST(BALOP_5.DIM_STATUS AS VARCHAR2(9)) as DIM_STATUS, CAST(BALOP_5.DIM_ACTIE AS VARCHAR2(9)) as DIM_ACTIE, CAST(BALOP_5.DIM_RECENT_IND AS CHAR(1)) as DIM_RECENT_IND 
+from  
+(select STG_DIM_HUB_KEY as DIM_HUB_KEY, STG_DIM_MD5 as DIM_MD5, DIM_START_DATUM as DIM_START_DATUM, DIM_START_DATUM_HUB as DIM_START_DATUM_HUB, DIM_EIND_DATUM as DIM_EIND_DATUM, DIM_KEY_BRZ as DIM_KEY_BRZ, DIM_STATUS as DIM_STATUS,  CASE WHEN (DIM_KEY_BRZ is null ) THEN (\\'I\\') WHEN (RIJ_NR > 1) THEN (\\'I\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS is null )) THEN (\\'U\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = \\'S\\')) THEN (\\'USX\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = \\'S\\')) THEN (\\'USI\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = \\'H\\')) THEN (\\'UHX\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = \\'H\\')) THEN (\\'UHI\\') ELSE (\\'X\\') END as DIM_ACTIE,  CASE WHEN (RIJ_NR_TOTAAL = RIJ_NR) THEN (\\'J\\') ELSE (\\'N\\') END as DIM_RECENT_IND 
+from  
+(select BALOP_1.DIM_HUB_KEY as STG_DIM_HUB_KEY, BALOP_3.DIM_MD5 as BRZ_DIM_MD5, BALOP_1.STG_DIM_MD5 as STG_DIM_MD5, BALOP_1.DIM_START_DATUM as DIM_START_DATUM, BALOP_1.DIM_EIND_DATUM as DIM_EIND_DATUM, BALOP_3.DIM_KEY_BRZ as DIM_KEY_BRZ, BALOP_3.DIM_STATUS as DIM_STATUS, BALOP_1.RIJ_NR as RIJ_NR, BALOP_1.RIJ_NR_TOTAAL as RIJ_NR_TOTAAL, BALOP_3.DIM_START_DATUM_HUB as DIM_START_DATUM_HUB 
+from  
+(select  row_number() over (partition by DIM_HUB_KEY order by DIM_START_DATUM) as rij_nr,
+           dim_hub_key,
+           dim_md5 as stg_dim_md5,
+           dim_start_datum,
+           lead([&"pmStagingHubTabelNaam"].dim_start_datum,1,date\\'9999-12-31\\') over 
+              (partition by [&"pmStagingHubTabelNaam"].dim_hub_key order by [&"pmStagingHubTabelNaam"].dim_start_datum asc)
+              as dim_eind_datum,
+           count(*) over (partition by DIM_HUB_KEY)  as RIJ_NR_TOTAAL
+from [&"pmStagingSchemaNaam"].[&"pmStagingHubTabelNaam"]) BALOP_1 
+left outer join  
+(select DIM_HUB_KEY as DIM_HUB_KEY, DIM_MD5 as DIM_MD5, DIM_KEY_BRZ as DIM_KEY_BRZ, DIM_STATUS as DIM_STATUS, DIM_START_DATUM as DIM_START_DATUM_HUB 
+from [&"pmBrzSchemaNaam"].[&"pmBrzHubTabelNaam"] [&"pmBrzHubTabelNaam"] 
+where DIM_RECENT_IND = \\'J\\') BALOP_3 
+on ((BALOP_1.DIM_HUB_KEY = BALOP_3.DIM_HUB_KEY) or ((BALOP_1.DIM_HUB_KEY is null ) and (BALOP_3.DIM_HUB_KEY is null ))) 
+order by BALOP_1.DIM_HUB_KEY asc nulls first ) BALOP_4 
+where  CASE WHEN (DIM_KEY_BRZ is null ) THEN (\\'I\\') WHEN (RIJ_NR > 1) THEN (\\'I\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS is null )) THEN (\\'U\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = \\'S\\')) THEN (\\'USX\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = \\'S\\')) THEN (\\'USI\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 = STG_DIM_MD5)) and (DIM_STATUS = \\'H\\')) THEN (\\'UHX\\') WHEN (((DIM_KEY_BRZ is not null ) and (BRZ_DIM_MD5 <> STG_DIM_MD5)) and (DIM_STATUS = \\'H\\')) THEN (\\'UHI\\') ELSE (\\'X\\') END <> \\'X\\') BALOP_5]]><ReadFromFileAfterSQL type=\\'bool\\'><![CDATA[0]]></ReadFromFileAfterSQL><FailOnError type=\\'bool\\'><![CDATA[1]]></FailOnError></AfterSQL><BeforeSQLNode type=\\'string\\'><![CDATA[]]><ReadFromFileBeforeSQLNode type=\\'bool\\'><![CDATA[0]]></ReadFromFileBeforeSQLNode><FailOnError type=\\'bool\\'><![CDATA[1]]></FailOnError></BeforeSQLNode><AfterSQLNode type=\\'string\\'><![CDATA[]]><ReadFromFileAfterSQLNode type=\\'bool\\'><![CDATA[0]]></ReadFromFileAfterSQLNode><FailOnError type=\\'bool\\'><![CDATA[1]]></FailOnError></AfterSQLNode></BeforeAfter><LoadControl><ManualMode collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></ManualMode><EnableParallelLoadSessions type=\\'bool\\'><![CDATA[1]]></EnableParallelLoadSessions><Buffersizeinkilobytes type=\\'int\\'><![CDATA[1024]]></Buffersizeinkilobytes><UseDateCache collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></UseDateCache><SkipIndexes type=\\'int\\'><![CDATA[0]]></SkipIndexes><DisableRedoLog type=\\'bool\\'><![CDATA[0]]></DisableRedoLog><BeforeLoad collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></BeforeLoad><AfterLoad collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></AfterLoad></LoadControl><ApplicationFailoverControl collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></ApplicationFailoverControl><Disconnect collapsed=\\'1\\' type=\\'int\\'><![CDATA[0]]></Disconnect><GenerateSQL type=\\'bool\\'><![CDATA[0]]></GenerateSQL><SQL><PlSqlStatement type=\\'string\\'><![CDATA[BEGIN RETURN; END;]]></PlSqlStatement></SQL><WriteStrategyTableName type=\\'string\\'><![CDATA[[&"pmStagingSchemaNaam"].[&"pmDeltaTabelNaam"]]]></WriteStrategyTableName><Transaction><RecordCount type=\\'int\\'><![CDATA[100]]></RecordCount></Transaction></Usage></Properties>'
+-connector '{
+   version=1.0, 
+   library=ccora12c, 
+   versionlist=\\'1.0,1.0\\', 
+   variant=\\'12c\\', 
+   name=OracleConnector, 
+   variantlist=\\'V1;11:"11g":ccora11g;12:"12c":ccora12c\\'
+}'
+-target 0 '{
+      DSSQLType={DIM_HUB_KEY=12, DIM_MD5=12, DIM_START_DATUM=11, DIM_START_DATUM_HUB=11, DIM_EIND_DATUM=11, DIM_KEY_BRZ=-5, DIM_STATUS=12, DIM_ACTIE=12, DIM_RECENT_IND=1}, 
+      DSSQLPrecision={DIM_HUB_KEY=999, DIM_MD5=99, DIM_STATUS=9, DIM_ACTIE=9, DIM_RECENT_IND=1}, 
+      DSSchema=\\'record
+         (
+           DIM_HUB_KEY\\:nullable string\\[max\\=999\\]\\;
+           DIM_MD5\\:nullable string\\[max\\=99\\]\\;
+           DIM_START_DATUM\\:nullable timestamp\\[microseconds\\]\\;
+           DIM_START_DATUM_HUB\\:nullable timestamp\\[microseconds\\]\\;
+           DIM_EIND_DATUM\\:nullable timestamp\\[microseconds\\]\\;
+           DIM_KEY_BRZ\\:nullable int64\\;
+           DIM_STATUS\\:nullable string\\[max\\=9\\]\\;
+           DIM_ACTIE\\:nullable string\\[max\\=9\\]\\;
+           DIM_RECENT_IND\\:nullable string\\[1\\]\\;
+         )\\'
+}'
+   
+## General options
+[ident('orc_DeltaTabel'); jobmon_ident('orc_DeltaTabel'); seq]
+## Inputs
+0< [] 'Initiator_1:lnk_LaadDelta.v'
+;
+# End of OSH code
+=+=+=+=
+   END DSSCRIPT
+END DSEXECJOB

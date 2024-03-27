@@ -1,0 +1,1929 @@
+BEGIN HEADER 
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "BE03QAP454UWVRM.HRC.BA.UWV.NL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2021-10-04"
+   Time "15.28.15"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "seq_DL_PeercodeRowLevelMasking"
+   DateModified "2021-09-29"
+   TimeModified "17.35.52"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "seq_DL_PeercodeRowLevelMasking"
+      Description =+=+=+=
+Row level masking sequence voor de bron Peercode. Checkt of de maskeringstypes bekend zijn en genereert de row level masking DML
+
+Datum      Naam   Omschrijving
+29-09-2021 mle134 Doorgeven pmDlNaam aan job_DL_GenereerPeercodeRLM_DML
+27-11-2020 mle134 Wijziging tabel naam DOSSIER -> PEER_DOSSIER
+20-11-2020 jsc226 Initiele versie
+=+=+=+=
+      NextID "43"
+      Container "V0"
+      JobVersion "56.0.0"
+      JobControlCode =+=+=+=
+* Tokens were replaced below as follows:
+* IdV40S0%%Result2%%0 <= log_Lopend.$UserStatus
+* IdV40S0%%Result1%%1 <= log_Lopend.$JobStatus
+* IdV40S0%%Name%%2 <= log_Lopend.$JobName
+* IdV41S0%%Result2%%3 <= log_Klaar.$UserStatus
+* IdV41S0%%Result1%%4 <= log_Klaar.$JobStatus
+* IdV41S0%%Name%%5 <= log_Klaar.$JobName
+* IdV0S0%%Result2%%6 <= seq_DL_CheckPeercodeMaskeringstype.$UserStatus
+* IdV0S0%%Result1%%7 <= seq_DL_CheckPeercodeMaskeringstype.$JobStatus
+* IdV0S0%%Name%%8 <= seq_DL_CheckPeercodeMaskeringstype.$JobName
+* IdV42S1%%Result2%%9 <= log_Afgebroken.$UserStatus
+* IdV42S1%%Result1%%10 <= log_Afgebroken.$JobStatus
+* IdV42S1%%Name%%11 <= log_Afgebroken.$JobName
+* IdV42S2%%Result2%%12 <= seq_DL_InsertErrorLog.$UserStatus
+* IdV42S2%%Result1%%13 <= seq_DL_InsertErrorLog.$JobStatus
+* IdV42S2%%Name%%14 <= seq_DL_InsertErrorLog.$JobName
+* IdV42S3%%Param%%15 <= exh.$ErrSource
+* IdV42S3%%Param%%16 <= exh.$ErrNumber
+* IdV42S3%%Param%%17 <= exh.$ErrMessage
+* IdV0S8%%Result2%%18 <= job_DL_GenereerPeercodeRLM_DML.$UserStatus
+* IdV0S8%%Result1%%19 <= job_DL_GenereerPeercodeRLM_DML.$JobStatus
+* IdV0S8%%Name%%20 <= job_DL_GenereerPeercodeRLM_DML.$JobName
+*
+*** [Generated at 2021-09-29 17:35:52 - 11.7.1.0]
+   $INCLUDE DSINCLUDE DSJ_XFUNCS.H
+   EQU Time$$ Lit "Oconv(Time(), 'MTS:'):': '"
+****************************************
+* Graphical Sequencer generated code for Job seq_DL_PeercodeRowLevelMasking
+****************************************
+   
+   handle$list = ""
+   id$list = ""
+   abort$list = ""
+   b$Abandoning = @False
+   b$CPRestarted = @False
+   b$InErrorRef = @False
+   summary$restarting = @False
+*** Create new checkpoint for sequence if not restarting
+   If DSCheckPointExists(DSJ.ME, cp$dtm) Then GoTo L$RESTART
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0015\\Starting new run of checkpointed Sequence job", ""), "@Coordinator")
+   If (Not(DSCheckPointValidate(DSJ.ME, cp$msg))) Then
+      err$source = "@Coordinator"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0016\\Error creating checkpoint record<L>%1", cp$msg)
+      msg$id = "@Coordinator"; GoTo L$ERROR
+   End
+   GoTo L$MAINSTART
+L$RESTART:
+*** Validate restarted job matches prior state
+   summary$restarting = @True
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0017\\Sequence job is being restarted after failure<L>Checkpoint record last modified at %1", cp$dtm), "@Coordinator")
+   b$CPRestarted = @True
+   If Not(DSCheckPointValidate(DSJ.ME, cp$msg)) Then
+      Call DSLogWarn(cp$msg, "@Coordinator")
+   End
+L$MAINSTART:
+*** Sequence start point
+   summary$ = DSMakeMsg("DSTAGE_JSG_M_0048\\Summary of sequence run", "")
+   If summary$restarting Then
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0049\\Sequence restarted after failure", ""))
+   End Else
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0050\\Sequence started (checkpointing on)", ""))
+   End
+   GoTo L$V40S0$START
+L$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V40S0$START:
+*** Activity "log_Lopend": Initialize job
+   b$InErrorRef$V40S0 = b$InErrorRef
+   h$V40S0 = DSAttachJob("job_DL_InsertProcesLog", DSJ.ERRNONE)
+   If (Not(h$V40S0)) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "job_DL_InsertProcesLog":@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V40S0, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V40S0 = "job_DL_InsertProcesLog":'.':(pmDlId:"_":pmDlNaam)
+   End Else
+      jb$V40S0 = "job_DL_InsertProcesLog"
+   End
+   dummy$ = DSDetachJob(h$V40S0)
+   b$V40S0skipping = @False
+   h$V40S0$cp = "h$V40S0"
+   If DSCheckPointGetValue(DSJ.ME, h$V40S0$cp, cp$value) = DSJE.NOERROR Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0021\\Skipped run of job '%1' on restart", jb$V40S0), "@log_Lopend")
+      job$V40S0$status = Raise(cp$value<1>)
+      job$V40S0$userstatus = Raise(cp$value<2>)
+      IdV40S0%%Result2%%0 = job$V40S0$userstatus
+      IdV40S0%%Result1%%1 = job$V40S0$status
+      IdV40S0%%Name%%2 = jb$V40S0
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0060\\%1 (JOB %2) skipped", "log_Lopend":@FM:jb$V40S0))
+      b$V40S0skipping = @True
+      Goto L$V40S0$SKIPPED
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "log_Lopend":@FM:jb$V40S0))
+   h$V40S0 = DSAttachJob(jb$V40S0, DSJ.ERRNONE)
+   If (Not(h$V40S0)) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V40S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   h$V40S0 = DSPrepareJob(h$V40S0)
+   If (Not(h$V40S0)) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V40S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+L$V40S0$PREPARED:
+   p$V40S0$1 = (pmRunId)
+   err$code = DSSetParam(h$V40S0, "pmRunId", p$V40S0$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmRunId":@FM:err$code)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   p$V40S0$2 = (pmProcesNaam)
+   err$code = DSSetParam(h$V40S0, "pmProcesNaam", p$V40S0$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesNaam":@FM:err$code)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   p$V40S0$3 = (par_Teksten.$evTekst_Status_Lopend)
+   err$code = DSSetParam(h$V40S0, "pmProcesStatus", p$V40S0$3)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesStatus":@FM:err$code)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   p$V40S0$4 = (DSJobName)
+   err$code = DSSetParam(h$V40S0, "pmProcesBoodschap", p$V40S0$4)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesBoodschap":@FM:err$code)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   p$V40S0$5 = "(As pre-defined)"
+   err$code = DSSetParam(h$V40S0, "par_DIM_Dbs", p$V40S0$5)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs":@FM:err$code)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V40S0, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Lopend"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V40S0:@FM:err$code)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V40S0
+   id$list<-1> = "V40S0"
+   GoTo L$RETURN$1
+**************************************************
+L$V40S0$FINISHED:
+   job$V40S0$status = DSGetJobInfo(h$V40S0, DSJ.JOBSTATUS)
+   job$V40S0$userstatus = DSGetJobInfo(h$V40S0, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "log_Lopend":@FM:jb$V40S0:@FM:job$V40S0$status))
+   IdV40S0%%Result2%%0 = job$V40S0$userstatus
+   IdV40S0%%Result1%%1 = job$V40S0$status
+   IdV40S0%%Name%%2 = jb$V40S0
+   If (job$V40S0$status <> DSJS.RUNOK) Then
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0030\\Job %1 did not finish OK, status = '%2'", jb$V40S0:@FM:DSTranslateCode(job$V40S0$status)), "@log_Lopend")
+   End
+   rpt$V40S0 = DSMakeJobReport(h$V40S0, 1, "CRLF")
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0004\\Report on job: %1<L>%2", jb$V40S0:@FM:rpt$V40S0), "@log_Lopend")
+   dummy$ = DSDetachJob(h$V40S0)
+   If (job$V40S0$status <> DSJS.RUNOK And job$V40S0$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "log_Lopend"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V40S0)
+      msg$id = "@log_Lopend"; GoTo L$ERROR
+   End
+   If b$InErrorRef$V40S0 Or (job$V40S0$status <> DSJS.RUNOK And job$V40S0$status <> DSJS.RUNWARN) Then Goto L$V40S0$SKIPPED
+   cp$value = Lower(job$V40S0$status)
+   cp$value<2> = Lower(job$V40S0$userstatus)
+   dummy$ = DSCheckPointSetValue(DSJ.ME, h$V40S0$cp, cp$value)
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0025\\Checkpointed run of job '%1'", jb$V40S0), "@log_Lopend")
+**************************************************
+L$V40S0$SKIPPED:
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   If (job$V40S0$status = DSJS.RUNOK) Then GoTo L$V0S0$START
+L$V40S0$RETURN$1:
+   If b$V40S0skipping Then GoTo L$RETURN$1
+   GoTo L$WAITFORJOB
+**************************************************
+L$V41S0$START:
+*** Activity "log_Klaar": Initialize job
+   b$InErrorRef$V41S0 = b$InErrorRef
+   h$V41S0 = DSAttachJob("job_DL_InsertProcesLog", DSJ.ERRNONE)
+   If (Not(h$V41S0)) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "job_DL_InsertProcesLog":@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V41S0, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V41S0 = "job_DL_InsertProcesLog":'.':(pmDlId:"_":pmDlNaam)
+   End Else
+      jb$V41S0 = "job_DL_InsertProcesLog"
+   End
+   dummy$ = DSDetachJob(h$V41S0)
+   b$V41S0skipping = @False
+   h$V41S0$cp = "h$V41S0"
+   If DSCheckPointGetValue(DSJ.ME, h$V41S0$cp, cp$value) = DSJE.NOERROR Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0021\\Skipped run of job '%1' on restart", jb$V41S0), "@log_Klaar")
+      job$V41S0$status = Raise(cp$value<1>)
+      job$V41S0$userstatus = Raise(cp$value<2>)
+      IdV41S0%%Result2%%3 = job$V41S0$userstatus
+      IdV41S0%%Result1%%4 = job$V41S0$status
+      IdV41S0%%Name%%5 = jb$V41S0
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0060\\%1 (JOB %2) skipped", "log_Klaar":@FM:jb$V41S0))
+      b$V41S0skipping = @True
+      Goto L$V41S0$SKIPPED
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "log_Klaar":@FM:jb$V41S0))
+   h$V41S0 = DSAttachJob(jb$V41S0, DSJ.ERRNONE)
+   If (Not(h$V41S0)) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V41S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   h$V41S0 = DSPrepareJob(h$V41S0)
+   If (Not(h$V41S0)) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V41S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+L$V41S0$PREPARED:
+   p$V41S0$1 = (pmRunId)
+   err$code = DSSetParam(h$V41S0, "pmRunId", p$V41S0$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmRunId":@FM:err$code)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   p$V41S0$2 = (pmProcesNaam)
+   err$code = DSSetParam(h$V41S0, "pmProcesNaam", p$V41S0$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesNaam":@FM:err$code)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   p$V41S0$3 = (par_Teksten.$evTekst_Status_Klaar)
+   err$code = DSSetParam(h$V41S0, "pmProcesStatus", p$V41S0$3)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesStatus":@FM:err$code)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   p$V41S0$4 = (DSJobName)
+   err$code = DSSetParam(h$V41S0, "pmProcesBoodschap", p$V41S0$4)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesBoodschap":@FM:err$code)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   p$V41S0$5 = "(As pre-defined)"
+   err$code = DSSetParam(h$V41S0, "par_DIM_Dbs", p$V41S0$5)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs":@FM:err$code)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V41S0, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Klaar"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V41S0:@FM:err$code)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V41S0
+   id$list<-1> = "V41S0"
+   GoTo L$V0S8$RETURN$1
+**************************************************
+L$V41S0$FINISHED:
+   job$V41S0$status = DSGetJobInfo(h$V41S0, DSJ.JOBSTATUS)
+   job$V41S0$userstatus = DSGetJobInfo(h$V41S0, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "log_Klaar":@FM:jb$V41S0:@FM:job$V41S0$status))
+   IdV41S0%%Result2%%3 = job$V41S0$userstatus
+   IdV41S0%%Result1%%4 = job$V41S0$status
+   IdV41S0%%Name%%5 = jb$V41S0
+   If (job$V41S0$status <> DSJS.RUNOK) Then
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0030\\Job %1 did not finish OK, status = '%2'", jb$V41S0:@FM:DSTranslateCode(job$V41S0$status)), "@log_Klaar")
+   End
+   rpt$V41S0 = DSMakeJobReport(h$V41S0, 1, "CRLF")
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0004\\Report on job: %1<L>%2", jb$V41S0:@FM:rpt$V41S0), "@log_Klaar")
+   dummy$ = DSDetachJob(h$V41S0)
+   If (job$V41S0$status <> DSJS.RUNOK And job$V41S0$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "log_Klaar"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V41S0)
+      msg$id = "@log_Klaar"; GoTo L$ERROR
+   End
+   If b$InErrorRef$V41S0 Or (job$V41S0$status <> DSJS.RUNOK And job$V41S0$status <> DSJS.RUNWARN) Then Goto L$V41S0$SKIPPED
+   cp$value = Lower(job$V41S0$status)
+   cp$value<2> = Lower(job$V41S0$userstatus)
+   dummy$ = DSCheckPointSetValue(DSJ.ME, h$V41S0$cp, cp$value)
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0025\\Checkpointed run of job '%1'", jb$V41S0), "@log_Klaar")
+**************************************************
+L$V41S0$SKIPPED:
+   If b$V41S0skipping Then GoTo L$V0S8$RETURN$1
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S0$START:
+*** Activity "seq_DL_CheckPeercodeMaskeringstype": Initialize job
+   b$InErrorRef$V0S0 = b$InErrorRef
+   h$V0S0 = DSAttachJob("seq_DL_CheckPeercodeMaskeringstype", DSJ.ERRNONE)
+   If (Not(h$V0S0)) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "seq_DL_CheckPeercodeMaskeringstype":@FM:DSGetLastErrorMsg())
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V0S0, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V0S0 = "seq_DL_CheckPeercodeMaskeringstype":'.':(pmDlId:"_":pmDlNaam)
+   End Else
+      jb$V0S0 = "seq_DL_CheckPeercodeMaskeringstype"
+   End
+   dummy$ = DSDetachJob(h$V0S0)
+   b$V0S0skipping = @False
+   h$V0S0$cp = "h$V0S0"
+   If DSCheckPointGetValue(DSJ.ME, h$V0S0$cp, cp$value) = DSJE.NOERROR Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0021\\Skipped run of job '%1' on restart", jb$V0S0), "@seq_DL_CheckPeercodeMaskeringstype")
+      job$V0S0$status = Raise(cp$value<1>)
+      job$V0S0$userstatus = Raise(cp$value<2>)
+      IdV0S0%%Result2%%6 = job$V0S0$userstatus
+      IdV0S0%%Result1%%7 = job$V0S0$status
+      IdV0S0%%Name%%8 = jb$V0S0
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0060\\%1 (JOB %2) skipped", "seq_DL_CheckPeercodeMaskeringstype":@FM:jb$V0S0))
+      b$V0S0skipping = @True
+      Goto L$V0S0$SKIPPED
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "seq_DL_CheckPeercodeMaskeringstype":@FM:jb$V0S0))
+   h$V0S0 = DSAttachJob(jb$V0S0, DSJ.ERRNONE)
+   If (Not(h$V0S0)) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V0S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   h$V0S0 = DSPrepareJob(h$V0S0)
+   If (Not(h$V0S0)) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V0S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+L$V0S0$PREPARED:
+   p$V0S0$1 = (pmRunId)
+   err$code = DSSetParam(h$V0S0, "pmRunId", p$V0S0$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmRunId":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$2 = (pmDlId)
+   err$code = DSSetParam(h$V0S0, "pmDlId", p$V0S0$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmDlId":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$3 = (pmDlNaam)
+   err$code = DSSetParam(h$V0S0, "pmDlNaam", p$V0S0$3)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmDlNaam":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$4 = (pmProcesDatum)
+   err$code = DSSetParam(h$V0S0, "pmProcesDatum", p$V0S0$4)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesDatum":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$5 = ('PeercodeControle')
+   err$code = DSSetParam(h$V0S0, "pmProcesNaam", p$V0S0$5)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesNaam":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$6 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S0, "par_DIM_Dbs", p$V0S0$6)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$24 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S0, "par_Linux_Paden", p$V0S0$24)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_Linux_Paden":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$41 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S0, "par_DIM_Email_Admin", p$V0S0$41)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Email_Admin":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   p$V0S0$45 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S0, "par_Teksten", p$V0S0$45)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_Teksten":@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V0S0, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V0S0:@FM:err$code)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V0S0
+   id$list<-1> = "V0S0"
+   GoTo L$V40S0$RETURN$1
+**************************************************
+L$V0S0$FINISHED:
+   job$V0S0$status = DSGetJobInfo(h$V0S0, DSJ.JOBSTATUS)
+   job$V0S0$userstatus = DSGetJobInfo(h$V0S0, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "seq_DL_CheckPeercodeMaskeringstype":@FM:jb$V0S0:@FM:job$V0S0$status))
+   IdV0S0%%Result2%%6 = job$V0S0$userstatus
+   IdV0S0%%Result1%%7 = job$V0S0$status
+   IdV0S0%%Name%%8 = jb$V0S0
+   If (job$V0S0$status <> DSJS.RUNOK) Then
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0030\\Job %1 did not finish OK, status = '%2'", jb$V0S0:@FM:DSTranslateCode(job$V0S0$status)), "@seq_DL_CheckPeercodeMaskeringstype")
+   End
+   rpt$V0S0 = DSMakeJobReport(h$V0S0, 1, "CRLF")
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0004\\Report on job: %1<L>%2", jb$V0S0:@FM:rpt$V0S0), "@seq_DL_CheckPeercodeMaskeringstype")
+   dummy$ = DSDetachJob(h$V0S0)
+   If (job$V0S0$status <> DSJS.RUNOK And job$V0S0$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "seq_DL_CheckPeercodeMaskeringstype"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V0S0)
+      msg$id = "@seq_DL_CheckPeercodeMaskeringstype"; GoTo L$ERROR
+   End
+   If b$InErrorRef$V0S0 Or (job$V0S0$status <> DSJS.RUNOK And job$V0S0$status <> DSJS.RUNWARN) Then Goto L$V0S0$SKIPPED
+   cp$value = Lower(job$V0S0$status)
+   cp$value<2> = Lower(job$V0S0$userstatus)
+   dummy$ = DSCheckPointSetValue(DSJ.ME, h$V0S0$cp, cp$value)
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0025\\Checkpointed run of job '%1'", jb$V0S0), "@seq_DL_CheckPeercodeMaskeringstype")
+**************************************************
+L$V0S0$SKIPPED:
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   If (job$V0S0$status = DSJS.RUNOK) Then GoTo L$V0S8$START
+L$V0S0$RETURN$1:
+   If b$V0S0skipping Then GoTo L$V40S0$RETURN$1
+   GoTo L$WAITFORJOB
+**************************************************
+L$V42S0$START:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0065\\%1 Executed", "ter_Afbreken"))
+* Send stop request to any outstanding child jobs
+   For index$ = 1 To DCount(handle$list, @FM)
+      handle$ = handle$list<index$>
+      If handle$ <> "" Then
+         job$name = DSGetJobInfo(handle$, DSJ.JOBNAME)
+         job$invid = DSGetJobInfo(handle$, DSJ.JOBINVOCATIONID)
+         if job$invid <> "" Then job$name = job$name:".":job$invid
+         Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0019\\Sending STOP request to job: %1", job$name), "@ter_Afbreken")
+         dummy$ = DSStopJob(handle$)
+      End
+   Next index$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0069\\Sequence terminated", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0020\\Sequence abort requested", ""), "@ter_Afbreken")
+**************************************************
+L$V42S1$START:
+*** Activity "log_Afgebroken": Initialize job
+   b$InErrorRef$V42S1 = b$InErrorRef
+   h$V42S1 = DSAttachJob("job_DL_InsertProcesLog", DSJ.ERRNONE)
+   If (Not(h$V42S1)) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "job_DL_InsertProcesLog":@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V42S1, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V42S1 = "job_DL_InsertProcesLog":'.':(pmDlId:"_":pmDlNaam)
+   End Else
+      jb$V42S1 = "job_DL_InsertProcesLog"
+   End
+   dummy$ = DSDetachJob(h$V42S1)
+   b$V42S1skipping = @False
+   h$V42S1$cp = "h$V42S1"
+   If DSCheckPointGetValue(DSJ.ME, h$V42S1$cp, cp$value) = DSJE.NOERROR Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0021\\Skipped run of job '%1' on restart", jb$V42S1), "@log_Afgebroken")
+      job$V42S1$status = Raise(cp$value<1>)
+      job$V42S1$userstatus = Raise(cp$value<2>)
+      IdV42S1%%Result2%%9 = job$V42S1$userstatus
+      IdV42S1%%Result1%%10 = job$V42S1$status
+      IdV42S1%%Name%%11 = jb$V42S1
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0060\\%1 (JOB %2) skipped", "log_Afgebroken":@FM:jb$V42S1))
+      b$V42S1skipping = @True
+      Goto L$V42S1$SKIPPED
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "log_Afgebroken":@FM:jb$V42S1))
+   h$V42S1 = DSAttachJob(jb$V42S1, DSJ.ERRNONE)
+   If (Not(h$V42S1)) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V42S1:@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   h$V42S1 = DSPrepareJob(h$V42S1)
+   If (Not(h$V42S1)) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V42S1:@FM:DSGetLastErrorMsg())
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+L$V42S1$PREPARED:
+   p$V42S1$1 = (pmRunId)
+   err$code = DSSetParam(h$V42S1, "pmRunId", p$V42S1$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmRunId":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$2 = (pmProcesNaam)
+   err$code = DSSetParam(h$V42S1, "pmProcesNaam", p$V42S1$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesNaam":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$3 = (par_Teksten.$evTekst_Status_Afgebroken)
+   err$code = DSSetParam(h$V42S1, "pmProcesStatus", p$V42S1$3)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesStatus":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$4 = (DSJobName)
+   err$code = DSSetParam(h$V42S1, "pmProcesBoodschap", p$V42S1$4)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesBoodschap":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$5 = (par_DIM_Dbs)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs", p$V42S1$5)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$6 = (par_DIM_Dbs.$evDIM_Dbs_Naam)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Dbs_Naam", p$V42S1$6)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Dbs_Naam":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$7 = (par_DIM_Dbs.$evDIM_Bedrijfszone_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Bedrijfszone_User", p$V42S1$7)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bedrijfszone_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$8 = (par_DIM_Dbs.$evDIM_Bedrijfszone_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Bedrijfszone_Password", p$V42S1$8)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bedrijfszone_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$9 = (par_DIM_Dbs.$evDIM_Bronzone_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Bronzone_User", p$V42S1$9)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bronzone_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$10 = (par_DIM_Dbs.$evDIM_Bronzone_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Bronzone_Password", p$V42S1$10)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bronzone_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$11 = (par_DIM_Dbs.$evDIM_Datastage_ConnectString)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Datastage_ConnectString", p$V42S1$11)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Datastage_ConnectString":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$12 = (par_DIM_Dbs.$evDIM_Datastage_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Datastage_User", p$V42S1$12)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Datastage_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$13 = (par_DIM_Dbs.$evDIM_Datastage_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Datastage_Password", p$V42S1$13)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Datastage_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$14 = (par_DIM_Dbs.$evDIM_Integratiezone_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Integratiezone_User", p$V42S1$14)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Integratiezone_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$15 = (par_DIM_Dbs.$evDIM_Integratiezone_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Integratiezone_Password", p$V42S1$15)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Integratiezone_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$16 = (par_DIM_Dbs.$evDIM_Logging_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Logging_User", p$V42S1$16)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Logging_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$17 = (par_DIM_Dbs.$evDIM_Logging_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Logging_Password", p$V42S1$17)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Logging_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$18 = (par_DIM_Dbs.$evDIM_Metadata_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Metadata_User", p$V42S1$18)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Metadata_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$19 = (par_DIM_Dbs.$evDIM_Metadata_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Metadata_Password", p$V42S1$19)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Metadata_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$20 = (par_DIM_Dbs.$evDIM_Staging_User)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Staging_User", p$V42S1$20)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Staging_User":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$21 = (par_DIM_Dbs.$evDIM_Staging_Password)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Staging_Password", p$V42S1$21)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Staging_Password":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   p$V42S1$22 = (par_DIM_Dbs.$evDIM_Staging_ConnectString)
+   err$code = DSSetParam(h$V42S1, "par_DIM_Dbs.$evDIM_Staging_ConnectString", p$V42S1$22)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Staging_ConnectString":@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V42S1, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "log_Afgebroken"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V42S1:@FM:err$code)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V42S1
+   id$list<-1> = "V42S1"
+   GoTo L$V42S2$RETURN$1
+**************************************************
+L$V42S1$FINISHED:
+   job$V42S1$status = DSGetJobInfo(h$V42S1, DSJ.JOBSTATUS)
+   job$V42S1$userstatus = DSGetJobInfo(h$V42S1, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "log_Afgebroken":@FM:jb$V42S1:@FM:job$V42S1$status))
+   IdV42S1%%Result2%%9 = job$V42S1$userstatus
+   IdV42S1%%Result1%%10 = job$V42S1$status
+   IdV42S1%%Name%%11 = jb$V42S1
+   If (job$V42S1$status <> DSJS.RUNOK) Then
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0030\\Job %1 did not finish OK, status = '%2'", jb$V42S1:@FM:DSTranslateCode(job$V42S1$status)), "@log_Afgebroken")
+   End
+   rpt$V42S1 = DSMakeJobReport(h$V42S1, 1, "CRLF")
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0004\\Report on job: %1<L>%2", jb$V42S1:@FM:rpt$V42S1), "@log_Afgebroken")
+   dummy$ = DSDetachJob(h$V42S1)
+   If (job$V42S1$status <> DSJS.RUNOK And job$V42S1$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "log_Afgebroken"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V42S1)
+      msg$id = "@log_Afgebroken"; GoTo L$ERROR
+   End
+   If b$InErrorRef$V42S1 Or (job$V42S1$status <> DSJS.RUNOK And job$V42S1$status <> DSJS.RUNWARN) Then Goto L$V42S1$SKIPPED
+   cp$value = Lower(job$V42S1$status)
+   cp$value<2> = Lower(job$V42S1$userstatus)
+   dummy$ = DSCheckPointSetValue(DSJ.ME, h$V42S1$cp, cp$value)
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0025\\Checkpointed run of job '%1'", jb$V42S1), "@log_Afgebroken")
+**************************************************
+L$V42S1$SKIPPED:
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   GoTo L$V42S0$START
+L$V42S1$RETURN$1:
+   If b$V42S1skipping Then GoTo L$V42S2$RETURN$1
+   GoTo L$WAITFORJOB
+**************************************************
+L$V42S2$START:
+*** Activity "seq_DL_InsertErrorLog": Initialize job
+   b$InErrorRef$V42S2 = b$InErrorRef
+   h$V42S2 = DSAttachJob("seq_DL_InsertErrorLog", DSJ.ERRNONE)
+   If (Not(h$V42S2)) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "seq_DL_InsertErrorLog":@FM:DSGetLastErrorMsg())
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V42S2, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V42S2 = "seq_DL_InsertErrorLog":'.':(pmDlId:"_":pmDlNaam)
+   End Else
+      jb$V42S2 = "seq_DL_InsertErrorLog"
+   End
+   dummy$ = DSDetachJob(h$V42S2)
+   b$V42S2skipping = @False
+   h$V42S2$cp = "h$V42S2"
+   If DSCheckPointGetValue(DSJ.ME, h$V42S2$cp, cp$value) = DSJE.NOERROR Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0021\\Skipped run of job '%1' on restart", jb$V42S2), "@seq_DL_InsertErrorLog")
+      job$V42S2$status = Raise(cp$value<1>)
+      job$V42S2$userstatus = Raise(cp$value<2>)
+      IdV42S2%%Result2%%12 = job$V42S2$userstatus
+      IdV42S2%%Result1%%13 = job$V42S2$status
+      IdV42S2%%Name%%14 = jb$V42S2
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0060\\%1 (JOB %2) skipped", "seq_DL_InsertErrorLog":@FM:jb$V42S2))
+      b$V42S2skipping = @True
+      Goto L$V42S2$SKIPPED
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "seq_DL_InsertErrorLog":@FM:jb$V42S2))
+   h$V42S2 = DSAttachJob(jb$V42S2, DSJ.ERRNONE)
+   If (Not(h$V42S2)) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V42S2:@FM:DSGetLastErrorMsg())
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   h$V42S2 = DSPrepareJob(h$V42S2)
+   If (Not(h$V42S2)) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V42S2:@FM:DSGetLastErrorMsg())
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+L$V42S2$PREPARED:
+   p$V42S2$1 = (pmDlId)
+   err$code = DSSetParam(h$V42S2, "pmDlId", p$V42S2$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmDlId":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$2 = (pmRunId)
+   err$code = DSSetParam(h$V42S2, "pmRunId", p$V42S2$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmRunId":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$3 = (pmProcesNaam)
+   err$code = DSSetParam(h$V42S2, "pmProcesNaam", p$V42S2$3)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesNaam":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$4 = (pmProcesDatum)
+   err$code = DSSetParam(h$V42S2, "pmProcesDatum", p$V42S2$4)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesDatum":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$5 = (par_Linux_Paden.$evPad_Bronzone : '/' : par_Linux_Paden.$evPad_Logs)
+   err$code = DSSetParam(h$V42S2, "pmErrorLogFileDirectory", p$V42S2$5)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmErrorLogFileDirectory":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$6 = (IdV42S3%%Param%%15 : ' ' : IdV42S3%%Param%%17)
+   err$code = DSSetParam(h$V42S2, "pmExceptionErrorMessage", p$V42S2$6)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmExceptionErrorMessage":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$7 = (par_DIM_Dbs)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs", p$V42S2$7)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$8 = (par_DIM_Dbs.$evDIM_Dbs_Naam)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Dbs_Naam", p$V42S2$8)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Dbs_Naam":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$9 = (par_DIM_Dbs.$evDIM_Bedrijfszone_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Bedrijfszone_User", p$V42S2$9)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bedrijfszone_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$10 = (par_DIM_Dbs.$evDIM_Bedrijfszone_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Bedrijfszone_Password", p$V42S2$10)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bedrijfszone_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$11 = (par_DIM_Dbs.$evDIM_Bronzone_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Bronzone_User", p$V42S2$11)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bronzone_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$12 = (par_DIM_Dbs.$evDIM_Bronzone_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Bronzone_Password", p$V42S2$12)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Bronzone_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$13 = (par_DIM_Dbs.$evDIM_Datastage_ConnectString)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Datastage_ConnectString", p$V42S2$13)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Datastage_ConnectString":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$14 = (par_DIM_Dbs.$evDIM_Datastage_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Datastage_User", p$V42S2$14)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Datastage_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$15 = (par_DIM_Dbs.$evDIM_Datastage_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Datastage_Password", p$V42S2$15)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Datastage_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$16 = (par_DIM_Dbs.$evDIM_Integratiezone_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Integratiezone_User", p$V42S2$16)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Integratiezone_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$17 = (par_DIM_Dbs.$evDIM_Integratiezone_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Integratiezone_Password", p$V42S2$17)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Integratiezone_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$18 = (par_DIM_Dbs.$evDIM_Logging_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Logging_User", p$V42S2$18)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Logging_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$19 = (par_DIM_Dbs.$evDIM_Logging_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Logging_Password", p$V42S2$19)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Logging_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$20 = (par_DIM_Dbs.$evDIM_Metadata_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Metadata_User", p$V42S2$20)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Metadata_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$21 = (par_DIM_Dbs.$evDIM_Metadata_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Metadata_Password", p$V42S2$21)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Metadata_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$22 = (par_DIM_Dbs.$evDIM_Staging_User)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Staging_User", p$V42S2$22)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Staging_User":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$23 = (par_DIM_Dbs.$evDIM_Staging_Password)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Staging_Password", p$V42S2$23)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Staging_Password":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$24 = (par_DIM_Dbs.$evDIM_Staging_ConnectString)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Dbs.$evDIM_Staging_ConnectString", p$V42S2$24)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs.$evDIM_Staging_ConnectString":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$25 = (par_DIM_Email_Admin)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Email_Admin", p$V42S2$25)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Email_Admin":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$26 = (par_DIM_Email_Admin.$evEmail_DIM_Admin_Adres)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Email_Admin.$evEmail_DIM_Admin_Adres", p$V42S2$26)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Email_Admin.$evEmail_DIM_Admin_Adres":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$27 = (par_DIM_Email_Admin.$evEmail_DIM_Zender_Adres)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Email_Admin.$evEmail_DIM_Zender_Adres", p$V42S2$27)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Email_Admin.$evEmail_DIM_Zender_Adres":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   p$V42S2$28 = (par_DIM_Email_Admin.$evEmail_SMTP_Server)
+   err$code = DSSetParam(h$V42S2, "par_DIM_Email_Admin.$evEmail_SMTP_Server", p$V42S2$28)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Email_Admin.$evEmail_SMTP_Server":@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V42S2, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V42S2:@FM:err$code)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V42S2
+   id$list<-1> = "V42S2"
+   GoTo L$V42S3$RETURN$1
+**************************************************
+L$V42S2$FINISHED:
+   job$V42S2$status = DSGetJobInfo(h$V42S2, DSJ.JOBSTATUS)
+   job$V42S2$userstatus = DSGetJobInfo(h$V42S2, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "seq_DL_InsertErrorLog":@FM:jb$V42S2:@FM:job$V42S2$status))
+   IdV42S2%%Result2%%12 = job$V42S2$userstatus
+   IdV42S2%%Result1%%13 = job$V42S2$status
+   IdV42S2%%Name%%14 = jb$V42S2
+   If (job$V42S2$status <> DSJS.RUNOK) Then
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0030\\Job %1 did not finish OK, status = '%2'", jb$V42S2:@FM:DSTranslateCode(job$V42S2$status)), "@seq_DL_InsertErrorLog")
+   End
+   rpt$V42S2 = DSMakeJobReport(h$V42S2, 1, "CRLF")
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0004\\Report on job: %1<L>%2", jb$V42S2:@FM:rpt$V42S2), "@seq_DL_InsertErrorLog")
+   dummy$ = DSDetachJob(h$V42S2)
+   If (job$V42S2$status <> DSJS.RUNOK And job$V42S2$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "seq_DL_InsertErrorLog"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V42S2)
+      msg$id = "@seq_DL_InsertErrorLog"; GoTo L$ERROR
+   End
+   If b$InErrorRef$V42S2 Or (job$V42S2$status <> DSJS.RUNOK And job$V42S2$status <> DSJS.RUNWARN) Then Goto L$V42S2$SKIPPED
+   cp$value = Lower(job$V42S2$status)
+   cp$value<2> = Lower(job$V42S2$userstatus)
+   dummy$ = DSCheckPointSetValue(DSJ.ME, h$V42S2$cp, cp$value)
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0025\\Checkpointed run of job '%1'", jb$V42S2), "@seq_DL_InsertErrorLog")
+**************************************************
+L$V42S2$SKIPPED:
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   GoTo L$V42S1$START
+L$V42S2$RETURN$1:
+   If b$V42S2skipping Then GoTo L$V42S3$RETURN$1
+   GoTo L$WAITFORJOB
+**************************************************
+L$V42S3$START:
+*** Decision "exh"
+   GoTo L$V42S2$START
+L$V42S3$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S8$START:
+*** Activity "job_DL_GenereerPeercodeRLM_DML": Initialize job
+   b$InErrorRef$V0S8 = b$InErrorRef
+   h$V0S8 = DSAttachJob("job_DL_GenereerPeercodeRLM_DML", DSJ.ERRNONE)
+   If (Not(h$V0S8)) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "job_DL_GenereerPeercodeRLM_DML":@FM:DSGetLastErrorMsg())
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V0S8, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V0S8 = "job_DL_GenereerPeercodeRLM_DML":'.':(pmDlId:"_":pmDlNaam)
+   End Else
+      jb$V0S8 = "job_DL_GenereerPeercodeRLM_DML"
+   End
+   dummy$ = DSDetachJob(h$V0S8)
+   b$V0S8skipping = @False
+   h$V0S8$cp = "h$V0S8"
+   If DSCheckPointGetValue(DSJ.ME, h$V0S8$cp, cp$value) = DSJE.NOERROR Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0021\\Skipped run of job '%1' on restart", jb$V0S8), "@job_DL_GenereerPeercodeRLM_DML")
+      job$V0S8$status = Raise(cp$value<1>)
+      job$V0S8$userstatus = Raise(cp$value<2>)
+      IdV0S8%%Result2%%18 = job$V0S8$userstatus
+      IdV0S8%%Result1%%19 = job$V0S8$status
+      IdV0S8%%Name%%20 = jb$V0S8
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0060\\%1 (JOB %2) skipped", "job_DL_GenereerPeercodeRLM_DML":@FM:jb$V0S8))
+      b$V0S8skipping = @True
+      Goto L$V0S8$SKIPPED
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "job_DL_GenereerPeercodeRLM_DML":@FM:jb$V0S8))
+   h$V0S8 = DSAttachJob(jb$V0S8, DSJ.ERRNONE)
+   If (Not(h$V0S8)) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V0S8:@FM:DSGetLastErrorMsg())
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   h$V0S8 = DSPrepareJob(h$V0S8)
+   If (Not(h$V0S8)) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V0S8:@FM:DSGetLastErrorMsg())
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+L$V0S8$PREPARED:
+   p$V0S8$1 = (pmDlId)
+   err$code = DSSetParam(h$V0S8, "pmDlId", p$V0S8$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmDlId":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$2 = (pmDlNaam)
+   err$code = DSSetParam(h$V0S8, "pmDlNaam", p$V0S8$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmDlNaam":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$3 = (pmProcesDatum)
+   err$code = DSSetParam(h$V0S8, "pmProcesDatum", p$V0S8$3)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmProcesDatum":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$4 = ('stg_peer_dossier_sim_tb')
+   err$code = DSSetParam(h$V0S8, "pmStgSIMTabelNaam", p$V0S8$4)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmStgSIMTabelNaam":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$5 = (pmBron)
+   err$code = DSSetParam(h$V0S8, "pmBron", p$V0S8$5)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmBron":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$6 = ('stg_peer_dossier_tb')
+   err$code = DSSetParam(h$V0S8, "pmTabelStgNaam", p$V0S8$6)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmTabelStgNaam":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$7 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S8, "par_DIM_Dbs", p$V0S8$7)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Dbs":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   p$V0S8$25 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S8, "par_Teksten", p$V0S8$25)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_Teksten":@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V0S8, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V0S8:@FM:err$code)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V0S8
+   id$list<-1> = "V0S8"
+   GoTo L$V0S0$RETURN$1
+**************************************************
+L$V0S8$FINISHED:
+   job$V0S8$status = DSGetJobInfo(h$V0S8, DSJ.JOBSTATUS)
+   job$V0S8$userstatus = DSGetJobInfo(h$V0S8, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "job_DL_GenereerPeercodeRLM_DML":@FM:jb$V0S8:@FM:job$V0S8$status))
+   IdV0S8%%Result2%%18 = job$V0S8$userstatus
+   IdV0S8%%Result1%%19 = job$V0S8$status
+   IdV0S8%%Name%%20 = jb$V0S8
+   If (job$V0S8$status <> DSJS.RUNOK) Then
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0030\\Job %1 did not finish OK, status = '%2'", jb$V0S8:@FM:DSTranslateCode(job$V0S8$status)), "@job_DL_GenereerPeercodeRLM_DML")
+   End
+   rpt$V0S8 = DSMakeJobReport(h$V0S8, 1, "CRLF")
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0004\\Report on job: %1<L>%2", jb$V0S8:@FM:rpt$V0S8), "@job_DL_GenereerPeercodeRLM_DML")
+   dummy$ = DSDetachJob(h$V0S8)
+   If (job$V0S8$status <> DSJS.RUNOK And job$V0S8$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "job_DL_GenereerPeercodeRLM_DML"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V0S8)
+      msg$id = "@job_DL_GenereerPeercodeRLM_DML"; GoTo L$ERROR
+   End
+   If b$InErrorRef$V0S8 Or (job$V0S8$status <> DSJS.RUNOK And job$V0S8$status <> DSJS.RUNWARN) Then Goto L$V0S8$SKIPPED
+   cp$value = Lower(job$V0S8$status)
+   cp$value<2> = Lower(job$V0S8$userstatus)
+   dummy$ = DSCheckPointSetValue(DSJ.ME, h$V0S8$cp, cp$value)
+   Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0025\\Checkpointed run of job '%1'", jb$V0S8), "@job_DL_GenereerPeercodeRLM_DML")
+**************************************************
+L$V0S8$SKIPPED:
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   If (job$V0S8$status = DSJS.RUNOK) Then GoTo L$V41S0$START
+L$V0S8$RETURN$1:
+   If b$V0S8skipping Then GoTo L$V0S0$RETURN$1
+   GoTo L$WAITFORJOB
+**************************************************
+L$WAITFORJOB:
+   If handle$list = "" Then GoTo L$FINISH
+   handle$ = DSWaitForJob(handle$list)
+   If handle$ = 0 Then handle$ = handle$list<1>
+   Locate handle$ In handle$list Setting index$ Then
+      id$ = id$list<index$>
+      Del id$list<index$>; Del handle$list<index$>
+      b$Abandoning = abort$list<index$>; Del abort$list<index$>
+      Begin Case
+      Case id$ = "V40S0"
+         GoTo L$V40S0$FINISHED
+      Case id$ = "V41S0"
+         GoTo L$V41S0$FINISHED
+      Case id$ = "V0S0"
+         GoTo L$V0S0$FINISHED
+      Case id$ = "V42S1"
+         GoTo L$V42S1$FINISHED
+      Case id$ = "V42S2"
+         GoTo L$V42S2$FINISHED
+      Case id$ = "V0S8"
+         GoTo L$V0S8$FINISHED
+      End Case
+   End
+* Error if fall though
+   handle$list = ""
+   err$source = "@Coordinator"; err$number = -1
+   msg$ = DSMakeMsg("DSTAGE_JSG_M_0008\\Error calling DSWaitForJob(), code=%1[E]", handle$)
+   msg$id = "@Coordinator"; GoTo L$ERROR
+**************************************************
+L$ERROR:
+   IdV42S3%%Param%%15 = err$source
+   IdV42S3%%Param%%16 = err$number
+   IdV42S3%%Param%%17 = msg$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0052\\Exception raised: %1", msg$id:", ":msg$))
+   If Not(b$InErrorRef) Then
+      dummy$ = DSCheckPointSetValue(DSJ.ME, "!", DSMakeMsg("DSTAGE_JSG_M_0031\\Failed at: %1, Reason=%2", err$source:@FM:msg$))
+   End
+   abort$list = Ifs(handle$list, Str(1:@FM, DCount(handle$list, @FM)), "")
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0053\\Exception handler started", ""))
+   If Not(b$InErrorRef) Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0010\\Will execute error activity: %1", "exh"), msg$id)
+      b$InErrorRef = @True
+      b$NumStarted = 1
+      GoTo L$V42S3$START
+   End Else
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0011\\Error while executing error activity: %1", "exh"), msg$id)
+   End
+   b$Abandoning = @True
+   GoTo L$WAITFORJOB
+L$ABORT:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0055\\Sequence failed (restartable)", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0014\\Sequence job (restartable) will abort due to previous unrecoverable errors", ""), "@Coordinator")
+**************************************************
+L$FINISH:
+   If b$Abandoning Then GoTo L$ABORT
+*** At successful exit remove checkpoint record
+   If Not(b$InErrorRef) And DSCheckPointExists(DSJ.ME, cp$dtm) Then
+      dummy$ = DSCheckPointDelete(DSJ.ME)
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0018\\Removed checkpoint record at successful completion of sequence", ""), "@Coordinator")
+   End
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0054\\Sequence finished OK", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   L$EXIT: Return To L$EXIT
+ 
+
+=+=+=+=
+      ControlAfterSubr "0"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "pmRunId"
+         Prompt "pmRunId"
+         Default "52"
+         ParamType "2"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmBron"
+         Prompt "pmBron"
+         Default "peercode"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDlId"
+         Prompt "pmDlId"
+         Default "9"
+         ParamType "2"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDlNaam"
+         Prompt "pmDlNaam"
+         Default "peercode"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesDatum"
+         Prompt "pmProcesDatum"
+         Default "2020-01-01 00:00:00"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesNaam"
+         Prompt "pmProcesNaam"
+         Default "PeercodeRowLevelMasking"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Teksten"
+         Prompt "par_Teksten parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor Tekst waarden"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Linux_Paden"
+         Prompt "par_Linux_Paden parameters"
+         Default "(As pre-defined)"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Email_Admin"
+         Prompt "par_DIM_Email_Admin parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Email settings voor DIM admin"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Prompt "par_DIM_Dbs parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor database connectie"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SequenceUseGridProperties"
+         Value "0"
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      Dependencies "CJobDepend"
+      BEGIN DSSUBRECORD
+         Name "job_DL_InsertProcesLog"
+         Type "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "seq_DL_CheckPeercodeMaskeringstype"
+         Type "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "seq_DL_InsertErrorLog"
+         Type "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "job_DL_GenereerPeercodeRLM_DML"
+         Type "0"
+      END DSSUBRECORD
+      IsTemplate "0"
+      NLSLocale ",,,,"
+      JobType "2"
+      Category "\\20 Bronzone\\50 Jobs\\1 Start"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "1"
+      JobSeqCodeGenOpts "handleaborts,checkpoints,logjoberrors,logjobreports"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V40S0|V41S0|V0S0|V42S0|V42S1|V42S2|V42S3|V0A5|V0S8"
+      StageXPos "72|648|264|600|432|288|144|5|480"
+      StageYPos "216|216|216|360|360|360|360|8|216"
+      StageTypes "CJSJobActivity|CJSJobActivity|CJSJobActivity|CJSTerminatorActivity|CJSJobActivity|CJSJobActivity|CJSExceptionHandler|ID_PALETTEJOBANNOTATION|CJSJobActivity"
+      NextStageID "9"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|48|48|48|48|48|48|695|48"
+      StageYSize "48|48|48|48|48|48|48|72|48"
+      ContainerViewSizing "0026 0026 1061 0465 0000 0001 0000 0000"
+      StageNames "log_Lopend|log_Klaar|seq_DL_CheckPeercodeMaskeringstype|ter_Afbreken|log_Afgebroken|seq_DL_InsertErrorLog|exh| |job_DL_GenereerPeercodeRLM_DML"
+      StageTypeIDs "CJobActivity|CJobActivity|CJobActivity|CTerminatorActivity|CJobActivity|CJobActivity|CExceptionHandler| |CJobActivity"
+      LinkNames "lnk_CheckMaskering| |lnk_GenereerRLM_DML| |lnk_Afbreken|lnk_Afgebroken|lnk_ExhLog| |lnk_Klaar"
+      LinkHasMetaDatas "False| |False| |False|False|False| |False"
+      LinkTypes "1| |1| |1|1|1| |1"
+      LinkNamePositionXs "140| |322| |528|337|219| |555"
+      LinkNamePositionYs "244| |245| |384|388|384| |242"
+      TargetStageIDs "V0S0| |V0S8| |V42S0|V42S1|V42S2| |V41S0"
+      SourceStageEffectiveExecutionModes "0| |0| |0|0|0| |0"
+      SourceStageRuntimeExecutionModes "0| |0| |0|0|0| |0"
+      TargetStageEffectiveExecutionModes "0| |0| |0|0|0| |0"
+      TargetStageRuntimeExecutionModes "0| |0| |0|0|0| |0"
+      LinkIsSingleOperatorLookup "False| |False| |False|False|False| |False"
+      LinkIsSortSequential "False| |False| |False|False|False| |False"
+      LinkSortMode "0| |0| |0|0|0| |0"
+      LinkPartColMode "0| |0| |0|0|0| |0"
+      LinkSourcePinIDs "V40S0P1| |V0S0P2| |V42S1P2|V42S2P2|V42S3P1| |V0S8P1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0A5"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "V0A5"
+      NextID "0"
+      AnnotationType "1"
+      TextFont "Courier\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "0"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "12713983"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "seq_DL_CheckPeercodeMaskeringstype"
+      NextID "3"
+      InputPins "V0S0P1"
+      OutputPins "V0S0P2"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "seq_DL_CheckPeercodeMaskeringstype"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmDlId#_#pmDlNaam#"
+         ValueType "4"
+         DisplayValue "#pmDlId#_#pmDlNaam#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmRunId"
+         Description "pmRunId"
+         ValueType "4"
+         DisplayValue "pmRunId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDlId"
+         Description "pmDlId"
+         ValueType "4"
+         DisplayValue "pmDlId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDlNaam"
+         Description "pmDlNaam"
+         ValueType "4"
+         DisplayValue "pmDlNaam"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesDatum"
+         Description "pmProcesDatum"
+         ValueType "4"
+         DisplayValue "pmProcesDatum"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesNaam"
+         Description "'PeercodeControle'"
+         ValueType "4"
+         DisplayValue "'PeercodeControle'"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Linux_Paden"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Email_Admin"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Teksten"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_CheckMaskering"
+      Partner "V40S0|V40S0P1"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0P2"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_GenereerRLM_DML"
+      Partner "V0S8|V0S8P2"
+      ConditionType "2"
+      TriggerExpression "\"Executed OK\""
+      LeftTextPos "322"
+      TopTextPos "245"
+      SourceID "V0S0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S8"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "job_DL_GenereerPeercodeRLM_DML"
+      NextID "3"
+      InputPins "V0S8P2"
+      OutputPins "V0S8P1"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "job_DL_GenereerPeercodeRLM_DML"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmDlId#_#pmDlNaam#"
+         ValueType "4"
+         DisplayValue "#pmDlId#_#pmDlNaam#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmDlId"
+         Description "pmDlId"
+         ValueType "4"
+         DisplayValue "pmDlId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmDlNaam"
+         Description "pmDlNaam"
+         ValueType "4"
+         DisplayValue "pmDlNaam"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesDatum"
+         Description "pmProcesDatum"
+         ValueType "4"
+         DisplayValue "pmProcesDatum"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmStgSIMTabelNaam"
+         Description "'stg_peer_dossier_sim_tb'"
+         ValueType "4"
+         DisplayValue "'stg_peer_dossier_sim_tb'"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmBron"
+         Description "pmBron"
+         ValueType "4"
+         DisplayValue "pmBron"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmTabelStgNaam"
+         Description "'stg_peer_dossier_tb'"
+         ValueType "4"
+         DisplayValue "'stg_peer_dossier_tb'"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Teksten"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S8P1"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_Klaar"
+      Partner "V41S0|V41S0P1"
+      ConditionType "2"
+      TriggerExpression "\"Executed OK\""
+      LeftTextPos "555"
+      TopTextPos "242"
+      SourceID "V0S11"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S8P2"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_GenereerRLM_DML"
+      Partner "V0S0|V0S0P2"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V40S0"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "log_Lopend"
+      NextID "2"
+      OutputPins "V40S0P1"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "job_DL_InsertProcesLog"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmDlId#_#pmDlNaam#"
+         ValueType "4"
+         DisplayValue "#pmDlId#_#pmDlNaam#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmRunId"
+         Description "pmRunId"
+         ValueType "4"
+         DisplayValue "pmRunId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesNaam"
+         Description "pmProcesNaam"
+         ValueType "4"
+         DisplayValue "pmProcesNaam"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesStatus"
+         Description "par_Teksten.$evTekst_Status_Lopend"
+         ValueType "4"
+         DisplayValue "par_Teksten.$evTekst_Status_Lopend"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesBoodschap"
+         Description "DSJobName"
+         ValueType "4"
+         DisplayValue "DSJobName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V40S0P1"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_CheckMaskering"
+      Partner "V0S0|V0S0P1"
+      ConditionType "2"
+      TriggerExpression "\"Executed OK\""
+      LeftTextPos "140"
+      TopTextPos "244"
+      SourceID "V0S1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V41S0"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "log_Klaar"
+      NextID "2"
+      InputPins "V41S0P1"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "job_DL_InsertProcesLog"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmDlId#_#pmDlNaam#"
+         ValueType "4"
+         DisplayValue "#pmDlId#_#pmDlNaam#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmRunId"
+         Description "pmRunId"
+         ValueType "4"
+         DisplayValue "pmRunId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesNaam"
+         Description "pmProcesNaam"
+         ValueType "4"
+         DisplayValue "pmProcesNaam"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesStatus"
+         Description "par_Teksten.$evTekst_Status_Klaar"
+         ValueType "4"
+         DisplayValue "par_Teksten.$evTekst_Status_Klaar"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesBoodschap"
+         Description "DSJobName"
+         ValueType "4"
+         DisplayValue "DSJobName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V41S0P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_Klaar"
+      Partner "V0S8|V0S8P1"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S0"
+      OLEType "CJSTerminatorActivity"
+      Readonly "0"
+      Name "ter_Afbreken"
+      NextID "2"
+      InputPins "V42S0P1"
+      TerminationType "0"
+      StageType "CTerminatorActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S0P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_Afbreken"
+      Partner "V42S1|V42S1P2"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S1"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "log_Afgebroken"
+      NextID "3"
+      InputPins "V42S1P1"
+      OutputPins "V42S1P2"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "job_DL_InsertProcesLog"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmDlId#_#pmDlNaam#"
+         ValueType "4"
+         DisplayValue "#pmDlId#_#pmDlNaam#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmRunId"
+         Description "pmRunId"
+         ValueType "4"
+         DisplayValue "pmRunId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesNaam"
+         Description "pmProcesNaam"
+         ValueType "4"
+         DisplayValue "pmProcesNaam"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesStatus"
+         Description "par_Teksten.$evTekst_Status_Afgebroken"
+         ValueType "4"
+         DisplayValue "par_Teksten.$evTekst_Status_Afgebroken"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesBoodschap"
+         Description "DSJobName"
+         ValueType "4"
+         DisplayValue "DSJobName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Description "par_DIM_Dbs"
+         ValueType "4"
+         DisplayValue "par_DIM_Dbs"
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S1P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_Afgebroken"
+      Partner "V42S2|V42S2P2"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S1P2"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_Afbreken"
+      Partner "V42S0|V42S0P1"
+      ConditionType "0"
+      TriggerExpression "N/A"
+      LeftTextPos "528"
+      TopTextPos "384"
+      SourceID "V18S0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S2"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "seq_DL_InsertErrorLog"
+      NextID "3"
+      InputPins "V42S2P1"
+      OutputPins "V42S2P2"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "seq_DL_InsertErrorLog"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmDlId#_#pmDlNaam#"
+         ValueType "4"
+         DisplayValue "#pmDlId#_#pmDlNaam#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmDlId"
+         Description "pmDlId"
+         ValueType "4"
+         DisplayValue "pmDlId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmRunId"
+         Description "pmRunId"
+         ValueType "4"
+         DisplayValue "pmRunId"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesNaam"
+         Description "pmProcesNaam"
+         ValueType "4"
+         DisplayValue "pmProcesNaam"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmProcesDatum"
+         Description "pmProcesDatum"
+         ValueType "4"
+         DisplayValue "pmProcesDatum"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmErrorLogFileDirectory"
+         Description "par_Linux_Paden.$evPad_Bronzone : '/' : par_Linux_Paden.$evPad_Logs "
+         ValueType "4"
+         DisplayValue "par_Linux_Paden.$evPad_Bronzone : '/' : par_Linux_Paden.$evPad_Logs "
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmExceptionErrorMessage"
+         Description "exh.$ErrSource : ' ' : exh.$ErrMessage"
+         ValueType "4"
+         DisplayValue "exh.$ErrSource : ' ' : exh.$ErrMessage"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Description "par_DIM_Dbs"
+         ValueType "4"
+         DisplayValue "par_DIM_Dbs"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Email_Admin"
+         Description "par_DIM_Email_Admin"
+         ValueType "4"
+         DisplayValue "par_DIM_Email_Admin"
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S2P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_ExhLog"
+      Partner "V42S3|V42S3P1"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S2P2"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_Afgebroken"
+      Partner "V42S1|V42S1P1"
+      ConditionType "0"
+      TriggerExpression "N/A"
+      LeftTextPos "337"
+      TopTextPos "388"
+      SourceID "V0S1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S3"
+      OLEType "CJSExceptionHandler"
+      Readonly "0"
+      Name "exh"
+      NextID "2"
+      OutputPins "V42S3P1"
+      ExceptionType "0"
+      StageType "CExceptionHandler"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V42S3P1"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_ExhLog"
+      Partner "V42S2|V42S2P1"
+      ConditionType "0"
+      LeftTextPos "219"
+      TopTextPos "384"
+      SourceID "V0S7"
+   END DSRECORD
+END DSJOB
