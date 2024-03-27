@@ -1,0 +1,61 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "VMD010140178224.DEV.LOCAL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2020-04-03"
+   Time "12.34.16"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSROUTINES
+   BEGIN DSRECORD
+      Identifier "SetUserStatus"
+      DateModified "2020-03-19"
+      TimeModified "19.05.41"
+      OLEType "CRoutine"
+      Readonly "0"
+      Category "\\Routines\\UWV Created"
+      RoutineType "0"
+      ArgCount "1"
+      Built "1"
+      SourceFlag "1"
+      Version "2.0.0"
+      Source =+=+=+=
+FUNCTION SetUserStatus(Arg1)
+Call DSSetUserStatus(Arg1)
+Ans=Arg1
+RETURN(Ans)
+=+=+=+=
+      Catalog "DSU.SetUserStatus"
+      JobType "0"
+      Arguments "CRtnArgument"
+      BEGIN DSSUBRECORD
+         Name "Arg1"
+         SqlType "0"
+         ColScale "0"
+         IOType "0"
+         Nullable "0"
+         Occurs "0"
+         KeyPosition "0"
+         Precision "0"
+         SignOption "0"
+         SyncIndicator "0"
+         LevelNo "0"
+      END DSSUBRECORD
+      SkipOnNull "0"
+      InvocationMethod "0"
+   END DSRECORD
+   BEGIN DSUBINARY
+      Identifier "DSU.SetUserStatus"
+      B1 "E1DA10B7050001000100020000000000020002000600060004000200FC7F00001E00000004000000"
+      B41 "050000001000000055C00000720000007200000094000000DC000000E60000000000000000000000"
+      B81 "080000001E00040001000300F80003000100F800010002005C01F800050002005C01004453536574"
+      B121 "55736572537461747573040F00000001000000010000000010000000000000000000000000000000"
+      B161 "0800000001000100000000000C0000000200030000000000130000000300040000000000244D4154"
+      B201 "52495800416E73005F5430303030004172673100FEFF00000800060008002F7530312F49424D2F49"
+      B241 "6E666F726D6174696F6E5365727665722F5365727665722F50726F6A656374732F44494D5F6F6E74"
+      B281 "77696B6B656C2F4453555F42502F4453552E536574557365725374617475730000"
+   END DSUBINARY
+END DSROUTINES

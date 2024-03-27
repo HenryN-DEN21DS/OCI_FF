@@ -1,0 +1,1014 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "BE03QAP454UWVRM.HRC.BA.UWV.NL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2022-11-23"
+   Time "13.58.51"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "seq_ExecCheckSQL"
+   DateModified "2022-11-23"
+   TimeModified "13.56.20"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "seq_ExecCheckSQL"
+      Description =+=+=+=
+Voer de SQL uit en vergelijk het resultaat met de referentiewaarde. Als het resultaat niet gelijk is aan de referentiewaarde, breek de verwerking dan af
+
+Datum      Naam   Omschrijving
+04-02-2022 jsc226 Aangepast aan S&R
+01-06-2021 mle134 Aangemaakt
+=+=+=+=
+      NextID "1"
+      Container "V0"
+      JobVersion "56.0.0"
+      JobControlCode =+=+=+=
+* Tokens were replaced below as follows:
+* IdV0S0%%Result2%%0 <= job_ExecCheckSQL.$UserStatus
+* IdV0S0%%Result1%%1 <= job_ExecCheckSQL.$JobStatus
+* IdV0S0%%Name%%2 <= job_ExecCheckSQL.$JobName
+* IdV0S9%%Param%%3 <= exh_Exception.$ErrSource
+* IdV0S9%%Param%%4 <= exh_Exception.$ErrNumber
+* IdV0S9%%Param%%5 <= exh_Exception.$ErrMessage
+*
+*** [Generated at 2022-11-23 13:56:20 - 11.7.1.0]
+   $INCLUDE DSINCLUDE DSJ_XFUNCS.H
+   EQU Time$$ Lit "Oconv(Time(), 'MTS:'):': '"
+****************************************
+* Graphical Sequencer generated code for Job seq_ExecCheckSQL
+****************************************
+   
+   handle$list = ""
+   id$list = ""
+   abort$list = ""
+   b$Abandoning = @False
+   b$InErrorRef = @False
+   summary$restarting = @False
+*** Sequence start point
+   summary$ = DSMakeMsg("DSTAGE_JSG_M_0048\\Summary of sequence run", "")
+   If summary$restarting Then
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0049\\Sequence restarted after failure", ""))
+   End Else
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0051\\Sequence started", ""))
+   End
+   GoTo L$V0S0$START
+L$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S0$START:
+*** Activity "job_ExecCheckSQL": Initialize job
+   h$V0S0 = DSAttachJob("job_ExecCheckSQL", DSJ.ERRNONE)
+   If (Not(h$V0S0)) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "job_ExecCheckSQL":@FM:DSGetLastErrorMsg())
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V0S0, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V0S0 = "job_ExecCheckSQL":'.':(pmTestStapCd)
+   End Else
+      jb$V0S0 = "job_ExecCheckSQL"
+   End
+   dummy$ = DSDetachJob(h$V0S0)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "job_ExecCheckSQL":@FM:jb$V0S0))
+   h$V0S0 = DSAttachJob(jb$V0S0, DSJ.ERRNONE)
+   If (Not(h$V0S0)) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V0S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   h$V0S0 = DSPrepareJob(h$V0S0)
+   If (Not(h$V0S0)) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V0S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+L$V0S0$PREPARED:
+   p$V0S0$1 = (pmTestStapCd)
+   err$code = DSSetParam(h$V0S0, "pmTestStapCd", p$V0S0$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmTestStapCd":@FM:err$code)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   p$V0S0$2 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S0, "par_DIM_Test", p$V0S0$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Test":@FM:err$code)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V0S0, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V0S0:@FM:err$code)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V0S0
+   id$list<-1> = "V0S0"
+   GoTo L$RETURN$1
+**************************************************
+L$V0S0$FINISHED:
+   job$V0S0$status = DSGetJobInfo(h$V0S0, DSJ.JOBSTATUS)
+   job$V0S0$userstatus = DSGetJobInfo(h$V0S0, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "job_ExecCheckSQL":@FM:jb$V0S0:@FM:job$V0S0$status))
+   IdV0S0%%Result2%%0 = job$V0S0$userstatus
+   IdV0S0%%Result1%%1 = job$V0S0$status
+   IdV0S0%%Name%%2 = jb$V0S0
+   dummy$ = DSDetachJob(h$V0S0)
+   If (job$V0S0$status <> DSJS.RUNOK And job$V0S0$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "job_ExecCheckSQL"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V0S0)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   If (job$V0S0$status = DSJS.RUNOK) Then GoTo L$V0S3$START
+L$V0S0$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S3$START:
+*** Decision "nes_CheckRefWaarde"
+   If (IdV0S0%%Result2%%0 <> pmRefWaarde) Then GoTo L$V0S8$START
+L$V0S3$RETURN$1:
+   GoTo L$V0S0$RETURN$1
+**************************************************
+L$V0S8$START:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0065\\%1 Executed", "ter_Error"))
+* Send stop request to any outstanding child jobs
+   For index$ = 1 To DCount(handle$list, @FM)
+      handle$ = handle$list<index$>
+      If handle$ <> "" Then
+         job$name = DSGetJobInfo(handle$, DSJ.JOBNAME)
+         job$invid = DSGetJobInfo(handle$, DSJ.JOBINVOCATIONID)
+         if job$invid <> "" Then job$name = job$name:".":job$invid
+         Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0019\\Sending STOP request to job: %1", job$name), "@ter_Error")
+         dummy$ = DSStopJob(handle$)
+      End
+   Next index$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0069\\Sequence terminated", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0020\\Sequence abort requested", ""), "@ter_Error")
+**************************************************
+L$V0S9$START:
+*** Decision "exh_Exception"
+   GoTo L$V0S11$START
+L$V0S9$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S11$START:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0065\\%1 Executed", "ter_Abort"))
+* Send stop request to any outstanding child jobs
+   For index$ = 1 To DCount(handle$list, @FM)
+      handle$ = handle$list<index$>
+      If handle$ <> "" Then
+         job$name = DSGetJobInfo(handle$, DSJ.JOBNAME)
+         job$invid = DSGetJobInfo(handle$, DSJ.JOBINVOCATIONID)
+         if job$invid <> "" Then job$name = job$name:".":job$invid
+         Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0019\\Sending STOP request to job: %1", job$name), "@ter_Abort")
+         dummy$ = DSStopJob(handle$)
+      End
+   Next index$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0069\\Sequence terminated", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0020\\Sequence abort requested", ""), "@ter_Abort")
+**************************************************
+L$WAITFORJOB:
+   If handle$list = "" Then GoTo L$FINISH
+   handle$ = DSWaitForJob(handle$list)
+   If handle$ = 0 Then handle$ = handle$list<1>
+   Locate handle$ In handle$list Setting index$ Then
+      id$ = id$list<index$>
+      Del id$list<index$>; Del handle$list<index$>
+      b$Abandoning = abort$list<index$>; Del abort$list<index$>
+      Begin Case
+      Case id$ = "V0S0"
+         GoTo L$V0S0$FINISHED
+      End Case
+   End
+* Error if fall though
+   handle$list = ""
+   err$source = "@Coordinator"; err$number = -1
+   msg$ = DSMakeMsg("DSTAGE_JSG_M_0008\\Error calling DSWaitForJob(), code=%1[E]", handle$)
+   msg$id = "@Coordinator"; GoTo L$ERROR
+**************************************************
+L$ERROR:
+   IdV0S9%%Param%%3 = err$source
+   IdV0S9%%Param%%4 = err$number
+   IdV0S9%%Param%%5 = msg$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0052\\Exception raised: %1", msg$id:", ":msg$))
+   abort$list = Ifs(handle$list, Str(1:@FM, DCount(handle$list, @FM)), "")
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0053\\Exception handler started", ""))
+   If Not(b$InErrorRef) Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0010\\Will execute error activity: %1", "exh_Exception"), msg$id)
+      b$InErrorRef = @True
+      b$NumStarted = 1
+      GoTo L$V0S9$START
+   End Else
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0011\\Error while executing error activity: %1", "exh_Exception"), msg$id)
+   End
+   b$Abandoning = @True
+   GoTo L$WAITFORJOB
+L$ABORT:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0056\\Sequence failed", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0013\\Sequence job will abort due to previous unrecoverable errors", ""), "@Coordinator")
+**************************************************
+L$FINISH:
+   If b$Abandoning Then GoTo L$ABORT
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0054\\Sequence finished OK", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   L$EXIT: Return To L$EXIT
+ 
+
+=+=+=+=
+      ControlAfterSubr "0"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "pmRefWaarde"
+         Prompt "pmRefWaarde"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmTestStapCd"
+         Prompt "pmTestStapCd"
+         Default "LEV5_TST4"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "pmSchemaNaam"
+         Prompt "pmSchemaNaam"
+         Default "DIM_TRUDI_DEV"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Test"
+         Prompt "par_DIM_Test parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameter set met connectie gegevens tbv het DIM_TEST schema"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SequenceUseGridProperties"
+         Value "0"
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      Dependencies "CJobDepend"
+      BEGIN DSSUBRECORD
+         Name "job_ExecCheckSQL"
+         Type "0"
+      END DSSUBRECORD
+      IsTemplate "0"
+      NLSLocale ",,,,"
+      JobType "2"
+      Category "\\90 Generiek\\40 Test Raamwerk"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "1"
+      JobSeqCodeGenOpts "handleaborts"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V0S0|V0S3|V0S8|V0S9|V0S11|V0A13"
+      StageXPos "72|216|360|72|240|8"
+      StageYPos "144|144|144|288|288|3"
+      StageTypes "CJSJobActivity|CJSCondition|CJSTerminatorActivity|CJSExceptionHandler|CJSTerminatorActivity|ID_PALETTEJOBANNOTATION"
+      NextStageID "14"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|48|48|48|48|681"
+      StageYSize "48|48|48|48|48|103"
+      ContainerViewSizing "0000 0000 0772 0414 0000 0001 0000 0000"
+      StageNames "job_ExecCheckSQL|nes_CheckRefWaarde|ter_Error|exh_Exception|ter_Abort| "
+      StageTypeIDs "CJobActivity|CCondition|CTerminatorActivity|CExceptionHandler|CTerminatorActivity| "
+      LinkNames "lnk_SqlResult|lnk_Error| |lnk_Abort| | "
+      LinkHasMetaDatas "False|False| |False| | "
+      LinkTypes "1|1| |1| | "
+      LinkNamePositionXs "137|293| |150| | "
+      LinkNamePositionYs "171|171| |312| | "
+      TargetStageIDs "V0S3|V0S8| |V0S11| | "
+      SourceStageEffectiveExecutionModes "0|0| |0| | "
+      SourceStageRuntimeExecutionModes "0|0| |0| | "
+      TargetStageEffectiveExecutionModes "0|0| |0| | "
+      TargetStageRuntimeExecutionModes "0|0| |0| | "
+      LinkIsSingleOperatorLookup "False|False| |False| | "
+      LinkIsSortSequential "False|False| |False| | "
+      LinkSortMode "0|0| |0| | "
+      LinkPartColMode "0|0| |0| | "
+      LinkSourcePinIDs "V0S0P1|V0S3P3| |V0S9P1| | "
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0A13"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "V0A13"
+      NextID "0"
+      AnnotationType "1"
+      TextFont "Courier\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "0"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "12713983"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0"
+      OLEType "CJSJobActivity"
+      Readonly "0"
+      Name "job_ExecCheckSQL"
+      NextID "2"
+      OutputPins "V0S0P1"
+      JobType "0"
+      ExecutionType "1"
+      Jobname "job_ExecCheckSQL"
+      JobInvocationID "CParamValues"
+      BEGIN DSSUBRECORD
+         Description "#pmTestStapCd#"
+         ValueType "4"
+         DisplayValue "#pmTestStapCd#"
+      END DSSUBRECORD
+      ParameterValues "CParamValues"
+      BEGIN DSSUBRECORD
+         Name "pmTestStapCd"
+         Description "pmTestStapCd"
+         ValueType "4"
+         DisplayValue "pmTestStapCd"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Test"
+         Description "\"(As pre-defined)\""
+         ValueType "4"
+         DisplayValue "\"(As pre-defined)\""
+      END DSSUBRECORD
+      CheckPoint "0"
+      StageType "CJobActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0P1"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_SqlResult"
+      Partner "V0S3|V0S3P1"
+      ConditionType "2"
+      TriggerExpression "\"Executed OK\""
+      LeftTextPos "137"
+      TopTextPos "171"
+      SourceID "V0S0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S11"
+      OLEType "CJSTerminatorActivity"
+      Readonly "0"
+      Name "ter_Abort"
+      NextID "2"
+      InputPins "V0S11P1"
+      TerminationType "0"
+      StageType "CTerminatorActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S11P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_Abort"
+      Partner "V0S9|V0S9P1"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3"
+      OLEType "CJSCondition"
+      Readonly "0"
+      Name "nes_CheckRefWaarde"
+      NextID "4"
+      InputPins "V0S3P1"
+      OutputPins "V0S3P3"
+      ConditionType "0"
+      StageType "CCondition"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_SqlResult"
+      Partner "V0S0|V0S0P1"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3P3"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_Error"
+      Partner "V0S8|V0S8P1"
+      ConditionType "6"
+      TriggerExpression "job_ExecCheckSQL.$UserStatus <> pmRefWaarde"
+      LeftTextPos "293"
+      TopTextPos "171"
+      SourceID "V0S3"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S8"
+      OLEType "CJSTerminatorActivity"
+      Readonly "0"
+      Name "ter_Error"
+      NextID "2"
+      InputPins "V0S8P1"
+      TerminationType "0"
+      StageType "CTerminatorActivity"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S8P1"
+      OLEType "CJSActivityInput"
+      Readonly "0"
+      Name "lnk_Error"
+      Partner "V0S3|V0S3P3"
+      LinkType "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S9"
+      OLEType "CJSExceptionHandler"
+      Readonly "0"
+      Name "exh_Exception"
+      NextID "2"
+      OutputPins "V0S9P1"
+      ExceptionType "0"
+      StageType "CExceptionHandler"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S9P1"
+      OLEType "CJSActivityOutput"
+      Readonly "0"
+      Name "lnk_Abort"
+      Partner "V0S11|V0S11P1"
+      ConditionType "0"
+      LeftTextPos "150"
+      TopTextPos "312"
+      SourceID "V0S9"
+   END DSRECORD
+END DSJOB
+BEGIN DSEXECJOB
+   Identifier "seq_ExecCheckSQL"
+   DateModified "1899-12-30"
+   TimeModified "00.00.01"
+   BEGIN DSRECORD
+      Identifier "seq_ExecCheckSQL"
+      F1 "JOB"
+      F3 "11.7///60/C"
+      F5 "pmRefWaarde\VpmTestStapCd\VpmSchemaNaam\Vpar_DIM_Test\Vpar_DIM_Test.$evDIM_Dbs_Naam\Vpar_DIM_Test.$evDIM_Test_User\Vpar_DIM_Test.$evDIM_Test_Password"
+      F6 "pmRefWaarde\VpmTestStapCd\VpmSchemaNaam\Vpar_DIM_Test parameters\VevDIM_Dbs_Naam: Naam van de DIM database\VevDIM_Test_User\VevDIM_Test_Password"
+      F7 "\VLEV5_TST4\VDIM_TRUDI_DEV\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw=="
+      F8 "\V\V\VParameter set met connectie gegevens tbv het DIM_TEST schema\V\V\V"
+      F9 "0\V0\V0\V13\V0\V0\V1"
+      F10 "V0"
+      F11 "Voer de SQL uit en vergelijk het resultaat met de referentiewaarde. Als het resultaat niet gelijk is aan de referentiewaarde, breek de verwerking dan af\(D)\(A)\(D)\(A)Datum      Naam   Omschrijving\(D)\(A)04-02-2022 jsc226 Aangepast aan S&R\(D)\(A)01-06-2021 mle134 Aangemaakt"
+      F18 "\VLEV5_TST4\VDIM_TRUDI_DEV\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw=="
+      F21 "1\V1\V1\V1\V1\V1\V1"
+      F22 "JOB.2001453189.DT.1940452987"
+      F24 ",,,,"
+      F25 "job_ExecCheckSQL"
+      F26 "0"
+      F28 "\\90 Generiek\\40 Test Raamwerk"
+      F29 "0"
+      F30 "1"
+      F31 "2022-11-23 13:56:21"
+      F32 "2"
+      F34 "\V\VLINUX\V0\V\V\V\V\V\V\V\V\V\V0"
+      F36 "be03qap454uwvrm.hrc.ba.uwv.nl"
+      F37 "DIM_ontwikkel"
+      F38 "0"
+      F41 "0"
+   END DSRECORD
+   BEGIN DSBPSOURCE
+      Identifier "JOB.2001453189.DT.1940452987"
+      TERMINATOR =+=+=+=
+* Tokens were replaced below as follows:
+* JobParam%%1 <= pmRefWaarde
+* JobParam%%2 <= pmTestStapCd
+* JobParam%%3 <= pmSchemaNaam
+* JobParam%%4 <= par_DIM_Test
+* JobParam%%5 <= par_DIM_Test.$evDIM_Dbs_Naam
+* JobParam%%6 <= par_DIM_Test.$evDIM_Test_User
+* JobParam%%7 <= par_DIM_Test.$evDIM_Test_Password
+*
+* Job Control subroutine for Job seq_ExecCheckSQL generated at 13:56:21 23 Nov 2022
+*
+SUBROUTINE DSJobControl
+
+$INCLUDE DSINCLUDE DSD_STAGE.H
+
+$DEFINE JobParam%%1 STAGECOM.JOB.STATUS<7,1>
+$DEFINE JobParam%%2 STAGECOM.JOB.STATUS<7,2>
+$DEFINE JobParam%%3 STAGECOM.JOB.STATUS<7,3>
+$DEFINE JobParam%%4 STAGECOM.JOB.STATUS<7,4>
+$DEFINE JobParam%%5 STAGECOM.JOB.STATUS<7,5>
+$DEFINE JobParam%%6 STAGECOM.JOB.STATUS<7,6>
+$DEFINE JobParam%%7 STAGECOM.JOB.STATUS<7,7>
+
+$INCLUDE DSINCLUDE JOBCONTROL.H
+* Tokens were replaced below as follows:
+* IdV0S0%%Result2%%0 <= job_ExecCheckSQL.$UserStatus
+* IdV0S0%%Result1%%1 <= job_ExecCheckSQL.$JobStatus
+* IdV0S0%%Name%%2 <= job_ExecCheckSQL.$JobName
+* IdV0S9%%Param%%3 <= exh_Exception.$ErrSource
+* IdV0S9%%Param%%4 <= exh_Exception.$ErrNumber
+* IdV0S9%%Param%%5 <= exh_Exception.$ErrMessage
+*
+*** [Generated at 2022-11-23 13:56:20 - 11.7.1.0]
+   $INCLUDE DSINCLUDE DSJ_XFUNCS.H
+   EQU Time$$ Lit "Oconv(Time(), 'MTS:'):': '"
+****************************************
+* Graphical Sequencer generated code for Job seq_ExecCheckSQL
+****************************************
+   
+   handle$list = ""
+   id$list = ""
+   abort$list = ""
+   b$Abandoning = @False
+   b$InErrorRef = @False
+   summary$restarting = @False
+*** Sequence start point
+   summary$ = DSMakeMsg("DSTAGE_JSG_M_0048\\Summary of sequence run", "")
+   If summary$restarting Then
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0049\\Sequence restarted after failure", ""))
+   End Else
+      summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0051\\Sequence started", ""))
+   End
+   GoTo L$V0S0$START
+L$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S0$START:
+*** Activity "job_ExecCheckSQL": Initialize job
+   h$V0S0 = DSAttachJob("job_ExecCheckSQL", DSJ.ERRNONE)
+   If (Not(h$V0S0)) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", "job_ExecCheckSQL":@FM:DSGetLastErrorMsg())
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   If DSGetJobInfo(h$V0S0, DSJ.JOBMULTIINVOKABLE) Then
+      jb$V0S0 = "job_ExecCheckSQL":'.':(JobParam%%2)
+   End Else
+      jb$V0S0 = "job_ExecCheckSQL"
+   End
+   dummy$ = DSDetachJob(h$V0S0)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0057\\%1 (JOB %2) started", "job_ExecCheckSQL":@FM:jb$V0S0))
+   h$V0S0 = DSAttachJob(jb$V0S0, DSJ.ERRNONE)
+   If (Not(h$V0S0)) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0001\\Error calling DSAttachJob(%1)<L>%2", jb$V0S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   h$V0S0 = DSPrepareJob(h$V0S0)
+   If (Not(h$V0S0)) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0012\\Error calling DSPrepareJob(%1)<L>%2", jb$V0S0:@FM:DSGetLastErrorMsg())
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+L$V0S0$PREPARED:
+   p$V0S0$1 = (JobParam%%2)
+   err$code = DSSetParam(h$V0S0, "pmTestStapCd", p$V0S0$1)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "pmTestStapCd":@FM:err$code)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   p$V0S0$2 = "(As pre-defined)"
+   err$code = DSSetParam(h$V0S0, "par_DIM_Test", p$V0S0$2)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0002\\Error calling DSSetParam(%1), code=%2[E]", "par_DIM_Test":@FM:err$code)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   err$code = DSRunJob(h$V0S0, DSJ.RUNNORMAL)
+   If (err$code <> DSJE.NOERROR) Then
+      err$source = "job_ExecCheckSQL"; err$number = -1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0003\\Error calling DSRunJob(%1), code=%2[E]", jb$V0S0:@FM:err$code)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   handle$list<-1> = h$V0S0
+   id$list<-1> = "V0S0"
+   GoTo L$RETURN$1
+**************************************************
+L$V0S0$FINISHED:
+   job$V0S0$status = DSGetJobInfo(h$V0S0, DSJ.JOBSTATUS)
+   job$V0S0$userstatus = DSGetJobInfo(h$V0S0, DSJ.USERSTATUS)
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0063\\%1 (JOB %2) finished, status=%3[E]", "job_ExecCheckSQL":@FM:jb$V0S0:@FM:job$V0S0$status))
+   IdV0S0%%Result2%%0 = job$V0S0$userstatus
+   IdV0S0%%Result1%%1 = job$V0S0$status
+   IdV0S0%%Name%%2 = jb$V0S0
+   dummy$ = DSDetachJob(h$V0S0)
+   If (job$V0S0$status <> DSJS.RUNOK And job$V0S0$status <> DSJS.RUNWARN And Not(b$Abandoning)) Then
+      err$source = "job_ExecCheckSQL"; err$number = 1
+      msg$ = DSMakeMsg("DSTAGE_JSG_M_0024\\Unhandled abort encountered in job %1", jb$V0S0)
+      msg$id = "@job_ExecCheckSQL"; GoTo L$ERROR
+   End
+   If b$Abandoning Then GoTo L$WAITFORJOB
+   If (job$V0S0$status = DSJS.RUNOK) Then GoTo L$V0S3$START
+L$V0S0$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S3$START:
+*** Decision "nes_CheckRefWaarde"
+   If (IdV0S0%%Result2%%0 <> JobParam%%1) Then GoTo L$V0S8$START
+L$V0S3$RETURN$1:
+   GoTo L$V0S0$RETURN$1
+**************************************************
+L$V0S8$START:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0065\\%1 Executed", "ter_Error"))
+* Send stop request to any outstanding child jobs
+   For index$ = 1 To DCount(handle$list, @FM)
+      handle$ = handle$list<index$>
+      If handle$ <> "" Then
+         job$name = DSGetJobInfo(handle$, DSJ.JOBNAME)
+         job$invid = DSGetJobInfo(handle$, DSJ.JOBINVOCATIONID)
+         if job$invid <> "" Then job$name = job$name:".":job$invid
+         Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0019\\Sending STOP request to job: %1", job$name), "@ter_Error")
+         dummy$ = DSStopJob(handle$)
+      End
+   Next index$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0069\\Sequence terminated", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0020\\Sequence abort requested", ""), "@ter_Error")
+**************************************************
+L$V0S9$START:
+*** Decision "exh_Exception"
+   GoTo L$V0S11$START
+L$V0S9$RETURN$1:
+   GoTo L$WAITFORJOB
+**************************************************
+L$V0S11$START:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0065\\%1 Executed", "ter_Abort"))
+* Send stop request to any outstanding child jobs
+   For index$ = 1 To DCount(handle$list, @FM)
+      handle$ = handle$list<index$>
+      If handle$ <> "" Then
+         job$name = DSGetJobInfo(handle$, DSJ.JOBNAME)
+         job$invid = DSGetJobInfo(handle$, DSJ.JOBINVOCATIONID)
+         if job$invid <> "" Then job$name = job$name:".":job$invid
+         Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0019\\Sending STOP request to job: %1", job$name), "@ter_Abort")
+         dummy$ = DSStopJob(handle$)
+      End
+   Next index$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0069\\Sequence terminated", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0020\\Sequence abort requested", ""), "@ter_Abort")
+**************************************************
+L$WAITFORJOB:
+   If handle$list = "" Then GoTo L$FINISH
+   handle$ = DSWaitForJob(handle$list)
+   If handle$ = 0 Then handle$ = handle$list<1>
+   Locate handle$ In handle$list Setting index$ Then
+      id$ = id$list<index$>
+      Del id$list<index$>; Del handle$list<index$>
+      b$Abandoning = abort$list<index$>; Del abort$list<index$>
+      Begin Case
+      Case id$ = "V0S0"
+         GoTo L$V0S0$FINISHED
+      End Case
+   End
+* Error if fall though
+   handle$list = ""
+   err$source = "@Coordinator"; err$number = -1
+   msg$ = DSMakeMsg("DSTAGE_JSG_M_0008\\Error calling DSWaitForJob(), code=%1[E]", handle$)
+   msg$id = "@Coordinator"; GoTo L$ERROR
+**************************************************
+L$ERROR:
+   IdV0S9%%Param%%3 = err$source
+   IdV0S9%%Param%%4 = err$number
+   IdV0S9%%Param%%5 = msg$
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0052\\Exception raised: %1", msg$id:", ":msg$))
+   abort$list = Ifs(handle$list, Str(1:@FM, DCount(handle$list, @FM)), "")
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0053\\Exception handler started", ""))
+   If Not(b$InErrorRef) Then
+      Call DSLogInfo(DSMakeMsg("DSTAGE_JSG_M_0010\\Will execute error activity: %1", "exh_Exception"), msg$id)
+      b$InErrorRef = @True
+      b$NumStarted = 1
+      GoTo L$V0S9$START
+   End Else
+      Call DSLogWarn(DSMakeMsg("DSTAGE_JSG_M_0011\\Error while executing error activity: %1", "exh_Exception"), msg$id)
+   End
+   b$Abandoning = @True
+   GoTo L$WAITFORJOB
+L$ABORT:
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0056\\Sequence failed", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   Call DSLogFatal(DSMakeMsg("DSTAGE_JSG_M_0013\\Sequence job will abort due to previous unrecoverable errors", ""), "@Coordinator")
+**************************************************
+L$FINISH:
+   If b$Abandoning Then GoTo L$ABORT
+   summary$<1,-1> = Time$$:Convert(@VM, " ", DSMakeMsg("DSTAGE_JSG_M_0054\\Sequence finished OK", ""))
+   x$masked$summary = summary$
+   Call DSMaskExecArgs(x$masked$summary, '')
+   Call DSLogInfo(x$masked$summary, "@Coordinator")
+   L$EXIT: Return To L$EXIT
+ 
+
+END
+
+=+=+=+=
+   END DSBPSOURCE
+   BEGIN DSBPBINARY
+      Identifier "JOB.2001453189.DT.1940452987"
+      B1 "E1DA10B705000100A60000000000010098009C0053014301AB009800FFFFFFFF420C0000E6000000"
+      B41 "B200000062050000D2770000960C00009E0C0000D4150000CB2300002F2500000000000000000000"
+      B81 "080000005800A800AB00AC005800A900AB00AC005800AA00AD00AC00F800AE003200F800AE003300"
+      B121 "F800AE003400F800AF003500F800AF003600F800AF003700F800B1003900F800AE003A009601B000"
+      B161 "020039003A003800DE023700B0000000A401B3001201B300B400B5002600B700B800F800BA003B00"
+      B201 "F800AE003C009601B00002003B003C00BB003C00B800B900BB00BC0004010300B500B600BC00BD00"
+      B241 "64003800AC00B200AF00BD003800C200FE000000A401BD001201BD00B400BE002600B700BF00F800"
+      B281 "C0003D00F800AE003E009601B00002003D003E00C1003C00BF00B900C100C20004010300BE00B600"
+      B321 "C200C30064003800AC00B200AF00C3003800C2000C010000C2000000D8080000F800C5004000F800"
+      B361 "C60041009601C4000200400041003F000E013F00C300DE02C300000078010000F800C5004200F800"
+      B401 "B2004300F800C70045002600C800C9009601CA000000CB0004010300C500C900CB0046009601B000"
+      B441 "0200450046004400F800CC004700C200BC090000F800CE0048009601CD0002003F004800C300DE02"
+      B481 "C3000000B00100006000A700D000D100AF00D2003A00CF00D2004900C2000000B6010000F800C500"
+      B521 "49009601D30001003F004A00A401C3001201C300B400D2002600B700D400F800D5004B002600C800"
+      B561 "D60004010300C500D60049004C009601B00002004B004C00D7003C00D400B900D700D80004010300"
+      B601 "D200B600D800D90064003800AC00B200AF00D9003800F800C6004D009601C400020049004D003F00"
+      B641 "0E013F00D900DE02D900000080020000F800C5004200F800B2004300F800C7004E002600C800DA00"
+      B681 "9601CA000000DB00040103004900DA00DB004F009601B00002004E004F004400F800CC004700C200"
+      B721 "BC0900009601DC0001003F003F000E013F00D900DE02D900DC020000F800C5004200F800B2004300"
+      B761 "F800DD0050002600C800DE009601CA000000DF00040103004900DE00DF0051009601B00002005000"
+      B801 "51004400F800CC004700C200BC0900006000A700D000D100AF005200F800E10054009601E0000300"
+      B841 "3F0054005200530006015300AF00D900DE02D90048030000F800C5004200F800B2004300F800E200"
+      B881 "55002600C800E30004010300E100E300530056009601B0000200550056004400F800CC004700C200"
+      B921 "BC090000F800E4005700F800E50058009601E00003003F0058005700530006015300AF00D900DE02"
+      B961 "D9000000B0030000F800C5004200F800B2004300F800E20059002600C800E60004010300E500E600"
+      B1001 "53005A009601B000020059005A004400F800CC004700C200BC090000F800AC005B009601E7000200"
+      B1041 "3F005B00530006015300AF00D900DE02D900000010040000F800C5004200F800B2004300F800E800"
+      B1081 "5C002600C800E900040103004900E90053005D009601B00002005C005D004400F800CC004700C200"
+      B1121 "BC09000064003200B200AF00AF003F00320064003300B200AF00AF00EA003300C200000004010000"
+      B1161 "F800AC005F009601CD0002003F005F005E00F800EB0061009601CD0002003F0061006000A401D900"
+      B1201 "1201D900B400EC002600B700ED00F800EE0062002600C800EF002600C800F00004010500C500EF00"
+      B1241 "4900F0005E0063009601B000020062006300F1003C00ED00B900F100F20004010300EC00B600F200"
+      B1281 "F30064003800AC00B200AF00F3003800F80060006400F8005E006500F800490066009601D3000100"
+      B1321 "3F004A0006015E00AC00F30006015E00D100F4000800F300F400F5000E013500F6000800F500F600"
+      B1361 "F700DE02F700000034050000F800C5004200F800AC004300F800F80067009601B000020067004900"
+      B1401 "4400F800CC004700C2000000BC090000DE02350044050000C2000000D80800006E005E00AC00F700"
+      B1441 "DE02F7005C050000C200000064050000C2000000D80800006000A700D000AC00AF00F70006016400"
+      B1481 "F700F900DE02F90088050000C200000090050000C20000005C050000A401F9001201F900B400FA00"
+      B1521 "2600B700FB00F800FC006800F800FD0069009601B000020068006900FE003C00FB00B900FE00FF00"
+      B1561 "04010300FA00B600FF00000164003800AC00B200AF0000013800F800AF006A002600C80000015000"
+      B1601 "32000001010198006A000101AC00000090060000600032006A00AF00AF006B0006016B00AE000101"
+      B1641 "DE02010188060000F800D1006D009601CD0002006B006D006C00F80002016F009601CD0002006B00"
+      B1681 "6F006E0006016E00AE000301DE0203015C060000040103006C0004016E006C00F800060170009601"
+      B1721 "B000020070006C007100F800070172001E0005010200710072009601080101006B004A00C2000000"
+      B1761 "E4050000A401010112010101B40003012600B7000901F8000A017300F800AE0074009601B0000200"
+      B1801 "730074000B013C000901B9000B010C01040103000301B6000C010D0164003800AC00B200AF000D01"
+      B1841 "3800F80038007500F800AE0076001E000E01020075007600F8000F0177001E000501020075007700"
+      B1881 "F80011017800F800AE0079009601B0000200780079007A00F80007017B001E00100102007A007B00"
+      B1921 "C20000003C070000C2000000D8080000A4010D0112010D01B40012012600B7001301F800FC007C00"
+      B1961 "F80014017D009601B00002007C007D0015013C001301B90015011601040103001201B60016011701"
+      B2001 "64003800AC00B200AF0017013800F800AF006A002600C8001701500032001701180198006A001801"
+      B2041 "AC0000003C080000600032006A00AF00AF006B0006016B00AE001801DE02180134080000F800D100"
+      B2081 "7E009601CD0002006B007E006C00F80002017F009601CD0002006B007F006E0006016E00AE001901"
+      B2121 "DE02190108080000040103006C0004016E006C00F800060180009601B000020080006C008100F800"
+      B2161 "1A0182001E0005010200810082009601080101006B004A00C200000090070000A401180112011801"
+      B2201 "B40019012600B7001B01F8000A018300F800AE0084009601B0000200830084001C013C001B01B900"
+      B2241 "1C011D01040103001901B6001D011E0164003800AC00B200AF001E013800F80038007500F800AE00"
+      B2281 "85001E000E01020075008500F8000F0186001E000501020075008600F80011018700F800AE008800"
+      B2321 "9601B0000200870088008900F8001A018A001E001001020089008A006E003200AE001E01DE021E01"
+      B2361 "F0080000C2000000B40B000096011F01010032006B006E006B00AF001E01DE021E01000018090000"
+      B2401 "60003200AC00AF00AF006B00D4006B003200AC00AF00AF00AE006A00C40000008C09000060003300"
+      B2441 "6A00AF00AF008B005E0033006A00AF00AF0033005E0032006A00AF00AF003200600034006A00AF00"
+      B2481 "AF0035005E0034006A00AF00AF0034006E008B00EA001E01DE021E018C090000C200000034040000"
+      B2521 "C20000008C090000F800AE003200F8000F014200F800B2004300F80020018C009601B00002008C00"
+      B2561 "6B004400F8000F014700C200BC090000F80042008D00F80043008E00F80044008F00A4011E011201"
+      B2601 "1E01B40021012600B7002201F800230190000401030047002401440091009601B000020090009100"
+      B2641 "25013C002201B90025012601040103002101B6002601270164003800AC00B200AF00270138002600"
+      B2681 "C80027013A00AC00270128012600C80029015000320029012A01920128012A012B01DA0132002B01"
+      B2721 "AE003400A4012B0112012B01B4002C012600B7002D01F8002E019200F800AE0093009601B0000200"
+      B2761 "920093002F013C002D01B9002F013001040103002C01B6003001310164003800AC00B200AF003101"
+      B2801 "38000E0136003101DE023101E80A0000F80032019400F800330195009601B0000200940095009600"
+      B2841 "1E000501020096004700F800AC003600F800AC009700C2002C070000C20000000A0B0000F8003501"
+      B2881 "9800F800330199009601B0000200980099009A001E00340102009A004700F800AC003500C2000000"
+      B2921 "D8080000A401310112013101B40036012600B7003701F80038019B00F800AE009C009601B0000200"
+      B2961 "9B009C0039013C003701B90039013A01040103003601B6003A013B0164003800AC00B200AF003B01"
+      B3001 "3800F80038007500F800AE009D001E000E01020075009D00F8000F019E001E000501020075009E00"
+      B3041 "F8003C019F00F800AE00A0009601B00002009F00A000A100F8000F01A2001E0010010200A100A200"
+      B3081 "DE023500C40B0000C2000000180B0000A4013B0112013B01B4003D012600B7003E01F8003F01A300"
+      B3121 "F800AE00A4009601B0000200A300A40040013C003E01B90040014101040103003D01B60041014201"
+      B3161 "64003800AC00B200AF0042013800F80038007500F800AE00A5001E000E0102007500A500F8000F01"
+      B3201 "A6001E00050102007500A6005E010000380C00005C010100000014000000005354414745434F4D00"
+      B3241 "FF01F702FF01FB0044534D616B654D73674453544147455F4A53475F4D5F303034385C53756D6D61"
+      B3281 "7279206F662073657175656E63652072756E4D54533A3A20204453544147455F4A53475F4D5F3030"
+      B3321 "34395C53657175656E636520726573746172746564206166746572206661696C7572654453544147"
+      B3361 "455F4A53475F4D5F303035315C53657175656E6365207374617274656444534174746163684A6F62"
+      B3401 "6A6F625F45786563436865636B53514C4453544147455F4A53475F4D5F303030315C4572726F7220"
+      B3441 "63616C6C696E672044534174746163684A6F62282531293C4C3E253244534765744C617374457272"
+      B3481 "6F724D7367406A6F625F45786563436865636B53514C44534765744A6F62496E666F6A6F625F4578"
+      B3521 "6563436865636B53514C2E44534465746163684A6F624453544147455F4A53475F4D5F303035375C"
+      B3561 "253120284A4F422025322920737461727465644453507265706172654A6F624453544147455F4A53"
+      B3601 "475F4D5F303031325C4572726F722063616C6C696E67204453507265706172654A6F62282531293C"
+      B3641 "4C3E25324453536574506172616D706D546573745374617043644453544147455F4A53475F4D5F30"
+      B3681 "3030325C4572726F722063616C6C696E67204453536574506172616D282531292C20636F64653D25"
+      B3721 "325B455D284173207072652D646566696E6564297061725F44494D5F54657374445352756E4A6F62"
+      B3761 "4453544147455F4A53475F4D5F303030335C4572726F722063616C6C696E6720445352756E4A6F62"
+      B3801 "282531292C20636F64653D25325B455D563053304453544147455F4A53475F4D5F303036335C2531"
+      B3841 "20284A4F42202532292066696E69736865642C207374617475733D25335B455D4453544147455F4A"
+      B3881 "53475F4D5F303032345C556E68616E646C65642061626F727420656E636F756E746572656420696E"
+      B3921 "206A6F622025314453544147455F4A53475F4D5F303036355C25312045786563757465647465725F"
+      B3961 "4572726F722E44534C6F67496E666F4453544147455F4A53475F4D5F303031395C53656E64696E67"
+      B4001 "2053544F50207265717565737420746F206A6F623A202531407465725F4572726F72445353746F70"
+      B4041 "4A6F624453544147455F4A53475F4D5F303036395C53657175656E6365207465726D696E61746564"
+      B4081 "44534D61736B457865634172677340436F6F7264696E61746F7244534C6F67466174616C44535441"
+      B4121 "47455F4A53475F4D5F303032305C53657175656E63652061626F7274207265717565737465647465"
+      B4161 "725F41626F7274407465725F41626F7274445357616974466F724A6F624453544147455F4A53475F"
+      B4201 "4D5F303030385C4572726F722063616C6C696E6720445357616974466F724A6F6228292C20636F64"
+      B4241 "653D25315B455D4453544147455F4A53475F4D5F303035325C457863657074696F6E207261697365"
+      B4281 "643A2025312C204453544147455F4A53475F4D5F303035335C457863657074696F6E2068616E646C"
+      B4321 "657220737461727465644453544147455F4A53475F4D5F303031305C57696C6C2065786563757465"
+      B4361 "206572726F722061637469766974793A2025316578685F457863657074696F6E44534C6F67576172"
+      B4401 "6E4453544147455F4A53475F4D5F303031315C4572726F72207768696C6520657865637574696E67"
+      B4441 "206572726F722061637469766974793A2025314453544147455F4A53475F4D5F303035365C536571"
+      B4481 "75656E6365206661696C65644453544147455F4A53475F4D5F303031335C53657175656E6365206A"
+      B4521 "6F622077696C6C2061626F72742064756520746F2070726576696F757320756E7265636F76657261"
+      B4561 "626C65206572726F72734453544147455F4A53475F4D5F303035345C53657175656E63652066696E"
+      B4601 "6973686564204F4B0300040000030100000003002000000100000000120000000300000000040900"
+      B4641 "00001200000001290000001B00000003FFFFFFFF0500000000010400000044000000050100000001"
+      B4681 "020000004800000003FD000000050200000001010000004A00000001320000004B00000005030000"
+      B4721 "00050400000005050000000506000000050700000001220000007D00000005080000000509000000"
+      B4761 "050A000000040B0000009F0000000110000000AA00000003030000000134000000BA00000003FE00"
+      B4801 "0000050B0000000411000000EE000000050C0000000111000000FF000000040C0000001001000003"
+      B4841 "1500000001110000001C01000003070000000302000000050D000000040B0000002D010000050E00"
+      B4881 "0000012500000038010000050F000000051000000005110000000512000000051300000005140000"
+      B4921 "00040C0000005D01000001350000006901000005150000000516000000040A0000009E010000010C"
+      B4961 "000000A8010000013A000000B401000005170000000110000000EE010000010C000000FE01000005"
+      B5001 "1800000004080000000A020000013800000012020000051900000001040000004A02000003080000"
+      B5041 "00051A000000051B00000001340000004E020000051C000000051D000000051E000000051F000000"
+      B5081 "05200000000521000000052200000005230000000524000000013700000082020000052500000005"
+      B5121 "260000000527000000011D000000B90200000109000000D602000005280000000529000000052A00"
+      B5161 "0000052B000000030E000000052C0000000101000000DF0200000409000000E00200000131000000"
+      B5201 "E9020000010A0000001A030000040900000024030000052D00000001250000002D030000052E0000"
+      B5241 "00052F0000000530000000040E00000052030000010C00000060030000040A0000006C030000012A"
+      B5281 "00000076030000053100000005320000000109000000A00300000533000000053400000005350000"
+      B5321 "0005360000000537000000010A000000A903000005380000000539000000053A000000053B000000"
+      B5361 "040C000000B3030000013A000000BF030000053C000000053D0000000126000000F9030000010200"
+      B5401 "00001F040000053E000000053F000000054000000005410000000542000000054300000005440000"
+      B5441 "0005450000000546000000012B000000210400000547000000054800000005490000000131000000"
+      B5481 "4C040000010D0000007D04000004090000008A040000013A00000093040000054A000000054B0000"
+      B5521 "000121000000CD040000054C000000054D000000054E000000014E000000EE040000054F00000005"
+      B5561 "5000000001260000003C050000055100000005520000000553000000000000000000000000000000"
+      B5601 "0800000001000100000000000F000000020001000000000019000000030001000000000024000000"
+      B5641 "04000100000000003000000005000100000000003800000006000100000000004000000007000100"
+      B5681 "000000004800000008000100000000005200000009000100000000005B0000000A00010000000000"
+      B5721 "650000000B000100000000006E0000000C00010000000000760000000D0001000000000080000000"
+      B5761 "0E00010000000000900000000F000100000000009A0000001000010000000000A400000011000100"
+      B5801 "00000000AC0000001200010000000000B60000001300010000000000C00000001400010000000000"
+      B5841 "C80000001500010000000000D50000001600010000000000E20000001700010000000000EC000000"
+      B5881 "1800010000000000F80000001900010000000000060100001A00010000000000120100001B000100"
+      B5921 "000000001A0100001C00010000000000220100001D000100000000002D0100001E00010000000000"
+      B5961 "330100001F000100000000003D010000200001000000000048010000210001000000000052010000"
+      B6001 "22000100000000005D01000023000100000000006601000024000100000000006B01000025000100"
+      B6041 "000000007501000026000100000000007B0100002700010000000000880100002800010000000000"
+      B6081 "8F0100002900010000000000970100002A00010000000000A00100002B00010000000000A8010000"
+      B6121 "2C00010000000000B00100002D00010000000000C00100002E00010000000000CD0100002F000100"
+      B6161 "00000000D60100003000010000000000D90100003100010000000000E70100003200010000000000"
+      B6201 "F30100003300010000000000FB010000340001000000000006020000350001000000000013020000"
+      B6241 "36000100000000002002000037000100000000003302000038000100000000003C02000039000100"
+      B6281 "00000000430200003A000100000000004A0200003B00010000000000510200003C00010000000000"
+      B6321 "580200003D000100000000005F0200003E00010000000000660200003F000100000000006D020000"
+      B6361 "40000100000000007402000041000100000000007B02000042000100000000008602000043000100"
+      B6401 "000000009102000044000100000000009602000045000100000000009D0200004600010000000000"
+      B6441 "A40200004700010000000000AB0200004800010000000000B20200004900010000000000BA020000"
+      B6481 "4A00010000000000C10200004B00010000000000C80200004C00010000000000CF0200004D000100"
+      B6521 "00000000D60200004E00010000000000DD0200004F00010000000000E40200005000010000000000"
+      B6561 "EB0200005100010000000000F20200005200010000000000FB020000530001000000000004030000"
+      B6601 "54000100000000000B03000055000100000000001203000056000100000000001903000057000100"
+      B6641 "00000000220300005800010000000000290300005900010000000000300300005A00010000000000"
+      B6681 "370300005B000100000000003E0300005C00010000000000450300005D000100000000004C030000"
+      B6721 "5E000100000000005C0300005F000100000000006303000060000100000000007703000061000100"
+      B6761 "000000007E03000062000100000000008503000063000100000000008C0300006400010000000000"
+      B6801 "9F0300006500010000000000B20300006600010000000000C20300006700010000000000C9030000"
+      B6841 "6800010000000000D00300006900010000000000D70300006A00010000000000DE0300006B000100"
+      B6881 "00000000E60300006C00010000000000EF0300006D00010000000000F60300006E00010000000000"
+      B6921 "000400006F000100000000000704000070000100000000000E040000710001000000000015040000"
+      B6961 "72000100000000001C04000073000100000000002304000074000100000000002A04000075000100"
+      B7001 "000000003B0400007600010000000000420400007700010000000000490400007800010000000000"
+      B7041 "500400007900010000000000570400007A000100000000005E0400007B0001000000000065040000"
+      B7081 "7C000100000000006C0400007D00010000000000730400007E000100000000007A0400007F000100"
+      B7121 "000000008104000080000100000000008804000081000100000000008F0400008200010000000000"
+      B7161 "9604000083000100000000009D0400008400010000000000A40400008500010000000000AB040000"
+      B7201 "8600010000000000B20400008700010000000000B90400008800010000000000C004000089000100"
+      B7241 "00000000C70400008A00010000000000CE0400008B00010000000000D20400008C00010000000000"
+      B7281 "D90400008D00010000000000EA0400008E00010000000000FB0400008F000100000000000C050000"
+      B7321 "90000100000000001305000091000100000000001A05000092000100000000002105000093000100"
+      B7361 "000000002805000094000100000000002F0500009500010000000000360500009600010000000000"
+      B7401 "3D05000097000100000000004A050000980001000000000051050000990001000000000058050000"
+      B7441 "9A000100000000005F0500009B00010000000000660500009C000100000000006D0500009D000100"
+      B7481 "00000000740500009E000100000000007B0500009F0001000000000082050000A000010000000000"
+      B7521 "89050000A10001000000000090050000A20001000000000097050000A3000100000000009E050000"
+      B7561 "A400010000000000A5050000A500010000000000AC050000A600010000000000B3050000A7000200"
+      B7601 "00000000C7050000A800070000000000D4050000A900070000000000E6050000AA00070000000000"
+      B7641 "244D41545249580048414E444C450050524F502E4E414D4500504152414D2E4E414D45004F424A45"
+      B7681 "43542E4E414D45004A6F624E616D65004572724D6F64650052746E4E616D65004A6F6248616E646C"
+      B7721 "6500496E666F547970650053746167654E616D65004C696E6B4E616D65004576656E744964005275"
+      B7761 "6E4E756D626572004576656E745479706546696C746572004576656E745479706500537461727454"
+      B7801 "696D6500456E6454696D65004D61784E756D62657200506172616D4E616D65005661724E616D6500"
+      B7841 "43757374496E666F4E616D65004576656E744D657373616765004D7367537472696E67005265706F"
+      B7881 "72744C6576656C004C696E65536570617261746F72004D736754656D706C617465004172674C6973"
+      B7921 "740052756E4D6F646500506172616D65746572730056616C7565004C696D697454797065004C696D"
+      B7961 "697456616C75650051756575654E616D6500506172616D56616C75650056617256616C756500436F"
+      B8001 "6465004572726F72436F6465004A6F6249440054726163654F7074696F6E7300706F72744E6F0054"
+      B8041 "696D656F757400537562724E616D650053756272417267004F7074696F6E73004A6F624E616D654F"
+      B8081 "7248616E646C65004C6173744D6F646966696564004572726F724D73670049640052657475726E65"
+      B8121 "6456616C75650068616E646C65246C697374006964246C6973740061626F7274246C697374006224"
+      B8161 "4162616E646F6E696E67006224496E4572726F725265660073756D6D617279247265737461727469"
+      B8201 "6E670073756D6D61727924005F5430303030005F5430303031005F5430303032005F543030303300"
+      B8241 "5F5430303034005F543030303500682456305330005F5430303036005F5430303037006572722473"
+      B8281 "6F7572636500657272246E756D626572006D736724005F5430303038005F5430303039006D736724"
+      B8321 "6964005F5430303130006A6224563053300064756D6D7924005F5430303131005F5430303132005F"
+      B8361 "5430303133005F5430303134005F5430303135005F5430303136005F543030313700702456305330"
+      B8401 "24310065727224636F6465005F5430303138005F5430303139005F54303032300070245630533024"
+      B8441 "32005F5430303231005F5430303232005F5430303233005F5430303234005F5430303235005F5430"
+      B8481 "303236006A6F62245630533024737461747573005F5430303237006A6F6224563053302475736572"
+      B8521 "737461747573005F5430303238005F5430303239005F543030333000496456305330252552657375"
+      B8561 "6C7432252530004964563053302525526573756C74312525310049645630533025254E616D652525"
+      B8601 "32005F5430303331005F5430303332005F543030333300696E646578240068616E646C6524006A6F"
+      B8641 "62246E616D65005F5430303334006A6F6224696E766964005F5430303335005F5430303336005F54"
+      B8681 "30303337005F5430303338005F5430303339005F54303034300078246D61736B65642473756D6D61"
+      B8721 "7279005F5430303431005F5430303432005F5430303433005F5430303434005F5430303435005F54"
+      B8761 "30303436005F5430303437005F5430303438005F5430303439005F5430303530005F543030353100"
+      B8801 "5F5430303532005F5430303533005F5430303534005F5430303535005F5430303536005F54303035"
+      B8841 "37005F5430303538005F5430303539005F5430303630005F543030363100696424005F5430303632"
+      B8881 "004964563053392525506172616D252533004964563053392525506172616D252534004964563053"
+      B8921 "392525506172616D252535005F5430303633005F5430303634005F5430303635005F543030363600"
+      B8961 "5F5430303637005F5430303638005F54303036390062244E756D53746172746564005F5430303730"
+      B9001 "005F5430303731005F5430303732005F5430303733005F5430303734005F5430303735005F543030"
+      B9041 "3736005F5430303737005F5430303738005F5430303739005F5430303830005F5430303831005F54"
+      B9081 "30303832005F5430303833005F5430303834005354414745434F4D2E4A4F422E5354415455530053"
+      B9121 "54414745434F4D2E50494E005354414745434F4D2E4E554D2E524F5753005354414745434F4D2E41"
+      B9161 "525200F2FF0000E6FF180006000600060006000600FEFF060018000800FEFF5400FEFF4E00FEFF06"
+      B9201 "00FCFF0800180010000C002C00FEFF0C001C00FEFF1C00FEFF06000A005A00120010000C002C00FE"
+      B9241 "FF0C000A000E000C002C00FDFF0C000C00140010000C002400FEFF0C000600140012000C002400FE"
+      B9281 "FF0C00120012000C002400FEFF0C000E000E00FDFF08001200120064000600060006000A0030000C"
+      B9321 "001200FEFF0E001000FEFF1800FCFF0800FEFF2400FDFF0800FEFF4E0022000C001000120012001C"
+      B9361 "002200FEFF0A0008004E00060010001000FCFF2800FEFF0800FDFF0800FEFF4E0022000C00100012"
+      B9401 "0012001C002200FEFF0A0008004E00060010001000FDFF280018000A001E0018000C001800FEFF18"
+      B9441 "0010000800FDFF080006000C001200FDFF0C0006000600060054002E004E000E00220006000600FE"
+      B9481 "FF0E00FEFF22000600FEFF08004E00060010001000FDFF280010004E00060010001000FDFF08002F"
+      B9521 "773030312F7368617265645F686F742F50726F6A656374732F44494D5F6F6E7477696B6B656C2F52"
+      B9561 "545F42503933392F4A4F422E323030313435333138392E44542E313934303435323938370000"
+   END DSBPBINARY
+END DSEXECJOB

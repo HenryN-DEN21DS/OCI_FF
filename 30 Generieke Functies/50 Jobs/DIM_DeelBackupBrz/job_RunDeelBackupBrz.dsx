@@ -1,0 +1,584 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "UWVM2VLOAPP0004.O-DC.BA.UWV.NL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2023-10-11"
+   Time "12.19.50"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "job_RunDeelBackupBrz"
+   DateModified "2023-10-11"
+   TimeModified "12.19.18"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "job_RunDeelBackupBrz"
+      Description =+=+=+=
+Het starten van de deel-backup voor BRZ.Het is een generieke job. De BRZ schema waarvoor dit gedraaid wordt moet wel in de stuurtabel DIM_DATAPUMP_STUUR_TB staan.
+
+Datum      Naam   Beschrijving
+03-10-2023 isa030 Aangemaakt
+=+=+=+=
+      NextID "38"
+      Container "V0"
+      JobVersion "56.0.0"
+      ControlAfterSubr "0"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "pmDumpSetNaam"
+         Prompt "pmDumpSetNaam"
+         Default "BRZ_BRON"
+         HelpTxt "Zie DIM_DATAPUMP_STUUR_TB"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_DIM_Dbs"
+         Prompt "par_DIM_Dbs parameters"
+         Default "(As pre-defined)"
+         HelpTxt "Parameterset voor database connectie"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "IdentList"
+         Value "cpy_Null|orc_DeelBackup"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "ClientCodePage"
+         Value "1252"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceMode"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceSeq"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceRecords"
+         Value "100"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TraceSkip"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "TracePeriod"
+         Value "1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RecordJobPerformanceData"
+         Value "0"
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      IsTemplate "0"
+      NLSLocale ",,,,"
+      JobType "3"
+      Category "\\90 Generiek\\30 Generieke Functies\\50 Jobs\\DIM_DeelBackupBrz"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "1"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V37S0|V37S1|V37A2"
+      StageXPos "384|144|31"
+      StageYPos "264|264|38"
+      StageTypes "CCustomStage|CCustomStage.CC_GUI|ID_PALETTEJOBANNOTATION"
+      NextStageID "0"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|48|879"
+      StageYSize "48|48|131"
+      ContainerViewSizing "0052 0052 1604 0502 0000 0001 0000 0000"
+      StageNames "cpy_Null|orc_DeelBackup| "
+      StageTypeIDs "PxCopy|OracleConnectorPX| "
+      LinkNames " |lnk_Resultaat| "
+      LinkHasMetaDatas " |True| "
+      LinkTypes " |1| "
+      LinkNamePositionXs " |205| "
+      LinkNamePositionYs " |288| "
+      TargetStageIDs " |V37S0| "
+      SourceStageEffectiveExecutionModes " |2| "
+      SourceStageRuntimeExecutionModes " |2| "
+      TargetStageEffectiveExecutionModes " |2| "
+      TargetStageRuntimeExecutionModes " |2| "
+      LinkIsSingleOperatorLookup " |False| "
+      LinkIsSortSequential " |False| "
+      LinkSortMode " |0| "
+      LinkPartColMode " |1| "
+      LinkSourcePinIDs " |V37S1P1| "
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V37A2"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "V37A2"
+      NextID "0"
+      AnnotationType "1"
+      TextFont "Courier\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "0"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "12713983"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V37S0"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "cpy_Null"
+      NextID "2"
+      InputPins "V37S0P1"
+      StageType "PxCopy"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "force"
+         Value " "
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V37S0P1"
+      OLEType "CCustomInput"
+      Readonly "0"
+      Name "lnk_Resultaat"
+      Partner "V37S1|V37S1P1"
+      LinkType "1"
+      ConditionNotMet "fail"
+      LookupFail "fail"
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "RTColumnProp"
+         Value "0"
+      END DSSUBRECORD
+      TransactionSize "0"
+      TXNBehaviour "0"
+      EnableTxGroup "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V37S1"
+      OLEType "CCustomStage"
+      Readonly "0"
+      Name "orc_DeelBackup"
+      NextID "2"
+      OutputPins "V37S1P1"
+      StageType "OracleConnectorPX"
+      AllowColumnMapping "0"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "RejectFromLink"
+         Value "-1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantVersion"
+         Value "1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantLibrary"
+         Value "ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectNumber"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariantsVersions"
+         Value "1.0,1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RACName"
+         Value "/Connection/RACName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Engine"
+         Value "EE"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantName"
+         Value "12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Username"
+         Value "/Connection/Username"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectUsesPercentage"
+         Value "false"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "xaoDbName"
+         Value "/Connection/xaoDbName"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Orientation"
+         Value "link"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectorName"
+         Value "OracleConnector"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectionString"
+         Value "/Connection/Server"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "OSLevelAuthentication"
+         Value "/Connection/OSLevelAuthentication"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariants"
+         Value "V1;11:\"11g\":ccora11g;12:\"12c\":ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectThreshold"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "SupportedVariantsLibraries"
+         Value "ccora11g,ccora12c"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Context"
+         Value "source"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "Password"
+         Value "/Connection/Password"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "XMLProperties"
+         Value =+=+=+=
+<?xml version='1.0' encoding='UTF-16'?><Properties version='1.1'><Common><Context type='int'>1</Context><Variant type='string'>12c</Variant><DescriptorVersion type='string'>1.0</DescriptorVersion><PartitionType type='int'>-1</PartitionType><RCP type='int'>0</RCP></Common><Connection><Server modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Dbs_Naam#]]></Server><Username modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Datastage_User#]]></Username><Password modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Datastage_Password#]]></Password><OSLevelAuthentication type='bool'><![CDATA[0]]></OSLevelAuthentication><Version modified='1' type='string'><![CDATA[12c]]></Version></Connection><Usage><ReadMode modified='1' type='int'><![CDATA[1]]></ReadMode><EnableQuotedIDs type='bool'><![CDATA[0]]></EnableQuotedIDs><SQL><PlSqlStatement modified='1' type='string'><![CDATA[BEGIN
+
+  dim_datapump.Deel_Backup_pkg.Deel_Backup_prc('#pmDumpSetNaam#');
+
+END;]]><ReadFromFilePLSQLBlock type='bool'><![CDATA[0]]></ReadFromFilePLSQLBlock></PlSqlStatement></SQL><EnablePartitionedReads collapsed='1' type='bool'><![CDATA[0]]></EnablePartitionedReads><Transaction><IsolationLevel type='int'><![CDATA[0]]></IsolationLevel><RecordCount type='int'><![CDATA[2000]]></RecordCount><EndOfWave type='int'><![CDATA[0]]></EndOfWave></Transaction><Session><PrefetchRowCount type='int'><![CDATA[1]]></PrefetchRowCount><PrefetchMemorySize type='int'><![CDATA[0]]></PrefetchMemorySize><TreatWarningsAsErrors type='bool'><![CDATA[0]]></TreatWarningsAsErrors><TreatFetchTruncateAsError type='bool'><![CDATA[1]]></TreatFetchTruncateAsError></Session><BeforeAfter collapsed='1' modified='1' type='bool'><![CDATA[0]]></BeforeAfter><ApplicationFailoverControl collapsed='1' type='bool'><![CDATA[0]]></ApplicationFailoverControl><LimitRows collapsed='1' type='bool'><![CDATA[0]]></LimitRows></Usage></Properties >
+=+=+=+=
+      END DSSUBRECORD
+      NextRecordID "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V37S1P1"
+      OLEType "CCustomOutput"
+      Readonly "0"
+      Name "lnk_Resultaat"
+      Partner "V37S0|V37S0P1"
+      Properties "CCustomProperty"
+      BEGIN DSSUBRECORD
+         Name "RejectFromLink"
+         Value "-1"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantVersion"
+         Value "1.0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantLibrary"
+         Value "ccora11g"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectNumber"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "VariantName"
+         Value "11"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectUsesPercentage"
+         Value "false"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "ConnectorName"
+         Value "OracleConnector"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "RejectThreshold"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "lookup\\type"
+      END DSSUBRECORD
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "dummy"
+         SqlType "12"
+         Precision "9"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "DiskWriteInc"
+         Value "1048576"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "BufFreeRun"
+         Value "50"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "MaxMemBufSize"
+         Value "3145728"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "QueueUpperSize"
+         Value "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "SchemaFormat"
+      END DSSUBRECORD
+      LeftTextPos "205"
+      TopTextPos "288"
+      LinkMinimised "0"
+   END DSRECORD
+END DSJOB
+BEGIN DSEXECJOB
+   Identifier "job_RunDeelBackupBrz"
+   DateModified "1899-12-30"
+   TimeModified "00.00.01"
+   BEGIN DSRECORD
+      Identifier "job_RunDeelBackupBrz"
+      F1 "JOB"
+      F3 "11.7///60/C"
+      F5 "pmDumpSetNaam\Vpar_DIM_Dbs\Vpar_DIM_Dbs.$evDIM_Dbs_Naam\Vpar_DIM_Dbs.$evDIM_Bedrijfszone_User\Vpar_DIM_Dbs.$evDIM_Bedrijfszone_Password\Vpar_DIM_Dbs.$evDIM_Bronzone_User\Vpar_DIM_Dbs.$evDIM_Bronzone_Password\Vpar_DIM_Dbs.$evDIM_Datastage_ConnectString\Vpar_DIM_Dbs.$evDIM_Datastage_User\Vpar_DIM_Dbs.$evDIM_Datastage_Password\Vpar_DIM_Dbs.$evDIM_Integratiezone_User\Vpar_DIM_Dbs.$evDIM_Integratiezone_Password\Vpar_DIM_Dbs.$evDIM_Logging_User\Vpar_DIM_Dbs.$evDIM_Logging_Password\Vpar_DIM_Dbs.$evDIM_Metadata_User\Vpar_DIM_Dbs.$evDIM_Metadata_Password\Vpar_DIM_Dbs.$evDIM_Staging_User\Vpar_DIM_Dbs.$evDIM_Staging_Password\Vpar_DIM_Dbs.$evDIM_Staging_ConnectString"
+      F6 "pmDumpSetNaam\Vpar_DIM_Dbs parameters\VevDIM_Dbs_Naam: Naam van de DIM database\VevDIM_Businesszone_User:         Naam            van generieke user voor Business zone\VevDIM_Businesszone_Password: Wachtwoord van generieke user voor Business zone\VevDIM_Bronzone_User:         Naam            van generieke user voor Bron zone\VevDIM_Bronzone_Password: Wachtwoord van generieke user voor Bron zone\VevDIM_DataStage: Connectie van generieke user voor DataStage (voor shell scripts)\VevDIM_DataStage_User:         Naam            van generieke user voor DataStage\VevDIM_DataStage_Password: Wachtwoord van generieke user voor DataStage\VevDIM_Integratiezone_User:         Naam            van generieke user voor Integratie zonej\VevDIM_Integratiezone_Password: Wachtwoord van generieke user voor Integratie zone\VevDIM_Logging_User:         Naam            van generieke user voor Logging\VevDIM_Logging_Password: Wachtwoord van generieke user voor Logging\VevDIM_Metadata_User:         Naam            van generieke user voor Metadata\VevDIM_Metadata_Password: Wachtwoord van generieke user voor Metadata\VevDIM_Staging_User:         Naam            van generieke user voor Staging\VevDIM_Staging_Password: Wachtwoord van generieke user voor Staging\VevDIM_Staging: Connectie van generieke user voor Staging (voor shell scripts)"
+      F7 "BRZ_BRON\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF"
+      F8 "Zie DIM_DATAPUMP_STUUR_TB\VParameterset voor database connectie\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V\V"
+      F9 "0\V13\V0\V0\V1\V0\V1\V0\V0\V1\V0\V1\V0\V1\V0\V1\V0\V1\V0"
+      F10 "V0"
+      F11 "Het starten van de deel-backup voor BRZ.Het is een generieke job. De BRZ schema waarvoor dit gedraaid wordt moet wel in de stuurtabel DIM_DATAPUMP_STUUR_TB staan.\(D)\(A)\(D)\(A)Datum      Naam   Beschrijving\(D)\(A)03-10-2023 isa030 Aangemaakt"
+      F15 "OracleConnectorPX\VPxCopy"
+      F18 "BRZ_BRON\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF\V{iisenc}eHG47YUwCsilbsYLdMUwUw==\V$PROJDEF"
+      F21 "1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1"
+      F24 ",,,,"
+      F28 "\\90 Generiek\\30 Generieke Functies\\50 Jobs\\DIM_DeelBackupBrz"
+      F29 "0"
+      F30 "1"
+      F31 "2023-10-11 12:19:19"
+      F32 "3"
+      F34 "0\V1\VLINUX\V0\V\V#DSProjectARTOptions#\V1252\V\V\V\V\V\V0\V0"
+      F35 "orc_DeelBackup\Vcpy_Null"
+      F36 "uwvm2vloapp0004.o-dc.ba.uwv.nl"
+      F37 "DIM_ontwikkel"
+      F38 "0"
+      F39 "job_RunDeelBackupBrz.cpy_Null\Vjob_RunDeelBackupBrz.orc_DeelBackup"
+      F41 "0"
+      F43 ",,,,"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_RunDeelBackupBrz.cpy_Null"
+      F1 "STAGE"
+      F2 "CUSTOM"
+      F3 "11.7///60/C"
+      F4 "job_RunDeelBackupBrz"
+      F9 "job_RunDeelBackupBrz.orc_DeelBackup.lnk_Resultaat"
+      F13 "force"
+      F14 " "
+      F16 "PxCopy"
+      F23 "5"
+      F31 "job_RunDeelBackupBrz.cpy_Null"
+      F32 "-1.-1"
+      F40 "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_RunDeelBackupBrz.orc_DeelBackup"
+      F1 "STAGE"
+      F2 "CUSTOM"
+      F3 "11.7///60/C"
+      F4 "job_RunDeelBackupBrz"
+      F10 "job_RunDeelBackupBrz.orc_DeelBackup.lnk_Resultaat"
+      F13 "RejectFromLink\VVariantVersion\VVariantLibrary\VRejectNumber\VSupportedVariantsVersions\VRACName\VEngine\VVariantName\VUsername\VRejectUsesPercentage\VxaoDbName\VOrientation\VConnectorName\VConnectionString\VOSLevelAuthentication\VSupportedVariants\VRejectThreshold\VSupportedVariantsLibraries\VContext\VPassword\VXMLProperties"
+      F14 "-1\V1.0\Vccora12c\V0\V1.0,1.0\V/Connection/RACName\VEE\V12c\V/Connection/Username\Vfalse\V/Connection/xaoDbName\Vlink\VOracleConnector\V/Connection/Server\V/Connection/OSLevelAuthentication\VV1;11:\"11g\":ccora11g;12:\"12c\":ccora12c\V0\Vccora11g,ccora12c\Vsource\V/Connection/Password\V<?xml version='1.0' encoding='UTF-16'?><Properties version='1.1'><Common><Context type='int'>1</Context><Variant type='string'>12c</Variant><DescriptorVersion type='string'>1.0</DescriptorVersion><PartitionType type='int'>-1</PartitionType><RCP type='int'>0</RCP></Common><Connection><Server modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Dbs_Naam#]]></Server><Username modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Datastage_User#]]></Username><Password modified='1' type='string'><![CDATA[#par_DIM_Dbs.$evDIM_Datastage_Password#]]></Password><OSLevelAuthentication type='bool'><![CDATA[0]]></OSLevelAuthentication><Version modified='1' type='string'><![CDATA[12c]]></Version></Connection><Usage><ReadMode modified='1' type='int'><![CDATA[1]]></ReadMode><EnableQuotedIDs type='bool'><![CDATA[0]]></EnableQuotedIDs><SQL><PlSqlStatement modified='1' type='string'><![CDATA[BEGIN\(D)\(A)\(D)\(A)  dim_datapump.Deel_Backup_pkg.Deel_Backup_prc('#pmDumpSetNaam#');\(D)\(A)\(D)\(A)END;]]><ReadFromFilePLSQLBlock type='bool'><![CDATA[0]]></ReadFromFilePLSQLBlock></PlSqlStatement></SQL><EnablePartitionedReads collapsed='1' type='bool'><![CDATA[0]]></EnablePartitionedReads><Transaction><IsolationLevel type='int'><![CDATA[0]]></IsolationLevel><RecordCount type='int'><![CDATA[2000]]></RecordCount><EndOfWave type='int'><![CDATA[0]]></EndOfWave></Transaction><Session><PrefetchRowCount type='int'><![CDATA[1]]></PrefetchRowCount><PrefetchMemorySize type='int'><![CDATA[0]]></PrefetchMemorySize><TreatWarningsAsErrors type='bool'><![CDATA[0]]></TreatWarningsAsErrors><TreatFetchTruncateAsError type='bool'><![CDATA[1]]></TreatFetchTruncateAsError></Session><BeforeAfter collapsed='1' modified='1' type='bool'><![CDATA[0]]></BeforeAfter><ApplicationFailoverControl collapsed='1' type='bool'><![CDATA[0]]></ApplicationFailoverControl><LimitRows collapsed='1' type='bool'><![CDATA[0]]></LimitRows></Usage></Properties >"
+      F16 "OracleConnectorPX"
+      F23 "2\V0\V0\V2\V0\V0\V0\V0\V0\V11\V0\V0\V0\V0\V0\V0\V2\V0\V0\V1\V0"
+      F31 "job_RunDeelBackupBrz.orc_DeelBackup"
+      F32 "-1.-1"
+      F40 "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_RunDeelBackupBrz.orc_DeelBackup.lnk_Resultaat"
+      F1 "INPIN"
+      F3 "11.7///60/C"
+      F5 "1"
+      F16 "job_RunDeelBackupBrz.orc_DeelBackup\Vjob_RunDeelBackupBrz.cpy_Null"
+      F21 "dummy"
+      F22 "0"
+      F25 "12"
+      F26 "9"
+      F27 "0"
+      F28 "0"
+      F39 "lnk_Resultaat"
+      F40 "0"
+      F50 "\V"
+   END DSRECORD
+   COMMENT No program sources in executable job
+   COMMENT No program binaries in executable job
+   BEGIN DSSCRIPT
+      Identifier "OshExecuter.sh"
+      TERMINATOR =+=+=+=
+#!/bin/sh
+# Shell script for Datastage to execute an osh script, generated at 2023-10-11 12:19:19
+# Compiler runtime stamp 11.7///60/C
+#
+# Parameters:
+# $1 - Run indicator: R=normal run, P=performance wrappered run
+# $2 - Environment variable file name - dummy
+# $3... - Osh / performance checker command line arguments
+RunIndicator=$1
+DummyEnv=$2
+shift
+shift
+if test ! -x "$APT_ORCHHOME/bin/osh"
+  then echo '##OSHRETVAL NOOSH'
+  exit 1
+fi
+# Test for resource estimation option.
+if test $RunIndicator = P
+  then $APT_ORCHHOME/bin/orchresest "$@" 2>&1 &
+  else $APT_ORCHHOME/bin/osh "$@" 2>&1 &
+fi
+oshpid=$!
+# Write the pid of the conductor process
+echo '##OSHPID' $oshpid
+wait $oshpid
+oshcode=$?
+oshdir=`dirname $0`
+# Write the terminating string
+echo '##OSHRETVAL' $oshcode > $oshdir/../RT_SCTEMP/$oshpid.retval
+echo '##OSHRETVAL' $oshcode
+# end of script
+=+=+=+=
+   END DSSCRIPT
+   BEGIN DSSCRIPT
+      Identifier "OshScript.osh"
+      TERMINATOR =+=+=+=
+# OSH / orchestrate script for Job job_RunDeelBackupBrz compiled at 12:19:19 11 Oct 2023
+#################################################################
+#### STAGE: cpy_Null
+## Operator
+copy
+## General options
+[ident('cpy_Null'); jobmon_ident('cpy_Null')]
+## Inputs
+0< [] 'orc_DeelBackup:lnk_Resultaat.v'
+;
+#################################################################
+#### STAGE: orc_DeelBackup
+## Operator
+pxbridge
+## Operator options
+-Orientation link
+-XMLProperties '<?xml version=\\'1.0\\' encoding=\\'UTF-16\\'?><Properties version=\\'1.1\\'><Common><Context type=\\'int\\'>1</Context><Variant type=\\'string\\'>12c</Variant><DescriptorVersion type=\\'string\\'>1.0</DescriptorVersion><PartitionType type=\\'int\\'>-1</PartitionType><RCP type=\\'int\\'>0</RCP></Common><Connection><Server modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Dbs_Naam"]]]></Server><Username modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Datastage_User"]]]></Username><Password modified=\\'1\\' type=\\'string\\'><![CDATA[[&"par_DIM_Dbs.$evDIM_Datastage_Password"]]]></Password><OSLevelAuthentication type=\\'bool\\'><![CDATA[0]]></OSLevelAuthentication><Version modified=\\'1\\' type=\\'string\\'><![CDATA[12c]]></Version></Connection><Usage><ReadMode modified=\\'1\\' type=\\'int\\'><![CDATA[1]]></ReadMode><EnableQuotedIDs type=\\'bool\\'><![CDATA[0]]></EnableQuotedIDs><SQL><PlSqlStatement modified=\\'1\\' type=\\'string\\'><![CDATA[BEGIN
+  dim_datapump.Deel_Backup_pkg.Deel_Backup_prc(\\'[&"pmDumpSetNaam"]\\');
+END;]]><ReadFromFilePLSQLBlock type=\\'bool\\'><![CDATA[0]]></ReadFromFilePLSQLBlock></PlSqlStatement></SQL><EnablePartitionedReads collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></EnablePartitionedReads><Transaction><IsolationLevel type=\\'int\\'><![CDATA[0]]></IsolationLevel><RecordCount type=\\'int\\'><![CDATA[2000]]></RecordCount><EndOfWave type=\\'int\\'><![CDATA[0]]></EndOfWave></Transaction><Session><PrefetchRowCount type=\\'int\\'><![CDATA[1]]></PrefetchRowCount><PrefetchMemorySize type=\\'int\\'><![CDATA[0]]></PrefetchMemorySize><TreatWarningsAsErrors type=\\'bool\\'><![CDATA[0]]></TreatWarningsAsErrors><TreatFetchTruncateAsError type=\\'bool\\'><![CDATA[1]]></TreatFetchTruncateAsError></Session><BeforeAfter collapsed=\\'1\\' modified=\\'1\\' type=\\'bool\\'><![CDATA[0]]></BeforeAfter><ApplicationFailoverControl collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></ApplicationFailoverControl><LimitRows collapsed=\\'1\\' type=\\'bool\\'><![CDATA[0]]></LimitRows></Usage></Properties >'
+-connector '{
+   version=1.0, 
+   library=ccora12c, 
+   versionlist=\\'1.0,1.0\\', 
+   variant=\\'12c\\', 
+   name=OracleConnector, 
+   variantlist=\\'V1;11:"11g":ccora11g;12:"12c":ccora12c\\'
+}'
+-source 0 '{
+      DSSQLType={dummy=12}, 
+      DSSQLPrecision={dummy=9}, 
+      DSSchema=\\'record
+         (
+           dummy\\:string\\[max\\=9\\]\\;
+         )\\'
+}'
+   
+## General options
+[ident('orc_DeelBackup'); jobmon_ident('orc_DeelBackup')]
+## Outputs
+0> [modify (
+  dummy:not_nullable string[max=9]=dummy;
+keep
+  dummy;
+)] 'orc_DeelBackup:lnk_Resultaat.v'
+;
+# End of OSH code
+=+=+=+=
+   END DSSCRIPT
+END DSEXECJOB

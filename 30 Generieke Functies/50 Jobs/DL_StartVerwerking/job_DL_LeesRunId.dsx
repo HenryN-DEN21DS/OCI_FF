@@ -1,0 +1,658 @@
+BEGIN HEADER
+   CharacterSet "CP1252"
+   ExportingTool "IBM InfoSphere DataStage Export"
+   ToolVersion "8"
+   ServerName "BE03QAP454UWVRM.HRC.BA.UWV.NL"
+   ToolInstanceID "DIM_ontwikkel"
+   MDISVersion "1.0"
+   Date "2021-01-28"
+   Time "13.43.18"
+   ServerVersion "11.7"
+END HEADER
+BEGIN DSJOB
+   Identifier "job_DL_LeesRunId"
+   DateModified "2020-12-21"
+   TimeModified "10.46.20"
+   BEGIN DSRECORD
+      Identifier "ROOT"
+      OLEType "CJobDefn"
+      Readonly "0"
+      Name "job_DL_LeesRunId"
+      NextID "1"
+      Container "V0"
+      JobVersion "56.0.0"
+      ControlAfterSubr "0"
+      Parameters "CParameters"
+      BEGIN DSSUBRECORD
+         Name "pmDlNaam"
+         Prompt "pmDlNaam"
+         Default "dummybron.lev4"
+         ParamType "0"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      BEGIN DSSUBRECORD
+         Name "par_Linux_Paden"
+         Prompt "par_Linux_Paden parameters"
+         Default "(As pre-defined)"
+         ParamType "13"
+         ParamLength "0"
+         ParamScale "0"
+      END DSSUBRECORD
+      MetaBag "CMetaProperty"
+      BEGIN DSSUBRECORD
+         Owner "APT"
+         Name "AdvancedRuntimeOptions"
+         Value "#DSProjectARTOptions#"
+      END DSSUBRECORD
+      NULLIndicatorPosition "0"
+      IsTemplate "0"
+      NLSLocale ",,,,"
+      JobType "0"
+      Category "\\90 Generiek\\30 Generieke Functies\\50 Jobs\\DL_StartVerwerking"
+      CenturyBreakYear "30"
+      NextAliasID "2"
+      ParameterFileDDName "DD00001"
+      ReservedWordCheck "1"
+      TransactionSize "0"
+      ValidationStatus "0"
+      Uploadable "0"
+      PgmCustomizationFlag "0"
+      JobReportFlag "0"
+      AllowMultipleInvocations "1"
+      Act2ActOverideDefaults "0"
+      Act2ActEnableRowBuffer "0"
+      Act2ActUseIPC "0"
+      Act2ActBufferSize "0"
+      Act2ActIPCTimeout "0"
+      ExpressionSemanticCheckFlag "0"
+      TraceOption "0"
+      EnableCacheSharing "0"
+      RuntimeColumnPropagation "0"
+      RelStagesInJobStatus "-1"
+      WebServiceEnabled "0"
+      MFProcessMetaData "0"
+      MFProcessMetaDataXMLFileExchangeMethod "0"
+      IMSProgType "0"
+      CopyLibPrefix "ARDT"
+      RecordPerformanceResults "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0"
+      OLEType "CContainerView"
+      Readonly "0"
+      Name "Job"
+      NextID "1"
+      IsTopLevel "0"
+      StageList "V0S0|V0S3|V0S6|V0A7"
+      StageXPos "48|288|480|23"
+      StageYPos "144|144|144|25"
+      StageTypes "CSeqFileStage|CTransformerStage|CSeqFileStage|ID_PALETTEANNOTATION"
+      NextStageID "8"
+      SnapToGrid "1"
+      GridLines "0"
+      ZoomValue "100"
+      StageXSize "48|48|48|594"
+      StageYSize "48|48|48|72"
+      ContainerViewSizing "0052 0052 0945 0433 0000 0001 0000 0000"
+      StageNames "sqf_ProcesDatum|trn_UserStatus|sqf_Dummy| "
+      StageTypeIDs "CSeqFileStage|CTransformerStage|CSeqFileStage| "
+      LinkNames "lnk_RunId|lnk_Dummy| | "
+      LinkHasMetaDatas "True|True| | "
+      LinkTypes "1|1| | "
+      LinkNamePositionXs "160|390| | "
+      LinkNamePositionYs "168|168| | "
+      TargetStageIDs "V0S3|V0S6| | "
+      SourceStageEffectiveExecutionModes "0|0| | "
+      SourceStageRuntimeExecutionModes "0|0| | "
+      TargetStageEffectiveExecutionModes "0|0| | "
+      TargetStageRuntimeExecutionModes "0|0| | "
+      LinkIsSingleOperatorLookup "False|False| | "
+      LinkIsSortSequential "False|False| | "
+      LinkSortMode "0|0| | "
+      LinkPartColMode "0|0| | "
+      LinkSourcePinIDs "V0S0P1|V0S3P2| | "
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0A7"
+      OLEType "CAnnotation"
+      Readonly "0"
+      Name "V0A7"
+      NextID "0"
+      AnnotationType "0"
+      AnnotationText =+=+=+=
+Generieke serverjob voor het lezen van de Run-ID parameter file en het doorgeven van de waarde van RUN_ID als UserStatus
+
+Datum      Naam   Omschijving
+28-05-2020 mle134 Initiele versie
+=+=+=+=
+      TextFont "Courier\\10\\0\\0\\0\\400\\0"
+      TextHorizontalJustification "0"
+      TextVerticalJustification "0"
+      TextColor "0"
+      BackgroundColor "12713983"
+      BackgroundTransparent "0"
+      BorderVisible "1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0"
+      OLEType "CSeqFileStage"
+      Readonly "0"
+      Name "sqf_ProcesDatum"
+      NextID "2"
+      OutputPins "V0S0P1"
+      UnixFormat "1"
+      PipeStage "0"
+      UnicodeBOM "1"
+      UnicodeSwapped "1"
+      AllowColumnMapping "0"
+      WithFilter "0"
+      StageType "CSeqFileStage"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S0P1"
+      OLEType "CSeqOutput"
+      Readonly "0"
+      Name "lnk_RunId"
+      Partner "V0S3|V0S3P1"
+      FileName "#par_Linux_Paden.$evPad_Staging#/#par_Linux_Paden.$evPad_Paramfiles#/#pmDlNaam#_RunID.csv"
+      ColDelim ","
+      QuoteChar "\""
+      ColHeaders "0"
+      FixedWidth "0"
+      ColSpace "0"
+      EnforceMetaData "0"
+      Readtimeout "0"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "RUN_ID"
+         SqlType "2"
+         Precision "22"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Group "0"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      Waitforwriter "0"
+      PadChar "#"
+      LeftTextPos "160"
+      TopTextPos "168"
+      SuppressTruncWarn "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3"
+      OLEType "CTransformerStage"
+      Readonly "0"
+      Name "trn_UserStatus"
+      NextID "3"
+      InputPins "V0S3P1"
+      OutputPins "V0S3P2"
+      ValidationStatus "0"
+      StageType "CTransformerStage"
+      BlockSize "0"
+      StageVarsMinimised "0"
+      LoopVarsMaximised "0"
+      MaxLoopIterations "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3P1"
+      OLEType "CTrxInput"
+      Readonly "0"
+      Name "lnk_RunId"
+      Partner "V0S0|V0S0P1"
+      LinkType "1"
+      MultiRow "0"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S3P2"
+      OLEType "CTrxOutput"
+      Readonly "0"
+      Name "lnk_Dummy"
+      Partner "V0S6|V0S6P1"
+      Reject "0"
+      ErrorPin "0"
+      RowLimit "0"
+      Columns "COutputColumn"
+      BEGIN DSSUBRECORD
+         Name "RUN_ID"
+         SqlType "2"
+         Precision "22"
+         Scale "0"
+         Nullable "0"
+         KeyPosition "0"
+         DisplaySize "0"
+         Derivation "SetUserStatus(lnk_RunId.RUN_ID)"
+         Group "0"
+         ParsedDerivation "SetUserStatus(lnk_RunId.RUN_ID)"
+         SourceColumn "lnk_RunId.RUN_ID"
+         Transform "SetUserStatus"
+         SortKey "0"
+         SortType "0"
+         AllowCRLF "0"
+         LevelNo "0"
+         Occurs "0"
+         PadNulls "0"
+         SignOption "0"
+         SortingOrder "0"
+         ArrayHandling "0"
+         SyncIndicator "0"
+         PadChar ""
+         ExtendedPrecision "0"
+         TaggedSubrec "0"
+         OccursVarying "0"
+         PKeyIsCaseless "0"
+         SCDPurpose "0"
+      END DSSUBRECORD
+      LeftTextPos "390"
+      TopTextPos "168"
+      LinkMinimised "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S6"
+      OLEType "CSeqFileStage"
+      Readonly "0"
+      Name "sqf_Dummy"
+      NextID "2"
+      InputPins "V0S6P1"
+      UnixFormat "1"
+      PipeStage "0"
+      UnicodeBOM "1"
+      UnicodeSwapped "1"
+      AllowColumnMapping "0"
+      WithFilter "0"
+      StageType "CSeqFileStage"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "V0S6P1"
+      OLEType "CSeqInput"
+      Readonly "0"
+      Name "lnk_Dummy"
+      Partner "V0S3|V0S3P2"
+      FileName "/dev/null"
+      Delimiter ","
+      QuoteChar "\""
+      ColHeaders "0"
+      OmitNewLine "0"
+      Append "0"
+      Backup "0"
+      FixedWidth "0"
+      ColSpace "0"
+      EnforceMetaData "0"
+      Writetime "0"
+      WaitforReader "0"
+      Flushrow "0"
+      PadChar "#"
+   END DSRECORD
+END DSJOB
+BEGIN DSEXECJOB
+   Identifier "job_DL_LeesRunId"
+   DateModified "1899-12-30"
+   TimeModified "00.00.01"
+   BEGIN DSRECORD
+      Identifier "job_DL_LeesRunId"
+      F1 "JOB"
+      F3 "11.7///60/C"
+      F4 "job_DL_LeesRunId.trn_UserStatus"
+      F5 "pmDlNaam\Vpar_Linux_Paden\Vpar_Linux_Paden.$evPad_Root\Vpar_Linux_Paden.$evPad_Datalevering\Vpar_Linux_Paden.$evPad_Afgewezen\Vpar_Linux_Paden.$evPad_Archief\Vpar_Linux_Paden.$evPad_Inbox\Vpar_Linux_Paden.$evPad_Verwerking\Vpar_Linux_Paden.$evPad_Staging\Vpar_Linux_Paden.$evPad_Bronzone\Vpar_Linux_Paden.$evPad_Integratiezone\Vpar_Linux_Paden.$evPad_Bedrijfszone\Vpar_Linux_Paden.$evPad_Scripts\Vpar_Linux_Paden.$evPad_Paramfiles\Vpar_Linux_Paden.$evPad_Schemafiles\Vpar_Linux_Paden.$evPad_Datasets\Vpar_Linux_Paden.$evPad_Logs\Vpar_Linux_Paden.$evPad_Generiek"
+      F6 "pmDlNaam\Vpar_Linux_Paden parameters\VevPad_Root: Root van de Linux boomstructuur voor DIM - en DataStage bestanden\VevPad_Datalevering: Map voor Data leveringen van alle bronnen\VevPad_Afgewezen: Submap per bron voor Afgewezen van data leveringen\VevPad_Archief:Submap per bron voor Archief van data leveringen\VevPad_Inbox: Submap per bron voor Inbox van data leveringen\VevPad_Verwerking: Submap per bron voor Verwerking van data leveringen\VevPad_Staging: Map voor Staging \VevPad_Bronzone: Map voor Bronzone\VevPad_Integratiezone:Map voor Integratiezone\VevPad_Bedrijfszone: Map voor Bedrijfszone\VevPad_Scripts: Submap voor Script bestanden\VevPad_Paramfiles: Submap voor Parameterfiles\VevPad_Schemafiles: Submap voor Schemafiles\VevPad_Datasets: Submap voor Dataset bestanden\VevPad_Logs: Submap voor Log bestanden\VevPad_Generiek: Map voor Generieke bestanden"
+      F7 "dummybron.lev4\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF"
+      F9 "0\V13\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0\V0"
+      F10 "V0"
+      F18 "dummybron.lev4\V(As pre-defined)\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF\V$PROJDEF"
+      F21 "1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1\V1"
+      F24 ",,,,"
+      F28 "\\90 Generiek\\30 Generieke Functies\\50 Jobs\\DL_StartVerwerking"
+      F29 "0"
+      F30 "1"
+      F31 "2020-12-21 10:46:23"
+      F32 "0"
+      F34 "\V\VLINUX\V0\V\V\V\V\V\V\V\V\V\V0"
+      F36 "be03qap454uwvrm.hrc.ba.uwv.nl"
+      F37 "DIM_ontwikkel"
+      F38 "0"
+      F39 "job_DL_LeesRunId.sqf_ProcesDatum\Vjob_DL_LeesRunId.sqf_Dummy"
+      F41 "0"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_LeesRunId.sqf_Dummy"
+      F1 "STAGE"
+      F2 "SEQ"
+      F3 "11.7///60/C"
+      F8 "0"
+      F9 "1"
+      F10 "1"
+      F11 "0"
+      F15 "V0S6"
+      F16 "CSeqFileStage"
+      F31 "job_DL_LeesRunId.sqf_Dummy"
+      F32 "-1.-1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_LeesRunId.sqf_Dummy.lnk_Dummy"
+      F1 "INPIN"
+      F2 "SEQ"
+      F3 "11.7///60/C"
+      F4 "WRITE"
+      F5 "1"
+      F6 "2"
+      F7 "0"
+      F10 "\(A)"
+      F11 ","
+      F13 "\""
+      F14 "0"
+      F16 "job_DL_LeesRunId.sqf_Dummy"
+      F17 "DSD.SEQOpen"
+      F19 "$DS.SEQPUT"
+      F20 "DSD.SEQClose"
+      F21 "RUN_ID"
+      F22 "0"
+      F23 "99"
+      F25 "2"
+      F26 "22"
+      F27 "0"
+      F28 "0"
+      F32 "J\\110\\V0S3P2\VJ\\110\\V0S6P1"
+      F33 "/dev/null"
+      F34 "2"
+      F35 "0"
+      F36 "0"
+      F37 "0"
+      F38 "NONE"
+      F39 "lnk_Dummy"
+      F40 "0"
+      F43 "0"
+      F44 "0"
+      F47 "2"
+      F54 "0"
+      F55 "0"
+      F56 "0"
+      F57 "0"
+      F59 "#"
+      F60 "0"
+      F61 "0"
+      F64 "0"
+      F67 "0"
+      F70 "0"
+      F71 "0"
+      F77 "lnk_Dummy"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_LeesRunId.sqf_ProcesDatum"
+      F1 "STAGE"
+      F2 "SEQ"
+      F3 "11.7///60/C"
+      F8 "0"
+      F9 "1"
+      F10 "1"
+      F11 "0"
+      F15 "V0S0"
+      F16 "CSeqFileStage"
+      F31 "job_DL_LeesRunId.sqf_ProcesDatum"
+      F32 "-1.-1"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_LeesRunId.sqf_ProcesDatum.lnk_RunId"
+      F1 "OUTPIN"
+      F2 "SEQ"
+      F3 "11.7///60/C"
+      F4 "READ"
+      F5 "1"
+      F6 "1"
+      F10 "\(A)"
+      F11 ","
+      F13 "\""
+      F14 "0"
+      F16 "job_DL_LeesRunId.sqf_ProcesDatum"
+      F17 "DSD.SEQOpen"
+      F18 "$DS.SEQGETNEXT"
+      F20 "DSD.SEQClose"
+      F21 "RUN_ID"
+      F22 "0"
+      F23 "99"
+      F25 "2"
+      F26 "22"
+      F27 "0"
+      F28 "0"
+      F32 "J\\110\\V0S0P1\VJ\\110\\V0S3P1"
+      F33 "#par_Linux_Paden.$evPad_Staging#/#par_Linux_Paden.$evPad_Paramfiles#/#pmDlNaam#_RunID.csv"
+      F35 "0"
+      F38 "NONE"
+      F39 "lnk_RunId"
+      F40 "0"
+      F43 "0"
+      F44 "0"
+      F47 "1"
+      F54 "0"
+      F55 "0"
+      F56 "0"
+      F57 "0"
+      F59 "#"
+      F60 "0"
+      F61 "0"
+      F62 "0"
+      F64 "0"
+      F67 "0"
+      F70 "0"
+      F71 "0"
+      F77 "lnk_RunId"
+   END DSRECORD
+   BEGIN DSRECORD
+      Identifier "job_DL_LeesRunId.trn_UserStatus"
+      F1 "STAGE"
+      F2 "TRX"
+      F3 "11.7///60/C"
+      F4 "job_DL_LeesRunId"
+      F5 "DSD.StageRun"
+      F7 "JOB.1670810215.DT.1919763433.TRANS1"
+      F9 "job_DL_LeesRunId.sqf_ProcesDatum.lnk_RunId"
+      F10 "job_DL_LeesRunId.sqf_Dummy.lnk_Dummy"
+      F12 "job_DL_LeesRunId.sqf_Dummy.lnk_Dummy"
+      F15 "V0S3"
+      F16 "CTransformerStage"
+      F27 "0"
+      F31 "job_DL_LeesRunId.trn_UserStatus"
+      F32 "-1.-1"
+   END DSRECORD
+   BEGIN DSBPSOURCE
+      Identifier "JOB.1670810215.DT.1919763433.TRANS1"
+      TERMINATOR =+=+=+=
+* Tokens were replaced below as follows:
+* JobParam%%1 <= pmDlNaam
+* JobParam%%2 <= par_Linux_Paden
+* JobParam%%3 <= par_Linux_Paden.$evPad_Root
+* JobParam%%4 <= par_Linux_Paden.$evPad_Datalevering
+* JobParam%%5 <= par_Linux_Paden.$evPad_Afgewezen
+* JobParam%%6 <= par_Linux_Paden.$evPad_Archief
+* JobParam%%7 <= par_Linux_Paden.$evPad_Inbox
+* JobParam%%8 <= par_Linux_Paden.$evPad_Verwerking
+* JobParam%%9 <= par_Linux_Paden.$evPad_Staging
+* JobParam%%10 <= par_Linux_Paden.$evPad_Bronzone
+* JobParam%%11 <= par_Linux_Paden.$evPad_Integratiezone
+* JobParam%%12 <= par_Linux_Paden.$evPad_Bedrijfszone
+* JobParam%%13 <= par_Linux_Paden.$evPad_Scripts
+* JobParam%%14 <= par_Linux_Paden.$evPad_Paramfiles
+* JobParam%%15 <= par_Linux_Paden.$evPad_Schemafiles
+* JobParam%%16 <= par_Linux_Paden.$evPad_Datasets
+* JobParam%%17 <= par_Linux_Paden.$evPad_Logs
+* JobParam%%18 <= par_Linux_Paden.$evPad_Generiek
+* Pin%%V0S3P1.Column%%1 <= lnk_RunId.RUN_ID
+* GET.Pin%%V0S3P1 <= GET.lnk_RunId
+* Pin%%V0S3P1.REJECTEDCODE <= lnk_RunId.REJECTEDCODE
+* Pin%%V0S3P2.Column%%1 <= lnk_Dummy.RUN_ID
+* PUT.Pin%%V0S3P2 <= PUT.lnk_Dummy
+* Pin%%V0S3P2.REJECTED <= lnk_Dummy.REJECTED
+* Pin%%V0S3P2.REJECTEDCODE <= lnk_Dummy.REJECTEDCODE
+*
+* Subroutine for active stage job_DL_LeesRunId.trn_UserStatus generated at 10:46:23 21 Dec 2020
+*
+SUBROUTINE DSTransformerStage(HANDLES,ERROR)
+
+$INCLUDE DSINCLUDE DSD_RTCONFIG.H
+$INCLUDE DSINCLUDE DSD_STAGE.H
+$INCLUDE DSINCLUDE DSD_BCI.H
+
+$DEFINE JobParam%%1 STAGECOM.JOB.STATUS<7,1>
+$DEFINE JobParam%%2 STAGECOM.JOB.STATUS<7,2>
+$DEFINE JobParam%%3 STAGECOM.JOB.STATUS<7,3>
+$DEFINE JobParam%%4 STAGECOM.JOB.STATUS<7,4>
+$DEFINE JobParam%%5 STAGECOM.JOB.STATUS<7,5>
+$DEFINE JobParam%%6 STAGECOM.JOB.STATUS<7,6>
+$DEFINE JobParam%%7 STAGECOM.JOB.STATUS<7,7>
+$DEFINE JobParam%%8 STAGECOM.JOB.STATUS<7,8>
+$DEFINE JobParam%%9 STAGECOM.JOB.STATUS<7,9>
+$DEFINE JobParam%%10 STAGECOM.JOB.STATUS<7,10>
+$DEFINE JobParam%%11 STAGECOM.JOB.STATUS<7,11>
+$DEFINE JobParam%%12 STAGECOM.JOB.STATUS<7,12>
+$DEFINE JobParam%%13 STAGECOM.JOB.STATUS<7,13>
+$DEFINE JobParam%%14 STAGECOM.JOB.STATUS<7,14>
+$DEFINE JobParam%%15 STAGECOM.JOB.STATUS<7,15>
+$DEFINE JobParam%%16 STAGECOM.JOB.STATUS<7,16>
+$DEFINE JobParam%%17 STAGECOM.JOB.STATUS<7,17>
+$DEFINE JobParam%%18 STAGECOM.JOB.STATUS<7,18>
+
+$INCLUDE DSINCLUDE JOBCONTROL.H
+DEFFUN DSRLoadString(Num,Text,Args) CALLING '*DataStage*DSR_LOADSTRING'
+$DEFINE Pin%%V0S3P1.Column%%1 STAGECOM.ARR(1)
+$DEFINE GET.Pin%%V0S3P1 CALL $DS.SEQGETNEXT(1,Pin%%V0S3P1.REJECTEDCODE)
+IF STAGECOM.TRACE.STATS THEN CALL $PERF.NAME(-2,'lnk_Dummy.Derivation')
+$DEFINE Pin%%V0S3P2.Column%%1 STAGECOM.ARR(2)
+$DEFINE PUT.Pin%%V0S3P2 CALL $DS.SEQPUT(2, Pin%%V0S3P2.REJECTEDCODE)
+DEFFUN SetUserStatus( ARG1) CALLING "DSU.SetUserStatus"
+
+UPDATE.COUNT = STAGECOM.RATE
+
+
+
+LOOP
+	REJECTED = @TRUE
+	* Get next row from primary input pin lnk_RunId
+	STAGECOM.PINNO = 1
+	GET.Pin%%V0S3P1
+	ERROR = Pin%%V0S3P1.REJECTEDCODE
+WHILE NOT(ERROR)
+
+	STAGECOM.PINNO = 2
+	    IF STAGECOM.TRACE.STATS THEN CALL $PERF.BEGIN(-2)
+	    IF @TRUE THEN
+		* Column derivation code for pin lnk_Dummy
+		Pin%%V0S3P2.Column%%1 = (SetUserStatus(Pin%%V0S3P1.Column%%1))
+		Pin%%V0S3P2.REJECTED = @FALSE
+	    IF STAGECOM.TRACE.STATS THEN CALL $PERF.END(-2)
+
+		PUT.Pin%%V0S3P2
+		IF NOT(Pin%%V0S3P2.REJECTEDCODE) THEN
+		    REJECTED = @FALSE
+		END ELSE 
+		    Pin%%V0S3P2.REJECTED = @TRUE
+		END 
+	    END
+	    ELSE
+		Pin%%V0S3P2.REJECTED = @TRUE
+		Pin%%V0S3P2.REJECTEDCODE = 0
+	    END
+
+
+  UPDATE.COUNT -= 1
+  IF UPDATE.COUNT LE 0 THEN CALL DSD.Update(HANDLES);UPDATE.COUNT = STAGECOM.RATE
+REPEAT
+RETURN
+END
+
+=+=+=+=
+   END DSBPSOURCE
+   BEGIN DSBPBINARY
+      Identifier "JOB.1670810215.DT.1919763433.TRANS1"
+      B1 "E1DA10B7050001003F00020000000200130025007C00670054001300FF7F0000FC01000066000000"
+      B41 "250000008200000064CC0000500200006002000061030000D10A00001B0B00000000000000000000"
+      B81 "08000000580043005400550058004400540055005800450056005500580046005400550058004700"
+      B121 "5400550058004800540055000201540057005800580049005800550058004A005400550058004B00"
+      B161 "5400550058004C005400550058004D005400550058004E005400550058004F005400550058005000"
+      B201 "56005500580051005600550058005200540055005800530054005500100042005900580006015800"
+      B241 "5A005B00DE025B00BE000000F8005D003400F8005E0035001E005C00020034003500E60044005A00"
+      B281 "55003700F80055003800FC0055005A0055004300F800550039001E005F00020039003A00F8003A00"
+      B321 "41000C010E0141005B00DE025B000000F8010000FC0057005A00550043001000420059005B000601"
+      B361 "5B005A006000DE026000000032010000F8005D003B001E00610001003B00DE0255000000B8010000"
+      B401 "96016200010000004500550055006000FC006000570055004500F8005A003C001000420059006000"
+      B441 "060160005A006300DE02630082010000F8005D003D001E00640001003D00F80057003E001E006500"
+      B481 "02003E003F000E013F006300DE026300AC010000F8005A003800C200B2010000F80055003C00C200"
+      B521 "C4010000F80055003C00F8005A003F009401370055003700CE0037005A006300DE026300EE010000"
+      B561 "1E00660001004000E60044005A00550037000C01C2000000C80000005C015C010100000014000000"
+      B601 "1200000013000000005354414745434F4D00FA01FC02FF01FB00424349434F4D00FD0EFE00245045"
+      B641 "52462E4E414D456C6E6B5F44756D6D792E44657269766174696F6E2444532E5345514745544E4558"
+      B681 "5424504552462E424547494E4453552E5365745573657253746174757324504552462E454E442444"
+      B721 "532E5345515055544453442E55706461746503000400000301000000030020000003020000000500"
+      B761 "000000031000000003000000000501000000040A0000001D00000003FEFFFFFF0114000000270000"
+      B801 "00040E0000003B0000000502000000040B0000004900000004110000005400000005030000000409"
+      B841 "00000065000000040A0000006E000000040A00000078000000000000000000000000000000080000"
+      B881 "0001000100000000000F000000020001000000000019000000030001000000000024000000040001"
+      B921 "00000000003000000005000100000000003500000006000100000000003A00000007000100000000"
+      B961 "00450000000800010000000000490000000900010000000000510000000A00010000000000590000"
+      B1001 "000B00010000000000610000000C000100000000006B0000000D00010000000000740000000E0001"
+      B1041 "00000000007E0000000F000100000000008700000010000100000000008F00000011000100000000"
+      B1081 "00990000001200010000000000A90000001300010000000000B30000001400010000000000BD0000"
+      B1121 "001500010000000000C50000001600010000000000CF0000001700010000000000D9000000180001"
+      B1161 "0000000000E10000001900010000000000EE0000001A00010000000000FB0000001B000100000000"
+      B1201 "00050100001C00010000000000110100001D000100000000001F0100001E000100000000002B0100"
+      B1241 "001F000100000000003301000020000100000000003B010000210001000000000046010000220001"
+      B1281 "00000000004C01000023000100000000005601000024000100000000006101000025000100000000"
+      B1321 "006B01000026000100000000007601000027000100000000007F0100002800010000000000840100"
+      B1361 "0029000100000000008E0100002A00010000000000940100002B00010000000000A10100002C0001"
+      B1401 "0000000000A80100002D00010000000000B00100002E00010000000000B90100002F000100000000"
+      B1441 "00C10100003000010000000000C90100003100010000000000CD0100003200010000000000D20100"
+      B1481 "003300010000000000D70100003400010000000000DE0100003500010000000000E5010000360001"
+      B1521 "0000000000EA0100003700010000000000F701000038000100000000000002000039000100000000"
+      B1561 "00070200003A00010000000000200200003B00010000000000270200003C000100000000003C0200"
+      B1601 "003D00010000000000430200003E000100000000004A0200003F0001000000000063020000400004"
+      B1641 "00000000006B02000041000400000000007102000042000200000000008402000043000700000000"
+      B1681 "00910200004400070000000000A30200004500070000000000B00200004600070000000000BB0200"
+      B1721 "004700070000000000C70200004800070000000000D80200004900070000000000E50200004A0007"
+      B1761 "0000000000F30200004B00070000000000010300004C00070000000000100300004D000700000000"
+      B1801 "00200300004E00070000000000300300004F000700000000004303000050000700000000004E0300"
+      B1841 "0051000700000000005D03000052000700000000006C0300005300070000000000244D4154524958"
+      B1881 "0048414E444C450050524F502E4E414D4500504152414D2E4E414D45004F424A4543542E4E414D45"
+      B1921 "004844424300494E464F0053544147452E4E414D45004B4559004A6F624E616D65004572724D6F64"
+      B1961 "650052746E4E616D65004A6F6248616E646C6500496E666F547970650053746167654E616D65004C"
+      B2001 "696E6B4E616D65004576656E7449640052756E4E756D626572004576656E745479706546696C7465"
+      B2041 "72004576656E745479706500537461727454696D6500456E6454696D65004D61784E756D62657200"
+      B2081 "506172616D4E616D65005661724E616D650043757374496E666F4E616D65004576656E744D657373"
+      B2121 "616765004D7367537472696E67005265706F72744C6576656C004C696E65536570617261746F7200"
+      B2161 "4D736754656D706C617465004172674C6973740052756E4D6F646500506172616D65746572730056"
+      B2201 "616C7565004C696D697454797065004C696D697456616C75650051756575654E616D650050617261"
+      B2241 "6D56616C75650056617256616C756500436F6465004572726F72436F6465004A6F62494400547261"
+      B2281 "63654F7074696F6E7300706F72744E6F0054696D656F757400537562724E616D6500537562724172"
+      B2321 "67004F7074696F6E73004E756D00546578740041726773005F5430303030005F5430303031004152"
+      B2361 "4731005550444154452E434F554E540052454A4543544544005F54303030320050696E2525563053"
+      B2401 "3350312E52454A4543544544434F4445005F54303030330050696E25255630533350322E52454A45"
+      B2441 "43544544005F5430303034005F54303030350050696E25255630533350322E52454A454354454443"
+      B2481 "4F44450048414E444C4553004552524F52005354414745434F4D2E54524143454D4F444500535441"
+      B2521 "4745434F4D2E50494E005354414745434F4D2E4E554D2E524F5753005354414745434F4D2E415252"
+      B2561 "00424349434F4D2E44534E00424349434F4D2E4844424300424349434F4D2E4E554D2E53544D5453"
+      B2601 "00424349434F4D2E4853544D5400424349434F4D2E5458524F575300424349434F4D2E545853495A"
+      B2641 "4500424349434F4D2E5052495641544500424349434F4D2E4152522E524F575300424349434F4D2E"
+      B2681 "4152522E53495A4500424349434F4D2E4E4C532E4D41504E414D4500424349434F4D2E4152520042"
+      B2721 "4349434F4D2E4D41502E41525200424349434F4D2E5458535441544500424349434F4D2E444F2E52"
+      B2761 "455052455041524500DFFF00001800E7FF7800FBFF2E00FBFF0A00FEFF06000A0010000600FEFF12"
+      B2801 "000A002800FEFF0A001A000600FEFF260010000E00FEFF0C00FCFF0C000600FCFF0600080022000A"
+      B2841 "0002002F773030312F7368617265645F686F742F50726F6A656374732F44494D5F6F6E7477696B6B"
+      B2881 "656C2F52545F42503131302F4A4F422E313637303831303231352E44542E31393139373633343333"
+      B2921 "2E5452414E53310000"
+   END DSBPBINARY
+END DSEXECJOB
