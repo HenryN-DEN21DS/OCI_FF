@@ -1,0 +1,847 @@
+sep=	
+NAAM	SIR
+VERSIE	0.0001
+OMSCHRIJVING	SONAR Werkbedrijf<FONT COLOR="FF0000">LET OP: POST INSTALL SCRIPTS aanwezig !</FONT> ivm Indexen
+STAR SCHEMA	SIR
+STAGE SCHEMA	SIRSTG
+CREATIE DATUM	26-jun-2019
+RAPPORTAGE DATUM	04-sep-2023
+
+FEITENTABELLEN
+	SIR_TBEROEPEN_FCT              	Toestanden (historie)
+		BEROEPEN_TST_KEY               	NUMBER(11,0)                   	
+		BEROEP                         	NUMBER(11,0)                   	SIR_TBEROEPEN_DIM              	BEROEP_KEY
+		DATUM_BEGIN_ADMINISTRATIE      	DATE                           	
+		DATUM_EINDE_ADMINISTRATIE      	DATE                           	
+		DATUM_BEGIN_WERKELIJKHEID      	DATE                           	
+		DATUM_EINDE_WERKELIJKHEID      	DATE                           	
+		DATUM_EERSTE_MUTATIE           	DATE                           	
+		IND_ACTIEF                     	VARCHAR2(1)                    	
+		IND_ACTIEF_VRG_TOESTAND        	VARCHAR2(1)                    	
+		CODE_EINDE_STATUS              	VARCHAR2(15)                   	
+		CODE_EINDE_VRG_STATUS          	VARCHAR2(15)                   	
+		DUUR_STATUS                    	NUMBER(11,0)                   	
+		DUUR_VRG_STATUS                	NUMBER(11,0)                   	
+		DUUR_ONDERBREKING              	NUMBER(11,0)                   	
+		DUUR_TOTAAL                    	NUMBER(11,0)                   	
+		WERKZOEKENDE                   	NUMBER(11,0)                   	SIR_TWERKZOEKENDEN_DIM         	WERKZOEKENDE_KEY
+		BEROEPSCODE                    	VARCHAR2(50)                   	
+		BVI_FLAG                       	VARCHAR2(1)                    	
+		DUMMY                          	VARCHAR2(1)                    	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+
+	SIR_TDVS_FCT                   	Toestanden (historie)
+		DVS_TST_KEY                    	NUMBER(11,0)                   	
+		DV                             	NUMBER(11,0)                   	SIR_TDVS_DIM                   	DV_KEY
+		DATUM_BEGIN_ADMINISTRATIE      	DATE                           	
+		DATUM_EINDE_ADMINISTRATIE      	DATE                           	
+		DATUM_BEGIN_WERKELIJKHEID      	DATE                           	
+		DATUM_EINDE_WERKELIJKHEID      	DATE                           	
+		DATUM_EERSTE_MUTATIE           	DATE                           	
+		IND_ACTIEF                     	VARCHAR2(1)                    	
+		IND_ACTIEF_VRG_TOESTAND        	VARCHAR2(1)                    	
+		CODE_EINDE_STATUS              	VARCHAR2(15)                   	
+		CODE_EINDE_VRG_STATUS          	VARCHAR2(15)                   	
+		DUUR_STATUS                    	NUMBER(11,0)                   	
+		DUUR_VRG_STATUS                	NUMBER(11,0)                   	
+		DUUR_ONDERBREKING              	NUMBER(11,0)                   	
+		DUUR_TOTAAL                    	NUMBER(11,0)                   	
+		WERKZOEKENDE                   	NUMBER(11,0)                   	SIR_TWERKZOEKENDEN_DIM         	WERKZOEKENDE_KEY
+		STATUS                         	VARCHAR2(30)                   	
+		REDEN_EINDE                    	VARCHAR2(50)                   	
+		UITSTROOM_STATUS               	VARCHAR2(30)                   	
+		DATUM_UITSTROOM                	DATE                           	
+		MAX_UITKERINGSDATUM            	DATE                           	
+		NIET_WERKEND_SINDS             	DATE                           	
+		EERSTE_UITK_DAG                	DATE                           	
+		INDICERING                     	VARCHAR2(30)                   	
+		AANTAL_UREN_WW                 	NUMBER(17,2)                   	
+		REDEN_UITSTROOM                	VARCHAR2(30)                   	
+		PARTICIPATIELADDER             	VARCHAR2(30)                   	
+		DUMMY                          	VARCHAR2(1)                    	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+
+	SIR_TOPLEIDINGEN_FCT           	Toestanden (historie)
+		OPLEIDINGEN_TST_KEY            	NUMBER(11,0)                   	
+		OPLEIDING                      	NUMBER(11,0)                   	SIR_TOPLEIDINGEN_DIM           	OPLEIDING_KEY
+		DATUM_BEGIN_ADMINISTRATIE      	DATE                           	
+		DATUM_EINDE_ADMINISTRATIE      	DATE                           	
+		DATUM_BEGIN_WERKELIJKHEID      	DATE                           	
+		DATUM_EINDE_WERKELIJKHEID      	DATE                           	
+		DATUM_EERSTE_MUTATIE           	DATE                           	
+		IND_ACTIEF                     	VARCHAR2(1)                    	
+		IND_ACTIEF_VRG_TOESTAND        	VARCHAR2(1)                    	
+		CODE_EINDE_STATUS              	VARCHAR2(15)                   	
+		CODE_EINDE_VRG_STATUS          	VARCHAR2(15)                   	
+		DUUR_STATUS                    	NUMBER(11,0)                   	
+		DUUR_VRG_STATUS                	NUMBER(11,0)                   	
+		DUUR_ONDERBREKING              	NUMBER(11,0)                   	
+		DUUR_TOTAAL                    	NUMBER(11,0)                   	
+		WERKZOEKENDE                   	NUMBER(11,0)                   	SIR_TWERKZOEKENDEN_DIM         	WERKZOEKENDE_KEY
+		NVS_OPLEIDINGSCODE             	VARCHAR2(50)                   	
+		DIPLOMA                        	VARCHAR2(50)                   	
+		NIVEAU                         	VARCHAR2(50)                   	
+		DUMMY                          	VARCHAR2(1)                    	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+
+	SIR_TWERKZOEKENDEN_FCT         	Toestanden (historie)
+		WERKZOEKENDEN_TST_KEY          	NUMBER(11,0)                   	
+		WERKZOEKENDE                   	NUMBER(11,0)                   	SIR_TWERKZOEKENDEN_DIM         	WERKZOEKENDE_KEY
+		DATUM_BEGIN_ADMINISTRATIE      	DATE                           	
+		DATUM_EINDE_ADMINISTRATIE      	DATE                           	
+		DATUM_BEGIN_WERKELIJKHEID      	DATE                           	
+		DATUM_EINDE_WERKELIJKHEID      	DATE                           	
+		DATUM_EERSTE_MUTATIE           	DATE                           	
+		IND_ACTIEF                     	VARCHAR2(1)                    	
+		IND_ACTIEF_VRG_TOESTAND        	VARCHAR2(1)                    	
+		CODE_EINDE_STATUS              	VARCHAR2(15)                   	
+		CODE_EINDE_VRG_STATUS          	VARCHAR2(15)                   	
+		DUUR_STATUS                    	NUMBER(11,0)                   	
+		DUUR_VRG_STATUS                	NUMBER(11,0)                   	
+		DUUR_ONDERBREKING              	NUMBER(11,0)                   	
+		DUUR_TOTAAL                    	NUMBER(11,0)                   	
+		STATUS_WZ                      	VARCHAR2(30)                   	
+		REDEN_UITSCHRIJVING            	VARCHAR2(30)                   	
+		UREN_NOG_WERKZAAM              	NUMBER(10,0)                   	
+		UITSCHRIJFDATUM                	DATE                           	
+		INSCHRIJFDATUM                 	DATE                           	
+		VERLENGDATUM                   	DATE                           	
+		NIET_WERKEND_SINDS             	DATE                           	
+		NATIONALITEIT                  	VARCHAR2(30)                   	
+		DIENSTVERBAND                  	VARCHAR2(30)                   	
+		BESCHIKBARE_UREN               	NUMBER(10,0)                   	
+		LAND                           	VARCHAR2(30)                   	
+		LAATSTE_DVP_ID                 	VARCHAR2(15)                   	
+		POSTCODE                       	VARCHAR2(10)                   	
+		PRESENTATIE_OP_WERKNL          	VARCHAR2(30)                   	
+		DUMMY                          	VARCHAR2(1)                    	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+
+DIMENSIETABELLEN
+	SIR_TBEROEPEN_DIM              	Primaire-dimensie bij SIR_TBEROEPEN_FCT
+		BEROEP_KEY                     	NUMBER(11,0)                   	
+		ROW_ID                         	VARCHAR2(50)                   	*
+		DATUM_BEGIN_BEROEP             	DATE                           	
+		DATUM_EINDE_BEROEP             	DATE                           	
+		TYPE_BEROEP                    	VARCHAR2(30)                   	
+		DATUM_VERWIJDERD_UIT_BRON      	DATE                           	
+		ACT_BEROEPSCODE                	VARCHAR2(50)                   	
+		ACT_BVI_FLAG                   	VARCHAR2(1)                    	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+		RUN_NR_MUTATIE                 	NUMBER(11,0)                   	
+
+	SIR_TDVS_DIM                   	Primaire-dimensie bij SIR_TDVS_FCT
+		DV_KEY                         	NUMBER(11,0)                   	
+		DV_ID                          	VARCHAR2(100)                  	*
+		DATUM_BEGIN_DV                 	DATE                           	
+		DATUM_EINDE_DV                 	DATE                           	
+		DV_NAAM                        	VARCHAR2(200)                  	
+		DATUM_VERWIJDERD_UIT_BRON      	DATE                           	
+		DATUM_MELDING                  	DATE                           	
+		STARTDATUM                     	DATE                           	
+		EINDDATUM                      	DATE                           	
+		DAGLOON                        	NUMBER(17,2)                   	
+		MEDISCHE_INDICERING            	VARCHAR2(100)                  	
+		VERMOED_EERSTE_UITK_DAG        	DATE                           	
+		OVERDRACHTSDATUM_WWB           	DATE                           	
+		SAMENLOOP                      	VARCHAR2(1)                    	
+		CV_PLUS                        	VARCHAR2(100)                  	
+		WZ_ROW_ID                      	VARCHAR2(30)                   	
+		EIGENAAR_ID                    	VARCHAR2(25)                   	
+		EERSTE_WW_DAG                  	DATE                           	
+		VESTIGING_ID                   	VARCHAR2(15)                   	
+		ACT_DATUM_UITSTROOM            	DATE                           	
+		ACT_MAX_UITKERINGSDATUM        	DATE                           	
+		ACT_EERSTE_UITK_DAG            	DATE                           	
+		ACT_INDICERING                 	VARCHAR2(30)                   	
+		ACT_PARTICIPATIELADDER         	VARCHAR2(30)                   	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+		RUN_NR_MUTATIE                 	NUMBER(11,0)                   	
+
+	SIR_TOPLEIDINGEN_DIM           	Primaire-dimensie bij SIR_TOPLEIDINGEN_FCT
+		OPLEIDING_KEY                  	NUMBER(11,0)                   	
+		WZ_ROW_ID                      	VARCHAR2(30)                   	*
+		DATUM_BEGIN_OPLEIDING          	DATE                           	
+		DATUM_EINDE_OPLEIDING          	DATE                           	
+		VERSIENUMMER                   	VARCHAR2(50)                   	
+		INSTANTIE_ID                   	VARCHAR2(15)                   	
+		DATUM_VERWIJDERD_UIT_BRON      	DATE                           	
+		ACT_NVS_OPLEIDINGSCODE         	VARCHAR2(50)                   	*
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+		RUN_NR_MUTATIE                 	NUMBER(11,0)                   	
+
+	SIR_TWERKZOEKENDEN_DIM         	Primaire-dimensie bij SIR_TWERKZOEKENDEN_FCT
+		WERKZOEKENDE_KEY               	NUMBER(11,0)                   	
+		ROW_ID                         	VARCHAR2(100)                  	*
+		INTEGRATION_ID                 	VARCHAR2(30)                   	
+		BSN                            	VARCHAR2(9)                    	
+		DATUM_BEGIN_WERKZOEKENDE       	DATE                           	
+		DATUM_EINDE_WERKZOEKENDE       	DATE                           	
+		WERKZOEKENDE_ID                	VARCHAR2(100)                  	
+		DATUM_VERWIJDERD_UIT_BRON      	DATE                           	
+		VOORLETTERS                    	VARCHAR2(50)                   	
+		VOORVOEGSELS                   	VARCHAR2(50)                   	
+		ACHTERNAAM                     	VARCHAR2(50)                   	
+		CODE_GESLACHT                  	VARCHAR2(30)                   	
+		GEBOORTEDATUM                  	DATE                           	
+		EXTRACTIEDATUM_LAST            	DATE                           	
+		MEDEWERKER_INVOER              	VARCHAR2(50)                   	
+		HUISNUMMER                     	VARCHAR2(100)                  	
+		HUISNUMMER_TOEV                	VARCHAR2(10)                   	
+		WOONPLAATS                     	VARCHAR2(50)                   	
+		RIJBEWIJS                      	VARCHAR2(50)                   	
+		VREEMDELINGENDOCUMENT          	VARCHAR2(30)                   	
+		EMAIL                          	VARCHAR2(500)                  	
+		STRAATNAAM                     	VARCHAR2(200)                  	
+		WERKMAP                        	VARCHAR2(1)                    	
+		MATCHEN_ABS                    	VARCHAR2(1)                    	
+		CV_PLUS                        	VARCHAR2(1)                    	
+		LTSTE_DATUM_WERKMAP            	DATE                           	
+		WOONGEMEENTE                   	VARCHAR2(50)                   	
+		SCHRIFTELIJK_NL                	VARCHAR2(30)                   	
+		MONDELING_NL                   	VARCHAR2(30)                   	
+		ACT_CODE_EINDE_STATUS          	VARCHAR2(15)                   	
+		BU_CODE                        	VARCHAR2(15)                   	
+		HELD_POSTN_ID                  	VARCHAR2(15)                   	
+		MDW_ID                         	VARCHAR2(15)                   	
+		ATTENDERING_DATUM              	DATE                           	
+		BANENAFSPRAAK                  	VARCHAR2(1)                    	
+		E_KANAAL_MOGELIJK              	VARCHAR2(1)                    	
+		BRON_CV                        	VARCHAR2(30)                   	
+		CV_NIET_VERWIJDEREN            	VARCHAR2(1)                    	
+		ACT_REDEN_UITSCHRIJVING        	VARCHAR2(30)                   	
+		ACT_UITSCHRIJFDATUM            	DATE                           	
+		ACT_INSCHRIJFDATUM             	DATE                           	
+		ACT_VERLENGDATUM               	DATE                           	
+		ACT_DIENSTVERBAND              	VARCHAR2(30)                   	
+		ACT_BESCHIKBARE_UREN           	NUMBER(10,0)                   	
+		ACT_LAATSTE_DVP_ID             	VARCHAR2(15)                   	
+		ACT_POSTCODE                   	VARCHAR2(10)                   	
+		RUN_NR_TOEVOEGING              	NUMBER(11,0)                   	
+		RUN_NR_MUTATIE                 	NUMBER(11,0)                   	
+
+CODETABELLEN
+	SIR_TCODE_EINDE_COD            
+		CODE_EINDE                     	VARCHAR2(15)                   
+		OMSCHRIJVING_KORT              	VARCHAR2(100)                  
+		OMSCHRIJVING_LANG              	VARCHAR2(200)                  
+		HERKOMST                       	VARCHAR2(100)                  
+
+	SIR_TCODE_GESLACHT_COD         
+		CODE_GESLACHT                  	VARCHAR2(30)                   
+		OMSCHRIJVING_KORT              	VARCHAR2(100)                  
+		OMSCHRIJVING_LANG              	VARCHAR2(200)                  
+		HERKOMST                       	VARCHAR2(100)                  
+		INDICATIE_GELDIGE_CODE         	VARCHAR2(100)                  
+
+HULPTABELLEN
+
+PACKAGES
+
+	FUNCTIES
+
+	PROCEDURES
+
+SECUNDAIRE STRUCTUREN
+
+PROCESGANG
+
+STAGE OMGEVING
+	ONE ATTRIBUTESET INTERFACE
+	BEROEPEN                       
+		SIR_TBEROEPEN_DIM                  	BEROEP_KEY                     	NUMBER(11,0)                   
+		SIR_TBEROEPEN_FCT                  	DATUM_EINDE_WERKELIJKHEID      	DATE                           
+		SIR_TBEROEPEN_FCT                  	DATUM_BEGIN_WERKELIJKHEID      	DATE                           
+		SIR_TBEROEPEN_DIM                  	ROW_ID                         	VARCHAR2(50)                   
+		SIR_TBEROEPEN_FCT                  	IND_ACTIEF                     	VARCHAR2(1)                    
+		SIR_TBEROEPEN_FCT                  	CODE_EINDE_STATUS              	VARCHAR2(15)                   
+		SIR_TBEROEPEN_DIM                  	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TBEROEPEN_DIM                  	TYPE_BEROEP                    	VARCHAR2(30)                   
+		SIR_TBEROEPEN_DIM                  	DATUM_EINDE_BEROEP             	DATE                           
+		SIR_TBEROEPEN_DIM                  	DATUM_BEGIN_BEROEP             	DATE                           
+		SIR_TBEROEPEN_DIM                  	ACT_BVI_FLAG                   	VARCHAR2(1)                    
+		SIR_TBEROEPEN_DIM                  	ACT_BEROEPSCODE                	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	ROW_ID                         	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER                     	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	ACT_UITSCHRIJFDATUM            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_DIENSTVERBAND              	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_POSTCODE                   	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_LAATSTE_DVP_ID             	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	BU_CODE                        	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_CODE_EINDE_STATUS          	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	INTEGRATION_ID                 	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	CODE_GESLACHT                  	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACHTERNAAM                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	BSN                            	VARCHAR2(9)                    
+		SIR_TWERKZOEKENDEN_DIM             	EXTRACTIEDATUM_LAST            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_BEGIN_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_EINDE_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	LTSTE_DATUM_WERKMAP            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	GEBOORTEDATUM                  	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	CV_NIET_VERWIJDEREN            	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	E_KANAAL_MOGELIJK              	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	BANENAFSPRAAK                  	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	ACT_VERLENGDATUM               	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_INSCHRIJFDATUM             	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	VOORLETTERS                    	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	VOORVOEGSELS                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	MEDEWERKER_INVOER              	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	EMAIL                          	VARCHAR2(500)                  
+		SIR_TWERKZOEKENDEN_DIM             	STRAATNAAM                     	VARCHAR2(200)                  
+		SIR_TWERKZOEKENDEN_DIM             	BRON_CV                        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	SCHRIFTELIJK_NL                	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	VREEMDELINGENDOCUMENT          	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	MONDELING_NL                   	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONGEMEENTE                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	RIJBEWIJS                      	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKMAP                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MATCHEN_ABS                    	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	CV_PLUS                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER_TOEV                	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	ATTENDERING_DATUM              	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	WOONPLAATS                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	HELD_POSTN_ID                  	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	MDW_ID                         	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_BESCHIKBARE_UREN           	NUMBER(10,0)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_REDEN_UITSCHRIJVING        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKZOEKENDE_ID                	VARCHAR2(100)                  
+		SIR_TBEROEPEN_FCT                  	BEROEPSCODE                    	VARCHAR2(50)                   
+		SIR_TBEROEPEN_FCT                  	BVI_FLAG                       	VARCHAR2(1)                    
+		SIR_TBEROEPEN_FCT                  	DUMMY                          	VARCHAR2(1)                    
+
+	DOELGROEPEN_AK_HLP             
+		SIR_TDOELGROEPEN_AK_HLP            	4                              	VARCHAR2                       
+		SIR_TDOELGROEPEN_AK_HLP            	1                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	3                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	1                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	2                              	VARCHAR2                       
+		SIR_TDOELGROEPEN_AK_HLP            	4                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	2                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	4                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	1                              	VARCHAR2                       
+		SIR_TDOELGROEPEN_AK_HLP            	3                              	DATE                           
+		SIR_TDOELGROEPEN_AK_HLP            	ROW_ID                         	VARCHAR2                       
+		SIR_TDOELGROEPEN_AK_HLP            	3                              	VARCHAR2                       
+		SIR_TDOELGROEPEN_AK_HLP            	2                              	DATE                           
+
+	DVS                            
+		SIR_TDVS_DIM                       	DV_KEY                         	NUMBER(11,0)                   
+		SIR_TDVS_FCT                       	DATUM_EINDE_WERKELIJKHEID      	DATE                           
+		SIR_TDVS_FCT                       	DATUM_BEGIN_WERKELIJKHEID      	DATE                           
+		SIR_TDVS_DIM                       	DV_ID                          	VARCHAR2(100)                  
+		SIR_TDVS_FCT                       	IND_ACTIEF                     	VARCHAR2(1)                    
+		SIR_TDVS_FCT                       	CODE_EINDE_STATUS              	VARCHAR2(15)                   
+		SIR_TDVS_DIM                       	DATUM_BEGIN_DV                 	DATE                           
+		SIR_TDVS_DIM                       	ACT_PARTICIPATIELADDER         	VARCHAR2(30)                   
+		SIR_TDVS_DIM                       	ACT_INDICERING                 	VARCHAR2(30)                   
+		SIR_TDVS_DIM                       	ACT_MAX_UITKERINGSDATUM        	DATE                           
+		SIR_TDVS_DIM                       	CV_PLUS                        	VARCHAR2(100)                  
+		SIR_TDVS_DIM                       	ACT_DATUM_UITSTROOM            	DATE                           
+		SIR_TDVS_DIM                       	ACT_EERSTE_UITK_DAG            	DATE                           
+		SIR_TDVS_DIM                       	DV_NAAM                        	VARCHAR2(200)                  
+		SIR_TDVS_DIM                       	DATUM_EINDE_DV                 	DATE                           
+		SIR_TDVS_DIM                       	SAMENLOOP                      	VARCHAR2(1)                    
+		SIR_TDVS_DIM                       	EIGENAAR_ID                    	VARCHAR2(25)                   
+		SIR_TDVS_DIM                       	VESTIGING_ID                   	VARCHAR2(15)                   
+		SIR_TDVS_DIM                       	OVERDRACHTSDATUM_WWB           	DATE                           
+		SIR_TDVS_DIM                       	EINDDATUM                      	DATE                           
+		SIR_TDVS_DIM                       	STARTDATUM                     	DATE                           
+		SIR_TDVS_DIM                       	VERMOED_EERSTE_UITK_DAG        	DATE                           
+		SIR_TDVS_DIM                       	DATUM_MELDING                  	DATE                           
+		SIR_TDVS_DIM                       	EERSTE_WW_DAG                  	DATE                           
+		SIR_TDVS_DIM                       	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TDVS_DIM                       	DAGLOON                        	NUMBER(17,2)                   
+		SIR_TDVS_DIM                       	WZ_ROW_ID                      	VARCHAR2(30)                   
+		SIR_TDVS_DIM                       	MEDISCHE_INDICERING            	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	ROW_ID                         	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	ACT_REDEN_UITSCHRIJVING        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_BESCHIKBARE_UREN           	NUMBER(10,0)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_VERLENGDATUM               	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_INSCHRIJFDATUM             	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_UITSCHRIJFDATUM            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_DIENSTVERBAND              	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_POSTCODE                   	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_LAATSTE_DVP_ID             	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_BEGIN_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_EINDE_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	CV_NIET_VERWIJDEREN            	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	E_KANAAL_MOGELIJK              	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	BANENAFSPRAAK                  	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MEDEWERKER_INVOER              	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	EMAIL                          	VARCHAR2(500)                  
+		SIR_TWERKZOEKENDEN_DIM             	STRAATNAAM                     	VARCHAR2(200)                  
+		SIR_TWERKZOEKENDEN_DIM             	BRON_CV                        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	SCHRIFTELIJK_NL                	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	VREEMDELINGENDOCUMENT          	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	MONDELING_NL                   	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONGEMEENTE                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	RIJBEWIJS                      	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKMAP                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MATCHEN_ABS                    	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	CV_PLUS                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER_TOEV                	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONPLAATS                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	HELD_POSTN_ID                  	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	MDW_ID                         	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	BU_CODE                        	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_CODE_EINDE_STATUS          	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	LTSTE_DATUM_WERKMAP            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	GEBOORTEDATUM                  	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ATTENDERING_DATUM              	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	EXTRACTIEDATUM_LAST            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	BSN                            	VARCHAR2(9)                    
+		SIR_TWERKZOEKENDEN_DIM             	ACHTERNAAM                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	CODE_GESLACHT                  	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	INTEGRATION_ID                 	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER                     	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	VOORLETTERS                    	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	VOORVOEGSELS                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKZOEKENDE_ID                	VARCHAR2(100)                  
+		SIR_TDVS_FCT                       	DUMMY                          	VARCHAR2(1)                    
+		SIR_TDVS_FCT                       	REDEN_EINDE                    	VARCHAR2(50)                   
+		SIR_TDVS_FCT                       	PARTICIPATIELADDER             	VARCHAR2(30)                   
+		SIR_TDVS_FCT                       	INDICERING                     	VARCHAR2(30)                   
+		SIR_TDVS_FCT                       	UITSTROOM_STATUS               	VARCHAR2(30)                   
+		SIR_TDVS_FCT                       	AANTAL_UREN_WW                 	NUMBER(17,2)                   
+		SIR_TDVS_FCT                       	STATUS                         	VARCHAR2(30)                   
+		SIR_TDVS_FCT                       	MAX_UITKERINGSDATUM            	DATE                           
+		SIR_TDVS_FCT                       	EERSTE_UITK_DAG                	DATE                           
+		SIR_TDVS_FCT                       	DATUM_UITSTROOM                	DATE                           
+		SIR_TDVS_FCT                       	NIET_WERKEND_SINDS             	DATE                           
+		SIR_TDVS_FCT                       	REDEN_UITSTROOM                	VARCHAR2(30)                   
+
+	IMPORT                         
+		SIR_TIMPORT                        	BATCHNUMMER                    	NUMBER                         
+		SIR_TIMPORT                        	BOVENGRENS                     	DATE                           
+		SIR_TIMPORT                        	IMPORT                         	DATE                           
+		SIR_TIMPORT                        	VERWERKT_DWH                   	VARCHAR2                       
+		SIR_TIMPORT                        	ONDERGRENS                     	DATE                           
+
+	OPLEIDINGEN                    
+		SIR_TOPLEIDINGEN_DIM               	OPLEIDING_KEY                  	NUMBER(11,0)                   
+		SIR_TOPLEIDINGEN_FCT               	DATUM_EINDE_WERKELIJKHEID      	DATE                           
+		SIR_TOPLEIDINGEN_FCT               	DATUM_BEGIN_WERKELIJKHEID      	DATE                           
+		SIR_TOPLEIDINGEN_DIM               	WZ_ROW_ID                      	VARCHAR2(30)                   
+		SIR_TOPLEIDINGEN_DIM               	ACT_NVS_OPLEIDINGSCODE         	VARCHAR2(50)                   
+		SIR_TOPLEIDINGEN_FCT               	IND_ACTIEF                     	VARCHAR2(1)                    
+		SIR_TOPLEIDINGEN_FCT               	CODE_EINDE_STATUS              	VARCHAR2(15)                   
+		SIR_TOPLEIDINGEN_DIM               	INSTANTIE_ID                   	VARCHAR2(15)                   
+		SIR_TOPLEIDINGEN_DIM               	VERSIENUMMER                   	VARCHAR2(50)                   
+		SIR_TOPLEIDINGEN_DIM               	DATUM_BEGIN_OPLEIDING          	DATE                           
+		SIR_TOPLEIDINGEN_DIM               	DATUM_EINDE_OPLEIDING          	DATE                           
+		SIR_TOPLEIDINGEN_DIM               	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ROW_ID                         	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	ACT_POSTCODE                   	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_LAATSTE_DVP_ID             	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_BEGIN_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_EINDE_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	CV_NIET_VERWIJDEREN            	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	E_KANAAL_MOGELIJK              	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	BANENAFSPRAAK                  	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MEDEWERKER_INVOER              	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	EMAIL                          	VARCHAR2(500)                  
+		SIR_TWERKZOEKENDEN_DIM             	STRAATNAAM                     	VARCHAR2(200)                  
+		SIR_TWERKZOEKENDEN_DIM             	BRON_CV                        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	SCHRIFTELIJK_NL                	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	VREEMDELINGENDOCUMENT          	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	MONDELING_NL                   	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONGEMEENTE                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	RIJBEWIJS                      	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_DIENSTVERBAND              	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_UITSCHRIJFDATUM            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_INSCHRIJFDATUM             	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_VERLENGDATUM               	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_BESCHIKBARE_UREN           	NUMBER(10,0)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_REDEN_UITSCHRIJVING        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKZOEKENDE_ID                	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	VOORVOEGSELS                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	VOORLETTERS                    	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER                     	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	INTEGRATION_ID                 	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	CODE_GESLACHT                  	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	BSN                            	VARCHAR2(9)                    
+		SIR_TWERKZOEKENDEN_DIM             	ACHTERNAAM                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	EXTRACTIEDATUM_LAST            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ATTENDERING_DATUM              	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	WERKMAP                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MATCHEN_ABS                    	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	CV_PLUS                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER_TOEV                	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONPLAATS                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	HELD_POSTN_ID                  	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	MDW_ID                         	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	BU_CODE                        	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_CODE_EINDE_STATUS          	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	LTSTE_DATUM_WERKMAP            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	GEBOORTEDATUM                  	DATE                           
+		SIR_TOPLEIDINGEN_FCT               	DUMMY                          	VARCHAR2(1)                    
+		SIR_TOPLEIDINGEN_FCT               	NVS_OPLEIDINGSCODE             	VARCHAR2(50)                   
+		SIR_TOPLEIDINGEN_FCT               	DIPLOMA                        	VARCHAR2(50)                   
+		SIR_TOPLEIDINGEN_FCT               	NIVEAU                         	VARCHAR2(50)                   
+
+	REF_DUUR_MAANDEN_HLP           
+		SIR_TREF_DUUR_MAANDEN_HLP          	NAAM                           	VARCHAR2                       
+		SIR_TREF_DUUR_MAANDEN_HLP          	MAANDEN                        	NUMBER                         
+		SIR_TREF_DUUR_MAANDEN_HLP          	NAAM_RESTEREND                 	VARCHAR2                       
+		SIR_TREF_DUUR_MAANDEN_HLP          	WW_DUUR_5                      	VARCHAR2                       
+		SIR_TREF_DUUR_MAANDEN_HLP          	WW_DUUR                        	VARCHAR2                       
+		SIR_TREF_DUUR_MAANDEN_HLP          	HISTORISCH                     	VARCHAR2                       
+		SIR_TREF_DUUR_MAANDEN_HLP          	VOLGORDE                       	NUMBER                         
+
+	REF_LEEFTIJD_HLP               
+		SIR_TREF_LEEFTIJD_HLP              	HISTORISCH                     	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	CWI                            	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	CBS                            	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	CWI_3_KLASSES                  	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	JAREN                          	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	JAREN                          	NUMBER                         
+		SIR_TREF_LEEFTIJD_HLP              	CWI_CODE                       	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	5JR                            	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	VSO                            	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	LUSTRUMS                       	NUMBER                         
+		SIR_TREF_LEEFTIJD_HLP              	MAANDEN                        	NUMBER                         
+		SIR_TREF_LEEFTIJD_HLP              	CWI_FIJN                       	VARCHAR2                       
+		SIR_TREF_LEEFTIJD_HLP              	VOLGNR                         	NUMBER                         
+
+	REF_OPLEIDINGEN_HLP            
+		SIR_TREF_OPLEIDINGEN_HLP           	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TREF_OPLEIDINGEN_HLP           	CODE                           	VARCHAR2                       
+		SIR_TREF_OPLEIDINGEN_HLP           	CODE                           	VARCHAR2                       
+
+	REF_OPLEIDINGSNIVO_HLP         
+		SIR_TREF_OPLEIDINGSNIVO_HLP        	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TREF_OPLEIDINGSNIVO_HLP        	CODE                           	VARCHAR2                       
+		SIR_TREF_OPLEIDINGSNIVO_HLP        	VOLGORDE                       	NUMBER                         
+		SIR_TREF_OPLEIDINGSNIVO_HLP        	ONGEDIPLOMEERD                 	NUMBER                         
+
+	RES_AK_ALL_LAST                
+		SIR_TRES_AK_ALL_LAST               	POSTCODE                       	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_ALL_LAST               	NWW                            	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	VERLENGDATUM                   	DATE                           
+		SIR_TRES_AK_ALL_LAST               	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_ALL_LAST               	STATUS_OMS                     	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	NAAM                           	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	WWB                            	DATE                           
+		SIR_TRES_AK_ALL_LAST               	WERKEND_SINDS                  	DATE                           
+		SIR_TRES_AK_ALL_LAST               	BEGIN_WERKELIJKHEID            	DATE                           
+		SIR_TRES_AK_ALL_LAST               	NATIONALITEIT                  	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	EINDE_WERKZOEKENDE             	DATE                           
+		SIR_TRES_AK_ALL_LAST               	DV                             	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	TOTAAL                         	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	INDICERING                     	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	EINDE_STATUS                   	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	UITSCHRIJFDATUM                	DATE                           
+		SIR_TRES_AK_ALL_LAST               	WERKLOOSHEID                   	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	UITSTROOM                      	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	ONDERBREKING                   	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	UITSCHRIJVING                  	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	EERSTE_UITK_DAG                	DATE                           
+		SIR_TRES_AK_ALL_LAST               	STATUS                         	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_ALL_LAST               	KEY                            	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	UREN                           	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_ALL_LAST               	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_ALL_LAST               	ROW_ID                         	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	GESLACHT                       	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	INSTROOM                       	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	OP_PEILDATUM                   	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	ARBEIDSVERLEDEN                	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	PEILDATUM                      	DATE                           
+		SIR_TRES_AK_ALL_LAST               	RIJBEWIJS                      	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	EINDDATUM                      	DATE                           
+		SIR_TRES_AK_ALL_LAST               	INSCHRIJFDATUM                 	DATE                           
+		SIR_TRES_AK_ALL_LAST               	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_ALL_LAST               	NOG_WERKZAAM                   	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	OP_WERKNL                      	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	SAMENLOOP                      	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	DVP_ID                         	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	INDICERING                     	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	EINDE_DV                       	DATE                           
+		SIR_TRES_AK_ALL_LAST               	KEY                            	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	WW_DAG                         	DATE                           
+		SIR_TRES_AK_ALL_LAST               	LAND                           	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	PEILMOMENT                     	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	INSTROOM                       	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	VREEMDELINGENDOCUMENT          	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	ROW_ID                         	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	EINDDATUM                      	DATE                           
+		SIR_TRES_AK_ALL_LAST               	BEGIN_WERKZOEKENDE             	DATE                           
+		SIR_TRES_AK_ALL_LAST               	DAGLOON                        	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	UITSTROOM                      	DATE                           
+		SIR_TRES_AK_ALL_LAST               	WERKGEVER                      	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	ID                             	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	UITK_DAG                       	DATE                           
+		SIR_TRES_AK_ALL_LAST               	PLUS                           	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	STATUS                         	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_ALL_LAST               	OP_INSCHRIJFDAT                	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	EINDE_VRG_STATUS               	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	BEMIDDELINGSBEROEP             	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_ALL_LAST               	UITSTROOM                      	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_ALL_LAST               	UITKERINGSDATUM                	DATE                           
+		SIR_TRES_AK_ALL_LAST               	VRG_STATUS                     	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	LAST                           	DATE                           
+		SIR_TRES_AK_ALL_LAST               	BSN                            	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	GEBOORTEDATUM                  	DATE                           
+		SIR_TRES_AK_ALL_LAST               	MELDING                        	DATE                           
+		SIR_TRES_AK_ALL_LAST               	BEGIN_DV                       	DATE                           
+		SIR_TRES_AK_ALL_LAST               	OP_UITSCHRIJFDAT               	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_ALL_LAST               	EINDE_WERKELIJKHEID            	DATE                           
+		SIR_TRES_AK_ALL_LAST               	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	DIENSTVERBAND                  	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_ALL_LAST               	TST_KEY                        	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	WZ                             	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	INSCHR                         	NUMBER                         
+		SIR_TRES_AK_ALL_LAST               	ID                             	VARCHAR2                       
+		SIR_TRES_AK_ALL_LAST               	PARTICIPATIELADDER             	VARCHAR2                       
+
+	RES_AK_ALL_PRE_LAST            
+		SIR_TRES_AK_ALL_PRE_LAST           	PEILMOMENT                     	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	NWW                            	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	INSTROOM                       	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	ID                             	VARCHAR2                       
+		SIR_TRES_AK_ALL_PRE_LAST           	ROW_ID                         	VARCHAR2                       
+		SIR_TRES_AK_ALL_PRE_LAST           	INSTROOM                       	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	KEY                            	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	UITSCHRIJFDATUM                	DATE                           
+		SIR_TRES_AK_ALL_PRE_LAST           	PEILDATUM                      	DATE                           
+		SIR_TRES_AK_ALL_PRE_LAST           	UITSTROOM                      	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	WZ                             	VARCHAR2                       
+		SIR_TRES_AK_ALL_PRE_LAST           	STATUS                         	VARCHAR2                       
+		SIR_TRES_AK_ALL_PRE_LAST           	UITSTROOM                      	NUMBER                         
+		SIR_TRES_AK_ALL_PRE_LAST           	EINDE_VRG_STATUS               	VARCHAR2                       
+
+	RES_AK_LAST                    
+		SIR_TRES_AK_LAST                   	POSTCODE                       	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_LAST                   	NWW                            	NUMBER                         
+		SIR_TRES_AK_LAST                   	VERLENGDATUM                   	DATE                           
+		SIR_TRES_AK_LAST                   	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_LAST                   	STATUS_OMS                     	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	NAAM                           	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	WWB                            	DATE                           
+		SIR_TRES_AK_LAST                   	WERKEND_SINDS                  	DATE                           
+		SIR_TRES_AK_LAST                   	BEGIN_WERKELIJKHEID            	DATE                           
+		SIR_TRES_AK_LAST                   	NATIONALITEIT                  	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	EINDE_WERKZOEKENDE             	DATE                           
+		SIR_TRES_AK_LAST                   	DV                             	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	TOTAAL                         	NUMBER                         
+		SIR_TRES_AK_LAST                   	INDICERING                     	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	EINDE_STATUS                   	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	UITSCHRIJFDATUM                	DATE                           
+		SIR_TRES_AK_LAST                   	WERKLOOSHEID                   	NUMBER                         
+		SIR_TRES_AK_LAST                   	UITSTROOM                      	NUMBER                         
+		SIR_TRES_AK_LAST                   	ONDERBREKING                   	NUMBER                         
+		SIR_TRES_AK_LAST                   	UITSCHRIJVING                  	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	EERSTE_UITK_DAG                	DATE                           
+		SIR_TRES_AK_LAST                   	STATUS                         	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_LAST                   	KEY                            	NUMBER                         
+		SIR_TRES_AK_LAST                   	UREN                           	NUMBER                         
+		SIR_TRES_AK_LAST                   	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_LAST                   	ROW_ID                         	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_LAST                   	GESLACHT                       	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	INSTROOM                       	NUMBER                         
+		SIR_TRES_AK_LAST                   	OP_PEILDATUM                   	NUMBER                         
+		SIR_TRES_AK_LAST                   	ARBEIDSVERLEDEN                	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	PEILDATUM                      	DATE                           
+		SIR_TRES_AK_LAST                   	RIJBEWIJS                      	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	EINDDATUM                      	DATE                           
+		SIR_TRES_AK_LAST                   	INSCHRIJFDATUM                 	DATE                           
+		SIR_TRES_AK_LAST                   	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_LAST                   	NOG_WERKZAAM                   	NUMBER                         
+		SIR_TRES_AK_LAST                   	OP_WERKNL                      	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	SAMENLOOP                      	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	DVP_ID                         	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	INDICERING                     	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	EINDE_DV                       	DATE                           
+		SIR_TRES_AK_LAST                   	KEY                            	NUMBER                         
+		SIR_TRES_AK_LAST                   	WW_DAG                         	DATE                           
+		SIR_TRES_AK_LAST                   	LAND                           	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	PEILMOMENT                     	NUMBER                         
+		SIR_TRES_AK_LAST                   	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	INSTROOM                       	NUMBER                         
+		SIR_TRES_AK_LAST                   	VREEMDELINGENDOCUMENT          	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	ROW_ID                         	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	EINDDATUM                      	DATE                           
+		SIR_TRES_AK_LAST                   	BEGIN_WERKZOEKENDE             	DATE                           
+		SIR_TRES_AK_LAST                   	DAGLOON                        	NUMBER                         
+		SIR_TRES_AK_LAST                   	UITSTROOM                      	DATE                           
+		SIR_TRES_AK_LAST                   	WERKGEVER                      	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	ID                             	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	UITK_DAG                       	DATE                           
+		SIR_TRES_AK_LAST                   	PLUS                           	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	STATUS                         	NUMBER                         
+		SIR_TRES_AK_LAST                   	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_LAST                   	OP_INSCHRIJFDAT                	NUMBER                         
+		SIR_TRES_AK_LAST                   	EINDE_VRG_STATUS               	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	BEMIDDELINGSBEROEP             	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_LAST                   	UITSTROOM                      	NUMBER                         
+		SIR_TRES_AK_LAST                   	STARTDATUM                     	DATE                           
+		SIR_TRES_AK_LAST                   	UITKERINGSDATUM                	DATE                           
+		SIR_TRES_AK_LAST                   	VRG_STATUS                     	NUMBER                         
+		SIR_TRES_AK_LAST                   	LAST                           	DATE                           
+		SIR_TRES_AK_LAST                   	BSN                            	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	GEBOORTEDATUM                  	DATE                           
+		SIR_TRES_AK_LAST                   	MELDING                        	DATE                           
+		SIR_TRES_AK_LAST                   	BEGIN_DV                       	DATE                           
+		SIR_TRES_AK_LAST                   	OP_UITSCHRIJFDAT               	NUMBER                         
+		SIR_TRES_AK_LAST                   	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_LAST                   	EINDE_WERKELIJKHEID            	DATE                           
+		SIR_TRES_AK_LAST                   	OMSCHRIJVING                   	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	DIENSTVERBAND                  	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	MUTATIEDATUM                   	DATE                           
+		SIR_TRES_AK_LAST                   	TST_KEY                        	NUMBER                         
+		SIR_TRES_AK_LAST                   	WZ                             	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	INSCHR                         	NUMBER                         
+		SIR_TRES_AK_LAST                   	ID                             	VARCHAR2                       
+		SIR_TRES_AK_LAST                   	PARTICIPATIELADDER             	VARCHAR2                       
+
+	RES_AK_UPDATE_HLP              
+		SIR_TRES_AK_UPDATE_HLP             	ID                             	VARCHAR2                       
+		SIR_TRES_AK_UPDATE_HLP             	WAARDE                         	VARCHAR2                       
+		SIR_TRES_AK_UPDATE_HLP             	SOORT                          	NUMBER                         
+
+	RES_LOG                        
+		SIR_TRES_LOG                       	BATCHNUMMER                    	NUMBER                         
+		SIR_TRES_LOG                       	EINDTIJD                       	DATE                           
+		SIR_TRES_LOG                       	AANTAL                         	NUMBER                         
+		SIR_TRES_LOG                       	STARTTIJD                      	DATE                           
+		SIR_TRES_LOG                       	GEDRAAID                       	VARCHAR2                       
+		SIR_TRES_LOG                       	PEILDATUM                      	DATE                           
+		SIR_TRES_LOG                       	SOORT                          	VARCHAR2                       
+		SIR_TRES_LOG                       	DATUM_BESTANDEN                	DATE                           
+
+	WERKZOEKENDEN                  
+		SIR_TWERKZOEKENDEN_DIM             	WERKZOEKENDE_KEY               	NUMBER(11,0)                   
+		SIR_TWERKZOEKENDEN_FCT             	DATUM_BEGIN_WERKELIJKHEID      	DATE                           
+		SIR_TWERKZOEKENDEN_FCT             	DATUM_EINDE_WERKELIJKHEID      	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ROW_ID                         	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_FCT             	IND_ACTIEF                     	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_FCT             	CODE_EINDE_STATUS              	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_REDEN_UITSCHRIJVING        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_BESCHIKBARE_UREN           	NUMBER(10,0)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_VERLENGDATUM               	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_INSCHRIJFDATUM             	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_UITSCHRIJFDATUM            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ACT_DIENSTVERBAND              	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_POSTCODE                   	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_LAATSTE_DVP_ID             	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_BEGIN_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_EINDE_WERKZOEKENDE       	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	CV_NIET_VERWIJDEREN            	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	E_KANAAL_MOGELIJK              	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	BANENAFSPRAAK                  	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MEDEWERKER_INVOER              	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	EMAIL                          	VARCHAR2(500)                  
+		SIR_TWERKZOEKENDEN_DIM             	STRAATNAAM                     	VARCHAR2(200)                  
+		SIR_TWERKZOEKENDEN_DIM             	BRON_CV                        	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	SCHRIFTELIJK_NL                	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	VREEMDELINGENDOCUMENT          	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	MONDELING_NL                   	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONGEMEENTE                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	RIJBEWIJS                      	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKMAP                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	MATCHEN_ABS                    	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	CV_PLUS                        	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER_TOEV                	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_DIM             	WOONPLAATS                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	HELD_POSTN_ID                  	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	MDW_ID                         	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	BU_CODE                        	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	ACT_CODE_EINDE_STATUS          	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_DIM             	LTSTE_DATUM_WERKMAP            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	GEBOORTEDATUM                  	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	ATTENDERING_DATUM              	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	EXTRACTIEDATUM_LAST            	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	DATUM_VERWIJDERD_UIT_BRON      	DATE                           
+		SIR_TWERKZOEKENDEN_DIM             	BSN                            	VARCHAR2(9)                    
+		SIR_TWERKZOEKENDEN_DIM             	ACHTERNAAM                     	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	CODE_GESLACHT                  	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	INTEGRATION_ID                 	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_DIM             	HUISNUMMER                     	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_DIM             	VOORLETTERS                    	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	VOORVOEGSELS                   	VARCHAR2(50)                   
+		SIR_TWERKZOEKENDEN_DIM             	WERKZOEKENDE_ID                	VARCHAR2(100)                  
+		SIR_TWERKZOEKENDEN_FCT             	DUMMY                          	VARCHAR2(1)                    
+		SIR_TWERKZOEKENDEN_FCT             	STATUS_WZ                      	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_FCT             	LAND                           	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_FCT             	LAATSTE_DVP_ID                 	VARCHAR2(15)                   
+		SIR_TWERKZOEKENDEN_FCT             	POSTCODE                       	VARCHAR2(10)                   
+		SIR_TWERKZOEKENDEN_FCT             	DIENSTVERBAND                  	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_FCT             	UREN_NOG_WERKZAAM              	NUMBER(10,0)                   
+		SIR_TWERKZOEKENDEN_FCT             	UITSCHRIJFDATUM                	DATE                           
+		SIR_TWERKZOEKENDEN_FCT             	INSCHRIJFDATUM                 	DATE                           
+		SIR_TWERKZOEKENDEN_FCT             	VERLENGDATUM                   	DATE                           
+		SIR_TWERKZOEKENDEN_FCT             	NIET_WERKEND_SINDS             	DATE                           
+		SIR_TWERKZOEKENDEN_FCT             	BESCHIKBARE_UREN               	NUMBER(10,0)                   
+		SIR_TWERKZOEKENDEN_FCT             	NATIONALITEIT                  	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_FCT             	REDEN_UITSCHRIJVING            	VARCHAR2(30)                   
+		SIR_TWERKZOEKENDEN_FCT             	PRESENTATIE_OP_WERKNL          	VARCHAR2(30)                   
+
+	WERKZOEKENDEN_AK_HLP           
+		SIR_TWERKZOEKENDEN_AK_HLP          	POSTCODE                       	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	PARTICIPATIELADDER             	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	OPLEIDINGSNIVEAU               	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	PEILMOMENT                     	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	BEVOLKINGSGROEP                	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	LAND                           	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	VERLENGDATUM                   	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	INSTROOM                       	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	OPLEIDING                      	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	WERKEND_SINDS                  	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	NATIONALITEIT                  	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	BEGIN_WERKELIJKHEID            	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	REGIO_WZ                       	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	TOTAAL                         	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	STATUS                         	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	EINDE_STATUS                   	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	EINDE_VRG_STATUS               	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	UITSCHRIJFDATUM                	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	BEMIDDELINGSBEROEP             	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	STATUS                         	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	UITSTROOM                      	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	ONDERBREKING                   	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	MAX_UITKERINGSDATUM            	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	UITSCHRIJVING                  	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	UITSTROOM                      	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	DIPLOMA                        	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	OORSPR                         	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	UREN                           	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	EERSTE_UITK_DAG                	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	VRG_STATUS                     	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	INDICERING                     	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	INSCHRIJFREDEN                 	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	NWW                            	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	VERLENGWIJZE                   	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	OPLEIDINGSCODE                 	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	INSTROOM                       	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	EINDE_WERKELIJKHEID            	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	DIENSTVERBAND                  	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	DATUM_UITSTROOM                	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	OP_WERKNL                      	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	NOG_WERKZAAM                   	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	INSCHRIJFDATUM                 	DATE                           
+		SIR_TWERKZOEKENDEN_AK_HLP          	TST_KEY                        	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	DVP_ID                         	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	WZ                             	VARCHAR2                       
+		SIR_TWERKZOEKENDEN_AK_HLP          	KEY                            	NUMBER                         
+		SIR_TWERKZOEKENDEN_AK_HLP          	AFL                            	VARCHAR2                       
+
+
